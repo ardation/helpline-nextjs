@@ -49,7 +49,7 @@ const TopBar = (): ReactElement => {
                 <Box className={classes.logo}>
                     <img src="/logo.svg" alt="find a helpline" />
                 </Box>
-                <Typography>
+                <Typography component="div">
                     <p>COVID-19 is affecting people’s mental health.</p>
                     <p>
                         To do our bit, we’re putting every free mental health helpline in the world at your fingertips.
