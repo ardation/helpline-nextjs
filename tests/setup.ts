@@ -1,5 +1,11 @@
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import '@testing-library/jest-dom';
 
-// Configure Enzyme with React 16 adapter
-Enzyme.configure({ adapter: new Adapter() });
+window.document.createRange = (): Range =>
+    (({
+        setStart: jest.fn(),
+        setEnd: jest.fn(),
+        commonAncestorContainer: ({
+            nodeName: 'BODY',
+            ownerDocument: document,
+        } as unknown) as Node,
+    } as unknown) as Range);

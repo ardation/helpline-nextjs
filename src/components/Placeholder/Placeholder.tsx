@@ -63,6 +63,7 @@ const TopBar = (): ReactElement => {
                         classes={{ root: classes.buttonRoot, label: classes.buttonLabel }}
                         href="mailto:elliot@livefortomorrow.co"
                         color="primary"
+                        data-testid="partnerWithUs"
                     >
                         Partner With Us
                     </Button>
@@ -73,6 +74,7 @@ const TopBar = (): ReactElement => {
                         classes={{ root: classes.buttonRoot, label: classes.buttonLabel }}
                         href="mailto:anna@livefortomorrow.co"
                         color="primary"
+                        data-testid="crowdsourceHelplines"
                     >
                         Help us crowdsource helplines
                     </Button>
@@ -83,6 +85,7 @@ const TopBar = (): ReactElement => {
                         classes={{ root: classes.buttonRoot, label: classes.buttonLabel }}
                         href="https://zealnz.typeform.com/to/BtdlLP"
                         color="primary"
+                        data-testid="launchMailingList"
                     >
                         Join the launch mailing list
                     </Button>

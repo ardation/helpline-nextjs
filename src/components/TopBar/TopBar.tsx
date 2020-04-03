@@ -102,6 +102,7 @@ const TopBar = ({ country }: Props): ReactElement => {
                                 classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
                                 endIcon={<CallIcon />}
                                 href={`tel:${country.emergencyNumber}`}
+                                data-testId="emergencyServicesButton"
                             >
                                 Emergency Services
                             </Button>
@@ -116,6 +117,7 @@ const TopBar = ({ country }: Props): ReactElement => {
                         classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
                         endIcon={<DirectionsRunIcon />}
                         href="https://accuweather.com"
+                        data-testId="leaveQuicklyButton"
                     >
                         Leave Quickly
                     </Button>
