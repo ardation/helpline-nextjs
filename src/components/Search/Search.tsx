@@ -78,7 +78,7 @@ const Search = ({ topics, countries }: Props): ReactElement => {
                         passHref
                     >
                         <Button
-                            data-testId="searchButton"
+                            data-testid="searchButton"
                             className={classes.button}
                             variant="contained"
                             color="primary"

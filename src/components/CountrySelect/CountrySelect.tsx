@@ -85,8 +85,8 @@ const CountrySelect = ({ countries, onChange }: Props): ReactElement => {
                 getOptionLabel={(option): string => option.name}
                 renderOption={(option): ReactElement => (
                     <Fragment>
-                        <span data-testId="countryFlag">{countryToFlag(option.code)}</span>
-                        <span>{option.name}</span>
+                        <span data-testid="countryFlag">{countryToFlag(option.code)}</span>
+                        {option.name}
                     </Fragment>
                 )}
                 openOnFocus={true}
