@@ -10,7 +10,7 @@ describe('Placeholder', () => {
 
     it('should contain Help us crowdsource helplines link', () => {
         const { getByTestId } = render(<Placeholder />);
-        expect(getByTestId('crowdsourceHelplines')).toHaveAttribute('href', 'mailto:anna@livefortomorrow.co');
+        expect(getByTestId('crowdsourceHelplines')).toHaveAttribute('href', 'https://findahelpline.com/volunteer');
     });
 
     it('should contain Join the launch mailing list link', () => {
