@@ -4,6 +4,8 @@ import { Container, Typography } from '@material-ui/core';
 import * as Faker from 'faker';
 import Chrome from '.';
 
+Faker.seed(123);
+
 storiesOf('Chrome', module)
     .add('default', () => {
         return (
