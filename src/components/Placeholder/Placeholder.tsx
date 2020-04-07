@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 color: theme.palette.primary.main,
             },
         },
-        buttonLabel: {
+        link: {
             color: '#000',
         },
     }),
@@ -50,7 +50,17 @@ const TopBar = (): ReactElement => {
                     <img src="/logo.svg" alt="find a helpline" />
                 </Box>
                 <Typography component="div">
-                    <p>COVID-19 is affecting people’s mental health.</p>
+                    <p>
+                        COVID-19 is{' '}
+                        <a
+                            href="https://www.psychiatry.org/newsroom/news-releases/new-poll-covid-19-impacting-mental-well-being-americans-feeling-anxious-especially-for-loved-ones-older-adults-are-less-anxious"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={classes.link}
+                        >
+                            affecting people’s mental health.
+                        </a>
+                    </p>
                     <p>
                         To do our bit, we’re putting every free mental health helpline in the world at your fingertips.
                     </p>
@@ -60,7 +70,7 @@ const TopBar = (): ReactElement => {
                 <div>
                     <Button
                         startIcon={<ThumbUpIcon />}
-                        classes={{ root: classes.buttonRoot, label: classes.buttonLabel }}
+                        classes={{ root: classes.buttonRoot, label: classes.link }}
                         href="mailto:elliot@livefortomorrow.co"
                         color="primary"
                         data-testid="partnerWithUs"
@@ -71,8 +81,8 @@ const TopBar = (): ReactElement => {
                 <div>
                     <Button
                         startIcon={<PublicIcon />}
-                        classes={{ root: classes.buttonRoot, label: classes.buttonLabel }}
-                        href="https://findahelpline.com/volunteer"
+                        classes={{ root: classes.buttonRoot, label: classes.link }}
+                        href="mailto:anna@livefortomorrow.co"
                         color="primary"
                         data-testid="crowdsourceHelplines"
                     >
@@ -82,7 +92,7 @@ const TopBar = (): ReactElement => {
                 <div>
                     <Button
                         startIcon={<EmailIcon />}
-                        classes={{ root: classes.buttonRoot, label: classes.buttonLabel }}
+                        classes={{ root: classes.buttonRoot, label: classes.link }}
                         href="https://zealnz.typeform.com/to/BtdlLP"
                         color="primary"
                         data-testid="launchMailingList"
