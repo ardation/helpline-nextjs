@@ -9,9 +9,11 @@
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "lint:ci": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
         "storybook": "start-storybook -p 6006 -c .storybook -s ./public",
+        "build-storybook": "build-storybook -c .storybook -s ./public",
         "test": "jest",
         "test:watch": "jest --watch",
-        "test:coverage": "jest --coverage"
+        "test:coverage": "jest --coverage",
+        "chromatic": "chromatic"
     },
     "dependencies": {
         "@material-ui/core": "^4.9.8",
@@ -52,6 +54,7 @@
         "jest": "^25.2.6",
         "lint-staged": "^10.0.9",
         "prettier": "^2.0.2",
+        "storybook-chromatic": "^3.5.2",
         "ts-jest": "^25.3.0",
         "typescript": "^3.8.3"
     },

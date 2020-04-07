@@ -15,3 +15,4 @@ install:
 script:
     - npm run test
     - npm run lint:ci
+    - bin/travis_chromatic.sh
