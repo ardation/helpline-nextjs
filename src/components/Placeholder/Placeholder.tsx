@@ -82,7 +82,7 @@ const TopBar = (): ReactElement => {
                     <Button
                         startIcon={<PublicIcon />}
                         classes={{ root: classes.buttonRoot, label: classes.link }}
-                        href="mailto:anna@livefortomorrow.co"
+                        href="https://findahelpline.com/volunteer"
                         color="primary"
                         data-testid="crowdsourceHelplines"
                     >
