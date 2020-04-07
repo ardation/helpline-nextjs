@@ -36,6 +36,13 @@ module.exports = {
       "rules": {
         "@typescript-eslint/explicit-function-return-type": "off"
       }
+    },
+    {
+      "files": ["*.stories.tsx"],
+      "rules": {
+        "import/exports-last": "off",
+        "import/no-anonymous-default-export": "off"
+      }
     }
   ]
 };

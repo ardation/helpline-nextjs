@@ -1,11 +1,18 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React, { ReactElement } from 'react';
 import { ThemeProvider } from '@material-ui/core';
 import theme from '../../theme';
 import Footer from '.';
 
-storiesOf('Footer', module).add('default', () => (
+export default {
+    title: 'Footer',
+};
+
+export const Default = (): ReactElement => (
     <ThemeProvider theme={theme}>
         <Footer />
     </ThemeProvider>
-));
+);
+
+Default.story = {
+    name: 'default',
+};

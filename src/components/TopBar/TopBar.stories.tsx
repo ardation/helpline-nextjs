@@ -1,11 +1,18 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React, { ReactElement } from 'react';
 import TopBar from '.';
 
-storiesOf('TopBar', module)
-    .add('default', () => {
-        return <TopBar />;
-    })
-    .add('with country', () => {
-        return <TopBar country={{ emergencyNumber: '111' }} />;
-    });
+export default {
+    title: 'TopBar',
+};
+
+export const Default = (): ReactElement => <TopBar />;
+
+Default.story = {
+    name: 'default',
+};
+
+export const WithCountry = (): ReactElement => <TopBar country={{ emergencyNumber: '111' }} />;
+
+WithCountry.story = {
+    name: 'with country',
+};
