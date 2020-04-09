@@ -9,7 +9,7 @@ const IndexPage = (): ReactElement => {
             <Head>
                 <title>Find A Helpline</title>
             </Head>
-            <Chrome>
+            <Chrome topbar={true}>
                 <Placeholder />
             </Chrome>
         </Fragment>

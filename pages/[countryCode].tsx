@@ -24,7 +24,7 @@ const CountryPage = ({ country, organizations }: GetCountryAndOrganizations): Re
             <Head>
                 <title>Find A Helpline | {country.name}</title>
             </Head>
-            <Chrome country={country}>
+            <Chrome topbar={true} country={country}>
                 <Container maxWidth="xs">
                     <Box my={2}>
                         <Typography variant="h6">

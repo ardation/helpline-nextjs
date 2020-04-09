@@ -39,7 +39,7 @@ const CountryPage = ({ country, subdivision, organizations }: Props): ReactEleme
                     Find A Helpline | {subdivision.name}, {country.name}
                 </title>
             </Head>
-            <Chrome country={country}>
+            <Chrome topbar={true} country={country}>
                 <Container maxWidth="xs">
                     <Box my={2}>
                         <Typography variant="h6">

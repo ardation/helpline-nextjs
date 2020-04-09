@@ -9,6 +9,7 @@ type Country = {
 };
 
 type Props = {
+    topbar?: boolean;
     footer?: boolean;
     country?: Country;
     children: ReactNode;
@@ -25,12 +26,12 @@ const useStyles = makeStyles(() =>
         },
     }),
 );
-const Chrome = ({ footer, country, children }: Props): ReactElement => {
+const Chrome = ({ topbar, footer, country, children }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
         <Div100vh className={classes.div100vh} as="main">
-            <TopBar country={country} />
+            {topbar && <TopBar country={country} />}
             <div className={classes.content}>{children}</div>
             {footer && <Footer />}
         </Div100vh>
