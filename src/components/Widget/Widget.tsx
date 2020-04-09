@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
-import TopBar from '../TopBar/TopBar';
+import WidgetSearch from '../WidgetSearch';
 
 const organization = {
     slug: 'youthline',
@@ -18,28 +18,43 @@ const organization = {
     timezone: 'Auckland',
 };
 
+type Subdivision = {
+    code: string;
+    name: string;
+};
+
 type Country = {
-    emergencyNumber: string;
+    code: string;
+    name: string;
+    subdivisions: Subdivision[];
+};
+
+type Topic = {
+    name: string;
 };
 
 type Props = {
     country?: Country;
+    countries: Country[];
+    topics: Topic[];
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
+        div100vh: {
+            display: 'grid',
+            gridTemplateRows: 'auto 1fr',
+        },
         box: {
             display: 'flex',
             flex: '0 0 auto',
             border: '1px solid #000',
-            borderRadius: '10px',
-            overflow: 'scroll',
-        },
-        topbar: {
-            maxHeight: '20%',
+            borderRadius: '0 0 10px 10px',
+            overflow: 'auto',
         },
         container: {
-            borderRadius: '10px',
+            paddingLeft: 0,
+            paddingRight: 0,
         },
         carousel: {
             flex: '0 0 auto',
@@ -56,26 +71,22 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Widget = ({ country }: Props): ReactElement => {
+const Widget = ({ countries }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
-        <>
-            <Container className={classes.topbar}>
-                <Box maxWidth="md">
-                    <div className={classes.topbar}>
-                        <TopBar country={{ emergencyNumber: '111' }} />
-                    </div>
-                    <Box className={classes.box}>
-                        <Box className={classes.carousel} m={2}>
-                            <OrganizationCard organization={organization} />
-                            <OrganizationCard organization={organization} />
-                            <OrganizationCard organization={organization} />
-                        </Box>
+        <Container className={classes.container}>
+            <Box maxWidth="md">
+                <WidgetSearch countries={countries} />
+                <Box className={classes.box}>
+                    <Box className={classes.carousel} m={2}>
+                        <OrganizationCard organization={organization} />
+                        <OrganizationCard organization={organization} />
+                        <OrganizationCard organization={organization} />
                     </Box>
                 </Box>
-            </Container>
-        </>
+            </Box>
+        </Container>
     );
 };
 
