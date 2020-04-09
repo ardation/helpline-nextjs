@@ -3,7 +3,6 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box, Button } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import WidgetSearch from '../WidgetSearch';
-import Carousel from '../Carousel/Carousel';
 
 const organization = {
     slug: 'youthline',
@@ -60,8 +59,10 @@ const useStyles = makeStyles(() =>
         },
         carousel: {
             flex: '0 0 auto',
-            position: 'relative',
             display: 'flex',
+            alignItems: 'flex-start',
+            touchAction: 'manipulation',
+            overflow: 'scroll',
             flexDirection: 'column',
             '@media (min-width: 480px)': {
                 flexDirection: 'row',
@@ -94,13 +95,11 @@ const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
                     </Button>
                 ) : null}
                 <Box className={classes.box}>
-                    <Container className={classes.carousel}>
-                        <Carousel>
-                            <OrganizationCard organization={organization} />
-                            <OrganizationCard organization={organization} />
-                            <OrganizationCard organization={organization} />
-                        </Carousel>
-                    </Container>
+                    <Box className={classes.carousel} m={2}>
+                        <OrganizationCard organization={organization} />
+                        <OrganizationCard organization={organization} />
+                        <OrganizationCard organization={organization} />
+                    </Box>
                 </Box>
             </Box>
         </Container>
