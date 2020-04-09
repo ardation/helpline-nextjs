@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Container, Box } from '@material-ui/core';
+import { Container, Box, Button } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import TopBar from '../TopBar/TopBar';
 
@@ -18,12 +18,25 @@ const organization = {
     timezone: 'Auckland',
 };
 
+type Subdivision = {
+    code: string;
+    name: string;
+};
+
 type Country = {
-    emergencyNumber: string;
+    code: string;
+    name: string;
+    subdivisions: Subdivision[];
+};
+
+type Topic = {
+    name: string;
 };
 
 type Props = {
-    country?: Country;
+    countries: Country[];
+    topics: Topic[];
+    xprops?: any;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -53,10 +66,16 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             minWidth: 0,
         },
+        button: {
+            borderRadius: '1000px',
+        },
     }),
 );
 
-const Widget = ({ country }: Props): ReactElement => {
+const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
+    const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
+    const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
+    const [selectedTopics, setSelectedTopics] = useState<Topic[]>([]);
     const classes = useStyles();
 
     return (
@@ -65,6 +84,18 @@ const Widget = ({ country }: Props): ReactElement => {
                 <Box maxWidth="md">
                     <div className={classes.topbar}>
                         <TopBar country={{ emergencyNumber: '111' }} />
+                        {xprops ? (
+                            <Button
+                                data-testid="searchButton"
+                                className={classes.button}
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                onClick={(): void => xprops.onCallback('Hello from the next.js app!')}
+                            >
+                                {xprops.text}
+                            </Button>
+                        ) : null}
                     </div>
                     <Box className={classes.box}>
                         <Box className={classes.carousel} m={2}>
