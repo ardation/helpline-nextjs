@@ -3,9 +3,9 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "next start",
+        "dev": "npm run copyfiles-zoid && next dev",
+        "build": "npm run copyfiles-zoid && next build",
+        "start": "npm run copyfiles-zoid && next start",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "lint:ci": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
         "storybook": "start-storybook -p 6006 -c .storybook -s ./public",
@@ -13,7 +13,8 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
-        "chromatic": "chromatic"
+        "chromatic": "chromatic",
+        "copyfiles-zoid": "npx copyfiles -f ./node_modules/zoid/dist/zoid.min.js ./node_modules/zoid/dist/zoid.frame.min.js ./public"
     },
     "dependencies": {
         "@material-ui/core": "^4.9.8",
@@ -45,6 +46,7 @@
         "@typescript-eslint/parser": "^2.26.0",
         "babel-loader": "^8.1.0",
         "babel-preset-react-app": "^9.1.2",
+        "copyfiles": "^2.2.0",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.10.1",
         "eslint-plugin-import": "^2.20.2",
@@ -57,7 +59,8 @@
         "prettier": "^2.0.2",
         "storybook-chromatic": "^3.5.2",
         "ts-jest": "^25.3.0",
-        "typescript": "^3.8.3"
+        "typescript": "^3.8.3",
+        "zoid": "^6.0.79"
     },
     "husky": {
         "hooks": {

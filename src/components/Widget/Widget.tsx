@@ -37,6 +37,7 @@ type Props = {
     country?: Country;
     countries: Country[];
     topics: Topic[];
+    xprops?: any;
 };
 
 const useStyles = makeStyles(() =>
@@ -68,16 +69,31 @@ const useStyles = makeStyles(() =>
             },
             minWidth: 0,
         },
+        button: {
+            borderRadius: '1000px',
+        },
     }),
 );
 
-const Widget = ({ countries }: Props): ReactElement => {
+const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <WidgetSearch countries={countries} />
+              {xprops ? (
+                            <Button
+                                data-testid="searchButton"
+                                className={classes.button}
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                onClick={(): void => xprops.onCallback('Hello from the next.js app!')}
+                            >
+                                {xprops.text}
+                            </Button>
+                        ) : null}
                 <Box className={classes.box}>
                     <Box className={classes.carousel} m={2}>
                         <OrganizationCard organization={organization} />

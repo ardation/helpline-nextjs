@@ -84,7 +84,7 @@ const TopBar = ({ country }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
-        <AppBar className={classes.appBar} position="static">
+        <AppBar className={classes.appBar} position="static" data-testid="topbar">
             <Container className={country && classes.container}>
                 <Toolbar
                     className={[

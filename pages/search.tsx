@@ -13,7 +13,7 @@ const SearchPage = ({ topics, countries }: GetCountriesAndTopics): ReactElement 
             <Head>
                 <title>Find A Helpline</title>
             </Head>
-            <Chrome footer={true}>
+            <Chrome topbar={true} footer={true}>
                 <Search countries={countries} topics={topics} />
             </Chrome>
         </Fragment>
