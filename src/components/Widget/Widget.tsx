@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Container, Box, Button } from '@material-ui/core';
+import { Container, Box } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import WidgetSearch from '../WidgetSearch';
 
@@ -82,18 +82,18 @@ const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <WidgetSearch countries={countries} />
-                {xprops ? (
-                    <Button
-                        data-testid="searchButton"
-                        className={classes.button}
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        onClick={(): void => xprops.onCallback('Hello from the next.js app!')}
-                    >
-                        {xprops.text}
-                    </Button>
-                ) : null}
+              {xprops ? (
+                            <Button
+                                data-testid="searchButton"
+                                className={classes.button}
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                onClick={(): void => xprops.onCallback('Hello from the next.js app!')}
+                            >
+                                {xprops.text}
+                            </Button>
+                        ) : null}
                 <Box className={classes.box}>
                     <Box className={classes.carousel} m={2}>
                         <OrganizationCard organization={organization} />
