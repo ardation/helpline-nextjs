@@ -9,7 +9,20 @@ export default {
 
 export const Default = (): ReactElement => (
     <ThemeProvider theme={theme}>
-        <Widget />
+        <Widget
+            countries={[
+                { code: 'AU', name: 'Australia', subdivisions: [] },
+                {
+                    code: 'NZ',
+                    name: 'New Zealand',
+                    subdivisions: [
+                        { name: 'Bay of Plenty', code: 'BOP' },
+                        { name: 'Auckland', code: 'AUK' },
+                    ],
+                },
+            ]}
+            topics={[{ name: 'Anxiety' }, { name: 'Bullying' }]}
+        />
     </ThemeProvider>
 );
 
