@@ -18,24 +18,12 @@ const organization = {
     timezone: 'Auckland',
 };
 
-type Subdivision = {
-    code: string;
-    name: string;
-};
-
 type Country = {
-    code: string;
-    name: string;
-    subdivisions: Subdivision[];
-};
-
-type Topic = {
-    name: string;
+    emergencyNumber: string;
 };
 
 type Props = {
-    countries: Country[];
-    topics: Topic[];
+    country?: Country;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -68,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Widget = ({ topics, countries }: Props): ReactElement => {
+const Widget = ({ country }: Props): ReactElement => {
     const classes = useStyles();
 
     return (

@@ -39,7 +39,7 @@ class WidgetPage extends Component<GetCountriesAndTopics, Xprops> {
                     <script src="http://localhost:3000/widget.js"></script>
                 </Head>
                 <Chrome footer={false}>
-                    <Widget countries={countries} topics={topics} />
+                    <Widget />
                 </Chrome>
             </Fragment>
         );
