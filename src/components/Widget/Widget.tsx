@@ -1,8 +1,8 @@
-import React, { ReactElement, useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Container, Box, Button } from '@material-ui/core';
+import React, { ReactElement } from 'react';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Container, Box } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
-import TopBar from '../TopBar/TopBar';
+import WidgetSearch from '../WidgetSearch';
 
 const organization = {
     slug: 'youthline',
@@ -34,25 +34,28 @@ type Topic = {
 };
 
 type Props = {
+    country?: Country;
     countries: Country[];
     topics: Topic[];
     xprops?: any;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
+        div100vh: {
+            display: 'grid',
+            gridTemplateRows: 'auto 1fr',
+        },
         box: {
             display: 'flex',
             flex: '0 0 auto',
             border: '1px solid #000',
-            borderRadius: '10px',
-            overflow: 'scroll',
-        },
-        topbar: {
-            maxHeight: '20%',
+            borderRadius: '0 0 10px 10px',
+            overflow: 'auto',
         },
         container: {
-            borderRadius: '10px',
+            paddingLeft: 0,
+            paddingRight: 0,
         },
         carousel: {
             flex: '0 0 auto',
@@ -73,18 +76,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
-    const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
-    const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
-    const [selectedTopics, setSelectedTopics] = useState<Topic[]>([]);
     const classes = useStyles();
 
     return (
-        <>
-            <Container className={classes.topbar}>
-                <Box maxWidth="md">
-                    <div className={classes.topbar}>
-                        <TopBar country={{ emergencyNumber: '111' }} />
-                        {xprops ? (
+        <Container className={classes.container}>
+            <Box maxWidth="md">
+                <WidgetSearch countries={countries} />
+              {xprops ? (
                             <Button
                                 data-testid="searchButton"
                                 className={classes.button}
@@ -96,17 +94,15 @@ const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
                                 {xprops.text}
                             </Button>
                         ) : null}
-                    </div>
-                    <Box className={classes.box}>
-                        <Box className={classes.carousel} m={2}>
-                            <OrganizationCard organization={organization} />
-                            <OrganizationCard organization={organization} />
-                            <OrganizationCard organization={organization} />
-                        </Box>
+                <Box className={classes.box}>
+                    <Box className={classes.carousel} m={2}>
+                        <OrganizationCard organization={organization} />
+                        <OrganizationCard organization={organization} />
+                        <OrganizationCard organization={organization} />
                     </Box>
                 </Box>
-            </Container>
-        </>
+            </Box>
+        </Container>
     );
 };
 

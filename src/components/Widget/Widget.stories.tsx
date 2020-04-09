@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { ThemeProvider, Box } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core';
 import theme from '../../theme';
 import Widget from '.';
 
