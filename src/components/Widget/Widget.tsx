@@ -3,7 +3,8 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box, Button } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import WidgetSearch from '../WidgetSearch';
-import Carousel from '../Carousel/Carousel';
+import WidgetCarousel from '../WidgetCarousel';
+import WidgetBar from '../WidgetBar';
 
 const organization = {
     slug: 'youthline',
@@ -43,25 +44,25 @@ type Props = {
 
 const useStyles = makeStyles(() =>
     createStyles({
-        div100vh: {
-            display: 'grid',
-            gridTemplateRows: 'auto 1fr',
-        },
         box: {
             display: 'flex',
-            flex: '0 0 auto',
+            alignItems: 'flex-start',
             border: '1px solid #000',
             borderRadius: '0 0 10px 10px',
             overflow: 'auto',
+            '@media (max-width: 412px)': {
+                flexDirection: 'column',
+            },
         },
         container: {
             paddingLeft: 0,
             paddingRight: 0,
         },
         carousel: {
-            flex: '0 0 auto',
             position: 'relative',
             display: 'flex',
+            flex: '0 0 auto',
+            alignItems: 'flex-start',
             flexDirection: 'column',
             '@media (min-width: 480px)': {
                 flexDirection: 'row',
@@ -74,7 +75,7 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
+const Widget = ({ topics, country, countries, xprops }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
@@ -93,13 +94,14 @@ const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
                         {xprops.text}
                     </Button>
                 ) : null}
+                <WidgetBar country={{ emergencyNumber: '111}' }} />
                 <Box className={classes.box}>
                     <Container className={classes.carousel}>
-                        <Carousel>
+                        <WidgetCarousel>
                             <OrganizationCard organization={organization} />
                             <OrganizationCard organization={organization} />
                             <OrganizationCard organization={organization} />
-                        </Carousel>
+                        </WidgetCarousel>
                     </Container>
                 </Box>
             </Box>

@@ -5,8 +5,7 @@ module.exports = ({ config }) => {
     options: {
       presets: [require.resolve('babel-preset-react-app')],
     },
-  });
-
+  }),
   config.resolve.extensions.push('.ts', '.tsx');
   return config;
 };

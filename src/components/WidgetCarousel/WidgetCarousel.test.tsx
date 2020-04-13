@@ -1,14 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Carousel from './Carousel';
+import WidgetCarousel from './WidgetCarousel';
 
-describe('Carousel', () => {
+describe('WidgetCarousel', () => {
     it('should render children', () => {
         const { getByText } = render(
-            <Carousel>
+            <WidgetCarousel>
                 <p>hello world</p>
                 <p>test</p>
-            </Carousel>,
+            </WidgetCarousel>,
         );
         expect(getByText('test')).toBeTruthy();
     });

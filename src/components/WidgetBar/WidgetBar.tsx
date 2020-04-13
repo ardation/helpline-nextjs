@@ -1,0 +1,109 @@
+import React, { ReactElement, Fragment } from 'react';
+import { AppBar, Container, Toolbar, Typography, Button } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
+import CallIcon from '@material-ui/icons/Call';
+
+type Country = {
+    emergencyNumber: string;
+};
+
+type Props = {
+    country?: Country;
+};
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        container: {
+            [theme.breakpoints.down('xs')]: {
+                paddingRight: theme.spacing(1),
+                paddingLeft: theme.spacing(1),
+            },
+        },
+        appBar: {
+            backgroundColor: '#181719',
+        },
+        toolbar: {
+            display: 'grid',
+            gridGap: theme.spacing(2),
+            paddingRight: 0,
+            paddingLeft: 0,
+            [theme.breakpoints.down('xs')]: {
+                gridGap: theme.spacing(1),
+                gridRowGap: 0,
+                height: '80px',
+            },
+        },
+        toolbarWithCountry: {
+            gridTemplateColumns: '1fr auto auto',
+            [theme.breakpoints.down('xs')]: {
+                textAlign: 'center',
+                gridTemplateColumns: '1fr 1fr',
+                alignItems: 'flex-start',
+            },
+        },
+        title: {
+            minWidth: '80px',
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.8rem',
+            },
+        },
+        titleWithCountry: {
+            [theme.breakpoints.down('xs')]: {
+                gridColumn: '1 / span 2',
+                alignSelf: 'center',
+            },
+        },
+        button: {
+            backgroundColor: '#CC001E',
+            textAlign: 'left',
+            borderRadius: '1000px',
+            paddingLeft: theme.spacing(2),
+            paddingRight: theme.spacing(2),
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.7rem',
+                paddingRight: theme.spacing(1),
+                paddingLeft: theme.spacing(1),
+            },
+            '&:hover': {
+                backgroundColor: '#CC001E',
+            },
+        },
+        buttonEndIcon: {
+            [theme.breakpoints.down('xs')]: {
+                display: 'none',
+            },
+        },
+    }),
+);
+
+const TopBar = ({ country }: Props): ReactElement => {
+    const classes = useStyles();
+
+    return (
+        <AppBar className={classes.appBar} position="sticky" data-testid="widgetbar">
+            <Container className={country && classes.container}>
+                <Toolbar className={[classes.toolbar, country ? classes.toolbarWithCountry : null].join(' ')}>
+                    {country && (
+                        <Fragment>
+                            <Typography className={[classes.title, classes.titleWithCountry].join(' ')}>
+                                Are you or someone else in immediate danger?
+                            </Typography>
+                            <Button
+                                color="inherit"
+                                classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
+                                endIcon={<CallIcon />}
+                                href={`tel:${country.emergencyNumber}`}
+                                data-testid="emergencyServicesButton"
+                            >
+                                Emergency Services
+                            </Button>
+                        </Fragment>
+                    )}
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
+};
+
+export default TopBar;
