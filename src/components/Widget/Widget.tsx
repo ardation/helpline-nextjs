@@ -3,6 +3,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box, Button } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import WidgetSearch from '../WidgetSearch';
+import EmergencyBanner from '../EmergencyBanner';
 
 const organization = {
     slug: 'youthline',
@@ -16,6 +17,10 @@ const organization = {
     url: 'https://www.youthline.co.nz/learn-and-grow.html',
     chatUrl: 'https://youthline.co.nz',
     timezone: 'Auckland',
+};
+
+const country = {
+    emergencyNumber: '911',
 };
 
 type Subdivision = {
@@ -37,6 +42,7 @@ type Props = {
     country?: Country;
     countries: Country[];
     topics: Topic[];
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     xprops?: any;
 };
 
@@ -75,13 +81,14 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
+const Widget = ({ countries, xprops }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <WidgetSearch countries={countries} />
+                <EmergencyBanner country={country} />
                 {xprops ? (
                     <Button
                         data-testid="searchButton"
