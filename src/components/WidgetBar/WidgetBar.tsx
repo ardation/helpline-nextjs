@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         appBar: {
-            backgroundColor: '#181719',
+            backgroundColor: '#F0F1F5',
         },
         toolbar: {
             display: 'grid',
@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         title: {
             minWidth: '80px',
+            color: '#202020',
             [theme.breakpoints.down('xs')]: {
                 fontSize: '0.8rem',
             },

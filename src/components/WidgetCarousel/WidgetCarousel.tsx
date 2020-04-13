@@ -24,9 +24,6 @@ type embla = {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        container: {
-            position: 'relative',
-        },
         carouselWrapper: {
             flex: '0 0 auto',
             display: 'flex',
@@ -56,13 +53,11 @@ const WidgetCarousel = ({ children }: Props): ReactElement => {
 
     return (
         <>
-            <Container className={classes.container}>
-                <ScrollButton className={classes.leftIcon} onClick={(): void => embla.scrollPrev()} />
-                <EmblaCarouselReact emblaRef={setEmbla} options={{ loop: false, align: 'start' }}>
-                    <Container className={classes.carouselWrapper}>{children}</Container>
-                </EmblaCarouselReact>
-                <ScrollButton className={classes.rightIcon} onClick={(): void => embla.scrollNext()} />
-            </Container>
+            <ScrollButton className={classes.leftIcon} onClick={(): void => embla.scrollPrev()} />
+            <EmblaCarouselReact emblaRef={setEmbla} options={{ loop: false, align: 'start' }}>
+                <Container className={classes.carouselWrapper}>{children}</Container>
+            </EmblaCarouselReact>
+            <ScrollButton className={classes.rightIcon} onClick={(): void => embla.scrollNext()} />
         </>
     );
 };

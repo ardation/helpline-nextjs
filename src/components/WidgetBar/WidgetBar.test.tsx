@@ -21,11 +21,5 @@ describe('WidgetBar', () => {
             const element = getByTestId('emergencyServicesButton');
             expect(element).toHaveAttribute('href', 'tel:111');
         });
-
-        it('should contain weather link', () => {
-            const { getByTestId } = render(<WidgetBar country={country} />);
-            const element = getByTestId('leaveQuicklyButton');
-            expect(element).toHaveAttribute('href', 'https://accuweather.com');
-        });
     });
 });
