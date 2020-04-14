@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import Chrome from '../src/components/Chrome';
 import Widget from '../src/components/Widget';
-import { GetCountriesAndTopics } from '../types/GetCountriesAndTopics';
+import { GetCountriesAndTags } from '../types/GetCountriesAndTags';
 
 declare global {
     interface Window {
@@ -16,7 +16,7 @@ type Xprops = {
     xprops: any;
 };
 
-class WidgetPage extends Component<GetCountriesAndTopics, Xprops> {
+class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,7 +29,7 @@ class WidgetPage extends Component<GetCountriesAndTopics, Xprops> {
         }
     }
     render() {
-        const { topics, countries } = this.props;
+        const { topics, categories, humanSupportTypes, countries } = this.props;
         const { xprops } = this.state;
         return (
             <Fragment>
@@ -39,16 +39,16 @@ class WidgetPage extends Component<GetCountriesAndTopics, Xprops> {
                     <script src="http://localhost:3000/widget.js"></script>
                 </Head>
                 <Chrome topbar={false} footer={false}>
-                    <Widget countries={countries} topics={topics} xprops={xprops} />
+                    <Widget countries={countries} filters={{ topics, categories, humanSupportTypes }} xprops={xprops} />
                 </Chrome>
             </Fragment>
         );
     }
 }
 
-export const getStaticProps = async (): Promise<{ props: GetCountriesAndTopics }> => {
+export const getStaticProps = async (): Promise<{ props: GetCountriesAndTags }> => {
     const query = gql`
-        query GetCountriesAndTopics {
+        query GetCountriesAndTags {
             countries {
                 code
                 name
@@ -60,13 +60,24 @@ export const getStaticProps = async (): Promise<{ props: GetCountriesAndTopics }
             topics {
                 name
             }
+            humanSupportTypes {
+                name
+            }
+            categories {
+                name
+            }
         }
     `;
-    const { countries, topics } = await request('https://api.findahelpline.com', print(query));
+    const { countries, topics, humanSupportTypes, categories } = await request(
+        'https://api.findahelpline.com',
+        print(query),
+    );
     return {
         props: {
             countries,
             topics,
+            humanSupportTypes,
+            categories,
         },
     };
 };
