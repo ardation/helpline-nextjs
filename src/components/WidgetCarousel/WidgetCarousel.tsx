@@ -2,14 +2,14 @@ import React, { useState, ReactElement, ReactNode } from 'react';
 import EmblaCarouselReact from 'embla-carousel-react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
-import ScrollButton from '../../icons/ScrollButton.svg';
+import { ReactComponent as ScrollButton } from '../../icons/ScrollButton.svg';
 
 type Props = {
     children: ReactNode;
     ScrollButton?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 };
 
-type SvgProps = {
+type ScrollButtonProps = {
     className: string;
     onClick: () => void;
 };
@@ -47,17 +47,21 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+const ClickableScrollButton = ({ className, onClick }: ScrollButtonProps): ReactElement => {
+    return <ScrollButton className={className} onClick={onClick} />;
+};
+
 const WidgetCarousel = ({ children }: Props): ReactElement => {
     const classes = useStyles();
     const [embla, setEmbla] = useState(null);
 
     return (
         <>
-            <ScrollButton className={classes.leftIcon} onClick={(): void => embla.scrollPrev()} />
+            <ClickableScrollButton className={classes.leftIcon} onClick={(): void => embla.scrollPrev()} />
             <EmblaCarouselReact emblaRef={setEmbla} options={{ loop: false, align: 'start' }}>
                 <Container className={classes.carouselWrapper}>{children}</Container>
             </EmblaCarouselReact>
-            <ScrollButton className={classes.rightIcon} onClick={(): void => embla.scrollNext()} />
+            <ClickableScrollButton className={classes.rightIcon} onClick={(): void => embla.scrollNext()} />
         </>
     );
 };
