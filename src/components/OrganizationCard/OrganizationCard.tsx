@@ -47,11 +47,12 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             border: '1px solid #000',
             borderRadius: '10px',
+            flexShrink: 0,
             gridTemplateColumns: '1fr 88px',
             '& > div': {
                 padding: theme.spacing(2),
             },
-            '@media (max-width: 320px)': {
+            '@media (max-width: 414px)': {
                 flexDirection: 'column',
             },
         },
@@ -111,7 +112,7 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'center',
             gridRowGap: theme.spacing(2),
             gridAutoRows: 'min-content',
-            '@media (max-width: 320px)': {
+            '@media (max-width: 414px)': {
                 borderTopRightRadius: '0',
                 borderBottomLeftRadius: '10px',
                 gridAutoFlow: 'column',
