@@ -47,6 +47,7 @@ const useStyles = makeStyles(() =>
         box: {
             display: 'flex',
             alignItems: 'flex-start',
+            maxHeight: '100vh',
             border: '1px solid #000',
             borderRadius: '0 0 10px 10px',
             overflow: 'auto',

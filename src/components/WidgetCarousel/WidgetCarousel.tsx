@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'flex-start',
             '@media (max-width: 320px)': {
                 flexDirection: 'column',
-                maxHeight: '500px',
+                overflowX: 'scroll',
             },
         },
         fab: {
@@ -78,7 +78,7 @@ const WidgetCarousel = ({ children }: WidgetCarouselProps): ReactElement => {
         <>
             <Fab
                 onClick={(): void => embla.scrollPrev()}
-                aria-label="text"
+                aria-label="scroll-previous"
                 className={`${classes.fab} ${classes.prevIcon}`}
             >
                 <ChevronLeftIcon className={`${classes.icon}`} />
@@ -96,7 +96,7 @@ const WidgetCarousel = ({ children }: WidgetCarouselProps): ReactElement => {
             </ConditionalWrapper>
             <Fab
                 onClick={(): void => embla.scrollNext()}
-                aria-label="text"
+                aria-label="scroll-next"
                 className={`${classes.fab} ${classes.nextIcon}`}
             >
                 <ChevronRightIcon className={`${classes.icon}`} />
