@@ -4,6 +4,7 @@ import { Container, Box, Button } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import WidgetSearch from '../WidgetSearch';
 import EmergencyBanner from '../EmergencyBanner';
+import WidgetCarousel from '../WidgetCarousel';
 
 const organization = {
     slug: 'youthline',
@@ -17,10 +18,6 @@ const organization = {
     url: 'https://www.youthline.co.nz/learn-and-grow.html',
     chatUrl: 'https://youthline.co.nz',
     timezone: 'Auckland',
-};
-
-const country = {
-    emergencyNumber: '911',
 };
 
 type Subdivision = {
@@ -48,27 +45,25 @@ type Props = {
 
 const useStyles = makeStyles(() =>
     createStyles({
-        div100vh: {
-            display: 'grid',
-            gridTemplateRows: 'auto 1fr',
-        },
         box: {
             display: 'flex',
-            flex: '0 0 auto',
+            alignItems: 'flex-start',
             border: '1px solid #000',
             borderRadius: '0 0 10px 10px',
             overflow: 'auto',
+            '@media (max-width: 412px)': {
+                flexDirection: 'column',
+            },
         },
         container: {
             paddingLeft: 0,
             paddingRight: 0,
         },
         carousel: {
-            flex: '0 0 auto',
+            position: 'relative',
             display: 'flex',
+            flex: '0 0 auto',
             alignItems: 'flex-start',
-            touchAction: 'manipulation',
-            overflow: 'scroll',
             flexDirection: 'column',
             '@media (min-width: 480px)': {
                 flexDirection: 'row',
@@ -81,14 +76,14 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const Widget = ({ countries, xprops }: Props): ReactElement => {
+const Widget = ({ topics, country, countries, xprops }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <WidgetSearch countries={countries} />
-                <EmergencyBanner country={country} />
+                <EmergencyBanner country={{ emergencyNumber: '911' }} />
                 {xprops ? (
                     <Button
                         data-testid="searchButton"
@@ -102,11 +97,13 @@ const Widget = ({ countries, xprops }: Props): ReactElement => {
                     </Button>
                 ) : null}
                 <Box className={classes.box}>
-                    <Box className={classes.carousel} m={2}>
-                        <OrganizationCard organization={organization} />
-                        <OrganizationCard organization={organization} />
-                        <OrganizationCard organization={organization} />
-                    </Box>
+                    <Container className={classes.carousel}>
+                        <WidgetCarousel>
+                            <OrganizationCard organization={organization} />
+                            <OrganizationCard organization={organization} />
+                            <OrganizationCard organization={organization} />
+                        </WidgetCarousel>
+                    </Container>
                 </Box>
             </Box>
         </Container>

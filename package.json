@@ -21,6 +21,8 @@
         "@material-ui/icons": "^4.9.1",
         "@material-ui/lab": "^4.0.0-alpha.47",
         "@types/react-div-100vh": "^0.3.0",
+        "babel-plugin-inline-react-svg": "^1.1.1",
+        "embla-carousel-react": "^1.2.20",
         "faker": "^4.1.0",
         "graphql": "^14.6.0",
         "graphql-request": "^1.8.2",
