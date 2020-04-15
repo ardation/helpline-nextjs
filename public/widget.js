@@ -8,19 +8,14 @@ const Widget = zoid.create({
     // The size of the component on their page. Only px and % strings are supported
     dimensions: {
         width: '100%',
-        height: '600px',
+        height: '700px',
     },
 
     // The properties they can (or must) pass down to my component. This is optional.
     props: {
-        text: {
+        countryCode: {
             type: 'string',
             required: false,
-        },
-
-        onCallback: {
-            type: 'function',
-            required: true,
         },
     },
 });
