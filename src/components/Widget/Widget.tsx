@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement, useState, useEffect, useContext } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box, Button } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
@@ -6,6 +6,7 @@ import FilterSort from '../FilterSort';
 import WidgetSearch from '../WidgetSearch';
 import WidgetCarousel from '../WidgetCarousel';
 import WidgetBar from '../WidgetBar';
+import OrganizationContext from '../../context/organizationContext';
 
 const organization = {
     slug: 'youthline',
@@ -40,7 +41,7 @@ type Filters = {
     topics?: Filter[];
     categories?: Filter[];
     humanSupportTypes?: Filter[];
-    contactMethod?: Filter[];
+    contactMethods?: Filter[];
 };
 
 type Props = {
@@ -66,6 +67,14 @@ const useStyles = makeStyles(() =>
             paddingLeft: 0,
             paddingRight: 0,
         },
+        header: {
+            position: 'relative',
+        },
+        filter: {
+            position: 'absolute',
+            zIndex: 100,
+            background: 'white',
+        },
         carousel: {
             position: 'relative',
             display: 'flex',
@@ -85,42 +94,41 @@ const useStyles = makeStyles(() =>
 
 const Widget = ({ filters, country, countries, xprops }: Props): ReactElement => {
     const classes = useStyles();
-    const [showFilter, setShowFilter] = useState(false);
-    const [topics, setTopics] = useState(null);
-    const [categories, setCategories] = useState(null);
-    const [humanSupportTypes, setHumanSupportTypes] = useState(null);
-
-    const setFilters = (filters): void => {
-        setTopics(filters.topics);
-        setCategories(filters.categories);
-        setHumanSupportTypes(filters.humanSupportTypes);
-    };
+    const { applyFilters } = useContext(OrganizationContext);
+    const [showFilter, setShowFilter] = useState(true);
 
     return (
         <Container className={classes.container}>
             <Box maxWidth="md">
-                <WidgetSearch countries={countries} />
-                {xprops ? (
-                    <Button
-                        data-testid="searchButton"
-                        className={classes.button}
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        onClick={(): void => xprops.onCallback('Hello from the next.js app!')}
-                    >
-                        {xprops.text}
-                    </Button>
-                ) : null}
-                <WidgetBar country={{ emergencyNumber: '111}' }} />
-                {showFilter && (
-                    <FilterSort
-                        topics={filters.topics}
-                        categories={filters.categories}
-                        humanSupportTypes={filters.humanSupportTypes}
-                        onApply={(filters): void => setFilters(filters)}
-                    />
-                )}
+                <div className={classes.header}>
+                    <WidgetSearch countries={countries} />
+                    {xprops ? (
+                        <Button
+                            data-testid="searchButton"
+                            className={classes.button}
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            onClick={(): void => xprops.onCallback('Hello from the next.js app!')}
+                        >
+                            {xprops.text}
+                        </Button>
+                    ) : null}
+                    <WidgetBar country={{ emergencyNumber: '111}' }} />
+                    {showFilter && (
+                        <div className={classes.filter}>
+                            <FilterSort
+                                topics={filters.topics}
+                                categories={filters.categories}
+                                humanSupportTypes={filters.humanSupportTypes}
+                                onApply={(filters): void => {
+                                    setShowFilter(false);
+                                    applyFilters(filters);
+                                }}
+                            />
+                        </div>
+                    )}
+                </div>
                 <Box className={classes.box}>
                     <Container className={classes.carousel}>
                         <WidgetCarousel>

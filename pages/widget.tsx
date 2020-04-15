@@ -6,6 +6,7 @@ import { print } from 'graphql';
 import Chrome from '../src/components/Chrome';
 import Widget from '../src/components/Widget';
 import { GetCountriesAndTags } from '../types/GetCountriesAndTags';
+import { OrganizationProvider } from '../src/context/organizationContext';
 
 declare global {
     interface Window {
@@ -39,7 +40,13 @@ class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
                     <script src="http://localhost:3000/widget.js"></script>
                 </Head>
                 <Chrome topbar={false} footer={false}>
-                    <Widget countries={countries} filters={{ topics, categories, humanSupportTypes }} xprops={xprops} />
+                    <OrganizationProvider>
+                        <Widget
+                            countries={countries}
+                            filters={{ topics, categories, humanSupportTypes }}
+                            xprops={xprops}
+                        />
+                    </OrganizationProvider>
                 </Chrome>
             </Fragment>
         );
