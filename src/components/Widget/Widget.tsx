@@ -114,7 +114,7 @@ const Widget = ({ country, countries, filterOptions, xprops }: Props): ReactElem
                             {xprops.text}
                         </Button>
                     ) : null}
-                    <WidgetBar country={{ emergencyNumber: '111}' }} />
+                    <WidgetBar country={{ emergencyNumber: '911' }} />
                     {showFilter && (
                         <div className={classes.filter}>
                             <FilterSort
