@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
 const useWindowSize = (): { width: number; height: number } => {
+    const isClient = typeof window === 'object';
+
     const [state, setState] = useState<{ width: number; height: number }>({
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: isClient ? window.innerWidth : undefined,
+        height: isClient ? window.innerHeight : undefined,
     });
 
     useEffect(() => {

@@ -8,12 +8,6 @@ import useWindowSize from '../../util/useWindowSize';
 
 type WidgetCarouselProps = {
     children: ReactNode;
-    ScrollButton?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-};
-
-type size = {
-    height?: number;
-    width?: number;
 };
 
 type ConditionalWrapperProps = {
@@ -28,6 +22,11 @@ type embla = {
     scrollNext: () => void;
     scrollPrev: () => void;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
+type size = {
+    height?: number;
+    width?: number;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -75,10 +74,6 @@ const WidgetCarousel = ({ children }: WidgetCarouselProps): ReactElement => {
     const size = useWindowSize();
     const [embla, setEmbla] = useState(null);
 
-    useEffect(() => {
-        console.log(size);
-    });
-
     return (
         <>
             <Fab
@@ -90,7 +85,7 @@ const WidgetCarousel = ({ children }: WidgetCarouselProps): ReactElement => {
             </Fab>
 
             <ConditionalWrapper
-                condition={size.width >= 320}
+                condition={size && size.width >= 320}
                 wrapper={(children): JSX.Element => (
                     <EmblaCarouselReact emblaRef={setEmbla} options={{ loop: false, align: 'start' }}>
                         {children}
