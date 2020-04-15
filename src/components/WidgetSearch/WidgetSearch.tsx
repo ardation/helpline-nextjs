@@ -15,8 +15,15 @@ type Country = {
     subdivisions: Subdivision[];
 };
 
+type Search = {
+    country: Country;
+    subdivision: Subdivision;
+};
+
 type Props = {
     countries: Country[];
+    onSearchChange?: (search: Search) => void;
+    xprops?: any;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -49,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Search = ({ countries }: Props): ReactElement => {
+const Search = ({ countries, onSearchChange, xprops }: Props): ReactElement => {
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
     const classes = useStyles();
@@ -65,26 +72,22 @@ const Search = ({ countries }: Props): ReactElement => {
                     countries={countries}
                     onCountryChange={setSelectedCountry}
                     onSubdivisionChange={setSelectedSubdivision}
+                    xprops={xprops}
                 />
                 {selectedCountry && (
-                    <Link
-                        href={{
-                            pathname: `/${selectedCountry.code.toLowerCase()}${
-                                selectedSubdivision ? `/${selectedSubdivision.code.toLowerCase()}` : ''
-                            }`,
+                    <Button
+                        data-testid="searchButton"
+                        className={classes.button}
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        onClick={(): void => {
+                            onSearchChange({ country: selectedCountry, subdivision: selectedSubdivision });
                         }}
-                        passHref
                     >
-                        <Button
-                            data-testid="searchButton"
-                            className={classes.button}
-                            variant="contained"
-                            color="primary"
-                            size="large"
-                        >
-                            Search
-                        </Button>
-                    </Link>
+                        Search
+                    </Button>
+                    // </Link>
                 )}
             </Box>
         </Container>
