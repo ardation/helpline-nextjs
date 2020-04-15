@@ -1,26 +1,16 @@
 import React, { ReactElement, useState, useEffect, useContext } from 'react';
+import { request } from 'graphql-request';
+import gql from 'graphql-tag';
+import { print } from 'graphql';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Container, Box, Button } from '@material-ui/core';
+import { Container, Box } from '@material-ui/core';
+import { GetCountryAndOrganizations } from '../../../types/GetCountryAndOrganizations';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import FilterSort from '../FilterSort';
 import WidgetSearch from '../WidgetSearch';
 import WidgetBar from '../WidgetBar';
 import WidgetCarousel from '../WidgetCarousel';
 import OrganizationContext from '../../context/organizationContext';
-
-const organization = {
-    slug: 'youthline',
-    name: 'Youthline',
-    alwaysOpen: true,
-    openingHours: [],
-    humanSupportTypes: [{ name: 'Volunteers' }, { name: 'Staff' }],
-    categories: [{ name: 'For youth' }, { name: 'All issues' }],
-    smsNumber: '234',
-    phoneNumber: '0800 376 633',
-    url: 'https://www.youthline.co.nz/learn-and-grow.html',
-    chatUrl: 'https://youthline.co.nz',
-    timezone: 'Auckland',
-};
 
 type Subdivision = {
     code: string;
@@ -37,7 +27,7 @@ type Filter = {
     name: string;
 };
 
-type Filters = {
+type FilterOptions = {
     topics?: Filter[];
     categories?: Filter[];
     humanSupportTypes?: Filter[];
@@ -45,10 +35,20 @@ type Filters = {
 };
 
 type Props = {
-    country?: Country;
     countries: Country[];
-    filterOptions: Filters;
+    filterOptions: FilterOptions;
     xprops?: any;
+};
+
+type Search = {
+    country: Country;
+    subdivision: Subdivision;
+};
+
+type SelectedCountry = {
+    code: string;
+    name: string;
+    emergencyNumber: string;
 };
 
 const useStyles = makeStyles(() =>
@@ -92,29 +92,83 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const Widget = ({ country, countries, filterOptions, xprops }: Props): ReactElement => {
+const getCountryAndOrganizations: any = async (countryCode): Promise<{ props: GetCountryAndOrganizations }> => {
+    const query = gql`
+        query GetCountryAndOrganizations($countryCode: String!) {
+            country(code: $countryCode) {
+                code
+                name
+                emergencyNumber
+            }
+            organizations(countryCode: $countryCode) {
+                nodes {
+                    slug
+                    name
+                    alwaysOpen
+                    smsNumber
+                    phoneNumber
+                    url
+                    chatUrl
+                    timezone
+                    humanSupportTypes {
+                        name
+                    }
+                    categories {
+                        name
+                    }
+                    topics {
+                        name
+                    }
+                    openingHours {
+                        day
+                        open
+                        close
+                    }
+                }
+            }
+        }
+    `;
+    const { country, organizations } = await request('https://api.findahelpline.com', print(query), {
+        countryCode: countryCode,
+    });
+    return {
+        props: {
+            country,
+            organizations,
+        },
+    };
+};
+
+const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
     const classes = useStyles();
     const [showFilter, setShowFilter] = useState(false);
     const { filters, applyFilters } = useContext(OrganizationContext);
+
+    const [selectedSearch, setSelectedSearch] = useState<Search | undefined>(undefined);
+    const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | undefined>(undefined);
+    const [organizations, setOrganizations] = useState<any | undefined>(undefined);
+
+    useEffect(() => {
+        setOrganizations(undefined);
+        if (selectedSearch) {
+            getCountryAndOrganizations(selectedSearch.country.code).then(({ props }) => {
+                setSelectedCountry(props.country);
+                setOrganizations(props.organizations);
+            });
+        } else if (xprops) {
+            getCountryAndOrganizations(xprops.countryCode).then(({ props }) => {
+                setSelectedCountry(props.country);
+                setOrganizations(props.organizations);
+            });
+        }
+    }, [selectedSearch, xprops]);
 
     return (
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <div className={classes.header}>
-                    <WidgetSearch countries={countries} />
-                    {xprops ? (
-                        <Button
-                            data-testid="searchButton"
-                            className={classes.button}
-                            variant="contained"
-                            color="primary"
-                            size="large"
-                            onClick={(): void => xprops.onCallback('Hello from the next.js app!')}
-                        >
-                            {xprops.text}
-                        </Button>
-                    ) : null}
-                    <WidgetBar country={{ emergencyNumber: '911' }} />
+                    <WidgetSearch countries={countries} xprops={xprops} onSearchChange={setSelectedSearch} />
+                    <WidgetBar country={selectedCountry} />
                     {showFilter && (
                         <div className={classes.filter}>
                             <FilterSort
@@ -130,13 +184,21 @@ const Widget = ({ country, countries, filterOptions, xprops }: Props): ReactElem
                     )}
                 </div>
                 <Box className={classes.box}>
-                    <Container className={classes.carousel}>
-                        <WidgetCarousel>
-                            <OrganizationCard organization={organization} />
-                            <OrganizationCard organization={organization} />
-                            <OrganizationCard organization={organization} />
-                        </WidgetCarousel>
-                    </Container>
+                    {selectedSearch || selectedCountry ? (
+                        <Container className={classes.carousel}>
+                            {organizations ? (
+                                <WidgetCarousel>
+                                    {organizations.nodes.map((organization) => (
+                                        <Box key={organization.slug} my={2}>
+                                            <OrganizationCard organization={organization} />
+                                        </Box>
+                                    ))}
+                                </WidgetCarousel>
+                            ) : (
+                                <div>loading...</div>
+                            )}
+                        </Container>
+                    ) : null}
                 </Box>
             </Box>
         </Container>

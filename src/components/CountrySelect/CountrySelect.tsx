@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { ReactElement, Fragment, useState } from 'react';
+import React, { ReactElement, Fragment, useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -22,6 +22,7 @@ type Props = {
     countries: Country[];
     onCountryChange: (country: Country) => void;
     onSubdivisionChange: (subdivision: Subdivision) => void;
+    xprops?: any;
 };
 
 // ISO 3166-1 alpha-2
@@ -77,9 +78,9 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange }: Props): ReactElement => {
+const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange, xprops }: Props): ReactElement => {
     const classes = useStyles();
-    const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
+    const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
     const setSelectedSubdivision = useState<Subdivision | undefined>(undefined)[1];
 
     const localOnCountryChange = (country: Country): void => {
@@ -94,9 +95,26 @@ const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange }: Prop
         onSubdivisionChange(subdivision);
     };
 
+    const setDefaultCountry = (): void => {
+        if (xprops) {
+            localOnCountryChange(
+                countries.filter((country: Country) => {
+                    return country.code === xprops?.countryCode;
+                })[0],
+            );
+        } else {
+            // localOnCountryChange(countries[0]);
+        }
+    };
+
+    useEffect(() => {
+        setDefaultCountry();
+    }, [xprops]);
+
     return (
         <Box className={classes.box}>
             <Autocomplete
+                value={selectedCountry}
                 style={{ width: 300 }}
                 options={sortBy('name', countries) as Country[]}
                 classes={{

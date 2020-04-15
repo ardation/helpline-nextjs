@@ -42,9 +42,7 @@ While the app is running, place the below snippet inside the body tag of a `.htm
     Widget.render(
         {
             text: 'String from embedded snippet',
-            onCallback: function (msg) {
-                console.log('String returned from callback:', msg);
-            },
+            countryCode: 'US',
         },
         '#widget',
     );
