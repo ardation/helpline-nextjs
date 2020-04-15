@@ -14,12 +14,19 @@ type FilterResponse = {
     contactMethods?: Filter[];
 };
 
+type FilterSection = {
+    key: string;
+    title: string;
+    options: Filter[];
+};
+
 type Props = {
     topics?: Filter[];
     categories?: Filter[];
     humanSupportTypes?: Filter[];
     contactMethods?: Filter[];
     // sortByKeys?: any[];
+    max?: number;
     onApply: (selectedFilters: FilterResponse) => void;
 };
 
@@ -68,7 +75,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const WidgetFilterSort = (props: Props): ReactElement => {
+const FilterSort = (props: Props): ReactElement => {
     const classes = useStyles();
     const [selectedFilters, setSelectedFilters] = useState({
         topics: [],
@@ -76,8 +83,9 @@ const WidgetFilterSort = (props: Props): ReactElement => {
         humanSupportTypes: [],
         contactMethods: [],
     });
+    const [max, setMax] = useState(props.max || 10);
 
-    const filterSections = Object.keys(selectedFilters).reduce((prev, key) => {
+    const filterSections: FilterSection[] = Object.keys(selectedFilters).reduce((prev, key) => {
         const title = key.replace(/([A-Z])/g, ' $1');
         props[key]?.length > 0 &&
             prev.push({
@@ -102,20 +110,36 @@ const WidgetFilterSort = (props: Props): ReactElement => {
                 <Box className={classes.sectionContainer} key={section.key}>
                     <Typography className={classes.subheading}>{section.title}</Typography>
                     <Box className={classes.chips}>
-                        {props[section.key].map((item) => (
+                        {section.options.map(
+                            (item: Filter, index: number) =>
+                                index < max && (
+                                    <Chip
+                                        color={find(item, selectedFilters[section.key]) ? 'primary' : 'default'}
+                                        key={item.name}
+                                        label={item.name}
+                                        onClick={(): void => toggleChip(section.key, item)}
+                                        data-testid="filterChip"
+                                        classes={{
+                                            root: classes.chipRoot,
+                                            colorPrimary: classes.chipColorPrimary,
+                                            clickableColorPrimary: classes.chipColorPrimary,
+                                        }}
+                                    />
+                                ),
+                        )}
+                        {section.options.length > max && (
                             <Chip
-                                color={find(item, selectedFilters[section.key]) ? 'primary' : 'default'}
-                                key={item.name}
-                                label={item.name}
-                                onClick={(): void => toggleChip(section.key, item)}
-                                data-testid="filterChip"
+                                color="default"
+                                label={`+${section.options.length - max} More`}
+                                onClick={(): void => setMax(100)}
+                                data-testid="showMoreChip"
                                 classes={{
                                     root: classes.chipRoot,
                                     colorPrimary: classes.chipColorPrimary,
                                     clickableColorPrimary: classes.chipColorPrimary,
                                 }}
                             />
-                        ))}
+                        )}
                     </Box>
                 </Box>
             ))}
@@ -133,4 +157,4 @@ const WidgetFilterSort = (props: Props): ReactElement => {
     );
 };
 
-export default WidgetFilterSort;
+export default FilterSort;

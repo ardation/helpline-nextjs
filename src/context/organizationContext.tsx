@@ -40,6 +40,7 @@ export const OrganizationProvider = ({ children }: Props): ReactElement => {
         setFilters({ ...filters, ...selectedFilters });
     };
 
+    // TODO: pass in the filters and set in the component for reusability
     const ctx = {
         organizations,
         applyFilters,

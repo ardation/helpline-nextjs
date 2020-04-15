@@ -118,6 +118,7 @@ const Widget = ({ filters, country, countries, xprops }: Props): ReactElement =>
                     {showFilter && (
                         <div className={classes.filter}>
                             <FilterSort
+                                max={10}
                                 topics={filters.topics}
                                 categories={filters.categories}
                                 humanSupportTypes={filters.humanSupportTypes}
