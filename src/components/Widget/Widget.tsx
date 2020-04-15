@@ -4,8 +4,8 @@ import { Container, Box, Button } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import FilterSort from '../FilterSort';
 import WidgetSearch from '../WidgetSearch';
-import WidgetCarousel from '../WidgetCarousel';
 import WidgetBar from '../WidgetBar';
+import WidgetCarousel from '../WidgetCarousel';
 import OrganizationContext from '../../context/organizationContext';
 
 const organization = {
@@ -47,7 +47,7 @@ type Filters = {
 type Props = {
     country?: Country;
     countries: Country[];
-    filters: Filters;
+    filterOptions: Filters;
     xprops?: any;
 };
 
@@ -76,7 +76,7 @@ const useStyles = makeStyles(() =>
             background: 'white',
         },
         carousel: {
-            position: 'relative',
+            // position: 'relative',
             display: 'flex',
             flex: '0 0 auto',
             alignItems: 'flex-start',
@@ -92,11 +92,10 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const Widget = ({ filters, country, countries, xprops }: Props): ReactElement => {
+const Widget = ({ country, countries, filterOptions, xprops }: Props): ReactElement => {
     const classes = useStyles();
-    const { applyFilters } = useContext(OrganizationContext);
-    const [showFilter, setShowFilter] = useState(true);
-    const contactMethods = [{ name: 'Phone' }, { name: 'Text' }, { name: 'Webchat' }];
+    const [showFilter, setShowFilter] = useState(false);
+    const { filters, applyFilters } = useContext(OrganizationContext);
 
     return (
         <Container className={classes.container}>
@@ -119,11 +118,9 @@ const Widget = ({ filters, country, countries, xprops }: Props): ReactElement =>
                     {showFilter && (
                         <div className={classes.filter}>
                             <FilterSort
-                                max={10}
-                                topics={filters.topics}
-                                categories={filters.categories}
-                                humanSupportTypes={filters.humanSupportTypes}
-                                contactMethods={contactMethods}
+                                showMax={10}
+                                filterOptions={filterOptions}
+                                activeFilters={filters}
                                 onApply={(filters): void => {
                                     setShowFilter(false);
                                     applyFilters(filters);

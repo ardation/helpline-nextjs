@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { Fragment, Component } from 'react';
+import React, { Fragment, Component, ReactElement } from 'react';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
@@ -10,10 +10,12 @@ import { OrganizationProvider } from '../src/context/organizationContext';
 
 declare global {
     interface Window {
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
         xprops: any;
     }
 }
 type Xprops = {
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     xprops: any;
 };
 
@@ -29,9 +31,11 @@ class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
             this.setState({ xprops: window.xprops });
         }
     }
+
     render() {
         const { topics, categories, humanSupportTypes, countries } = this.props;
         const { xprops } = this.state;
+        const contactMethods = [{ name: 'Phone' }, { name: 'Text' }, { name: 'Webchat' }];
         return (
             <Fragment>
                 <Head>
@@ -43,7 +47,7 @@ class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
                     <OrganizationProvider>
                         <Widget
                             countries={countries}
-                            filters={{ topics, categories, humanSupportTypes }}
+                            filterOptions={{ topics, categories, humanSupportTypes, contactMethods }}
                             xprops={xprops}
                         />
                     </OrganizationProvider>
@@ -59,6 +63,7 @@ export const getStaticProps = async (): Promise<{ props: GetCountriesAndTags }> 
             countries {
                 code
                 name
+                emergencyNumber
                 subdivisions {
                     code
                     name

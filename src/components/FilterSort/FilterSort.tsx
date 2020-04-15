@@ -7,7 +7,7 @@ type Filter = {
     name: string;
 };
 
-type FilterResponse = {
+type FilterOptions = {
     topics?: Filter[];
     categories?: Filter[];
     humanSupportTypes?: Filter[];
@@ -21,13 +21,10 @@ type FilterSection = {
 };
 
 type Props = {
-    topics?: Filter[];
-    categories?: Filter[];
-    humanSupportTypes?: Filter[];
-    contactMethods?: Filter[];
-    // sortByKeys?: any[];
-    max?: number;
-    onApply: (selectedFilters: FilterResponse) => void;
+    filterOptions: FilterOptions;
+    activeFilters?: FilterOptions;
+    showMax?: number;
+    onApply: (selectedFilters: FilterOptions) => void;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -75,23 +72,25 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const FilterSort = (props: Props): ReactElement => {
+const FilterSort = ({ filterOptions, activeFilters, showMax, onApply }: Props): ReactElement => {
     const classes = useStyles();
-    const [selectedFilters, setSelectedFilters] = useState({
-        topics: [],
-        categories: [],
-        humanSupportTypes: [],
-        contactMethods: [],
-    });
-    const [max, setMax] = useState(props.max || 10);
+    const [selectedFilters, setSelectedFilters] = useState(
+        activeFilters || {
+            topics: [],
+            categories: [],
+            humanSupportTypes: [],
+            contactMethods: [],
+        },
+    );
+    const [max, setMax] = useState(showMax || 10);
 
-    const filterSections: FilterSection[] = Object.keys(selectedFilters).reduce((prev, key) => {
+    const filterSections: FilterSection[] = Object.keys(filterOptions).reduce((prev, key) => {
         const title = key.replace(/([A-Z])/g, ' $1');
-        props[key]?.length > 0 &&
+        filterOptions[key]?.length > 0 &&
             prev.push({
                 key,
                 title: title.charAt(0).toUpperCase() + title.slice(1),
-                options: props[key],
+                options: filterOptions[key],
             });
         return prev;
     }, []);
@@ -148,7 +147,7 @@ const FilterSort = (props: Props): ReactElement => {
                     data-testid="applyButton"
                     className={classes.button}
                     variant="outlined"
-                    onClick={(): void => props.onApply(selectedFilters)}
+                    onClick={(): void => onApply(selectedFilters)}
                 >
                     Apply
                 </Button>

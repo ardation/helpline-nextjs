@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, ReactElement, ReactNode } from 'react';
+import FilterSort from '../components/FilterSort';
 
 type Props = {
     children: ReactNode;
@@ -17,6 +18,7 @@ type Filters = {
 
 const initialState = {
     organizations: [],
+    filters: {},
     applyFilters: (selectedFilters: Filters): void => null,
 };
 
@@ -31,18 +33,13 @@ export const OrganizationProvider = ({ children }: Props): ReactElement => {
         contactMethods: null,
     });
 
-    useEffect(() => {
-        // setOrganizations(fetch(gqlQuery))
-        console.log('update query with', filters);
-    }, [filters]);
-
     const applyFilters = (selectedFilters: Filters): void => {
         setFilters({ ...filters, ...selectedFilters });
     };
 
-    // TODO: pass in the filters and set in the component for reusability
     const ctx = {
         organizations,
+        filters,
         applyFilters,
     };
 

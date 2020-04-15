@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useWindowSize = (): { width: number; height: number } => {
+const useWindowSize = (): { width: number | undefined; height: number | undefined } => {
     const isClient = typeof window === 'object';
 
     const [state, setState] = useState<{ width: number; height: number }>({
@@ -9,6 +9,9 @@ const useWindowSize = (): { width: number; height: number } => {
     });
 
     useEffect(() => {
+        if (!isClient) {
+            return;
+        }
         const handler = (): void => {
             setState({
                 width: window.innerWidth,

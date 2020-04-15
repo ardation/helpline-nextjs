@@ -1,8 +1,8 @@
-import React, { ReactElement, Fragment } from 'react';
-import { AppBar, Container, Toolbar, Typography, Button } from '@material-ui/core';
+import React, { ReactElement, useState, Fragment } from 'react';
+import { Container, Toolbar, Typography, Button } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
-import CallIcon from '@material-ui/icons/Call';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 type Country = {
     emergencyNumber: string;
@@ -19,41 +19,32 @@ const useStyles = makeStyles((theme: Theme) =>
                 paddingRight: theme.spacing(1),
                 paddingLeft: theme.spacing(1),
             },
-        },
-        appBar: {
             backgroundColor: '#F0F1F5',
         },
         toolbar: {
             display: 'grid',
             gridGap: theme.spacing(2),
+            gridTemplateColumns: '1fr auto auto',
             paddingRight: 0,
             paddingLeft: 0,
             [theme.breakpoints.down('xs')]: {
-                gridGap: theme.spacing(1),
                 gridRowGap: 0,
-                height: '80px',
-            },
-        },
-        toolbarWithCountry: {
-            gridTemplateColumns: '1fr auto auto',
-            [theme.breakpoints.down('xs')]: {
-                textAlign: 'center',
-                gridTemplateColumns: '1fr 1fr',
                 alignItems: 'flex-start',
             },
         },
         title: {
-            minWidth: '80px',
-            color: '#202020',
-            [theme.breakpoints.down('xs')]: {
-                fontSize: '0.8rem',
-            },
-        },
-        titleWithCountry: {
             [theme.breakpoints.down('xs')]: {
                 gridColumn: '1 / span 2',
                 alignSelf: 'center',
             },
+            display: 'inline',
+        },
+        titleDropdown: {
+            [theme.breakpoints.down('xs')]: {
+                gridColumn: '1 / span 2',
+                alignSelf: 'center',
+            },
+            display: 'none',
         },
         button: {
             backgroundColor: '#CC001E',
@@ -61,50 +52,87 @@ const useStyles = makeStyles((theme: Theme) =>
             borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
-            [theme.breakpoints.down('xs')]: {
-                fontSize: '0.7rem',
-                paddingRight: theme.spacing(1),
-                paddingLeft: theme.spacing(1),
-            },
             '&:hover': {
                 backgroundColor: '#CC001E',
             },
-        },
-        buttonEndIcon: {
             [theme.breakpoints.down('xs')]: {
                 display: 'none',
             },
         },
+        buttonDropdown: {
+            backgroundColor: '#CC001E',
+            textAlign: 'center',
+            alignSelf: 'center',
+            borderRadius: '1000px',
+            paddingLeft: theme.spacing(2),
+            paddingRight: theme.spacing(2),
+            '&:hover': {
+                backgroundColor: '#CC001E',
+            },
+            display: 'inline',
+        },
+        dropdownIcon: {
+            display: 'none',
+            alignSelf: 'center',
+            [theme.breakpoints.down('xs')]: {
+                display: 'inline',
+            },
+        },
+        dropdownIconDropdown: {
+            alignSelf: 'center',
+        },
     }),
 );
 
-const TopBar = ({ country }: Props): ReactElement => {
+const WidgetBar = ({ country }: Props): ReactElement => {
     const classes = useStyles();
+    const [isDropdown, setIsDropdown] = useState<boolean>(false);
+
+    if (!country) {
+        country = {
+            emergencyNumber: '911',
+        };
+    }
 
     return (
-        <AppBar className={classes.appBar} position="sticky" data-testid="widgetbar">
-            <Container className={country && classes.container}>
-                <Toolbar className={[classes.toolbar, country ? classes.toolbarWithCountry : null].join(' ')}>
-                    {country && (
-                        <Fragment>
-                            <Typography className={[classes.title, classes.titleWithCountry].join(' ')}>
-                                Are you or someone else in immediate danger?
-                            </Typography>
-                            <Button
-                                color="inherit"
-                                classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
-                                endIcon={<CallIcon />}
-                                href={`tel:${country.emergencyNumber}`}
-                                data-testid="emergencyServicesButton"
-                            >
-                                Emergency Services
-                            </Button>
-                        </Fragment>
-                    )}
-                </Toolbar>
-            </Container>
-        </AppBar>
+        <Container className={country && classes.container}>
+            <Toolbar className={classes.toolbar}>
+                {!isDropdown ? (
+                    <Fragment>
+                        <Typography className={classes.title}>Are you or someone else in immediate danger?</Typography>
+                        <Button
+                            color="inherit"
+                            className={classes.button}
+                            href={`tel:${country.emergencyNumber}`}
+                            data-testid="emergencyServicesButton"
+                        >
+                            Emergency Services
+                        </Button>
+                        <Button className={classes.dropdownIcon} onClick={(): void => setIsDropdown(true)}>
+                            <ExpandMoreIcon />
+                        </Button>
+                    </Fragment>
+                ) : (
+                    <Fragment>
+                        <Typography className={classes.titleDropdown}>
+                            Are you or someone else in immediate danger?
+                        </Typography>
+                        <Button
+                            color="inherit"
+                            className={classes.buttonDropdown}
+                            href={`tel:${country.emergencyNumber}`}
+                            data-testid="emergencyServicesButton"
+                        >
+                            Emergency Services
+                        </Button>
+                        <Button className={classes.dropdownIconDropdown} onClick={(): void => setIsDropdown(false)}>
+                            <ExpandLessIcon />
+                        </Button>
+                    </Fragment>
+                )}
+            </Toolbar>
+        </Container>
     );
 };
 
-export default TopBar;
+export default WidgetBar;
