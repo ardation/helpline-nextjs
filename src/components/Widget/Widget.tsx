@@ -96,6 +96,7 @@ const Widget = ({ filters, country, countries, xprops }: Props): ReactElement =>
     const classes = useStyles();
     const { applyFilters } = useContext(OrganizationContext);
     const [showFilter, setShowFilter] = useState(true);
+    const contactMethods = [{ name: 'Phone' }, { name: 'Text' }, { name: 'Webchat' }];
 
     return (
         <Container className={classes.container}>
@@ -122,6 +123,7 @@ const Widget = ({ filters, country, countries, xprops }: Props): ReactElement =>
                                 topics={filters.topics}
                                 categories={filters.categories}
                                 humanSupportTypes={filters.humanSupportTypes}
+                                contactMethods={contactMethods}
                                 onApply={(filters): void => {
                                     setShowFilter(false);
                                     applyFilters(filters);
