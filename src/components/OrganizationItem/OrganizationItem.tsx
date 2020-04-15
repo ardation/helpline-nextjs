@@ -65,19 +65,21 @@ const useStyles = makeStyles((theme: Theme) =>
         heading: {
             fontWeight: 'bold',
             textDecoration: 'underline',
-            color: '#000000',
+            color: theme.palette.text.primary,
         },
         chipAlwaysOpen: {
             color: '#FFFFFF',
             fontWeight: 'bold',
             backgroundColor: theme.palette.secondary.main,
             textDecoration: 'none',
+            marginLeft: theme.spacing(2),
         },
         button: {
             textTransform: 'none',
+            lineHeight: '1.5',
         },
         buttonDisabled: {
-            color: '#000000 !important',
+            color: `${theme.palette.text.primary} !important`,
         },
         buttonLink: {
             textDecoration: 'underline',
@@ -97,7 +99,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         chip: {
             color: '#FFFFFF',
-            backgroundColor: '#000000',
+            backgroundColor: theme.palette.text.primary,
             fontWeight: 600,
         },
         side: {
@@ -114,6 +116,9 @@ const useStyles = makeStyles((theme: Theme) =>
                 gridAutoFlow: 'column',
             },
         },
+        fab: {
+            fontSize: '2rem',
+        },
         fabLabel: {
             textTransform: 'uppercase',
             fontSize: '0.8rem',
@@ -129,12 +134,14 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
     return (
         <Box className={classes.box}>
             <Box className={classes.grid}>
-                <Typography variant="h6">
-                    <Link href="/organizations/[slug]" as={`/organizations/${organization.slug}`} passHref>
-                        <a className={classes.heading}>{organization.name}</a>
-                    </Link>{' '}
-                    {organization.alwaysOpen && <Chip className={classes.chipAlwaysOpen} label="24/7" />}
-                </Typography>
+                <Box ml={1}>
+                    <Typography variant="h6">
+                        <Link href="/organizations/[slug]" as={`/organizations/${organization.slug}`} passHref>
+                            <a className={classes.heading}>{organization.name}</a>
+                        </Link>
+                        {organization.alwaysOpen && <Chip className={classes.chipAlwaysOpen} label="24/7" />}
+                    </Typography>
+                </Box>
                 {(organization.alwaysOpen || organization.openingHours.length > 0) && (
                     <Box data-testid="open">
                         <Button
@@ -206,7 +213,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                     </Box>
                 )}
                 {organization.categories.length > 0 && (
-                    <Box className={classes.chips} data-testid="categories">
+                    <Box ml={1} className={classes.chips} data-testid="categories">
                         {organization.categories.map((category, index) => (
                             <Chip className={classes.chip} key={index} label={category.name} />
                         ))}
@@ -222,8 +229,9 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                                 color="primary"
                                 aria-label="text"
                                 data-testid="smsNumberFab"
+                                className={classes.fab}
                             >
-                                <SmsOutlinedIcon />
+                                <SmsOutlinedIcon fontSize="inherit" />
                             </Fab>
                             <Typography className={classes.fabLabel}>Text</Typography>
                         </Box>
@@ -235,16 +243,23 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                                 color="primary"
                                 aria-label="call"
                                 data-testid="phoneNumberFab"
+                                className={classes.fab}
                             >
-                                <PhoneIcon />
+                                <PhoneIcon fontSize="inherit" />
                             </Fab>
                             <Typography className={classes.fabLabel}>Call</Typography>
                         </Box>
                     )}
                     {organization.chatUrl && (
                         <Box>
-                            <Fab href={organization.chatUrl} color="primary" aria-label="text" data-testid="chatUrlFab">
-                                <MessageOutlinedIcon />
+                            <Fab
+                                href={organization.chatUrl}
+                                color="primary"
+                                aria-label="text"
+                                data-testid="chatUrlFab"
+                                className={classes.fab}
+                            >
+                                <MessageOutlinedIcon fontSize="inherit" />
                             </Fab>
                             <Typography className={classes.fabLabel}>Web Chat</Typography>
                         </Box>

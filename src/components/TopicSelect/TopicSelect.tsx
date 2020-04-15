@@ -36,9 +36,9 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 600,
         },
         chipColorPrimary: {
-            backgroundColor: '#000000',
+            backgroundColor: theme.palette.text.primary,
             '&:hover, &:focus': {
-                backgroundColor: '#000000',
+                backgroundColor: theme.palette.text.primary,
             },
         },
         text: {
