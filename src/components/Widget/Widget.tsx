@@ -3,7 +3,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box, Button } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import WidgetSearch from '../WidgetSearch';
-import EmergencyBanner from '../EmergencyBanner';
+import WidgetBar from '../WidgetBar';
 import WidgetCarousel from '../WidgetCarousel';
 
 const organization = {
@@ -60,7 +60,7 @@ const useStyles = makeStyles(() =>
             paddingRight: 0,
         },
         carousel: {
-            position: 'relative',
+            // position: 'relative',
             display: 'flex',
             flex: '0 0 auto',
             alignItems: 'flex-start',
@@ -83,7 +83,6 @@ const Widget = ({ topics, country, countries, xprops }: Props): ReactElement => 
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <WidgetSearch countries={countries} />
-                <EmergencyBanner country={{ emergencyNumber: '911' }} />
                 {xprops ? (
                     <Button
                         data-testid="searchButton"
@@ -96,6 +95,7 @@ const Widget = ({ topics, country, countries, xprops }: Props): ReactElement => 
                         {xprops.text}
                     </Button>
                 ) : null}
+                <WidgetBar country={{ emergencyNumber: '911' }} />
                 <Box className={classes.box}>
                     <Container className={classes.carousel}>
                         <WidgetCarousel>
