@@ -24,4 +24,3 @@ const Widget = zoid.create({
         },
     },
 });
-

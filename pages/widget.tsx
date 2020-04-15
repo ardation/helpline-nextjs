@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { Fragment, Component } from 'react';
+import React, { Fragment, Component, ReactElement } from 'react';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
@@ -9,10 +9,12 @@ import { GetCountriesAndTopics } from '../types/GetCountriesAndTopics';
 
 declare global {
     interface Window {
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
         xprops: any;
     }
 }
 type Xprops = {
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     xprops: any;
 };
 
@@ -28,7 +30,8 @@ class WidgetPage extends Component<GetCountriesAndTopics, Xprops> {
             this.setState({ xprops: window.xprops });
         }
     }
-    render() {
+
+    render(): ReactElement {
         const { topics, countries } = this.props;
         const { xprops } = this.state;
         return (
@@ -52,6 +55,7 @@ export const getStaticProps = async (): Promise<{ props: GetCountriesAndTopics }
             countries {
                 code
                 name
+                emergencyNumber
                 subdivisions {
                     code
                     name

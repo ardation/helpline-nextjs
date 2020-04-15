@@ -3,8 +3,8 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box, Button } from '@material-ui/core';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import WidgetSearch from '../WidgetSearch';
+import EmergencyBanner from '../EmergencyBanner';
 import WidgetCarousel from '../WidgetCarousel';
-import WidgetBar from '../WidgetBar';
 
 const organization = {
     slug: 'youthline',
@@ -39,6 +39,7 @@ type Props = {
     country?: Country;
     countries: Country[];
     topics: Topic[];
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     xprops?: any;
 };
 
@@ -83,6 +84,7 @@ const Widget = ({ topics, country, countries, xprops }: Props): ReactElement => 
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <WidgetSearch countries={countries} />
+                <EmergencyBanner country={{ emergencyNumber: '911' }} />
                 {xprops ? (
                     <Button
                         data-testid="searchButton"
@@ -95,7 +97,6 @@ const Widget = ({ topics, country, countries, xprops }: Props): ReactElement => 
                         {xprops.text}
                     </Button>
                 ) : null}
-                <WidgetBar country={{ emergencyNumber: '111}' }} />
                 <Box className={classes.box}>
                     <Container className={classes.carousel}>
                         <WidgetCarousel>
