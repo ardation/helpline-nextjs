@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         button: {
             backgroundColor: '#CC001E',
+            color: '#FFFFFF',
             textAlign: 'left',
             borderRadius: '1000px',
             paddingLeft: theme.spacing(2),

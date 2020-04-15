@@ -1,10 +1,11 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement, useState, useEffect, useContext } from 'react';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box, Button } from '@material-ui/core';
 import { GetCountryAndOrganizations } from '../../../types/GetCountryAndOrganizations';
+import OrganizationContext from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import WidgetSearch from '../WidgetSearch';
 import WidgetBar from '../WidgetBar';
@@ -61,7 +62,7 @@ const useStyles = makeStyles(() =>
             paddingRight: 0,
         },
         carousel: {
-            // position: 'relative',
+            position: 'relative',
             display: 'flex',
             flex: '0 0 auto',
             alignItems: 'flex-start',
@@ -126,6 +127,7 @@ const getCountryAndOrganizations: any = async (countryCode): Promise<{ props: Ge
 
 const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
     const classes = useStyles();
+    const orgContext = useContext(OrganizationContext);
 
     const [selectedSearch, setSelectedSearch] = useState<Search | undefined>(undefined);
     const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | undefined>(undefined);

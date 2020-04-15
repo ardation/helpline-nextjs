@@ -47,20 +47,26 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             border: '1px solid #000',
             borderRadius: '10px',
+            minHeight: '20em',
             flexShrink: 0,
             gridTemplateColumns: '1fr 88px',
             '& > div': {
                 padding: theme.spacing(2),
             },
             '@media (max-width: 414px)': {
+                alignItems: 'center',
                 flexDirection: 'column',
+                minHeight: 'unset',
             },
         },
         grid: {
             flex: 1,
             display: 'flex',
+            minWidth: '18em',
             flexDirection: 'column',
-            minWidth: 0,
+            '@media (max-width: 414px)': {
+                flexDirection: 'column',
+            },
         },
         heading: {
             fontWeight: 'bold',
@@ -116,6 +122,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 borderTopRightRadius: '0',
                 borderBottomLeftRadius: '10px',
                 gridAutoFlow: 'column',
+                width: '100%',
             },
         },
         fabLabel: {
