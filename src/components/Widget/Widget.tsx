@@ -167,7 +167,12 @@ const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <div className={classes.header}>
-                    <WidgetSearch countries={countries} xprops={xprops} onSearchChange={setSelectedSearch} />
+                    <WidgetSearch
+                        countries={countries}
+                        xprops={xprops}
+                        onSearchChange={setSelectedSearch}
+                        toggleFilters={(): void => setShowFilter(!showFilter)}
+                    />
                     <WidgetBar country={selectedCountry} />
                     {showFilter && (
                         <div className={classes.filter}>
