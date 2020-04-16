@@ -1,10 +1,13 @@
 import React, { ReactElement } from 'react';
 import { ThemeProvider } from '@material-ui/core';
+import { withContexts } from '@storybook/addon-contexts/react';
 import theme from '../../theme';
+import OrganizationContext from '../../context/organizationContext';
 import Widget from '.';
 
 export default {
     title: 'Widget',
+    // decorators: [withContexts(OrganizationContext)],
 };
 
 export const Default = (): ReactElement => (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement, ReactNode } from 'react';
+import React, { useState, ReactElement, ReactNode } from 'react';
 import EmblaCarouselReact from 'embla-carousel-react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Container, Fab } from '@material-ui/core';
@@ -79,6 +79,7 @@ const WidgetCarousel = ({ children }: WidgetCarouselProps): ReactElement => {
             <Fab
                 onClick={(): void => embla.scrollPrev()}
                 aria-label="scroll-previous"
+                data-testid="scroll-previous"
                 className={`${classes.fab} ${classes.prevIcon}`}
             >
                 <ChevronLeftIcon className={`${classes.icon}`} />
@@ -87,7 +88,10 @@ const WidgetCarousel = ({ children }: WidgetCarouselProps): ReactElement => {
             <ConditionalWrapper
                 condition={size && size.width >= 320}
                 wrapper={(children): JSX.Element => (
-                    <EmblaCarouselReact emblaRef={setEmbla} options={{ loop: false, align: 'start' }}>
+                    <EmblaCarouselReact
+                        emblaRef={setEmbla}
+                        options={{ loop: false, align: 'start', containScroll: true }}
+                    >
                         {children}
                     </EmblaCarouselReact>
                 )}
@@ -97,6 +101,7 @@ const WidgetCarousel = ({ children }: WidgetCarouselProps): ReactElement => {
             <Fab
                 onClick={(): void => embla.scrollNext()}
                 aria-label="scroll-next"
+                data-testid="scroll-next"
                 className={`${classes.fab} ${classes.nextIcon}`}
             >
                 <ChevronRightIcon className={`${classes.icon}`} />

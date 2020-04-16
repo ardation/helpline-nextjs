@@ -29,19 +29,25 @@ The easiest way to deploy your Next.js app is to use the [ZEIT Now Platform](htt
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+## Helpline Widget
+
+The helpine widget code can be found in `./src/widget/widget.js` and is bundled and minified using it's own `./webpack.config.js`.
+
+The three target enviornments for building are `dev`, `staging`, and `production` and these script refrences can be found in the `./package.json`. The mechanism that controls which build to generate is the `STAGING` environment property which can be passed in at run time or defined in a `.env` file. This controls which host origin url to provide to the widget, bundles and minifies the code, and then places this `widget.min.js` in the `./public` folder of the application.
+
+Please ensure this is run before you run the application. The `npm run dev` command has been updated to ensure this happens when running locally but this is not the case with `npm run build` or `npm run start` as these calls will need to come from the respective environment pipelines.
+
 ## Embedding the Helpline Widget (localhost)
 
-While the app is running, place the below snippet inside the body tag of a `.html` file and view that file locally on your browser.
+While the app is running, place the below snippet inside and before the closing `<body>` tag of a `.html` file and view that file locally on your browser.
 
 ```html
 <div id="widget"></div>
 
-<script src="http://localhost:3000/zoid.min.js"></script>
-<script src="http://localhost:3000/widget.js"></script>
+<script src="http://localhost:3000/widget.min.js"></script>
 <script type="text/javascript">
     Widget.render(
         {
-            text: 'String from embedded snippet',
             countryCode: 'US',
         },
         '#widget',
