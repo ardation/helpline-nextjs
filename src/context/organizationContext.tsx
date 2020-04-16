@@ -10,19 +10,25 @@ type Filter = {
 };
 
 type Filters = {
-    topics?: Filter[];
-    categories?: Filter[];
-    humanSupportTypes?: Filter[];
-    contactMethods?: Filter[];
+    topics?: Filter[] | null;
+    categories?: Filter[] | null;
+    humanSupportTypes?: Filter[] | null;
+    contactMethods?: Filter[] | null;
 };
 
-const initialState = {
+type State = {
+    organizations: any[];
+    filters: Filters;
+    applyFilters: (selectedFilters: Filters) => void;
+};
+
+const initialState: State = {
     organizations: [],
     filters: {
-        topics: [],
-        categories: [],
-        humanSupportTypes: [],
-        contactMethods: [],
+        topics: null,
+        categories: null,
+        humanSupportTypes: null,
+        contactMethods: null,
     },
     applyFilters: (selectedFilters: Filters): void => null,
 };
@@ -31,12 +37,7 @@ const OrganizationContext = createContext(initialState);
 
 export const OrganizationProvider = ({ children }: Props): ReactElement => {
     const [organizations, setOrganizations] = useState(initialState.organizations);
-    const [filters, setFilters] = useState({
-        topics: null,
-        categories: null,
-        humanSupportTypes: null,
-        contactMethods: null,
-    });
+    const [filters, setFilters] = useState<Filters>(initialState.filters);
 
     const applyFilters = (selectedFilters: Filters): void => {
         setFilters({ ...filters, ...selectedFilters });
