@@ -141,8 +141,8 @@ const getCountryAndOrganizations: any = async (countryCode): Promise<{ props: Ge
 
 const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
     const classes = useStyles();
-    const [showFilter, setShowFilter] = useState(false);
     const { filters, applyFilters } = useContext(OrganizationContext);
+    const [showFilter, setShowFilter] = useState(false);
 
     const [selectedSearch, setSelectedSearch] = useState<Search | undefined>(undefined);
     const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | undefined>(undefined);
