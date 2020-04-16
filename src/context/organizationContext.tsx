@@ -18,7 +18,12 @@ type Filters = {
 
 const initialState = {
     organizations: [],
-    filters: {},
+    filters: {
+        topics: [],
+        categories: [],
+        humanSupportTypes: [],
+        contactMethods: [],
+    },
     applyFilters: (selectedFilters: Filters): void => null,
 };
 

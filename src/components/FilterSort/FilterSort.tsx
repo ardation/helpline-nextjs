@@ -35,6 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingTop: '1.5rem',
             paddingBottom: '1.5rem',
         },
+        header: {
+            display: 'flex',
+            justifyContent: 'space-between',
+        },
         heading: {
             fontSize: '1.2rem',
             fontWeight: 'bold',
@@ -66,7 +70,6 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         button: {
-            borderColor: 'black',
             borderRadius: '1000px',
         },
     }),
@@ -102,8 +105,16 @@ const FilterSort = ({ filterOptions, activeFilters, showMax, onApply }: Props): 
 
     return (
         <Container className={classes.container}>
-            <Box mb={1}>
+            <Box mb={1} className={classes.header}>
                 <Typography className={classes.heading}>Filter & Sort</Typography>
+                <Button
+                    data-testid="applyButton"
+                    className={classes.button}
+                    variant="outlined"
+                    onClick={(): void => onApply(selectedFilters)}
+                >
+                    Apply Filters
+                </Button>
             </Box>
             {filterSections.map((section) => (
                 <Box className={classes.sectionContainer} key={section.key}>
@@ -142,16 +153,6 @@ const FilterSort = ({ filterOptions, activeFilters, showMax, onApply }: Props): 
                     </Box>
                 </Box>
             ))}
-            <Box className={'classes.footer'}>
-                <Button
-                    data-testid="applyButton"
-                    className={classes.button}
-                    variant="outlined"
-                    onClick={(): void => onApply(selectedFilters)}
-                >
-                    Apply
-                </Button>
-            </Box>
         </Container>
     );
 };

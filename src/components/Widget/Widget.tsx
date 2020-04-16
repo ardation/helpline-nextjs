@@ -66,6 +66,7 @@ const useStyles = makeStyles(() =>
             },
         },
         container: {
+            height: '100vh',
             paddingLeft: 0,
             paddingRight: 0,
         },
@@ -74,7 +75,7 @@ const useStyles = makeStyles(() =>
         },
         filter: {
             position: 'absolute',
-            zIndex: 100,
+            zIndex: 1200,
             background: 'white',
         },
         carousel: {
@@ -143,7 +144,7 @@ const getCountryAndOrganizations: any = async (countryCode): Promise<{ props: Ge
 
 const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
     const classes = useStyles();
-    const orgContext = useContext(OrganizationContext);
+    const { filters, applyFilters } = useContext(OrganizationContext);
     const [showFilter, setShowFilter] = useState(false);
 
     const [selectedSearch, setSelectedSearch] = useState<Search | undefined>(undefined);
@@ -181,10 +182,10 @@ const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
                             <FilterSort
                                 showMax={10}
                                 filterOptions={filterOptions}
-                                activeFilters={orgContext.filters}
+                                activeFilters={filters}
                                 onApply={(filters): void => {
                                     setShowFilter(false);
-                                    orgContext.applyFilters(filters);
+                                    applyFilters(filters);
                                 }}
                             />
                         </div>
