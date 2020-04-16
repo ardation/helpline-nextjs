@@ -10,6 +10,7 @@ import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import WidgetSearch from '../WidgetSearch';
 import WidgetBar from '../WidgetBar';
 import WidgetCarousel from '../WidgetCarousel';
+import Spinner from '../Spinner';
 
 type Subdivision = {
     code: string;
@@ -167,7 +168,7 @@ const Widget = ({ topics, countries, xprops }: Props): ReactElement => {
                                     ))}
                                 </WidgetCarousel>
                             ) : (
-                                <div>loading...</div>
+                                <Spinner />
                             )}
                         </Container>
                     ) : null}

@@ -38,7 +38,8 @@ class WidgetPage extends Component<GetCountriesAndTopics, Xprops> {
             <Fragment>
                 <Head>
                     <title>Find A Helpline</title>
-                    <script src="/widget.min.js"></script>
+                    <script src="http://localhost:3000/zoid.min.js"></script>
+                    <script src="http://localhost:3000/widget.js"></script>
                 </Head>
                 <Chrome topbar={false} footer={false}>
                     <Widget countries={countries} topics={topics} xprops={xprops} />

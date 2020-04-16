@@ -19,4 +19,23 @@ describe('WidgetSearch', () => {
         const { getByText } = render(<WidgetSearch countries={countries} />);
         expect(getByText('Struggling? Talk to a real person, for free.')).toBeTruthy();
     });
+
+    it('should change search url after country select', () => {
+        const { getByTestId, getByRole } = render(<WidgetSearch countries={countries} />);
+        const element = getByRole('textbox');
+        fireEvent.click(element);
+        fireEvent.click(getByRole('listbox').children[0]);
+        expect(getByTestId('searchButton')).toHaveAttribute('href', '/au');
+    });
+
+    it('should change search url after country and subdivision select', () => {
+        const { getByTestId, getAllByRole } = render(<WidgetSearch countries={countries} />);
+        const countryElement = getAllByRole('textbox')[0];
+        fireEvent.click(countryElement);
+        fireEvent.click(getAllByRole('listbox')[0].children[1]);
+        const subdivisionElement = getAllByRole('textbox')[1];
+        fireEvent.click(subdivisionElement);
+        fireEvent.click(getAllByRole('listbox')[0].children[1]);
+        expect(getByTestId('searchButton')).toHaveAttribute('href', '/nz/bop');
+    });
 });
