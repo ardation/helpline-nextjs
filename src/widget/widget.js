@@ -1,9 +1,13 @@
+import * as zoid from 'zoid/dist/zoid.frame';
+
+// declare const DOMAIN_URL: string;
+
 const Widget = zoid.create({
     // The html tag used to render my component
     tag: 'my-widget',
 
     // The url that will be loaded in the iframe or popup, when someone includes my component on their page
-    url: 'http://localhost:3000/widget',
+    url: `${DOMAIN_URL}/widget`,
 
     // The size of the component on their page. Only px and % strings are supported
     dimensions: {
@@ -19,3 +23,5 @@ const Widget = zoid.create({
         },
     },
 });
+
+export default Widget;
