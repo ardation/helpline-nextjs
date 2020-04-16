@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box } from '@material-ui/core';
+import { includes, map, some, filter, reduce } from 'lodash/fp';
 import { GetCountryAndOrganizations } from '../../../types/GetCountryAndOrganizations';
 import OrganizationContext from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
@@ -50,6 +51,27 @@ type SelectedCountry = {
     code: string;
     name: string;
     emergencyNumber: string;
+};
+
+type OpeningHour = {
+    day: string;
+    open: string;
+    close: string;
+};
+
+type Organization = {
+    slug: string;
+    name: string;
+    alwaysOpen: boolean;
+    humanSupportTypes: Filter[];
+    categories: Filter[];
+    topics: Filter[];
+    openingHours: OpeningHour[];
+    smsNumber?: string;
+    phoneNumber?: string;
+    url?: string;
+    chatUrl?: string;
+    timezone: string;
 };
 
 const useStyles = makeStyles(() =>
@@ -145,26 +167,46 @@ const getCountryAndOrganizations: any = async (countryCode): Promise<{ props: Ge
 const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
     const classes = useStyles();
     const { filters, applyFilters } = useContext(OrganizationContext);
-    const [showFilter, setShowFilter] = useState(false);
+    const [showFilter, setShowFilter] = useState<boolean>(false);
 
     const [selectedSearch, setSelectedSearch] = useState<Search | undefined>(undefined);
     const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | undefined>(undefined);
-    const [organizations, setOrganizations] = useState<any | undefined>(undefined);
+    const [organizations, setOrganizations] = useState<Organization[] | undefined>(undefined);
+
+    const filterResults = (results: Organization[]): Organization[] =>
+        filter(
+            (result: Organization) =>
+                reduce(
+                    (acc: boolean, [filterKey, filterValues]) => {
+                        let row = true;
+                        if (filterValues?.length > 0) {
+                            row = some(
+                                ({ name }: Filter) => includes(name, map('name', filterValues)),
+                                result[filterKey],
+                            );
+                        }
+                        return acc && row;
+                    },
+                    true,
+                    Object.entries(filters),
+                ),
+            results,
+        );
 
     useEffect(() => {
         setOrganizations(undefined);
         if (selectedSearch) {
             getCountryAndOrganizations(selectedSearch.country.code).then(({ props }) => {
                 setSelectedCountry(props.country);
-                setOrganizations(props.organizations);
+                setOrganizations(filterResults(props.organizations.nodes));
             });
         } else if (xprops) {
             getCountryAndOrganizations(xprops.countryCode).then(({ props }) => {
                 setSelectedCountry(props.country);
-                setOrganizations(props.organizations);
+                setOrganizations(filterResults(props.organizations.nodes));
             });
         }
-    }, [selectedSearch, xprops]);
+    }, [selectedSearch, xprops, filters]);
 
     return (
         <Container className={classes.container}>
@@ -196,7 +238,7 @@ const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
                         <Container className={classes.carousel}>
                             {organizations ? (
                                 <WidgetCarousel>
-                                    {organizations.nodes.map((organization) => (
+                                    {organizations.map((organization) => (
                                         <Box key={organization.slug} my={2}>
                                             <OrganizationCard organization={organization} />
                                         </Box>
