@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, Fragment } from 'react';
-import { Container, Toolbar, Typography, Button } from '@material-ui/core';
+import { Container, Toolbar, Typography, Button, Box } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
@@ -22,15 +22,14 @@ const useStyles = makeStyles((theme: Theme) =>
             backgroundColor: '#F0F1F5',
         },
         toolbar: {
-            display: 'grid',
-            gridGap: theme.spacing(2),
-            gridTemplateColumns: '1fr auto auto',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingTop: theme.spacing(1),
+            paddingBottom: theme.spacing(1),
             paddingRight: 0,
             paddingLeft: 0,
-            [theme.breakpoints.down('xs')]: {
-                gridRowGap: 0,
-                alignItems: 'flex-start',
-            },
         },
         title: {
             [theme.breakpoints.down('xs')]: {
@@ -39,55 +38,47 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             display: 'inline',
         },
-        titleDropdown: {
+        buttonsContainer: {
+            display: 'inline',
             [theme.breakpoints.down('xs')]: {
-                gridColumn: '1 / span 2',
-                alignSelf: 'center',
+                display: 'none',
+                textAlign: 'center',
+                '&.show': {
+                    display: 'block',
+                    width: '100%',
+                    padding: theme.spacing(1),
+                },
             },
-            display: 'none',
         },
         button: {
-            backgroundColor: '#CC001E',
-            color: '#FFFFFF',
             textAlign: 'left',
             borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
-            '&:hover': {
-                backgroundColor: '#CC001E',
-            },
-            [theme.breakpoints.down('xs')]: {
-                display: 'none',
-            },
+            margin: `0 ${theme.spacing(1)}px`,
         },
-        buttonDropdown: {
+        emergencyButton: {
             backgroundColor: '#CC001E',
             textAlign: 'center',
             alignSelf: 'center',
-            borderRadius: '1000px',
-            paddingLeft: theme.spacing(2),
-            paddingRight: theme.spacing(2),
+            color: 'white',
             '&:hover': {
-                backgroundColor: '#CC001E',
+                backgroundColor: '#CC001EBF',
             },
-            display: 'inline',
         },
-        dropdownIcon: {
+        dropdownButton: {
             display: 'none',
             alignSelf: 'center',
             [theme.breakpoints.down('xs')]: {
                 display: 'inline',
             },
         },
-        dropdownIconDropdown: {
-            alignSelf: 'center',
-        },
     }),
 );
 
 const WidgetBar = ({ country }: Props): ReactElement => {
     const classes = useStyles();
-    const [isDropdown, setIsDropdown] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(false);
 
     if (!country) {
         country = {
@@ -98,39 +89,28 @@ const WidgetBar = ({ country }: Props): ReactElement => {
     return (
         <Container className={country && classes.container}>
             <Toolbar className={classes.toolbar}>
-                {!isDropdown ? (
-                    <Fragment>
-                        <Typography className={classes.title}>Are you or someone else in immediate danger?</Typography>
+                <Fragment>
+                    <Typography className={classes.title}>Are you or someone else in immediate danger?</Typography>
+                    <Button
+                        className={classes.dropdownButton}
+                        variant="text"
+                        size="small"
+                        disableRipple
+                        onClick={(): void => setOpen(!open)}
+                    >
+                        {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                    </Button>
+                    <Box className={`${classes.buttonsContainer} ${open ? 'show' : ''}`}>
                         <Button
+                            className={`${classes.emergencyButton} ${classes.button}`}
                             color="inherit"
-                            className={classes.button}
                             href={`tel:${country.emergencyNumber}`}
                             data-testid="emergencyServicesButton"
                         >
                             Emergency Services
                         </Button>
-                        <Button className={classes.dropdownIcon} onClick={(): void => setIsDropdown(true)}>
-                            <ExpandMoreIcon />
-                        </Button>
-                    </Fragment>
-                ) : (
-                    <Fragment>
-                        <Typography className={classes.titleDropdown}>
-                            Are you or someone else in immediate danger?
-                        </Typography>
-                        <Button
-                            color="inherit"
-                            className={classes.buttonDropdown}
-                            href={`tel:${country.emergencyNumber}`}
-                            data-testid="emergencyServicesButton"
-                        >
-                            Emergency Services
-                        </Button>
-                        <Button className={classes.dropdownIconDropdown} onClick={(): void => setIsDropdown(false)}>
-                            <ExpandLessIcon />
-                        </Button>
-                    </Fragment>
-                )}
+                    </Box>
+                </Fragment>
             </Toolbar>
         </Container>
     );

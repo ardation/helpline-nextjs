@@ -22,6 +22,7 @@ type Props = {
     countries: Country[];
     onCountryChange: (country: Country) => void;
     onSubdivisionChange: (subdivision: Subdivision) => void;
+    inline?: boolean;
     xprops?: any;
 };
 
@@ -40,6 +41,11 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         box: {
             display: 'grid',
+            gridGap: theme.spacing(1),
+        },
+        inlineGrid: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(0, 1fr))',
             gridGap: theme.spacing(1),
         },
         inputRoot: {
@@ -78,7 +84,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange, xprops }: Props): ReactElement => {
+const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange, inline, xprops }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
     const setSelectedSubdivision = useState<Subdivision | undefined>(undefined)[1];
@@ -112,7 +118,7 @@ const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange, xprops
     }, [xprops]);
 
     return (
-        <Box className={classes.box}>
+        <Box className={inline ? classes.inlineGrid : classes.box}>
             <Autocomplete
                 value={selectedCountry}
                 style={{ width: 300 }}

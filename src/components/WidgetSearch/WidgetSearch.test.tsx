@@ -14,28 +14,47 @@ describe('WidgetSearch', () => {
             ],
         },
     ];
+    const onSearchChange = jest.fn();
 
     it('should show correct text', () => {
         const { getByText } = render(<WidgetSearch countries={countries} />);
         expect(getByText('Struggling? Talk to a real person, for free.')).toBeTruthy();
     });
 
-    it('should change search url after country select', () => {
-        const { getByTestId, getByRole } = render(<WidgetSearch countries={countries} />);
+    it('should pass the correct data when country select', () => {
+        const { getByTestId, getByRole } = render(
+            <WidgetSearch countries={countries} onSearchChange={onSearchChange} />,
+        );
         const element = getByRole('textbox');
         fireEvent.click(element);
         fireEvent.click(getByRole('listbox').children[0]);
-        expect(getByTestId('searchButton')).toHaveAttribute('href', '/au');
+        const searchButton = getByTestId('searchButton');
+        fireEvent.click(searchButton);
+        expect(onSearchChange).toBeCalledWith(
+            expect.objectContaining({
+                country: expect.objectContaining({ code: 'AU' }),
+            }),
+        );
     });
 
-    it('should change search url after country and subdivision select', () => {
-        const { getByTestId, getAllByRole } = render(<WidgetSearch countries={countries} />);
+    it('should pass the correct data when country and subdivision select', () => {
+        const { getByTestId, getAllByRole } = render(
+            <WidgetSearch countries={countries} onSearchChange={onSearchChange} />,
+        );
         const countryElement = getAllByRole('textbox')[0];
         fireEvent.click(countryElement);
         fireEvent.click(getAllByRole('listbox')[0].children[1]);
         const subdivisionElement = getAllByRole('textbox')[1];
         fireEvent.click(subdivisionElement);
         fireEvent.click(getAllByRole('listbox')[0].children[1]);
-        expect(getByTestId('searchButton')).toHaveAttribute('href', '/nz/bop');
+        const searchButton = getByTestId('searchButton');
+        fireEvent.click(searchButton);
+        expect(onSearchChange).toHaveBeenNthCalledWith(
+            2,
+            expect.objectContaining({
+                country: expect.objectContaining({ code: 'NZ' }),
+                subdivision: expect.objectContaining({ code: 'BOP' }),
+            }),
+        );
     });
 });

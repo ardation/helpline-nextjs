@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import { Typography, Box, Button, Container } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Link from 'next/link';
+import FilterListIcon from '@material-ui/icons/FilterList';
 import CountrySelect from '../CountrySelect';
 
 type Subdivision = {
@@ -23,6 +23,7 @@ type Search = {
 type Props = {
     countries: Country[];
     onSearchChange?: (search: Search) => void;
+    toggleFilters?: () => void;
     xprops?: any;
 };
 
@@ -50,13 +51,36 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'grid',
             gridGap: theme.spacing(1),
         },
+        inputConatainer: {
+            display: 'flex',
+            alignItems: 'center',
+        },
         button: {
+            textAlign: 'left',
             borderRadius: '1000px',
+            paddingLeft: theme.spacing(2),
+            paddingRight: theme.spacing(2),
+            margin: `0 ${theme.spacing(1)}px`,
+        },
+        searchButton: {
+            flexGrow: 1,
+        },
+        filterButton: {
+            backgroundColor: 'white',
+            fontSize: '70%',
+            lineHeight: 'normal',
+            '& .label': {
+                width: '70%',
+                paddingRight: theme.spacing(1),
+            },
+            '&:hover': {
+                backgroundColor: '#f0f0f0',
+            },
         },
     }),
 );
 
-const Search = ({ countries, onSearchChange, xprops }: Props): ReactElement => {
+const Search = ({ countries, onSearchChange, toggleFilters, xprops }: Props): ReactElement => {
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
     const classes = useStyles();
@@ -69,25 +93,38 @@ const Search = ({ countries, onSearchChange, xprops }: Props): ReactElement => {
                 </Box>
                 <Typography className={classes.subheader}>Struggling? Talk to a real person, for free.</Typography>
                 <CountrySelect
+                    inline
                     countries={countries}
                     onCountryChange={setSelectedCountry}
                     onSubdivisionChange={setSelectedSubdivision}
                     xprops={xprops}
                 />
                 {selectedCountry && (
-                    <Button
-                        data-testid="searchButton"
-                        className={classes.button}
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        onClick={(): void => {
-                            onSearchChange({ country: selectedCountry, subdivision: selectedSubdivision });
-                        }}
-                    >
-                        Search
-                    </Button>
-                    // </Link>
+                    <Box className={classes.inputConatainer}>
+                        <Button
+                            data-testid="searchButton"
+                            className={`${classes.button} ${classes.searchButton}`}
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            onClick={(): void => {
+                                onSearchChange({ country: selectedCountry, subdivision: selectedSubdivision });
+                            }}
+                        >
+                            Search
+                        </Button>
+                        <Button
+                            className={`${classes.button} ${classes.filterButton}`}
+                            color="default"
+                            onClick={(): void => toggleFilters()}
+                            data-testid="filterSortButton"
+                        >
+                            <span className="label">
+                                Filter <br />& Sort
+                            </span>
+                            <FilterListIcon />
+                        </Button>
+                    </Box>
                 )}
             </Box>
         </Container>

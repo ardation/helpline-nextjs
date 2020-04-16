@@ -5,7 +5,8 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import Chrome from '../src/components/Chrome';
 import Widget from '../src/components/Widget';
-import { GetCountriesAndTopics } from '../types/GetCountriesAndTopics';
+import { GetCountriesAndTags } from '../types/GetCountriesAndTags';
+import { OrganizationProvider } from '../src/context/organizationContext';
 
 declare global {
     interface Window {
@@ -18,7 +19,7 @@ type Xprops = {
     xprops: any;
 };
 
-class WidgetPage extends Component<GetCountriesAndTopics, Xprops> {
+class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,9 +32,10 @@ class WidgetPage extends Component<GetCountriesAndTopics, Xprops> {
         }
     }
 
-    render(): ReactElement {
-        const { topics, countries } = this.props;
+    render() {
+        const { topics, categories, humanSupportTypes, countries } = this.props;
         const { xprops } = this.state;
+        const contactMethods = [{ name: 'Phone' }, { name: 'Text' }, { name: 'Webchat' }];
         return (
             <Fragment>
                 <Head>
@@ -42,16 +44,22 @@ class WidgetPage extends Component<GetCountriesAndTopics, Xprops> {
                     <script src="http://localhost:3000/widget.js"></script>
                 </Head>
                 <Chrome topbar={false} footer={false}>
-                    <Widget countries={countries} topics={topics} xprops={xprops} />
+                    <OrganizationProvider>
+                        <Widget
+                            countries={countries}
+                            filterOptions={{ topics, categories, humanSupportTypes, contactMethods }}
+                            xprops={xprops}
+                        />
+                    </OrganizationProvider>
                 </Chrome>
             </Fragment>
         );
     }
 }
 
-export const getStaticProps = async (): Promise<{ props: GetCountriesAndTopics }> => {
+export const getStaticProps = async (): Promise<{ props: GetCountriesAndTags }> => {
     const query = gql`
-        query GetCountriesAndTopics {
+        query GetCountriesAndTags {
             countries {
                 code
                 name
@@ -64,13 +72,24 @@ export const getStaticProps = async (): Promise<{ props: GetCountriesAndTopics }
             topics {
                 name
             }
+            humanSupportTypes {
+                name
+            }
+            categories {
+                name
+            }
         }
     `;
-    const { countries, topics } = await request('https://api.findahelpline.com', print(query));
+    const { countries, topics, humanSupportTypes, categories } = await request(
+        'https://api.findahelpline.com',
+        print(query),
+    );
     return {
         props: {
             countries,
             topics,
+            humanSupportTypes,
+            categories,
         },
     };
 };
