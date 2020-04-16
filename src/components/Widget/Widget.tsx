@@ -5,12 +5,13 @@ import { print } from 'graphql';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box } from '@material-ui/core';
 import { GetCountryAndOrganizations } from '../../../types/GetCountryAndOrganizations';
+import OrganizationContext from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import FilterSort from '../FilterSort';
 import WidgetSearch from '../WidgetSearch';
 import WidgetBar from '../WidgetBar';
 import WidgetCarousel from '../WidgetCarousel';
-import OrganizationContext from '../../context/organizationContext';
+import Spinner from '../Spinner';
 
 type Subdivision = {
     code: string;
@@ -56,6 +57,7 @@ const useStyles = makeStyles(() =>
         box: {
             display: 'flex',
             alignItems: 'flex-start',
+            maxHeight: '100vh',
             border: '1px solid #000',
             borderRadius: '0 0 10px 10px',
             overflow: 'auto',
@@ -76,7 +78,7 @@ const useStyles = makeStyles(() =>
             background: 'white',
         },
         carousel: {
-            // position: 'relative',
+            position: 'relative',
             display: 'flex',
             flex: '0 0 auto',
             alignItems: 'flex-start',
@@ -141,7 +143,7 @@ const getCountryAndOrganizations: any = async (countryCode): Promise<{ props: Ge
 
 const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
     const classes = useStyles();
-    const { filters, applyFilters } = useContext(OrganizationContext);
+    const orgContext = useContext(OrganizationContext);
     const [showFilter, setShowFilter] = useState(false);
 
     const [selectedSearch, setSelectedSearch] = useState<Search | undefined>(undefined);
@@ -179,10 +181,10 @@ const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
                             <FilterSort
                                 showMax={10}
                                 filterOptions={filterOptions}
-                                activeFilters={filters}
+                                activeFilters={orgContext.filters}
                                 onApply={(filters): void => {
                                     setShowFilter(false);
-                                    applyFilters(filters);
+                                    orgContext.applyFilters(filters);
                                 }}
                             />
                         </div>
@@ -200,7 +202,7 @@ const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
                                     ))}
                                 </WidgetCarousel>
                             ) : (
-                                <div>loading...</div>
+                                <Spinner />
                             )}
                         </Container>
                     ) : null}
