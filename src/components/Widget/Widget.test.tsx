@@ -20,4 +20,9 @@ describe('Widget', () => {
         const { findByText } = render(<Widget countries={countries} topics={topics} />);
         expect(findByText('Are you or someone else in immediate danger?')).toBeTruthy();
     });
+
+    it('should contain widget search bar', () => {
+        const { findByText } = render(<Widget countries={countries} topics={topics} />);
+        expect(findByText('Struggling? Talk to a real person, for free.')).toBeTruthy();
+    });
 });
