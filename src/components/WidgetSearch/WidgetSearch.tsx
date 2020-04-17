@@ -1,8 +1,10 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, useContext } from 'react';
 import { Typography, Box, Button, Container } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CountrySelect from '../CountrySelect';
+import FilterSort from '../FilterSort';
+import OrganizationContext from '../../context/organizationContext';
 
 type Subdivision = {
     code: string;
@@ -20,10 +22,21 @@ type Search = {
     subdivision: Subdivision;
 };
 
+type Filter = {
+    name: string;
+};
+
+type FilterOptions = {
+    topics?: Filter[];
+    categories?: Filter[];
+    humanSupportTypes?: Filter[];
+    contactMethods?: Filter[];
+};
+
 type Props = {
     countries: Country[];
     onSearchChange?: (search: Search) => void;
-    toggleFilters?: () => void;
+    filters?: FilterOptions;
     xprops?: any;
 };
 
@@ -43,6 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'left',
             height: '100%',
             backgroundColor: '#181719',
+            position: 'relative',
         },
         subheader: {
             color: '#FFFFFF',
@@ -77,12 +91,23 @@ const useStyles = makeStyles((theme: Theme) =>
                 backgroundColor: '#f0f0f0',
             },
         },
+        filter: {
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            right: 0,
+            zIndex: 1200,
+            background: 'white',
+        },
     }),
 );
 
-const Search = ({ countries, onSearchChange, toggleFilters, xprops }: Props): ReactElement => {
+const Search = ({ countries, onSearchChange, xprops }: Props): ReactElement => {
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
+    const [showFilter, setShowFilter] = useState<boolean>(false);
+    const { filterOptions, selectedFilters, applyFilters } = useContext(OrganizationContext);
+
     const classes = useStyles();
 
     return (
@@ -116,7 +141,7 @@ const Search = ({ countries, onSearchChange, toggleFilters, xprops }: Props): Re
                         <Button
                             className={`${classes.button} ${classes.filterButton}`}
                             color="default"
-                            onClick={(): void => toggleFilters()}
+                            onClick={(): void => setShowFilter(!showFilter)}
                             data-testid="filterSortButton"
                         >
                             <span className="label">
@@ -127,6 +152,18 @@ const Search = ({ countries, onSearchChange, toggleFilters, xprops }: Props): Re
                     </Box>
                 )}
             </Box>
+            {showFilter && (
+                <div className={classes.filter}>
+                    <FilterSort
+                        filterOptions={filterOptions}
+                        activeFilters={selectedFilters}
+                        onApply={(filters): void => {
+                            setShowFilter(false);
+                            applyFilters(filters);
+                        }}
+                    />
+                </div>
+            )}
         </Container>
     );
 };

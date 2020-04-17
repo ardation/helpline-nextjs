@@ -8,7 +8,6 @@ import { includes, map, some, filter, reduce } from 'lodash/fp';
 import { GetCountryAndOrganizations } from '../../../types/GetCountryAndOrganizations';
 import OrganizationContext from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
-import FilterSort from '../FilterSort';
 import WidgetSearch from '../WidgetSearch';
 import WidgetBar from '../WidgetBar';
 import WidgetCarousel from '../WidgetCarousel';
@@ -29,16 +28,8 @@ type Filter = {
     name: string;
 };
 
-type FilterOptions = {
-    topics?: Filter[];
-    categories?: Filter[];
-    humanSupportTypes?: Filter[];
-    contactMethods?: Filter[];
-};
-
 type Props = {
     countries: Country[];
-    filterOptions: FilterOptions;
     xprops?: any;
 };
 
@@ -95,11 +86,7 @@ const useStyles = makeStyles(() =>
         header: {
             position: 'relative',
         },
-        filter: {
-            position: 'absolute',
-            zIndex: 1200,
-            background: 'white',
-        },
+
         carousel: {
             position: 'relative',
             display: 'flex',
@@ -164,10 +151,9 @@ const getCountryAndOrganizations: any = async (countryCode): Promise<{ props: Ge
     };
 };
 
-const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
+const Widget = ({ countries, xprops }: Props): ReactElement => {
     const classes = useStyles();
-    const { filters, applyFilters } = useContext(OrganizationContext);
-    const [showFilter, setShowFilter] = useState<boolean>(false);
+    const { selectedFilters } = useContext(OrganizationContext);
     const [selectedSearch, setSelectedSearch] = useState<Search | undefined>(undefined);
     const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | undefined>(undefined);
     const [organizations, setOrganizations] = useState<Organization[] | undefined>(undefined);
@@ -187,7 +173,7 @@ const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
                         return acc && row;
                     },
                     true,
-                    Object.entries(filters),
+                    Object.entries(selectedFilters),
                 ),
             results,
         );
@@ -205,32 +191,14 @@ const Widget = ({ countries, filterOptions, xprops }: Props): ReactElement => {
                 setOrganizations(filterResults(props.organizations.nodes));
             });
         }
-    }, [selectedSearch, xprops, filters]);
+    }, [selectedSearch, xprops, selectedFilters]);
 
     return (
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <div className={classes.header}>
-                    <WidgetSearch
-                        countries={countries}
-                        xprops={xprops}
-                        onSearchChange={setSelectedSearch}
-                        toggleFilters={(): void => setShowFilter(!showFilter)}
-                    />
+                    <WidgetSearch countries={countries} xprops={xprops} onSearchChange={setSelectedSearch} />
                     <WidgetBar country={selectedCountry} />
-                    {showFilter && (
-                        <div className={classes.filter}>
-                            <FilterSort
-                                showMax={10}
-                                filterOptions={filterOptions}
-                                activeFilters={filters}
-                                onApply={(filters): void => {
-                                    setShowFilter(false);
-                                    applyFilters(filters);
-                                }}
-                            />
-                        </div>
-                    )}
                 </div>
                 <Box className={classes.box}>
                     {selectedSearch || selectedCountry ? (

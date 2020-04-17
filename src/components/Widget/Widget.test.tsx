@@ -17,7 +17,7 @@ describe('Widget', () => {
     const topics = [{ name: 'happy' }, { name: 'sad' }];
 
     it('should contain correct text', () => {
-        const { findByText } = render(<Widget countries={countries} filterOptions={{ topics }} />);
+        const { findByText } = render(<Widget countries={countries} />);
         expect(findByText('Are you or someone else in immediate danger?')).toBeTruthy();
     });
 });

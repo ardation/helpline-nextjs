@@ -24,7 +24,6 @@ export const Default = (): ReactElement => (
                     ],
                 },
             ]}
-            filterOptions={{ topics: [{ name: 'Anxiety' }, { name: 'Bullying' }] }}
         />
     </ThemeProvider>
 );

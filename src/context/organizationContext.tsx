@@ -1,9 +1,4 @@
-import React, { createContext, useState, useEffect, ReactElement, ReactNode } from 'react';
-import FilterSort from '../components/FilterSort';
-
-type Props = {
-    children: ReactNode;
-};
+import React, { createContext, useState, ReactElement, ReactNode, useEffect } from 'react';
 
 type Filter = {
     name: string;
@@ -16,36 +11,43 @@ type Filters = {
     contactMethods?: Filter[] | null;
 };
 
+type Props = {
+    children: ReactNode;
+    filterOptions: Filters;
+    // countries: Countries[]
+};
+
 type State = {
     organizations: any[];
-    filters: Filters;
+    filterOptions: Filters;
+    selectedFilters: Filters;
     applyFilters: (selectedFilters: Filters) => void;
+};
+
+const initialFilters = {
+    topics: null,
+    categories: null,
+    humanSupportTypes: null,
+    contactMethods: null,
 };
 
 const initialState: State = {
     organizations: [],
-    filters: {
-        topics: null,
-        categories: null,
-        humanSupportTypes: null,
-        contactMethods: null,
-    },
+    filterOptions: initialFilters,
+    selectedFilters: initialFilters,
     applyFilters: (selectedFilters: Filters): void => null,
 };
 
 const OrganizationContext = createContext(initialState);
 
-export const OrganizationProvider = ({ children }: Props): ReactElement => {
+export const OrganizationProvider = ({ children, filterOptions }: Props): ReactElement => {
     const [organizations, setOrganizations] = useState(initialState.organizations);
-    const [filters, setFilters] = useState<Filters>(initialState.filters);
-
-    const applyFilters = (selectedFilters: Filters): void => {
-        setFilters({ ...filters, ...selectedFilters });
-    };
+    const [filters, applyFilters] = useState<Filters>(initialState.selectedFilters);
 
     const ctx = {
         organizations,
-        filters,
+        filterOptions,
+        selectedFilters: filters,
         applyFilters,
     };
 
