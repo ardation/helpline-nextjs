@@ -12,7 +12,10 @@ export const Default = (): ReactElement => (
     <ThemeProvider theme={theme}>
         <Box m={2}>
             <FilterSort
-                filterOptions={{ topics: [{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }] }}
+                filterOptions={{
+                    topics: [{ name: 'Topic 1' }, { name: 'Topic 2' }, { name: 'Topic 3' }],
+                    categories: [{ name: 'Category 1' }, { name: 'Category 2' }],
+                }}
                 onApply={action('onClick')}
             />
         </Box>
