@@ -1,10 +1,11 @@
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Chip, Container, Box, Typography, Button } from '@material-ui/core';
-import { find, xor, sortBy } from 'lodash/fp';
+import { map } from 'lodash/fp';
 
 type Filter = {
     name: string;
+    active?: boolean | false;
 };
 
 type FilterOptions = {
@@ -22,7 +23,6 @@ type FilterSection = {
 
 type Props = {
     filterOptions: FilterOptions;
-    activeFilters?: FilterOptions;
     showMax?: number;
     onApply: (selectedFilters: FilterOptions) => void;
 };
@@ -75,32 +75,28 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const FilterSort = ({ filterOptions, activeFilters, showMax, onApply }: Props): ReactElement => {
+const FilterSort = ({ filterOptions, showMax, onApply }: Props): ReactElement => {
     const classes = useStyles();
-    const [selectedFilters, setSelectedFilters] = useState(
-        activeFilters || {
-            topics: [],
-            categories: [],
-            humanSupportTypes: [],
-            contactMethods: [],
-        },
-    );
+    const [filters, setFilters] = useState(filterOptions);
     const [max, setMax] = useState(showMax || 10);
 
-    const filterSections: FilterSection[] = Object.keys(filterOptions).reduce((prev, key) => {
+    const filterSections: FilterSection[] = Object.keys(filters).reduce((prev, key) => {
         const title = key.replace(/([A-Z])/g, ' $1');
-        filterOptions[key]?.length > 0 &&
+        filters[key]?.length > 0 &&
             prev.push({
                 key,
                 title: title.charAt(0).toUpperCase() + title.slice(1),
-                options: filterOptions[key],
+                options: filters[key],
             });
         return prev;
     }, []);
 
     const toggleChip = (key: string, value: Filter): void => {
-        const selected = sortBy('name', xor([value], selectedFilters[key]));
-        setSelectedFilters({ ...selectedFilters, [key]: selected });
+        const updated = map(
+            (item: Filter) => (item.name === value.name ? { ...item, active: !item.active } : item),
+            filters[key],
+        );
+        setFilters({ ...filters, [key]: updated });
     };
 
     return (
@@ -111,7 +107,7 @@ const FilterSort = ({ filterOptions, activeFilters, showMax, onApply }: Props): 
                     data-testid="applyButton"
                     className={classes.button}
                     variant="outlined"
-                    onClick={(): void => onApply(selectedFilters)}
+                    onClick={(): void => onApply(filters)}
                 >
                     Apply Filters
                 </Button>
@@ -124,7 +120,7 @@ const FilterSort = ({ filterOptions, activeFilters, showMax, onApply }: Props): 
                             (item: Filter, index: number) =>
                                 index < max && (
                                     <Chip
-                                        color={find(item, selectedFilters[section.key]) ? 'primary' : 'default'}
+                                        color={item.active ? 'primary' : 'default'}
                                         key={item.name}
                                         label={item.name}
                                         onClick={(): void => toggleChip(section.key, item)}

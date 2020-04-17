@@ -2,6 +2,7 @@ import React, { createContext, useState, ReactElement, ReactNode, useEffect } fr
 
 type Filter = {
     name: string;
+    active?: boolean | false;
 };
 
 type Filters = {
@@ -19,22 +20,18 @@ type Props = {
 
 type State = {
     organizations: any[];
-    filterOptions: Filters;
-    selectedFilters: Filters;
+    filters: Filters;
     applyFilters: (selectedFilters: Filters) => void;
-};
-
-const initialFilters = {
-    topics: null,
-    categories: null,
-    humanSupportTypes: null,
-    contactMethods: null,
 };
 
 const initialState: State = {
     organizations: [],
-    filterOptions: initialFilters,
-    selectedFilters: initialFilters,
+    filters: {
+        topics: null,
+        categories: null,
+        humanSupportTypes: null,
+        contactMethods: null,
+    },
     applyFilters: (selectedFilters: Filters): void => null,
 };
 
@@ -42,12 +39,11 @@ const OrganizationContext = createContext(initialState);
 
 export const OrganizationProvider = ({ children, filterOptions }: Props): ReactElement => {
     const [organizations, setOrganizations] = useState(initialState.organizations);
-    const [filters, applyFilters] = useState<Filters>(initialState.selectedFilters);
+    const [filters, applyFilters] = useState<Filters>(filterOptions);
 
     const ctx = {
         organizations,
-        filterOptions,
-        selectedFilters: filters,
+        filters,
         applyFilters,
     };
 

@@ -153,30 +153,30 @@ const getCountryAndOrganizations: any = async (countryCode): Promise<{ props: Ge
 
 const Widget = ({ countries, xprops }: Props): ReactElement => {
     const classes = useStyles();
-    const { selectedFilters } = useContext(OrganizationContext);
+    const { filters } = useContext(OrganizationContext);
     const [selectedSearch, setSelectedSearch] = useState<Search | undefined>(undefined);
     const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | undefined>(undefined);
     const [organizations, setOrganizations] = useState<Organization[] | undefined>(undefined);
 
-    const filterResults = (results: Organization[]): Organization[] =>
-        filter(
-            (result: Organization) =>
-                reduce(
-                    (acc: boolean, [filterKey, filterValues]) => {
-                        let row = true;
-                        if (filterValues?.length > 0) {
-                            row = some(
-                                ({ name }: Filter) => includes(name, map('name', filterValues)),
-                                result[filterKey],
-                            );
-                        }
-                        return acc && row;
-                    },
-                    true,
-                    Object.entries(selectedFilters),
-                ),
-            results,
-        );
+    const filterResults = (results: Organization[]): Organization[] => results;
+    // filter(
+    //     (result: Organization) =>
+    //         reduce(
+    //             (acc: boolean, [filterKey, filterValues]) => {
+    //                 let row = true;
+    //                 if (filterValues?.length > 0) {
+    //                     row = some(
+    //                         ({ name }: Filter) => includes(name, map('name', filterValues)),
+    //                         result[filterKey],
+    //                     );
+    //                 }
+    //                 return acc && row;
+    //             },
+    //             true,
+    //             Object.entries(filters),
+    //         ),
+    //     results,
+    // );
 
     useEffect(() => {
         setOrganizations(undefined);
@@ -191,7 +191,7 @@ const Widget = ({ countries, xprops }: Props): ReactElement => {
                 setOrganizations(filterResults(props.organizations.nodes));
             });
         }
-    }, [selectedSearch, xprops, selectedFilters]);
+    }, [selectedSearch, xprops, filters]);
 
     return (
         <Container className={classes.container}>

@@ -52,6 +52,7 @@ describe('FilterSort', () => {
             expect.objectContaining({
                 topics: [
                     {
+                        active: true,
                         name: 'Anxiety Bullying',
                     },
                 ],
@@ -66,15 +67,25 @@ describe('FilterSort', () => {
         fireEvent.click(chips[0]);
         fireEvent.click(applyButton);
         expect(mocks.onApply).toBeCalledWith(
-            expect.not.objectContaining({
-                topics: [],
+            expect.objectContaining({
+                topics: [
+                    {
+                        active: true,
+                        name: 'Anxiety Bullying',
+                    },
+                ],
             }),
         );
         fireEvent.click(chips[0]);
         fireEvent.click(applyButton);
         expect(mocks.onApply).toBeCalledWith(
             expect.objectContaining({
-                topics: [],
+                topics: [
+                    {
+                        active: false,
+                        name: 'Anxiety Bullying',
+                    },
+                ],
             }),
         );
     });
