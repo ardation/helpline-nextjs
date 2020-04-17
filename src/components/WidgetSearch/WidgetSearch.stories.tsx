@@ -10,7 +10,7 @@ export default {
 
 export const Default = (): ReactElement => (
     <ThemeProvider theme={theme}>
-        <OrganizationProvider filterOptions={{ topics: [{ name: 'Topic' }, { name: 'Topic 2' }] }}>
+        <OrganizationProvider countries={[]} filterOptions={{ topics: [{ name: 'Topic' }, { name: 'Topic 2' }] }}>
             <Box m={2}>
                 <WidgetSearch
                     countries={[

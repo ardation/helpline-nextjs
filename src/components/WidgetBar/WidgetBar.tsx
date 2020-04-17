@@ -4,12 +4,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
-type Country = {
-    emergencyNumber: string;
-};
-
 type Props = {
-    country?: Country;
+    emergencyNumber?: string;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -76,18 +72,12 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const WidgetBar = ({ country }: Props): ReactElement => {
+const WidgetBar = ({ emergencyNumber = '911' }: Props): ReactElement => {
     const classes = useStyles();
     const [open, setOpen] = useState<boolean>(false);
 
-    if (!country) {
-        country = {
-            emergencyNumber: '911',
-        };
-    }
-
     return (
-        <Container className={country && classes.container}>
+        <Container className={emergencyNumber && classes.container}>
             <Toolbar className={classes.toolbar}>
                 <Fragment>
                     <Typography className={classes.title}>Are you or someone else in immediate danger?</Typography>
@@ -104,7 +94,7 @@ const WidgetBar = ({ country }: Props): ReactElement => {
                         <Button
                             className={`${classes.emergencyButton} ${classes.button}`}
                             color="inherit"
-                            href={`tel:${country.emergencyNumber}`}
+                            href={`tel:${emergencyNumber}`}
                             data-testid="emergencyServicesButton"
                         >
                             Emergency Services

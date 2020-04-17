@@ -29,7 +29,6 @@ type Topic = {
 };
 
 type Props = {
-    countries: Country[];
     xprops?: any;
 };
 
@@ -151,11 +150,10 @@ const getCountryAndOrganizations: any = async (countryCode): Promise<{ props: Ge
     };
 };
 
-const Widget = ({ countries, xprops }: Props): ReactElement => {
+const Widget = ({ xprops }: Props): ReactElement => {
     const classes = useStyles();
-    const { filters } = useContext(OrganizationContext);
+    const { countries, activeCountry, filters, setActiveCountry } = useContext(OrganizationContext);
     const [selectedSearch, setSelectedSearch] = useState<Search | undefined>(undefined);
-    const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | undefined>(undefined);
     const [organizations, setOrganizations] = useState<Organization[] | undefined>(undefined);
 
     const filterResults = (results: Organization[]): Organization[] =>
@@ -184,12 +182,12 @@ const Widget = ({ countries, xprops }: Props): ReactElement => {
         setOrganizations(undefined);
         if (selectedSearch) {
             getCountryAndOrganizations(selectedSearch.country.code).then(({ props }) => {
-                setSelectedCountry(props.country);
+                setActiveCountry(props.country);
                 setOrganizations(filterResults(props.organizations.nodes));
             });
         } else if (xprops) {
             getCountryAndOrganizations(xprops.countryCode).then(({ props }) => {
-                setSelectedCountry(props.country);
+                setActiveCountry(props.country);
                 setOrganizations(filterResults(props.organizations.nodes));
             });
         }
@@ -200,10 +198,10 @@ const Widget = ({ countries, xprops }: Props): ReactElement => {
             <Box maxWidth="md">
                 <div className={classes.header}>
                     <WidgetSearch countries={countries} xprops={xprops} onSearchChange={setSelectedSearch} />
-                    <WidgetBar country={selectedCountry} />
+                    <WidgetBar emergencyNumber={activeCountry?.emergencyNumber} />
                 </div>
                 <Box className={classes.box}>
-                    {selectedSearch || selectedCountry ? (
+                    {selectedSearch || activeCountry ? (
                         <Container className={classes.carousel}>
                             {organizations ? (
                                 <WidgetCarousel>

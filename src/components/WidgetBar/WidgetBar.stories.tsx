@@ -11,8 +11,8 @@ Default.story = {
     name: 'default',
 };
 
-export const WithCountry = (): ReactElement => <WidgetBar country={{ emergencyNumber: '111' }} />;
+export const WithEmergency = (): ReactElement => <WidgetBar emergencyNumber="111" />;
 
-WithCountry.story = {
-    name: 'with country',
+WithEmergency.story = {
+    name: 'with emergency',
 };

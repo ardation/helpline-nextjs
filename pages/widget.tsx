@@ -47,8 +47,12 @@ class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
                     <script src="/widget.min.js"></script>
                 </Head>
                 <Chrome topbar={false} footer={false}>
-                    <OrganizationProvider filterOptions={{ topics, categories, humanSupportTypes, contactMethods }}>
-                        <Widget countries={countries} xprops={xprops} />
+                    <OrganizationProvider
+                        countries={countries}
+                        filterOptions={{ topics, categories, humanSupportTypes, contactMethods }}
+                        xprops={xprops}
+                    >
+                        <Widget xprops={xprops} />
                     </OrganizationProvider>
                 </Chrome>
             </Fragment>
