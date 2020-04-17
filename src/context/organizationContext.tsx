@@ -116,7 +116,8 @@ export const OrganizationProvider = ({
         );
 
     useEffect(() => {
-        setOrganizations(filter(['country.code', activeCountry?.code] && filterOrganization, allOrganizations));
+        const countryResults = filter(['country.code', activeCountry?.code], allOrganizations);
+        setOrganizations(filter(filterOrganization, countryResults));
     }, [activeCountry, filters]);
 
     const ctx = {

@@ -23,7 +23,7 @@ type Props = {
     xprops?: any;
 };
 
-type Search = {
+type CountrySearch = {
     country: Country;
     subdivision: Subdivision;
 };
@@ -78,14 +78,14 @@ const Widget = ({ xprops }: Props): ReactElement => {
                     <WidgetSearch
                         countries={countries}
                         xprops={xprops}
-                        onSearchChange={(res: Search): void => setActiveCountry(res.country)}
+                        onSearchChange={(result: CountrySearch): void => setActiveCountry(result.country)}
                     />
                     <WidgetBar emergencyNumber={activeCountry?.emergencyNumber} />
                 </div>
                 <Box className={classes.box}>
                     {activeCountry ? (
                         <Container className={classes.carousel}>
-                            {organizations ? (
+                            {organizations?.length > 0 ? (
                                 <WidgetCarousel>
                                     {organizations.map((organization) => (
                                         <Box key={organization.slug} my={2}>
@@ -94,6 +94,7 @@ const Widget = ({ xprops }: Props): ReactElement => {
                                     ))}
                                 </WidgetCarousel>
                             ) : (
+                                // TODO: this also spins on 'no results, need to differentiate
                                 <Spinner />
                             )}
                         </Container>
