@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box } from '@material-ui/core';
-import { includes, map, some, filter, reduce } from 'lodash/fp';
+import { filter, reduce, intersectionBy } from 'lodash/fp';
 import { GetCountryAndOrganizations } from '../../../types/GetCountryAndOrganizations';
 import OrganizationContext from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
@@ -158,25 +158,23 @@ const Widget = ({ countries, xprops }: Props): ReactElement => {
     const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | undefined>(undefined);
     const [organizations, setOrganizations] = useState<Organization[] | undefined>(undefined);
 
-    const filterResults = (results: Organization[]): Organization[] => results;
-    // filter(
-    //     (result: Organization) =>
-    //         reduce(
-    //             (acc: boolean, [filterKey, filterValues]) => {
-    //                 let row = true;
-    //                 if (filterValues?.length > 0) {
-    //                     row = some(
-    //                         ({ name }: Filter) => includes(name, map('name', filterValues)),
-    //                         result[filterKey],
-    //                     );
-    //                 }
-    //                 return acc && row;
-    //             },
-    //             true,
-    //             Object.entries(filters),
-    //         ),
-    //     results,
-    // );
+    const filterResults = (results: Organization[]): Organization[] =>
+        filter(
+            (result: Organization) =>
+                reduce(
+                    (acc: boolean, [filterKey, filterValues]) => {
+                        const activeFilters = filter('active', filterValues);
+                        if (activeFilters.length > 0) {
+                            return acc && intersectionBy('name', result[filterKey], activeFilters).length > 0;
+                        } else {
+                            return acc;
+                        }
+                    },
+                    true,
+                    Object.entries(filters),
+                ),
+            results,
+        );
 
     useEffect(() => {
         setOrganizations(undefined);
