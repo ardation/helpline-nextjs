@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "npm run build-widget-dev && next dev",
-        "build": "next build",
+        "build": "npx webpack && next build",
         "start": "next start",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "lint:ci": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",

@@ -20,6 +20,9 @@ const Widget = zoid.create({
         countryCode: {
             type: 'string',
             required: false,
+            def: function () {
+                return 'US';
+            },
         },
     },
 });
