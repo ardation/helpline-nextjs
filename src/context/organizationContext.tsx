@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactElement, ReactNode, useEffect } from 'react';
-import { find } from 'lodash/fp';
+import { find, filter, reduce, intersectionBy, some } from 'lodash/fp';
 
 type Subdivision = {
     code: string;
@@ -26,23 +26,48 @@ type Filters = {
     contactMethods?: Filter[] | null;
 };
 
+type OpeningHour = {
+    day: string;
+    open: string;
+    close: string;
+};
+
+type Organization = {
+    slug: string;
+    name: string;
+    alwaysOpen: boolean;
+    humanSupportTypes: Filter[];
+    categories: Filter[];
+    topics: Filter[];
+    openingHours: OpeningHour[];
+    smsNumber?: string;
+    phoneNumber?: string;
+    url?: string;
+    chatUrl?: string;
+    timezone: string;
+    country: Country;
+};
+
 type Props = {
     children: ReactNode;
-    filterOptions: Filters;
     countries: Country[];
+    allOrganizations: Organization[];
+    filterOptions: Filters;
     xprops?: any;
 };
 
 type State = {
+    // loading: boolean;
     countries: Country[];
     activeCountry?: Country;
-    organizations: any[];
+    organizations: Organization[];
     filters: Filters;
     setActiveCountry: (country: Country) => void;
     applyFilters: (selectedFilters: Filters) => void;
 };
 
 const initialState: State = {
+    // loading: false,
     countries: [],
     activeCountry: null,
     organizations: [],
@@ -58,14 +83,44 @@ const initialState: State = {
 
 const OrganizationContext = createContext(initialState);
 
-export const OrganizationProvider = ({ children, countries, filterOptions, xprops }: Props): ReactElement => {
-    const [organizations, setOrganizations] = useState(initialState.organizations);
+export const OrganizationProvider = ({
+    children,
+    countries,
+    allOrganizations,
+    filterOptions,
+    xprops,
+}: Props): ReactElement => {
     const [activeCountry, setActiveCountry] = useState<Country | undefined>(
         find(['countryCode', xprops?.countryCode], countries) || undefined,
     );
+    const [organizations, setOrganizations] = useState<Organization[] | undefined>(undefined);
     const [filters, applyFilters] = useState<Filters>(filterOptions);
+    // const [loading, setLoading] = useState<boolean>(false);
+
+    const filterOrganization = (result: Organization): Organization[] =>
+        reduce(
+            (acc: boolean, [filterKey, filterValues]) => {
+                const activeFilters = filter('active', filterValues);
+                if (activeFilters.length > 0) {
+                    if (filterKey == 'contactMethods') {
+                        return acc && some((item: Filter) => !!result[item.key], activeFilters);
+                    } else {
+                        return acc && intersectionBy('name', result[filterKey], activeFilters).length > 0;
+                    }
+                } else {
+                    return acc;
+                }
+            },
+            true,
+            Object.entries(filters),
+        );
+
+    useEffect(() => {
+        setOrganizations(filter(['country.code', activeCountry?.code] && filterOrganization, allOrganizations));
+    }, [activeCountry, filters]);
 
     const ctx = {
+        // loading,
         countries,
         activeCountry,
         organizations,

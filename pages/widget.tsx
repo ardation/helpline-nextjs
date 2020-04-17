@@ -1,11 +1,11 @@
 import Head from 'next/head';
-import React, { Fragment, Component, ReactElement } from 'react';
+import React, { Fragment, Component } from 'react';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import Chrome from '../src/components/Chrome';
 import Widget from '../src/components/Widget';
-import { GetCountriesAndTags } from '../types/GetCountriesAndTags';
+import { GetCountriesOrgsAndTags } from '../types/GetCountriesOrgsAndTags';
 import { OrganizationProvider } from '../src/context/organizationContext';
 
 declare global {
@@ -19,7 +19,7 @@ type Xprops = {
     xprops: any;
 };
 
-class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
+class WidgetPage extends Component<GetCountriesOrgsAndTags, Xprops> {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,7 +33,7 @@ class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
     }
 
     render() {
-        const { topics, categories, humanSupportTypes, countries } = this.props;
+        const { countries, organizations, topics, categories, humanSupportTypes } = this.props;
         const { xprops } = this.state;
         const contactMethods = [
             { name: 'Phone', key: 'phoneNumber' },
@@ -49,6 +49,7 @@ class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
                 <Chrome topbar={false} footer={false}>
                     <OrganizationProvider
                         countries={countries}
+                        allOrganizations={organizations.nodes}
                         filterOptions={{ topics, categories, humanSupportTypes, contactMethods }}
                         xprops={xprops}
                     >
@@ -60,9 +61,9 @@ class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
     }
 }
 
-export const getStaticProps = async (): Promise<{ props: GetCountriesAndTags }> => {
+export const getStaticProps = async (): Promise<{ props: GetCountriesOrgsAndTags }> => {
     const query = gql`
-        query GetCountriesAndTags {
+        query GetCountriesOrgsAndTags {
             countries {
                 code
                 name
@@ -70,6 +71,40 @@ export const getStaticProps = async (): Promise<{ props: GetCountriesAndTags }> 
                 subdivisions {
                     code
                     name
+                }
+            }
+            organizations {
+                nodes {
+                    slug
+                    name
+                    alwaysOpen
+                    smsNumber
+                    phoneNumber
+                    url
+                    chatUrl
+                    timezone
+                    country {
+                        name
+                        code
+                        subdivisions {
+                            name
+                            code
+                        }
+                    }
+                    humanSupportTypes {
+                        name
+                    }
+                    categories {
+                        name
+                    }
+                    topics {
+                        name
+                    }
+                    openingHours {
+                        day
+                        open
+                        close
+                    }
                 }
             }
             topics {
@@ -83,13 +118,14 @@ export const getStaticProps = async (): Promise<{ props: GetCountriesAndTags }> 
             }
         }
     `;
-    const { countries, topics, humanSupportTypes, categories } = await request(
+    const { countries, organizations, topics, humanSupportTypes, categories } = await request(
         'https://api.findahelpline.com',
         print(query),
     );
     return {
         props: {
             countries,
+            organizations,
             topics,
             humanSupportTypes,
             categories,

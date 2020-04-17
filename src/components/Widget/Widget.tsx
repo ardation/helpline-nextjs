@@ -1,11 +1,6 @@
-import React, { ReactElement, useState, useEffect, useContext } from 'react';
-import { request } from 'graphql-request';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
+import React, { ReactElement, useContext } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box } from '@material-ui/core';
-import { filter, reduce, intersectionBy, some } from 'lodash/fp';
-import { GetCountryAndOrganizations } from '../../../types/GetCountryAndOrganizations';
 import OrganizationContext from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
 import WidgetSearch from '../WidgetSearch';
@@ -24,10 +19,6 @@ type Country = {
     subdivisions: Subdivision[];
 };
 
-type Topic = {
-    name: string;
-};
-
 type Props = {
     xprops?: any;
 };
@@ -35,33 +26,6 @@ type Props = {
 type Search = {
     country: Country;
     subdivision: Subdivision;
-};
-
-type SelectedCountry = {
-    code: string;
-    name: string;
-    emergencyNumber: string;
-};
-
-type OpeningHour = {
-    day: string;
-    open: string;
-    close: string;
-};
-
-type Organization = {
-    slug: string;
-    name: string;
-    alwaysOpen: boolean;
-    humanSupportTypes: Topic[];
-    categories: Topic[];
-    topics: Topic[];
-    openingHours: OpeningHour[];
-    smsNumber?: string;
-    phoneNumber?: string;
-    url?: string;
-    chatUrl?: string;
-    timezone: string;
 };
 
 const useStyles = makeStyles(() =>
@@ -103,105 +67,23 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const getCountryAndOrganizations: any = async (countryCode): Promise<{ props: GetCountryAndOrganizations }> => {
-    const query = gql`
-        query GetCountryAndOrganizations($countryCode: String!) {
-            country(code: $countryCode) {
-                code
-                name
-                emergencyNumber
-            }
-            organizations(countryCode: $countryCode) {
-                nodes {
-                    slug
-                    name
-                    alwaysOpen
-                    smsNumber
-                    phoneNumber
-                    url
-                    chatUrl
-                    timezone
-                    humanSupportTypes {
-                        name
-                    }
-                    categories {
-                        name
-                    }
-                    topics {
-                        name
-                    }
-                    openingHours {
-                        day
-                        open
-                        close
-                    }
-                }
-            }
-        }
-    `;
-    const { country, organizations } = await request('https://api.findahelpline.com', print(query), {
-        countryCode: countryCode,
-    });
-    return {
-        props: {
-            country,
-            organizations,
-        },
-    };
-};
-
 const Widget = ({ xprops }: Props): ReactElement => {
     const classes = useStyles();
-    const { countries, activeCountry, filters, setActiveCountry } = useContext(OrganizationContext);
-    const [selectedSearch, setSelectedSearch] = useState<Search | undefined>(undefined);
-    const [organizations, setOrganizations] = useState<Organization[] | undefined>(undefined);
-
-    const filterResults = (results: Organization[]): Organization[] =>
-        filter(
-            (result: Organization) =>
-                reduce(
-                    (acc: boolean, [filterKey, filterValues]) => {
-                        const activeFilters = filter('active', filterValues);
-                        if (activeFilters.length > 0) {
-                            if (filterKey == 'contactMethods') {
-                                return acc && some((item) => !!result[item.key], activeFilters);
-                            } else {
-                                return acc && intersectionBy('name', result[filterKey], activeFilters).length > 0;
-                            }
-                        } else {
-                            return acc;
-                        }
-                    },
-                    true,
-                    Object.entries(filters),
-                ),
-            results,
-        );
-
-    useEffect(() => {
-        setOrganizations(undefined);
-        if (selectedSearch) {
-            getCountryAndOrganizations(selectedSearch.country.code).then(({ props }) => {
-                setActiveCountry(props.country);
-                setOrganizations(filterResults(props.organizations.nodes));
-            });
-        } else if (xprops) {
-            getCountryAndOrganizations(xprops.countryCode).then(({ props }) => {
-                setActiveCountry(props.country);
-                setOrganizations(filterResults(props.organizations.nodes));
-            });
-        }
-    }, [selectedSearch, xprops, filters]);
+    const { countries, activeCountry, organizations, setActiveCountry } = useContext(OrganizationContext);
 
     return (
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <div className={classes.header}>
-                    <WidgetSearch countries={countries} xprops={xprops} onSearchChange={setSelectedSearch} />
+                    <WidgetSearch
+                        countries={countries}
+                        xprops={xprops}
+                        onSearchChange={(res: Search): void => setActiveCountry(res.country)}
+                    />
                     <WidgetBar emergencyNumber={activeCountry?.emergencyNumber} />
                 </div>
                 <Box className={classes.box}>
-                    {selectedSearch || activeCountry ? (
+                    {activeCountry ? (
                         <Container className={classes.carousel}>
                             {organizations ? (
                                 <WidgetCarousel>
