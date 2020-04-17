@@ -35,7 +35,11 @@ class WidgetPage extends Component<GetCountriesAndTags, Xprops> {
     render() {
         const { topics, categories, humanSupportTypes, countries } = this.props;
         const { xprops } = this.state;
-        const contactMethods = [{ name: 'Phone' }, { name: 'Text' }, { name: 'Webchat' }];
+        const contactMethods = [
+            { name: 'Phone', key: 'phoneNumber' },
+            { name: 'Text', key: 'smsNumber' },
+            { name: 'Webchat', key: 'chatUrl' },
+        ];
         return (
             <Fragment>
                 <Head>

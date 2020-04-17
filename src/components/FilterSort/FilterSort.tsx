@@ -5,6 +5,7 @@ import { map } from 'lodash/fp';
 
 type Filter = {
     name: string;
+    key?: string;
     active?: boolean | false;
 };
 

@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box } from '@material-ui/core';
-import { filter, reduce, intersectionBy } from 'lodash/fp';
+import { filter, reduce, intersectionBy, some } from 'lodash/fp';
 import { GetCountryAndOrganizations } from '../../../types/GetCountryAndOrganizations';
 import OrganizationContext from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
@@ -24,7 +24,7 @@ type Country = {
     subdivisions: Subdivision[];
 };
 
-type Filter = {
+type Topic = {
     name: string;
 };
 
@@ -54,9 +54,9 @@ type Organization = {
     slug: string;
     name: string;
     alwaysOpen: boolean;
-    humanSupportTypes: Filter[];
-    categories: Filter[];
-    topics: Filter[];
+    humanSupportTypes: Topic[];
+    categories: Topic[];
+    topics: Topic[];
     openingHours: OpeningHour[];
     smsNumber?: string;
     phoneNumber?: string;
@@ -165,7 +165,11 @@ const Widget = ({ countries, xprops }: Props): ReactElement => {
                     (acc: boolean, [filterKey, filterValues]) => {
                         const activeFilters = filter('active', filterValues);
                         if (activeFilters.length > 0) {
-                            return acc && intersectionBy('name', result[filterKey], activeFilters).length > 0;
+                            if (filterKey == 'contactMethods') {
+                                return acc && some((item) => !!result[item.key], activeFilters);
+                            } else {
+                                return acc && intersectionBy('name', result[filterKey], activeFilters).length > 0;
+                            }
                         } else {
                             return acc;
                         }

@@ -2,6 +2,7 @@ import React, { createContext, useState, ReactElement, ReactNode, useEffect } fr
 
 type Filter = {
     name: string;
+    key?: string;
     active?: boolean | false;
 };
 
