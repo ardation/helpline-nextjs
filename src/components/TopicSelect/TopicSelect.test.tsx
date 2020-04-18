@@ -6,8 +6,8 @@ describe('TopicSelect', () => {
     const topics = [{ name: 'happy' }, { name: 'sad' }];
 
     it('should contain correct text', () => {
-        const { findByText } = render(<TopicSelect topics={topics} onChange={jest.fn()} />);
-        expect(findByText('Select topics (optional)')).toBeTruthy();
+        const { getByText } = render(<TopicSelect topics={topics} onChange={jest.fn()} />);
+        expect(getByText('Select topics (optional)')).toBeTruthy();
     });
 
     it('should contain multiple chips', () => {

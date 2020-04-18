@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const TopBar = ({ categories, humanSupportTypes, topics, preselectedTopics, onChange }: Props): ReactElement => {
+const OrganizationFilter = ({ categories, humanSupportTypes, topics, preselectedTopics, onChange }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedContactMethods, setSelectedContactMethods] = useState<ContactMethod[]>([]);
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
@@ -128,4 +128,4 @@ const TopBar = ({ categories, humanSupportTypes, topics, preselectedTopics, onCh
     );
 };
 
-export default TopBar;
+export default OrganizationFilter;
