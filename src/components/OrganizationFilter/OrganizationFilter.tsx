@@ -69,7 +69,7 @@ const OrganizationFilter = ({
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
     const [selectedHumanSupportTypes, setSelectedHumanSupportTypes] = useState<HumanSupportType[]>([]);
     const [selectedTopics, setSelectedTopics] = useState<Topic[]>([]);
-    const [selectedSorts, setSelectedSorts] = useState<Sort[]>([{ name: 'A-Z' }]);
+    const [selectedSorts, setSelectedSorts] = useState<Sort[]>([{ name: 'A – Z' }]);
 
     const onClick = (): void => {
         onChange({
@@ -120,7 +120,7 @@ const OrganizationFilter = ({
                 <Box my={2}>
                     <Typography className={classes.title}>Sort by</Typography>
                     <ItemSelect
-                        items={[{ name: 'A-Z' }, { name: 'Open now' }]}
+                        items={[{ name: 'A – Z' }, { name: 'Open now' }]}
                         preselectedItems={selectedSorts}
                         onChange={setSelectedSorts}
                         single

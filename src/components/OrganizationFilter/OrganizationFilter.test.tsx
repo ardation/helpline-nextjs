@@ -68,7 +68,7 @@ describe('OrganizationFilter', () => {
             expect(sorts).toEqual([{ name: 'Open now' }]);
         };
         const { getByText } = render(<OrganizationFilter onChange={onChange} />);
-        fireEvent.click(getByText('A-Z'));
+        fireEvent.click(getByText('A – Z'));
         fireEvent.click(getByText('Open now'));
         fireEvent.click(getByText('Apply'));
     });
