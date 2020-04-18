@@ -57,7 +57,13 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const OrganizationFilter = ({ categories, humanSupportTypes, topics, preselectedTopics, onChange }: Props): ReactElement => {
+const OrganizationFilter = ({
+    categories,
+    humanSupportTypes,
+    topics,
+    preselectedTopics,
+    onChange,
+}: Props): ReactElement => {
     const classes = useStyles();
     const [selectedContactMethods, setSelectedContactMethods] = useState<ContactMethod[]>([]);
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
@@ -81,7 +87,7 @@ const OrganizationFilter = ({ categories, humanSupportTypes, topics, preselected
                 Filter &amp; Sort
             </Typography>
             <Box mt={2} mb={3}>
-                {topics && topics.length > 0 && (
+                {topics && topics.length > 0 && preselectedTopics && preselectedTopics.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Topics</Typography>
                         <ItemSelect
