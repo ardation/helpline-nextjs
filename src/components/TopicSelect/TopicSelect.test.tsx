@@ -12,7 +12,7 @@ describe('TopicSelect', () => {
 
     it('should contain multiple chips', () => {
         const { getAllByTestId } = render(<TopicSelect topics={topics} onChange={jest.fn()} />);
-        const elements = getAllByTestId('topicChip');
+        const elements = getAllByTestId('itemChip');
         expect(elements).toHaveLength(2);
     });
 
@@ -28,7 +28,7 @@ describe('TopicSelect', () => {
         };
 
         const { getAllByTestId } = render(<TopicSelect topics={topics} onChange={onChange} />);
-        const elements = getAllByTestId('topicChip');
+        const elements = getAllByTestId('itemChip');
         fireEvent.click(elements[0]);
         fireEvent.click(elements[0]);
     });

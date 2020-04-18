@@ -30,3 +30,15 @@ export const WithSingle = (): ReactElement => (
         </Box>
     </ThemeProvider>
 );
+export const WithHideUnselected = (): ReactElement => (
+    <ThemeProvider theme={theme}>
+        <Box m={2}>
+            <ItemSelect
+                items={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]}
+                preselectedItems={[{ name: 'Anxiety' }]}
+                onChange={action('onChange')}
+                hideUnselected
+            />
+        </Box>
+    </ThemeProvider>
+);

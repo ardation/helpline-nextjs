@@ -23,7 +23,13 @@ export default {
 
 export const Default = (): ReactElement => (
     <ThemeProvider theme={theme}>
-        <OrganizationFilter onChange={action('onChange')} />
+        <OrganizationFilter
+            onChange={action('onChange')}
+            topics={topics}
+            preselectedTopics={preselectedTopics}
+            humanSupportTypes={humanSupportTypes}
+            categories={categories}
+        />
     </ThemeProvider>
 );
 

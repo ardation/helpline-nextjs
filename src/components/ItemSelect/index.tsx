@@ -1,3 +1,3 @@
-import TopicSelect from './ItemSelect';
+import ItemSelect from './ItemSelect';
 
-export default TopicSelect;
+export default ItemSelect;

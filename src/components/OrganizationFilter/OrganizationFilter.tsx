@@ -63,7 +63,7 @@ const TopBar = ({ categories, humanSupportTypes, topics, preselectedTopics, onCh
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
     const [selectedHumanSupportTypes, setSelectedHumanSupportTypes] = useState<HumanSupportType[]>([]);
     const [selectedTopics, setSelectedTopics] = useState<Topic[]>([]);
-    const [selectedSorts, setSelectedSorts] = useState<Sort[]>([]);
+    const [selectedSorts, setSelectedSorts] = useState<Sort[]>([{ name: 'A-Z' }]);
 
     const onClick = (): void => {
         onChange({
@@ -114,7 +114,8 @@ const TopBar = ({ categories, humanSupportTypes, topics, preselectedTopics, onCh
                 <Box my={2}>
                     <Typography className={classes.title}>Sort by</Typography>
                     <ItemSelect
-                        items={[{ name: 'Top rated' }, { name: 'A-Z' }, { name: 'Open now' }]}
+                        items={[{ name: 'A-Z' }, { name: 'Open now' }]}
+                        preselectedItems={selectedSorts}
                         onChange={setSelectedSorts}
                         single
                     />
