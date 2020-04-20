@@ -30,3 +30,6 @@ yarn-error.log*
 .env.production.local
 
 .now
+
+# files copied across at run time
+/public/widget*

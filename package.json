@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
-        "build": "next build",
+        "dev": "npm run build-widget-dev && next dev",
+        "build": "npx webpack --config webpack.config.js && next build",
         "start": "next start",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "lint:ci": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
@@ -13,7 +13,10 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
-        "chromatic": "chromatic"
+        "chromatic": "chromatic",
+        "build-widget-dev": "STAGING=-1 npx webpack --config webpack.config.js",
+        "build-widget-stage": "STAGING=1 npx webpack --config webpack.config.js",
+        "build-widget-prod": "STAGING=0 npx webpack --config webpack.config.js"
     },
     "dependencies": {
         "@material-ui/core": "^4.9.8",
@@ -60,7 +63,9 @@
         "prettier": "^2.0.2",
         "storybook-chromatic": "^3.5.2",
         "ts-jest": "^25.3.0",
-        "typescript": "^3.8.3"
+        "typescript": "^3.8.3",
+        "webpack-cli": "^3.3.11",
+        "zoid": "^6.0.79"
     },
     "husky": {
         "hooks": {
