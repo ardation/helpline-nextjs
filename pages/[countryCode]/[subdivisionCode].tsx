@@ -1,35 +1,40 @@
 import React, { ReactElement, Fragment } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Typography, Container, Box } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { find, flatten } from 'lodash/fp';
-import formatArrayIntoSentence from '../../src/util/formatArrayIntoSentence';
 import Chrome from '../../src/components/Chrome';
 import { GetCountriesAndSubdivisions } from '../../types/GetCountriesAndSubdivisions';
-import OrganizationCard from '../../src/components/OrganizationCard';
 import {
-    GetCountrySubdivisionsAndOrganizations,
-    GetCountrySubdivisionsAndOrganizations_country_subdivisions as Subdivision,
-    GetCountrySubdivisionsAndOrganizations_country as Country,
-    GetCountrySubdivisionsAndOrganizations_organizations as OrganizationsConnection,
-} from '../../types/GetCountrySubdivisionsAndOrganizations';
+    GetSubdivisionCodeProps,
+    GetSubdivisionCodeProps_country_subdivisions as Subdivision,
+} from '../../types/GetSubdivisionCodeProps';
+import OrganizationList from '../../src/components/OrganizationList';
+import Footer from '../../src/components/Footer';
 
-type Props = {
-    country: Country;
+interface Props extends GetSubdivisionCodeProps {
     subdivision: Subdivision;
-    organizations: OrganizationsConnection;
-};
+}
 
-const CountryPage = ({ country, subdivision, organizations }: Props): ReactElement => {
+const SubdivisionCodePage = ({
+    country,
+    subdivision,
+    organizations,
+    categories,
+    humanSupportTypes,
+    topics,
+}: Props): ReactElement => {
     const router = useRouter();
-    let { topics } = router.query;
+    const queryTopics = router.query.topics;
+    let preselectedTopics: { name: string }[] = [];
 
-    if (topics) {
-        topics = [topics].flat();
+    if (queryTopics) {
+        preselectedTopics = [queryTopics].flat().map((topic) => {
+            return { name: topic };
+        });
     }
 
     return (
@@ -39,20 +44,17 @@ const CountryPage = ({ country, subdivision, organizations }: Props): ReactEleme
                     Find A Helpline | {subdivision.name}, {country.name}
                 </title>
             </Head>
-            <Chrome topbar={true} country={country}>
-                <Container maxWidth="xs">
-                    <Box my={2}>
-                        <Typography variant="h6">
-                            Best helplines in {subdivision.name}, {country.name}
-                            {topics && <Fragment> for {formatArrayIntoSentence(topics).toLowerCase()}</Fragment>}.
-                        </Typography>
-                    </Box>
-                    {organizations.nodes.map((organization) => (
-                        <Box key={organization.slug} my={2}>
-                            <OrganizationCard organization={organization} />
-                        </Box>
-                    ))}
-                </Container>
+            <Chrome country={country}>
+                <OrganizationList
+                    organizations={organizations.nodes}
+                    country={country}
+                    subdivision={subdivision}
+                    preselectedTopics={preselectedTopics}
+                    categories={categories}
+                    humanSupportTypes={humanSupportTypes}
+                    topics={topics}
+                />
+                <Footer />
             </Chrome>
         </Fragment>
     );
@@ -60,7 +62,7 @@ const CountryPage = ({ country, subdivision, organizations }: Props): ReactEleme
 
 export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
     const query = gql`
-        query GetCountrySubdivisionsAndOrganizations($countryCode: String!, $subdivisionCode: String!) {
+        query GetSubdivisionCodeProps($countryCode: String!, $subdivisionCode: String!) {
             country(code: $countryCode) {
                 code
                 name
@@ -96,18 +98,34 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                     }
                 }
             }
+            categories {
+                name
+            }
+            humanSupportTypes {
+                name
+            }
+            topics {
+                name
+            }
         }
     `;
-    const { country, organizations } = (await request('https://api.findahelpline.com', print(query), {
-        countryCode: context.params.countryCode,
-        subdivisionCode: context.params.subdivisionCode,
-    })) as GetCountrySubdivisionsAndOrganizations;
+    const { country, organizations, categories, humanSupportTypes, topics } = await request(
+        'https://api.findahelpline.com',
+        print(query),
+        {
+            countryCode: context.params.countryCode,
+            subdivisionCode: context.params.subdivisionCode,
+        },
+    );
     const subdivision = find({ code: context.params.subdivisionCode.toString().toUpperCase() }, country.subdivisions);
     return {
         props: {
             country,
             subdivision,
             organizations,
+            categories,
+            humanSupportTypes,
+            topics,
         },
     };
 };
@@ -142,4 +160,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
 };
 
-export default CountryPage;
+export default SubdivisionCodePage;

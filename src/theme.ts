@@ -24,6 +24,9 @@ const theme = createMuiTheme({
         secondary: {
             main: '#FF6150',
         },
+        text: {
+            primary: '#202020',
+        },
     },
 });
 

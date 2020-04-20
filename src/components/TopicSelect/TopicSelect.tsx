@@ -1,7 +1,7 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Chip, Box, Typography } from '@material-ui/core';
-import { find, xor, sortBy } from 'lodash/fp';
+import { Box, Typography } from '@material-ui/core';
+import ItemSelect from '../ItemSelect';
 
 type Topic = {
     name: string;
@@ -36,9 +36,9 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 600,
         },
         chipColorPrimary: {
-            backgroundColor: '#000000',
+            backgroundColor: theme.palette.text.primary,
             '&:hover, &:focus': {
-                backgroundColor: '#000000',
+                backgroundColor: theme.palette.text.primary,
             },
         },
         text: {
@@ -50,35 +50,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const TopicSelect = ({ topics, onChange }: Props): ReactElement => {
     const classes = useStyles();
-    const [selectedTopics, setSelectedTopics] = useState([]);
-
-    const onClick = (topic: Topic): void => {
-        const topics = sortBy('name', xor([topic], selectedTopics));
-        setSelectedTopics(topics);
-        onChange(topics);
-    };
 
     return (
         <Box className={classes.box}>
             <Box mb={1} className={classes.heading}>
                 <Typography className={classes.text}>Select topics (optional)</Typography>
             </Box>
-            <Box className={classes.chips}>
-                {topics.map((topic) => (
-                    <Chip
-                        color={find(topic, selectedTopics) ? 'primary' : 'default'}
-                        key={topic.name}
-                        label={topic.name}
-                        onClick={(): void => onClick(topic)}
-                        data-testid="topicChip"
-                        classes={{
-                            root: classes.chipRoot,
-                            colorPrimary: classes.chipColorPrimary,
-                            clickableColorPrimary: classes.chipColorPrimary,
-                        }}
-                    />
-                ))}
-            </Box>
+            <ItemSelect items={topics} onChange={onChange} />
         </Box>
     );
 };

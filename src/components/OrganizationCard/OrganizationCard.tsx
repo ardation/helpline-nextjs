@@ -8,6 +8,7 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import PublicIcon from '@material-ui/icons/Public';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import Link from 'next/link';
+import OrganizationOpen from '../OrganizationOpen';
 
 type OpeningHour = {
     day: string;
@@ -23,13 +24,18 @@ type Category = {
     name: string;
 };
 
-type Organization = {
+type Topic = {
+    name: string;
+};
+
+export type Organization = {
     slug: string;
     name: string;
     alwaysOpen: boolean;
     humanSupportTypes: HumanSupportType[];
     categories: Category[];
     openingHours: OpeningHour[];
+    topics: Topic[];
     smsNumber?: string;
     phoneNumber?: string;
     url?: string;
@@ -47,47 +53,49 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             border: '1px solid #000',
             borderRadius: '10px',
-            minHeight: '20em',
-            flexShrink: 0,
             gridTemplateColumns: '1fr 88px',
             '& > div': {
                 padding: theme.spacing(2),
             },
-            '@media (max-width: 414px)': {
-                alignItems: 'center',
+            '@media (max-width: 320px)': {
                 flexDirection: 'column',
-                minHeight: 'unset',
+            },
+        },
+        webChatSpacing: {
+            display: 'none',
+            '@media (max-width: 320px)': {
+                display: 'inline',
+            },
+        },
+        webChatLineBreak: {
+            '@media (max-width: 320px)': {
+                display: 'none',
             },
         },
         grid: {
             flex: 1,
             display: 'flex',
-            minWidth: '18em',
             flexDirection: 'column',
-            '@media (max-width: 414px)': {
-                flexDirection: 'column',
-            },
+            minWidth: 0,
         },
         heading: {
             fontWeight: 'bold',
             textDecoration: 'underline',
-            color: '#000000',
+            color: theme.palette.text.primary,
         },
         chipAlwaysOpen: {
             color: '#FFFFFF',
             fontWeight: 'bold',
             backgroundColor: theme.palette.secondary.main,
             textDecoration: 'none',
-        },
-        open: {
-            color: '#3FA607',
-            fontWeight: 'bold',
+            marginLeft: theme.spacing(2),
         },
         button: {
             textTransform: 'none',
+            lineHeight: '1.5',
         },
         buttonDisabled: {
-            color: '#000000 !important',
+            color: `${theme.palette.text.primary} !important`,
         },
         buttonLink: {
             textDecoration: 'underline',
@@ -107,7 +115,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         chip: {
             color: '#FFFFFF',
-            backgroundColor: '#000000',
+            backgroundColor: theme.palette.text.primary,
             fontWeight: 600,
         },
         side: {
@@ -118,12 +126,14 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'center',
             gridRowGap: theme.spacing(2),
             gridAutoRows: 'min-content',
-            '@media (max-width: 414px)': {
+            '@media (max-width: 320px)': {
                 borderTopRightRadius: '0',
                 borderBottomLeftRadius: '10px',
                 gridAutoFlow: 'column',
-                width: '100%',
             },
+        },
+        fab: {
+            fontSize: '2rem',
         },
         fabLabel: {
             textTransform: 'uppercase',
@@ -138,23 +148,25 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
-        <Box className={classes.box} m={1}>
+        <Box className={classes.box}>
             <Box className={classes.grid}>
-                <Typography variant="h6">
-                    <Link href="/organizations/[slug]" as={`/organizations/${organization.slug}`} passHref>
-                        <a className={classes.heading}>{organization.name}</a>
-                    </Link>{' '}
-                    {organization.alwaysOpen && <Chip className={classes.chipAlwaysOpen} label="24/7" />}
-                </Typography>
-                {organization.alwaysOpen && (
-                    <Box>
+                <Box ml={1}>
+                    <Typography variant="h6">
+                        <Link href="/organizations/[slug]" as={`/organizations/${organization.slug}`} passHref>
+                            <a className={classes.heading}>{organization.name}</a>
+                        </Link>
+                        {organization.alwaysOpen && <Chip className={classes.chipAlwaysOpen} label="24/7" />}
+                    </Typography>
+                </Box>
+                {(organization.alwaysOpen || organization.openingHours.length > 0) && (
+                    <Box data-testid="open">
                         <Button
                             size="large"
                             classes={{ root: classes.button, disabled: classes.buttonDisabled }}
                             startIcon={<AccessTimeIcon />}
                             disabled
                         >
-                            <span className={classes.open}>Open</span> &nbsp;&#8226; Available 24/7
+                            <OrganizationOpen organization={organization} />
                         </Button>
                     </Box>
                 )}
@@ -165,6 +177,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                             classes={{ root: classes.button, disabled: classes.buttonDisabled }}
                             startIcon={<AccountCircleIcon />}
                             disabled
+                            data-testid="humanSupportTypes"
                         >
                             {organization.humanSupportTypes.map((humanSupportType) => humanSupportType.name).join(', ')}
                         </Button>
@@ -178,6 +191,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                                 size="large"
                                 className={[classes.button, classes.buttonLink].join(' ')}
                                 startIcon={<SmsOutlinedIcon />}
+                                data-testid="smsNumber"
                             >
                                 {organization.smsNumber}
                             </Button>
@@ -188,6 +202,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                                 size="large"
                                 className={[classes.button, classes.buttonLink].join(' ')}
                                 startIcon={<PhoneIcon />}
+                                data-testid="phoneNumber"
                             >
                                 {organization.phoneNumber}
                             </Button>
@@ -201,6 +216,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                             href={organization.url}
                             className={[classes.button, classes.buttonLink].join(' ')}
                             startIcon={<PublicIcon />}
+                            data-testid="url"
                         >
                             {
                                 organization.url
@@ -213,7 +229,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                     </Box>
                 )}
                 {organization.categories.length > 0 && (
-                    <Box className={classes.chips}>
+                    <Box ml={1} className={classes.chips} data-testid="categories">
                         {organization.categories.map((category, index) => (
                             <Chip className={classes.chip} key={index} label={category.name} />
                         ))}
@@ -221,29 +237,51 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                 )}
             </Box>
             {(organization.smsNumber || organization.phoneNumber || organization.chatUrl) && (
-                <Box className={classes.side}>
+                <Box className={classes.side} data-testid="fabs">
                     {organization.smsNumber && (
                         <Box>
-                            <Fab href={`sms:${organization.smsNumber}`} color="primary" aria-label="text">
-                                <SmsOutlinedIcon />
+                            <Fab
+                                href={`sms:${organization.smsNumber}`}
+                                color="primary"
+                                aria-label="text"
+                                data-testid="smsNumberFab"
+                                className={classes.fab}
+                            >
+                                <SmsOutlinedIcon fontSize="inherit" />
                             </Fab>
                             <Typography className={classes.fabLabel}>Text</Typography>
                         </Box>
                     )}
                     {organization.phoneNumber && (
                         <Box>
-                            <Fab href={`tel:${organization.phoneNumber}`} color="primary" aria-label="call">
-                                <PhoneIcon />
+                            <Fab
+                                href={`tel:${organization.phoneNumber}`}
+                                color="primary"
+                                aria-label="call"
+                                data-testid="phoneNumberFab"
+                                className={classes.fab}
+                            >
+                                <PhoneIcon fontSize="inherit" />
                             </Fab>
                             <Typography className={classes.fabLabel}>Call</Typography>
                         </Box>
                     )}
                     {organization.chatUrl && (
                         <Box>
-                            <Fab href={organization.chatUrl} color="primary" aria-label="text">
-                                <MessageOutlinedIcon />
+                            <Fab
+                                href={organization.chatUrl}
+                                color="primary"
+                                aria-label="text"
+                                data-testid="chatUrlFab"
+                                className={classes.fab}
+                            >
+                                <MessageOutlinedIcon fontSize="inherit" />
                             </Fab>
-                            <Typography className={classes.fabLabel}>Web Chat</Typography>
+                            <Typography className={classes.fabLabel}>
+                                Web<span className={classes.webChatSpacing}>&nbsp;</span>
+                                <br className={classes.webChatLineBreak} />
+                                Chat
+                            </Typography>
                         </Box>
                     )}
                 </Box>

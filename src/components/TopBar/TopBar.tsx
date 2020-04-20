@@ -1,5 +1,5 @@
 import React, { ReactElement, Fragment } from 'react';
-import { AppBar, Container, Toolbar, Typography, Button } from '@material-ui/core';
+import { AppBar, Container, Toolbar, Typography, Button, Hidden } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import CallIcon from '@material-ui/icons/Call';
@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         appBar: {
             backgroundColor: '#181719',
+            zIndex: theme.zIndex.drawer + 2,
         },
         toolbar: {
             display: 'grid',
@@ -104,7 +105,8 @@ const TopBar = ({ country }: Props): ReactElement => {
                                 href={`tel:${country.emergencyNumber}`}
                                 data-testid="emergencyServicesButton"
                             >
-                                Emergency Services
+                                <Hidden smUp>Call {country.emergencyNumber}</Hidden>
+                                <Hidden only="xs">Emergency Services</Hidden>
                             </Button>
                         </Fragment>
                     ) : (

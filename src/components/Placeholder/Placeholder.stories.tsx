@@ -12,7 +12,3 @@ export const Default = (): ReactElement => (
         <Placeholder />
     </ThemeProvider>
 );
-
-Default.story = {
-    name: 'default',
-};

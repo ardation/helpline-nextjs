@@ -6,13 +6,13 @@ describe('TopicSelect', () => {
     const topics = [{ name: 'happy' }, { name: 'sad' }];
 
     it('should contain correct text', () => {
-        const { findByText } = render(<TopicSelect topics={topics} onChange={jest.fn()} />);
-        expect(findByText('Select topics (optional)')).toBeTruthy();
+        const { getByText } = render(<TopicSelect topics={topics} onChange={jest.fn()} />);
+        expect(getByText('Select topics (optional)')).toBeTruthy();
     });
 
     it('should contain multiple chips', () => {
         const { getAllByTestId } = render(<TopicSelect topics={topics} onChange={jest.fn()} />);
-        const elements = getAllByTestId('topicChip');
+        const elements = getAllByTestId('itemChip');
         expect(elements).toHaveLength(2);
     });
 
@@ -28,7 +28,7 @@ describe('TopicSelect', () => {
         };
 
         const { getAllByTestId } = render(<TopicSelect topics={topics} onChange={onChange} />);
-        const elements = getAllByTestId('topicChip');
+        const elements = getAllByTestId('itemChip');
         fireEvent.click(elements[0]);
         fireEvent.click(elements[0]);
     });
