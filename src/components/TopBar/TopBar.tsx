@@ -10,6 +10,7 @@ type Country = {
 
 type Props = {
     country?: Country;
+    widget?: boolean;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,7 +22,8 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         appBar: {
-            backgroundColor: '#181719',
+            backgroundColor: (props: Props): string => (props.widget ? '#F0F1F5' : '#181719'),
+            color: (props: Props): string => (props.widget ? '#000' : '#FFF'),
             zIndex: theme.zIndex.drawer + 2,
         },
         toolbar: {
@@ -60,6 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         button: {
             backgroundColor: '#CC001E',
+            color: '#FFF',
             textAlign: 'left',
             borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
@@ -81,8 +84,8 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const TopBar = ({ country }: Props): ReactElement => {
-    const classes = useStyles();
+const TopBar = ({ country, widget }: Props): ReactElement => {
+    const classes = useStyles({ widget });
 
     return (
         <AppBar className={classes.appBar} position="static">
@@ -114,15 +117,17 @@ const TopBar = ({ country }: Props): ReactElement => {
                             Need to leave quickly? Click to leave this site and open the weather.
                         </Typography>
                     )}
-                    <Button
-                        color="inherit"
-                        classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
-                        endIcon={<DirectionsRunIcon />}
-                        href="https://accuweather.com"
-                        data-testid="leaveQuicklyButton"
-                    >
-                        Leave Quickly
-                    </Button>
+                    {!widget && (
+                        <Button
+                            color="inherit"
+                            classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
+                            endIcon={<DirectionsRunIcon />}
+                            href="https://accuweather.com"
+                            data-testid="leaveQuicklyButton"
+                        >
+                            Leave Quickly
+                        </Button>
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>
