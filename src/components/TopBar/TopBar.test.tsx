@@ -4,8 +4,8 @@ import TopBar from '.';
 
 describe('TopBar', () => {
     it('should contain correct text', () => {
-        const { findByText } = render(<TopBar />);
-        expect(findByText('Need to leave quickly? Click to leave this site and open the weather.')).toBeTruthy();
+        const { getByText } = render(<TopBar />);
+        expect(getByText('Need to leave quickly? Click to leave this site and open the weather.')).toBeTruthy();
     });
 
     it('should contain weather link', () => {
@@ -18,8 +18,8 @@ describe('TopBar', () => {
         const country = { emergencyNumber: '111' };
 
         it('should contain correct text', () => {
-            const { findByText } = render(<TopBar country={country} />);
-            expect(findByText('Are you or someone else in immediate danger?')).toBeTruthy();
+            const { getByText } = render(<TopBar country={country} />);
+            expect(getByText('Are you or someone else in immediate danger?')).toBeTruthy();
         });
 
         it('should contain emergency link', () => {

@@ -18,7 +18,3 @@ export const Default = (): ReactElement => (
         </Box>
     </ThemeProvider>
 );
-
-Default.story = {
-    name: 'default',
-};

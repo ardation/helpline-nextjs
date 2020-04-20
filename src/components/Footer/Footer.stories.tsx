@@ -12,7 +12,3 @@ export const Default = (): ReactElement => (
         <Footer />
     </ThemeProvider>
 );
-
-Default.story = {
-    name: 'default',
-};

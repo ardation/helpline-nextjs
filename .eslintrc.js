@@ -15,7 +15,6 @@ module.exports = {
     sourceType: "module" // Allows for the use of imports
   },
   rules: {
-    "import/exports-last": "error",
     "import/no-duplicates": "error",
     "import/extensions": "error",
     "import/order": "error",
@@ -40,7 +39,6 @@ module.exports = {
     {
       "files": ["*.stories.tsx"],
       "rules": {
-        "import/exports-last": "off",
         "import/no-anonymous-default-export": "off"
       }
     }

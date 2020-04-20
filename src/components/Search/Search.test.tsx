@@ -49,7 +49,7 @@ describe('Search', () => {
         const element = getByRole('textbox');
         fireEvent.click(element);
         fireEvent.click(getByRole('listbox').children[0]);
-        const elements = getAllByTestId('topicChip');
+        const elements = getAllByTestId('itemChip');
         fireEvent.click(elements[0]);
         expect(getByTestId('searchButton')).toHaveAttribute('href', '/au?topics=happy');
     });

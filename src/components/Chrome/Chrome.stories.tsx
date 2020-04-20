@@ -21,10 +21,6 @@ export const Default = (): ReactElement => (
     </Fragment>
 );
 
-Default.story = {
-    name: 'default',
-};
-
 export const WithCountry = (): ReactElement => (
     <Fragment>
         <Chrome country={{ emergencyNumber: '111' }}>
@@ -36,7 +32,3 @@ export const WithCountry = (): ReactElement => (
         </Chrome>
     </Fragment>
 );
-
-Default.story = {
-    name: 'with country',
-};
