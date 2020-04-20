@@ -94,7 +94,7 @@ const Search = ({ countries, onSearchChange, xprops }: Props): ReactElement => {
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
     const [showFilter, setShowFilter] = useState<boolean>(false);
-    const { filters, applyFilters } = useContext(OrganizationContext);
+    const { filterOptions, applyFilters } = useContext(OrganizationContext);
 
     const classes = useStyles();
 
@@ -144,7 +144,7 @@ const Search = ({ countries, onSearchChange, xprops }: Props): ReactElement => {
             {showFilter && (
                 <div className={classes.filter}>
                     <FilterSort
-                        filterOptions={filters}
+                        filterOptions={filterOptions}
                         onApply={(filters): void => {
                             setShowFilter(false);
                             applyFilters(filters);

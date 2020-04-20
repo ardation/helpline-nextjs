@@ -40,6 +40,8 @@ class WidgetPage extends Component<GetCountriesOrgsAndTags, Xprops> {
             { name: 'Text', key: 'smsNumber' },
             { name: 'Webchat', key: 'chatUrl' },
         ];
+        const sorts = [{ name: 'A – Z' }, { name: 'Open now' }];
+
         return (
             <Fragment>
                 <Head>
@@ -50,7 +52,7 @@ class WidgetPage extends Component<GetCountriesOrgsAndTags, Xprops> {
                     <OrganizationProvider
                         countries={countries}
                         allOrganizations={organizations.nodes}
-                        filterOptions={{ topics, categories, humanSupportTypes, contactMethods }}
+                        filterOptions={{ topics, categories, humanSupportTypes, contactMethods, sorts }}
                         xprops={xprops}
                     >
                         <Widget xprops={xprops} />

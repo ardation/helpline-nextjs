@@ -1,19 +1,19 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, useContext } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Chip, Container, Box, Typography, Button } from '@material-ui/core';
-import { map } from 'lodash/fp';
+import { Container, Box, Typography, Button } from '@material-ui/core';
+import OrganizationContext from '../../context/organizationContext';
+import ItemSelect from '../ItemSelect';
 
 type Filter = {
     name: string;
-    key?: string;
-    active?: boolean | false;
 };
 
 type FilterOptions = {
-    topics?: Filter[];
-    categories?: Filter[];
-    humanSupportTypes?: Filter[];
-    contactMethods?: Filter[];
+    topics: Filter[];
+    categories: Filter[];
+    humanSupportTypes: Filter[];
+    contactMethods: Filter[];
+    sorts: Filter[];
 };
 
 type FilterSection = {
@@ -28,7 +28,7 @@ type Props = {
     onApply: (selectedFilters: FilterOptions) => void;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
         container: {
             overflowY: 'scroll',
@@ -52,52 +52,30 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 'bold',
             marginBottom: '0.5rem',
         },
-        chips: {
-            display: 'flex',
-            justifyContent: 'left',
-            flexWrap: 'wrap',
-            '& > *': {
-                marginRight: theme.spacing(0.5),
-                marginBottom: theme.spacing(0.5),
-            },
-        },
-        chipRoot: {
-            fontWeight: 600,
-        },
-        chipColorPrimary: {
-            backgroundColor: '#000000',
-            '&:hover, &:focus': {
-                backgroundColor: '#000000',
-            },
-        },
         button: {
             borderRadius: '1000px',
         },
     }),
 );
 
-const FilterSort = ({ filterOptions, showMax, onApply }: Props): ReactElement => {
+const FilterSort = ({ filterOptions, onApply }: Props): ReactElement => {
     const classes = useStyles();
-    const [filters, setFilters] = useState(filterOptions);
-    const [max, setMax] = useState(showMax || 10);
+    const { activeFilters } = useContext(OrganizationContext);
+    const [selectedFilters, setSelectedFilters] = useState(activeFilters);
 
-    const filterSections: FilterSection[] = Object.keys(filters).reduce((prev, key) => {
+    const filterSections: FilterSection[] = Object.keys(filterOptions).reduce((prev, key) => {
         const title = key.replace(/([A-Z])/g, ' $1');
-        filters[key]?.length > 0 &&
+        filterOptions[key]?.length > 0 &&
             prev.push({
                 key,
                 title: title.charAt(0).toUpperCase() + title.slice(1),
-                options: filters[key],
+                options: filterOptions[key],
             });
         return prev;
     }, []);
 
-    const toggleChip = (key: string, value: Filter): void => {
-        const updated = map(
-            (item: Filter) => (item.name === value.name ? { ...item, active: !item.active } : item),
-            filters[key],
-        );
-        setFilters({ ...filters, [key]: updated });
+    const onChange = (key: string, items: Filter[]): void => {
+        setSelectedFilters({ ...selectedFilters, [key]: items });
     };
 
     return (
@@ -108,46 +86,19 @@ const FilterSort = ({ filterOptions, showMax, onApply }: Props): ReactElement =>
                     data-testid="applyButton"
                     className={classes.button}
                     variant="outlined"
-                    onClick={(): void => onApply(filters)}
+                    onClick={(): void => onApply(selectedFilters)}
                 >
                     Apply Filters
                 </Button>
             </Box>
-            {filterSections.map((section) => (
-                <Box className={classes.sectionContainer} key={section.key}>
-                    <Typography className={classes.subheading}>{section.title}</Typography>
-                    <Box className={classes.chips}>
-                        {section.options.map(
-                            (item: Filter, index: number) =>
-                                index < max && (
-                                    <Chip
-                                        color={item.active ? 'primary' : 'default'}
-                                        key={item.name}
-                                        label={item.name}
-                                        onClick={(): void => toggleChip(section.key, item)}
-                                        data-testid="filterChip"
-                                        classes={{
-                                            root: classes.chipRoot,
-                                            colorPrimary: classes.chipColorPrimary,
-                                            clickableColorPrimary: classes.chipColorPrimary,
-                                        }}
-                                    />
-                                ),
-                        )}
-                        {section.options.length > max && (
-                            <Chip
-                                color="default"
-                                label={`+${section.options.length - max} More`}
-                                onClick={(): void => setMax(100)}
-                                data-testid="showMoreChip"
-                                classes={{
-                                    root: classes.chipRoot,
-                                    colorPrimary: classes.chipColorPrimary,
-                                    clickableColorPrimary: classes.chipColorPrimary,
-                                }}
-                            />
-                        )}
-                    </Box>
+            {filterSections.map((row) => (
+                <Box className={classes.sectionContainer} key={row.key}>
+                    <Typography className={classes.subheading}>{row.title}</Typography>
+                    <ItemSelect
+                        items={row.options}
+                        preselectedItems={selectedFilters[row.key]}
+                        onChange={(items: Filter[]): void => onChange(row.key, items)}
+                    />
                 </Box>
             ))}
         </Container>
