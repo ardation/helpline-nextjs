@@ -15,6 +15,9 @@ export const Default = (): ReactElement => (
                 filterOptions={{
                     topics: [{ name: 'Topic 1' }, { name: 'Topic 2' }, { name: 'Topic 3' }],
                     categories: [{ name: 'Category 1' }, { name: 'Category 2' }],
+                    humanSupportTypes: [],
+                    contactMethods: [],
+                    sorts: [],
                 }}
                 onApply={action('onClick')}
             />

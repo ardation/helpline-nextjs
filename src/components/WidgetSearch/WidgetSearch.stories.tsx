@@ -13,7 +13,13 @@ export const Default = (): ReactElement => (
         <OrganizationProvider
             allOrganizations={[]}
             countries={[]}
-            filterOptions={{ topics: [{ name: 'Topic' }, { name: 'Topic 2' }] }}
+            filterOptions={{
+                topics: [{ name: 'Topic' }, { name: 'Topic 2' }],
+                categories: [],
+                humanSupportTypes: [],
+                contactMethods: [],
+                sorts: [],
+            }}
         >
             <Box m={2}>
                 <WidgetSearch

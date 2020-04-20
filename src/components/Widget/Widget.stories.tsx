@@ -23,14 +23,6 @@ export const Default = (): ReactElement => (
                     url: 'https://www.youthline.co.nz',
                     chatUrl: 'https://www.youthline.co.nz/web-chat-counselling.html',
                     timezone: 'Pacific/Auckland',
-                    country: {
-                        code: 'NZ',
-                        name: 'New Zealand',
-                        subdivisions: [
-                            { name: 'Bay of Plenty', code: 'BOP' },
-                            { name: 'Auckland', code: 'AUK' },
-                        ],
-                    },
                     topics: [{ name: 'Topic 1' }],
                     categories: [{ name: 'Category 1' }],
                     humanSupportTypes: [],
@@ -57,6 +49,9 @@ export const Default = (): ReactElement => (
             filterOptions={{
                 topics: [{ name: 'Topic 1' }, { name: 'Topic 2' }, { name: 'Topic 3' }],
                 categories: [{ name: 'Category 1' }, { name: 'Category 2' }],
+                humanSupportTypes: [],
+                contactMethods: [],
+                sorts: [],
             }}
         >
             <Widget />
