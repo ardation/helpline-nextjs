@@ -22,6 +22,8 @@ type Props = {
     countries: Country[];
     onCountryChange: (country: Country) => void;
     onSubdivisionChange: (subdivision: Subdivision) => void;
+    inline?: boolean;
+    defaultCountryCode?: string;
 };
 
 // ISO 3166-1 alpha-2
@@ -39,6 +41,11 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         box: {
             display: 'grid',
+            gridGap: theme.spacing(1),
+        },
+        inlineGrid: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(0, 1fr))',
             gridGap: theme.spacing(1),
         },
         inputRoot: {
@@ -77,9 +84,19 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange }: Props): ReactElement => {
+const CountrySelect = ({
+    countries,
+    onCountryChange,
+    onSubdivisionChange,
+    inline,
+    defaultCountryCode,
+}: Props): ReactElement => {
     const classes = useStyles();
-    const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
+    const [selectedCountry, setSelectedCountry] = useState<Country | null>(
+        countries.filter((country: Country) => {
+            return country.code === defaultCountryCode;
+        })[0] ?? null,
+    );
     const setSelectedSubdivision = useState<Subdivision | undefined>(undefined)[1];
 
     const localOnCountryChange = (country: Country): void => {
@@ -95,8 +112,9 @@ const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange }: Prop
     };
 
     return (
-        <Box className={classes.box}>
+        <Box className={inline ? classes.inlineGrid : classes.box}>
             <Autocomplete
+                value={selectedCountry}
                 style={{ width: 300 }}
                 options={sortBy('name', countries) as Country[]}
                 classes={{
