@@ -1,18 +1,23 @@
 import Head from 'next/head';
 import React, { Fragment, Component } from 'react';
+import { Container } from '@material-ui/core';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
-import Chrome from '../src/components/Chrome';
+import { withRouter } from 'next/router';
 import { GetCountriesAndSubdivisions } from '../types/GetCountriesAndSubdivisions';
 
 declare global {
     interface Window {
-        xprops: Record<string, string>;
+        xprops: {
+            countryCode: string;
+        };
     }
 }
 type Xprops = {
-    xprops: Record<string, string>;
+    xprops: {
+        countryCode: string;
+    };
 };
 
 class WidgetPage extends Component<GetCountriesAndSubdivisions, Xprops> {
@@ -25,7 +30,6 @@ class WidgetPage extends Component<GetCountriesAndSubdivisions, Xprops> {
     componentDidMount(): void {
         if (window.xprops) {
             this.setState({ xprops: window.xprops });
-            console.log(window.xprops);
         }
     }
 
@@ -38,23 +42,23 @@ class WidgetPage extends Component<GetCountriesAndSubdivisions, Xprops> {
                     <title>Find A Helpline</title>
                     <script src="/widget.min.js"></script>
                 </Head>
-                <Chrome footer={false}>
-                    {xprops ? <p>widget default country: {xprops.countryCode}</p> : null}
+                <Container>
+                    {xprops ? <div>widget default country: {xprops.countryCode}</div> : null}
                     <ul>
                         {countries.map((country, key) => {
                             return (
                                 <li key={key}>
                                     {country.code}
-                                    <div>
+                                    <ul>
                                         {country.subdivisions.map((subdivision, index) => {
-                                            return <span key={index}>{subdivision.code}, </span>;
+                                            return <li key={index}>{subdivision.code} </li>;
                                         })}
-                                    </div>
+                                    </ul>
                                 </li>
                             );
                         })}
                     </ul>
-                </Chrome>
+                </Container>
             </Fragment>
         );
     }
@@ -80,4 +84,4 @@ export const getStaticProps = async (): Promise<{ props: GetCountriesAndSubdivis
     };
 };
 
-export default WidgetPage;
+export default withRouter(WidgetPage);

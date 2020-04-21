@@ -22,7 +22,7 @@ const setupDomainUrl = () => {
 module.exports = {
     mode: 'production',
     entry: {
-        widget: './src/widget/widget.ts',
+        widget: './src/widget/widget.tsx',
     },
     output: {
         path: path.resolve(__dirname, 'public/'),
@@ -57,7 +57,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-typescript'],
+                        presets: ['@babel/preset-env', 'next/babel'],
                     },
                 },
             },
