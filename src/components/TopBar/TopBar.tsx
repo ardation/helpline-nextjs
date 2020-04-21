@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
             gridTemplateColumns: '1fr auto auto',
             [theme.breakpoints.down('xs')]: {
                 textAlign: 'center',
-                gridTemplateColumns: '1fr 1fr',
+                gridTemplateColumns: (props: Props): string => (props.widget ? '1fr auto' : '1fr 1fr'),
                 alignItems: 'flex-start',
             },
         },
