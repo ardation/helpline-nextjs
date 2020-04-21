@@ -91,14 +91,14 @@ const OrganizationFilter = ({
                 Filter &amp; Sort
             </Typography>
             <Box mt={2} mb={3}>
-                {topics && topics.length > 0 && preselectedTopics && preselectedTopics.length > 0 && (
+                {topics && topics.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Topics</Typography>
                         <ItemSelect
                             items={topics}
                             preselectedItems={preselectedTopics}
                             onChange={setSelectedTopics}
-                            hideUnselected
+                            hideUnselected={preselectedTopics && preselectedTopics.length > 0}
                         />
                     </Box>
                 )}

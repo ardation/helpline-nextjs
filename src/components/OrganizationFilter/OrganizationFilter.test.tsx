@@ -72,13 +72,4 @@ describe('OrganizationFilter', () => {
         fireEvent.click(getByText('Open now'));
         fireEvent.click(getByText('Apply'));
     });
-
-    it('should allow preselectedTopics to be updated', () => {
-        const { getByText, rerender } = render(
-            <OrganizationFilter topics={topics} preselectedTopics={[]} onChange={jest.fn()} />,
-        );
-        expect(() => getByText('+2 more')).toThrow();
-        rerender(<OrganizationFilter topics={topics} preselectedTopics={preselectedTopics} onChange={jest.fn()} />);
-        expect(getByText('+2 more')).toBeTruthy();
-    });
 });
