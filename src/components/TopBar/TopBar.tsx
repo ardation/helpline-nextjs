@@ -69,8 +69,7 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingRight: theme.spacing(2),
             [theme.breakpoints.down('xs')]: {
                 fontSize: '0.7rem',
-                paddingRight: theme.spacing(1),
-                paddingLeft: theme.spacing(1),
+                margin: (props: Props): string => props.widget && '0 auto',
             },
             '&:hover': {
                 backgroundColor: '#CC001E',
