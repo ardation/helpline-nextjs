@@ -8,17 +8,17 @@ const setupDomainUrl = () => {
     switch (process.env.STAGING) {
         case '0':
             domainUrl = process.env.NOW_URL
-                ? JSON.stringify(process.env.NOW_URL)
+                ? JSON.stringify(`https://${process.env.NOW_URL}`)
                 : JSON.stringify('https://www.findahelpline.com');
             break;
         case '1':
             domainUrl = process.env.NOW_URL
-                ? JSON.stringify(process.env.NOW_URL)
+                ? JSON.stringify(`https://${process.env.NOW_URL}`)
                 : JSON.stringify('https://stage.findahelpline.com');
             break;
         default:
             domainUrl = process.env.NOW_URL
-                ? JSON.stringify(process.env.NOW_URL)
+                ? JSON.stringify(`https://${process.env.NOW_URL}`)
                 : JSON.stringify('http://localhost:3000');
             break;
     }
