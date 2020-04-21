@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "npm run build-widget-dev && next dev",
+        "dev": "STAGING=-1 npx webpack --config webpack.config.js && next dev",
         "build": "npx webpack --config webpack.config.js && next build",
         "start": "next start",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
@@ -13,10 +13,7 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
-        "chromatic": "chromatic",
-        "build-widget-dev": "STAGING=-1 npx webpack --config webpack.config.js",
-        "build-widget-stage": "STAGING=1 npx webpack --config webpack.config.js",
-        "build-widget-prod": "STAGING=0 npx webpack --config webpack.config.js"
+        "chromatic": "chromatic"
     },
     "dependencies": {
         "@material-ui/core": "^4.9.8",

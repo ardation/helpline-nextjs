@@ -46,7 +46,7 @@ While the app is running, place the below snippet inside and before the closing 
 
 <script src="http://localhost:3000/widget.min.js"></script>
 <script type="text/javascript">
-    Widget.render(
+    Widget.default.render(
         {
             countryCode: 'US',
         },
