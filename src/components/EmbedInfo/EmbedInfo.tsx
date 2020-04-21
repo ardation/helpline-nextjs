@@ -22,9 +22,8 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            paddingTop: theme.spacing(5),
-            paddingBottom: theme.spacing(5),
-            height: '100%',
+            marginTop: theme.spacing(5),
+            marginBottom: theme.spacing(5),
         },
         box: {
             display: 'grid',
@@ -34,13 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
             backgroundColor: '#F0F1F5',
             paddingLeft: theme.spacing(2),
             width: '100%',
-            // fontFamily: 'Courier',
-        },
-        copy: {
-            color: '#07838E',
-            marginRight: theme.spacing(1),
-            marginBottom: theme.spacing(1),
-            float: 'right',
+            fontFamily: 'Courier',
         },
         buttonRoot: {
             color: '#000',
