@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, ChangeEvent } from 'react';
-import { Container, Box, Typography, TextField, FormControl, MenuItem, InputLabel, Select } from '@material-ui/core';
+import { Container, Box, Typography, FormControl, MenuItem, InputLabel, Select } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 type Country = {
@@ -24,21 +24,17 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'center',
             paddingTop: theme.spacing(5),
             paddingBottom: theme.spacing(5),
-            marginTop: theme.spacing(5),
-            marginBottom: theme.spacing(5),
             height: '100%',
         },
         box: {
             display: 'grid',
             gridGap: theme.spacing(2),
         },
-        codeSnippet: {
-            backgroundColor: '#F0F1F5',
-        },
         code: {
-            padding: theme.spacing(2),
+            backgroundColor: '#F0F1F5',
+            paddingLeft: theme.spacing(2),
             width: '100%',
-            fontFamily: 'Courier',
+            // fontFamily: 'Courier',
         },
         copy: {
             color: '#07838E',
@@ -72,20 +68,19 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Embed = ({ countries }: Props): ReactElement => {
     const [selectedCountryCode, setSelectedCountryCode] = useState<string>('US');
+    const domainUrl = process.env.NOW_URL ? JSON.stringify(`https://${process.env.NOW_URL}`) : 'http://localhost:3000';
     const classes = useStyles();
 
-    const domainUrl = process.env.NOW_URL ? JSON.stringify(`https://${process.env.NOW_URL}`) : 'http://localhost:3000';
-
     const snippet = `<div id="widget"></div>
-    <script src="${domainUrl}/widget.min.js"></script>
-    <script>
-      Widget.default.render(
+<script src="${domainUrl}/widget.min.js"></script>
+<script>
+    Widget.default.render(
         {
-          countryCode: '${selectedCountryCode}',
+            countryCode: '${selectedCountryCode}',
         },
         "#widget"
-      );
-    </script>`;
+    );
+</script>`;
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
         setSelectedCountryCode(event.target.value);
@@ -137,9 +132,11 @@ const Embed = ({ countries }: Props): ReactElement => {
                         page’s HTML where you want the widget to appear.
                     </p>
                 </Typography>
-                <Box className={classes.codeSnippet}>
-                    <TextField className={classes.code} multiline value={snippet} />
-                </Box>
+                <Typography className={classes.code}>
+                    <pre>
+                        <code>{snippet}</code>
+                    </pre>
+                </Typography>
             </Box>
         </Container>
     );

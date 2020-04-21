@@ -1,14 +1,14 @@
 import React, { ReactElement } from 'react';
 import { Box } from '@material-ui/core';
-import Embed from '.';
+import EmbedInfo from '.';
 
 export default {
-    title: 'Embed',
+    title: 'EmbedInfo',
 };
 
 export const Default = (): ReactElement => (
     <Box m={2}>
-        <Embed />
+        <EmbedInfo />
     </Box>
 );
 
@@ -18,7 +18,7 @@ Default.story = {
 
 export const WithCountries = (): ReactElement => (
     <Box m={2}>
-        <Embed
+        <EmbedInfo
             countries={[
                 { code: 'AU', name: 'Australia' },
                 {
