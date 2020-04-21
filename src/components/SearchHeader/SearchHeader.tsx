@@ -3,6 +3,7 @@ import { Typography, Box, Button, Container } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CloseIcon from '@material-ui/icons/Close';
+import Link from 'next/link';
 import CountrySelect from '../CountrySelect';
 import OrganizationFilter from '../OrganizationFilter';
 import OrganizationContext from '../../context/organizationContext';
@@ -18,14 +19,9 @@ type Country = {
     subdivisions: Subdivision[];
 };
 
-type Search = {
-    country: Country;
-    subdivision: Subdivision;
-};
-
 type Props = {
     countries: Country[];
-    onSearchChange?: (search: Search) => void;
+    parentPage?: string;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -92,7 +88,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const SearchHeader = ({ countries, onSearchChange }: Props): ReactElement => {
+const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
     const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -115,19 +111,27 @@ const SearchHeader = ({ countries, onSearchChange }: Props): ReactElement => {
                 />
                 {selectedCountry && (
                     <Box className={classes.inputConatainer}>
-                        <Button
-                            data-testid="searchButton"
-                            className={`${classes.button} ${classes.searchButton}`}
-                            variant="contained"
-                            color="primary"
-                            size="large"
-                            onClick={(): void => {
-                                setShowFilter(false);
-                                onSearchChange({ country: selectedCountry, subdivision: selectedSubdivision });
+                        <Link
+                            href={{
+                                pathname: `${parentPage ? '/' + parentPage : ''}/${selectedCountry.code.toLowerCase()}${
+                                    selectedSubdivision ? `/${selectedSubdivision.code.toLowerCase()}` : ''
+                                }`,
                             }}
+                            passHref
                         >
-                            Search
-                        </Button>
+                            <Button
+                                data-testid="searchButton"
+                                className={`${classes.button} ${classes.searchButton}`}
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                onClick={(): void => {
+                                    setShowFilter(false);
+                                }}
+                            >
+                                Search
+                            </Button>
+                        </Link>
                         <Button
                             className={`${classes.button} ${classes.filterButton}`}
                             onClick={(): void => setShowFilter(!showFilter)}
