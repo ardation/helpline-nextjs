@@ -4,7 +4,7 @@ import { Container, Box, Theme } from '@material-ui/core';
 import OrganizationContext from '../../context/organizationContext';
 import TopBar from '../TopBar';
 import SearchHeader from '../SearchHeader';
-import OrganizationCarousel from '../OrganizationCarousel';
+import OrganizationCarousel from '../OrganizationCarousel/OrganizationCarousel';
 
 type Props = {};
 
