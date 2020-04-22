@@ -30,6 +30,9 @@ const WidgetSubdivisionCodePage = ({
     const router = useRouter();
     const queryTopics = router.query.topics;
     let preselectedTopics: { name: string }[] = [];
+    const activeCountry = countries.find((_country) => {
+        return _country.code === country.code;
+    });
 
     if (queryTopics) {
         preselectedTopics = [queryTopics].flat().map((topic) => {
@@ -45,6 +48,7 @@ const WidgetSubdivisionCodePage = ({
                 </title>
             </Head>
             <OrganizationProvider
+                activeCountry={activeCountry}
                 countries={countries}
                 allOrganizations={organizations.nodes}
                 filterOptions={{

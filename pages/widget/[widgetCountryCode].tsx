@@ -20,6 +20,9 @@ const WidgetCountryCodePage = ({
     const router = useRouter();
     const queryCountyCode = router.query.widgetCountyCode;
     const preselectedTopics: { name: string }[] = [];
+    const activeCountry = countries.find((_country) => {
+        return _country.code === country.code;
+    });
 
     return (
         <Fragment>
@@ -29,6 +32,7 @@ const WidgetCountryCodePage = ({
             </Head>
 
             <OrganizationProvider
+                activeCountry={activeCountry}
                 countries={countries}
                 allOrganizations={organizations.nodes}
                 filterOptions={{
