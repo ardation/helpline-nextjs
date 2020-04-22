@@ -1,9 +1,11 @@
 import Head from 'next/head';
-import React, { Fragment, Component } from 'react';
-import router from 'next/router';
+import React, { Fragment, useState, useEffect, ReactElement } from 'react';
+import { useRouter } from 'next/router';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Container, Theme } from '@material-ui/core';
 import { GetWidgetCountriesAndSubdivisions } from '../types/GetWidgetCountriesAndSubdivisions';
 import { OrganizationProvider } from '../src/context/organizationContext';
 import Widget from '../src/components/Widget';
@@ -22,50 +24,61 @@ type Xprops = {
     };
 };
 
-class WidgetPage extends Component<GetWidgetCountriesAndSubdivisions, Xprops> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            xprops: null,
-        };
-    }
-    componentDidMount(): void {
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        container: {
+            position: 'relative',
+            backgroundColor: '#FFFFFF',
+            padding: theme.spacing(6),
+        },
+    }),
+);
+
+const WidgetPage = ({
+    countries,
+    topics,
+    categories,
+    humanSupportTypes,
+}: GetWidgetCountriesAndSubdivisions): ReactElement => {
+    const classes = useStyles();
+    const router = useRouter();
+    const [xprops, setXprops] = useState(null);
+
+    useEffect(() => {
         if (window.xprops) {
-            this.setState({ xprops: window.xprops });
+            setXprops(window.xprops);
             router.push(`/widget/${window.xprops.countryCode.toLowerCase()}`);
         }
-    }
+    });
 
-    render(): JSX.Element {
-        const { countries, topics, categories, humanSupportTypes } = this.props;
-        const { xprops } = this.state;
-        return (
+    return (
+        <Fragment>
+            <Head>
+                <title>Find A Helpline</title>
+                <script src="/widget.min.js"></script>
+            </Head>
             <Fragment>
-                <Head>
-                    <title>Find A Helpline</title>
-                    <script src="/widget.min.js"></script>
-                </Head>
-                <Fragment>
-                    {xprops ? (
+                {xprops ? (
+                    <Container className={classes.container}>
                         <LoadingSpinner />
-                    ) : (
-                        <OrganizationProvider
-                            countries={countries}
-                            allOrganizations={[]}
-                            filterOptions={{
-                                topics: topics,
-                                categories: categories,
-                                humanSupportTypes: humanSupportTypes,
-                            }}
-                        >
-                            <Widget />
-                        </OrganizationProvider>
-                    )}
-                </Fragment>
+                    </Container>
+                ) : (
+                    <OrganizationProvider
+                        countries={countries}
+                        allOrganizations={[]}
+                        filterOptions={{
+                            topics: topics,
+                            categories: categories,
+                            humanSupportTypes: humanSupportTypes,
+                        }}
+                    >
+                        <Widget />
+                    </OrganizationProvider>
+                )}
             </Fragment>
-        );
-    }
-}
+        </Fragment>
+    );
+};
 
 export const getStaticProps = async (): Promise<{ props: GetWidgetCountriesAndSubdivisions }> => {
     const query = gql`
