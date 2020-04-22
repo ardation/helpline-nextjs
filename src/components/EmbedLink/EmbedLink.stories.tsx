@@ -3,7 +3,7 @@ import { Box } from '@material-ui/core';
 import EmbedLink from '.';
 
 export default {
-    title: 'Embed',
+    title: 'EmbedLink',
 };
 
 export const Default = (): ReactElement => (

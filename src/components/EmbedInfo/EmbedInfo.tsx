@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, ChangeEvent } from 'react';
-import { Container, Box, Typography, TextField, FormControl, MenuItem, InputLabel, Select } from '@material-ui/core';
+import { Container, Box, Typography, FormControl, MenuItem, InputLabel, Select } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 type Country = {
@@ -22,29 +22,19 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            paddingTop: theme.spacing(5),
-            paddingBottom: theme.spacing(5),
             marginTop: theme.spacing(5),
-            marginBottom: theme.spacing(5),
-            height: '100%',
+            marginBottom: theme.spacing(1),
         },
         box: {
             display: 'grid',
             gridGap: theme.spacing(2),
         },
-        codeSnippet: {
-            backgroundColor: '#F0F1F5',
-        },
         code: {
-            padding: theme.spacing(2),
+            backgroundColor: '#F0F1F5',
+            paddingRight: theme.spacing(2),
+            paddingLeft: theme.spacing(2),
             width: '100%',
             fontFamily: 'Courier',
-        },
-        copy: {
-            color: '#07838E',
-            marginRight: theme.spacing(1),
-            marginBottom: theme.spacing(1),
-            float: 'right',
         },
         buttonRoot: {
             color: '#000',
@@ -70,34 +60,34 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Embed = ({ countries }: Props): ReactElement => {
+const EmbedInfo = ({ countries }: Props): ReactElement => {
     const [selectedCountryCode, setSelectedCountryCode] = useState<string>('US');
+    const domainUrl = process.env.NOW_URL ? JSON.stringify(`https://${process.env.NOW_URL}`) : 'http://localhost:3000';
     const classes = useStyles();
 
-    const domainUrl = process.env.NOW_URL ? JSON.stringify(`https://${process.env.NOW_URL}`) : 'http://localhost:3000';
-
     const snippet = `<div id="widget"></div>
-    <script src="${domainUrl}/widget.min.js"></script>
-    <script>
-      Widget.default.render(
+
+<script src="${domainUrl}/widget.min.js"></script>
+<script>
+    Widget.default.render(
         {
-          countryCode: '${selectedCountryCode}',
+            countryCode: '${selectedCountryCode}',
         },
         "#widget"
-      );
-    </script>`;
+    );
+</script>`;
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
         setSelectedCountryCode(event.target.value);
     };
 
     return (
-        <Container maxWidth="sm" className={classes.container} data-testid="embedContainer">
+        <Container maxWidth="xs" className={classes.container} data-testid="embedContainer">
             <Box className={classes.box}>
                 <Box className={classes.logo}>
                     <img src="/logo.svg" alt="find a helpline" />
                 </Box>
-                <Typography component="div">
+                <Typography component="div" data-testid="typographyOne">
                     <p>We’re putting every free mental health helpline in the world at your fingertips.</p>
                     <p>Quick. Easy. Reliable.</p>
                     <h3>Embed the Find A Helpline widget</h3>
@@ -105,7 +95,7 @@ const Embed = ({ countries }: Props): ReactElement => {
                         <span className={classes.steps}>Step 1:</span> Choose the default country for the widget.
                     </p>
                 </Typography>
-                <FormControl className={classes.formControl}>
+                <FormControl className={classes.formControl} data-testid="dropdownForm">
                     <InputLabel id="demo-simple-select-label">Select Country</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -131,18 +121,20 @@ const Embed = ({ countries }: Props): ReactElement => {
                         ;
                     </Select>
                 </FormControl>
-                <Typography component="div">
+                <Typography component="div" data-testid="typographyTwo">
                     <p>
                         <span className={classes.steps}>Step 2:</span> Simply copy the code snippet and paste it in your
                         page’s HTML where you want the widget to appear.
                     </p>
                 </Typography>
-                <Box className={classes.codeSnippet}>
-                    <TextField className={classes.code} multiline value={snippet} />
-                </Box>
+                <Typography className={classes.code} data-testid="typographyThree">
+                    <pre>
+                        <code>{snippet}</code>
+                    </pre>
+                </Typography>
             </Box>
         </Container>
     );
 };
 
-export default Embed;
+export default EmbedInfo;

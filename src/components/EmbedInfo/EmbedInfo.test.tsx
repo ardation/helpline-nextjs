@@ -12,8 +12,23 @@ describe('EmbedInfo', () => {
         { code: 'US', name: 'United States of America' },
     ];
 
-    it('should render EmbedInfo container', () => {
-        const { getByTestId } = render(<EmbedInfo countries={countries} />);
+    it('should render EmbedInfo', () => {
+        const { getByTestId, getByAltText } = render(<EmbedInfo />);
         expect(getByTestId('embedContainer')).toBeTruthy();
+        expect(getByAltText('find a helpline')).toBeTruthy();
+        expect(getByTestId('typographyOne')).toBeTruthy();
+        expect(getByTestId('typographyTwo')).toBeTruthy();
+        expect(getByTestId('typographyThree')).toBeTruthy();
+        expect(getByTestId('dropdownForm')).toBeTruthy();
+    });
+
+    it('should render EmbedInfo with countries', () => {
+        const { getByTestId, getByAltText } = render(<EmbedInfo countries={countries} />);
+        expect(getByTestId('embedContainer')).toBeTruthy();
+        expect(getByAltText('find a helpline')).toBeTruthy();
+        expect(getByTestId('typographyOne')).toBeTruthy();
+        expect(getByTestId('typographyTwo')).toBeTruthy();
+        expect(getByTestId('typographyThree')).toBeTruthy();
+        expect(getByTestId('dropdownForm')).toBeTruthy();
     });
 });
