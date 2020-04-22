@@ -66,6 +66,7 @@ const EmbedInfo = ({ countries }: Props): ReactElement => {
     const classes = useStyles();
 
     const snippet = `<div id="widget"></div>
+
 <script src="${domainUrl}/widget.min.js"></script>
 <script>
     Widget.default.render(
