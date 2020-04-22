@@ -45,8 +45,7 @@ const OrganizationCarousel = ({ organizations }: Props): ReactElement => {
     const scrollNext = useCallback(() => embla.scrollNext(), [embla]);
     const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
     const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
-
-    const [width, setWidth] = useState(window.innerWidth);
+    const [width, setWidth] = useState(undefined);
 
     useWindowResize(() => {
         setWidth(window.innerWidth);

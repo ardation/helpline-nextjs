@@ -6,16 +6,15 @@ import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { find, flatten } from 'lodash/fp';
-import Chrome from '../../../src/components/Chrome';
 import { GetCountriesAndSubdivisions } from '../../../types/GetCountriesAndSubdivisions';
 import {
-    GetSubdivisionCodeProps,
-    GetSubdivisionCodeProps_country_subdivisions as Subdivision,
-} from '../../../types/GetSubdivisionCodeProps';
-import OrganizationList from '../../../src/components/OrganizationList';
-import Footer from '../../../src/components/Footer';
+    GetWidgetSubdivisionCodeProps,
+    GetWidgetSubdivisionCodeProps_country_subdivisions as Subdivision,
+} from '../../../types/GetWidgetSubdivisionCodeProps';
+import { OrganizationProvider } from '../../../src/context/organizationContext';
+import Widget from '../../../src/components/Widget';
 
-interface Props extends GetSubdivisionCodeProps {
+interface Props extends GetWidgetSubdivisionCodeProps {
     subdivision: Subdivision;
 }
 
@@ -26,6 +25,7 @@ const WidgetSubdivisionCodePage = ({
     categories,
     humanSupportTypes,
     topics,
+    countries,
 }: Props): ReactElement => {
     const router = useRouter();
     const queryTopics = router.query.topics;
@@ -44,25 +44,24 @@ const WidgetSubdivisionCodePage = ({
                     Find A Helpline | {subdivision.name}, {country.name}
                 </title>
             </Head>
-            <Chrome country={country}>
-                <OrganizationList
-                    organizations={organizations.nodes}
-                    country={country}
-                    subdivision={subdivision}
-                    preselectedTopics={preselectedTopics}
-                    categories={categories}
-                    humanSupportTypes={humanSupportTypes}
-                    topics={topics}
-                />
-                <Footer />
-            </Chrome>
+            <OrganizationProvider
+                countries={countries}
+                allOrganizations={organizations.nodes}
+                filterOptions={{
+                    topics: topics,
+                    categories: categories,
+                    humanSupportTypes: humanSupportTypes,
+                }}
+            >
+                <Widget />
+            </OrganizationProvider>
         </Fragment>
     );
 };
 
 export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
     const query = gql`
-        query GetSubdivisionCodeProps($countryCode: String!, $subdivisionCode: String!) {
+        query GetWidgetSubdivisionCodeProps($countryCode: String!, $subdivisionCode: String!) {
             country(code: $countryCode) {
                 code
                 name
@@ -107,9 +106,17 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             topics {
                 name
             }
+            countries {
+                code
+                name
+                subdivisions {
+                    code
+                    name
+                }
+            }
         }
     `;
-    const { country, organizations, categories, humanSupportTypes, topics } = await request(
+    const { country, organizations, categories, humanSupportTypes, topics, countries } = await request(
         'https://api.findahelpline.com',
         print(query),
         {
@@ -129,6 +136,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             categories,
             humanSupportTypes,
             topics,
+            countries,
         },
     };
 };

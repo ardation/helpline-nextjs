@@ -6,8 +6,8 @@ import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { GetWidgetCountryCodeProps } from '../../types/GetWidgetCountryCodeProps';
-import OrganizationList from '../../src/components/OrganizationList';
-import Footer from '../../src/components/Footer';
+import { OrganizationProvider } from '../../src/context/organizationContext';
+import Widget from '../../src/components/Widget';
 
 const WidgetCountryCodePage = ({
     country,
@@ -18,7 +18,7 @@ const WidgetCountryCodePage = ({
     countries,
 }: GetWidgetCountryCodeProps): ReactElement => {
     const router = useRouter();
-    const query = router.query;
+    const queryCountyCode = router.query.widgetCountyCode;
     const preselectedTopics: { name: string }[] = [];
 
     return (
@@ -27,22 +27,18 @@ const WidgetCountryCodePage = ({
                 <title>Find A Helpline | {country.name}</title>
                 <script src="/widget.min.js"></script>
             </Head>
-            <div className="widget">
-                <div className="search">
-                    countries count: {countries.length} - selected country: {country.name} - query:{' '}
-                    {query.widgetCountyCode}
-                </div>
 
-                <OrganizationList
-                    organizations={organizations.nodes}
-                    country={country}
-                    preselectedTopics={preselectedTopics}
-                    categories={categories}
-                    humanSupportTypes={humanSupportTypes}
-                    topics={topics}
-                />
-                <Footer />
-            </div>
+            <OrganizationProvider
+                countries={countries}
+                allOrganizations={organizations.nodes}
+                filterOptions={{
+                    topics: topics,
+                    categories: categories,
+                    humanSupportTypes: humanSupportTypes,
+                }}
+            >
+                <Widget />
+            </OrganizationProvider>
         </Fragment>
     );
 };

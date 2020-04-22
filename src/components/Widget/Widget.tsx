@@ -12,8 +12,6 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
             height: '100%',
-            maxHeight: '100vh',
-            overflow: 'scroll',
             paddingLeft: 0,
             paddingRight: 0,
             border: '1px solid #000',

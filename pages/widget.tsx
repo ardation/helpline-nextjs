@@ -47,7 +47,6 @@ class WidgetPage extends Component<GetWidgetCountriesAndSubdivisions, Xprops> {
                 </Head>
                 <Fragment>
                     {xprops ? (
-                        // <div>loading widget for selected default country of {xprops.countryCode}...</div>
                         <LoadingSpinner />
                     ) : (
                         <OrganizationProvider
