@@ -15,7 +15,7 @@ const Widget = zoid.create({
     // The size of the component on their page. Only px and % strings are supported
     dimensions: {
         width: '100%',
-        height: '720px',
+        height: '100%',
     },
 
     defaultLogLevel: 'error', // info, error

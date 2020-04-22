@@ -1,11 +1,15 @@
 import Head from 'next/head';
-import React, { Fragment, Component } from 'react';
-import { Container } from '@material-ui/core';
+import React, { Fragment, useState, useEffect, ReactElement } from 'react';
+import { useRouter } from 'next/router';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
-import { withRouter } from 'next/router';
-import { GetCountriesAndSubdivisions } from '../types/GetCountriesAndSubdivisions';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Container, Theme } from '@material-ui/core';
+import { GetWidgetCountriesAndSubdivisions } from '../types/GetWidgetCountriesAndSubdivisions';
+import { OrganizationProvider } from '../src/context/organizationContext';
+import Widget from '../src/components/Widget';
+import LoadingSpinner from '../src/components/LoadingSpinner';
 
 declare global {
     interface Window {
@@ -20,68 +24,97 @@ type Xprops = {
     };
 };
 
-class WidgetPage extends Component<GetCountriesAndSubdivisions, Xprops> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            xprops: null,
-        };
-    }
-    componentDidMount(): void {
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        container: {
+            position: 'relative',
+            backgroundColor: '#FFFFFF',
+            padding: theme.spacing(6),
+        },
+    }),
+);
+
+const WidgetPage = ({
+    countries,
+    topics,
+    categories,
+    humanSupportTypes,
+}: GetWidgetCountriesAndSubdivisions): ReactElement => {
+    const classes = useStyles();
+    const router = useRouter();
+    const [xprops, setXprops] = useState(null);
+
+    useEffect(() => {
         if (window.xprops) {
-            this.setState({ xprops: window.xprops });
+            setXprops(window.xprops);
+            router.push(`/widget/${window.xprops.countryCode.toLowerCase()}`);
         }
-    }
+    });
 
-    render(): JSX.Element {
-        const { countries } = this.props;
-        const { xprops } = this.state;
-        return (
+    return (
+        <Fragment>
+            <Head>
+                <title>Find A Helpline</title>
+                <script src="/widget.min.js"></script>
+            </Head>
             <Fragment>
-                <Head>
-                    <title>Find A Helpline</title>
-                    <script src="/widget.min.js"></script>
-                </Head>
-                <Container>
-                    {xprops ? <div>widget default country: {xprops.countryCode}</div> : null}
-                    <ul>
-                        {countries.map((country, key) => {
-                            return (
-                                <li key={key}>
-                                    {country.code}
-                                    <ul>
-                                        {country.subdivisions.map((subdivision, index) => {
-                                            return <li key={index}>{subdivision.code} </li>;
-                                        })}
-                                    </ul>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </Container>
+                {xprops ? (
+                    <Container className={classes.container}>
+                        <LoadingSpinner />
+                    </Container>
+                ) : (
+                    <OrganizationProvider
+                        countries={countries}
+                        allOrganizations={[]}
+                        filterOptions={{
+                            topics: topics,
+                            categories: categories,
+                            humanSupportTypes: humanSupportTypes,
+                        }}
+                    >
+                        <Widget />
+                    </OrganizationProvider>
+                )}
             </Fragment>
-        );
-    }
-}
+        </Fragment>
+    );
+};
 
-export const getStaticProps = async (): Promise<{ props: GetCountriesAndSubdivisions }> => {
+export const getStaticProps = async (): Promise<{ props: GetWidgetCountriesAndSubdivisions }> => {
     const query = gql`
-        query GetCountries {
+        query GetWidgetCountriesAndSubdivisions {
             countries {
                 code
+                name
+                emergencyNumber
                 subdivisions {
                     code
                     name
                 }
             }
+            topics {
+                name
+            }
+            categories {
+                name
+            }
+            humanSupportTypes {
+                name
+            }
         }
     `;
-    const { countries } = await request('https://api.findahelpline.com', print(query));
+    const { countries, topics, categories, humanSupportTypes } = await request(
+        'https://api.findahelpline.com',
+        print(query),
+    );
     return {
         props: {
             countries,
+            topics,
+            categories,
+            humanSupportTypes,
         },
     };
 };
 
-export default withRouter(WidgetPage);
+export default WidgetPage;

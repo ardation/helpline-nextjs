@@ -31,10 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
             gridGap: theme.spacing(2),
             paddingRight: 0,
             paddingLeft: 0,
+            minHeight: (props: Props): string => props.widget && '56px',
             [theme.breakpoints.down('xs')]: {
                 gridGap: theme.spacing(1),
                 gridRowGap: 0,
-                height: '80px',
+                height: (props: Props): string => (props.widget ? 'auto' : '80px'),
+                minHeight: (props: Props): string => props.widget && '44px',
             },
         },
         toolbarWithCountry: {
@@ -51,12 +53,12 @@ const useStyles = makeStyles((theme: Theme) =>
         title: {
             minWidth: '80px',
             [theme.breakpoints.down('xs')]: {
-                fontSize: '0.8rem',
+                fontSize: '12px',
             },
         },
         titleWithCountry: {
             [theme.breakpoints.down('xs')]: {
-                gridColumn: '1 / span 2',
+                gridColumn: (props: Props): string => !props.widget && '1 / span 2',
                 alignSelf: 'center',
             },
         },
@@ -67,9 +69,9 @@ const useStyles = makeStyles((theme: Theme) =>
             borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
+            alignSelf: 'center',
             [theme.breakpoints.down('xs')]: {
                 fontSize: '0.7rem',
-                margin: (props: Props): string => props.widget && '0 auto',
             },
             '&:hover': {
                 backgroundColor: '#CC001E',
@@ -104,10 +106,10 @@ const TopBar = ({ country, widget }: Props): ReactElement => {
                                 color="inherit"
                                 classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
                                 endIcon={<CallIcon />}
-                                href={`tel:${country.emergencyNumber}`}
+                                href={`tel:${country?.emergencyNumber || 911}`}
                                 data-testid="emergencyServicesButton"
                             >
-                                <Hidden smUp>Call {country.emergencyNumber}</Hidden>
+                                <Hidden smUp>Call {country.emergencyNumber || 911}</Hidden>
                                 <Hidden only="xs">Emergency Services</Hidden>
                             </Button>
                         </Fragment>

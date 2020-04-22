@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         chipRoot: {
             fontWeight: 600,
+            [theme.breakpoints.down(420)]: {
+                fontSize: '10px',
+                height: '24px',
+            },
         },
         chipColorPrimary: {
             backgroundColor: '#000000',
@@ -78,6 +82,9 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected 
                 <Chip
                     onClick={(): void => setHide(false)}
                     label={`+${differenceBy('name', items, selectedItems).length} more`}
+                    classes={{
+                        root: classes.chipRoot,
+                    }}
                 />
             )}
         </Box>
