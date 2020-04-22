@@ -1,9 +1,6 @@
 import React, { ReactElement, useState, ChangeEvent } from 'react';
-import getConfig from 'next/config';
 import { Container, Box, Typography, FormControl, MenuItem, InputLabel, Select } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-
-const { serverRuntimeConfig } = getConfig();
 
 type Country = {
     code: string;
@@ -65,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const EmbedInfo = ({ countries }: Props): ReactElement => {
     const [selectedCountryCode, setSelectedCountryCode] = useState<string>('US');
-    const domainUrl = serverRuntimeConfig.NOW_URL ? `https://${serverRuntimeConfig.NOW_URL}` : 'http://localhost:3000';
+    const domainUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
     const classes = useStyles();
 
     const snippet = `<div id="widget"></div>
