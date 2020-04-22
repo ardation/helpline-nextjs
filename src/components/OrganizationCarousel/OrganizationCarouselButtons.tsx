@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
             flexShrink: 0,
             zIndex: theme.zIndex.mobileStepper,
             top: '30%',
-            fontSize: '4em',
+            fontSize: '3.5em',
+            textAlign: 'center',
         },
         prevIcon: {
             left: '0em',
