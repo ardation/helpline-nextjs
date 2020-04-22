@@ -1,16 +1,17 @@
 import React, { ReactElement } from 'react';
 import { ThemeProvider } from '@material-ui/core';
 import theme from '../../theme';
-import withMockOrganizationProvider from '../../context/organizationProviderMock';
+import withMockOrganizationProvider, { organizationData } from '../../context/organizationProviderMock';
+import Widget from './Widget';
 
-import Widget from '.';
+const organizations = Array(8).fill(organizationData[0]);
 
 export default {
     title: 'Widget',
 };
 
 export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>{withMockOrganizationProvider(<Widget />, { organizations: [] })}</ThemeProvider>
+    <ThemeProvider theme={theme}>{withMockOrganizationProvider(<Widget />, { organizations })}</ThemeProvider>
 );
 
 export const WithActiveCountry = (): ReactElement => (

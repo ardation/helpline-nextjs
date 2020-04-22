@@ -28,7 +28,7 @@ const filterData = {
     sorts: [],
 };
 
-const organizationData = [
+export const organizationData = [
     {
         slug: 'youthline',
         name: 'Youthline',
