@@ -132,6 +132,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
         { code: context.params.widgetSubdivisionCode.toString().toUpperCase() },
         country.subdivisions,
     );
+    // key is needed here for link router to work - https://github.com/zeit/next.js/issues/9992
     return {
         props: {
             country,
@@ -141,6 +142,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             humanSupportTypes,
             topics,
             countries,
+            key: context.params.widgetSubdivisionCode,
         },
     };
 };

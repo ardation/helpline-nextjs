@@ -120,6 +120,10 @@ export interface GetWidgetSubdivisionCodeProps {
    * Find all countries
    */
   countries: GetWidgetSubdivisionCodeProps_countries[];
+  /**
+   * Required to allow same page dynamic link updates to hidrate 
+   */
+  key: string|string[];
 }
 
 export interface GetWidgetSubdivisionCodePropsVariables {

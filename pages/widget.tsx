@@ -47,7 +47,7 @@ const WidgetPage = ({
     useEffect(() => {
         if (window.xprops) {
             setXprops(window.xprops);
-            router.push(`/widget/${window.xprops.countryCode.toLowerCase()}`);
+            router.push(`/widget/[widgetCountryCode]`, `/widget/${window.xprops.countryCode.toLowerCase()}`);
         }
     });
 

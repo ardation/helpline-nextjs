@@ -130,10 +130,13 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                     <Box className={classes.inputConatainer}>
                         <Link
                             href={{
-                                pathname: `${parentPage ? '/' + parentPage : ''}/${selectedCountry.code.toLowerCase()}${
-                                    selectedSubdivision ? `/${selectedSubdivision.code.toLowerCase()}` : ''
+                                pathname: `${parentPage ? '/' + parentPage : ''}/[widgetCountryCode]${
+                                    selectedSubdivision ? `/[widgetSubdivisionCode]` : ''
                                 }`,
                             }}
+                            as={`${parentPage ? '/' + parentPage : ''}/${selectedCountry.code.toLowerCase()}${
+                                selectedSubdivision ? `/${selectedSubdivision.code.toLowerCase()}` : ''
+                            }`}
                             passHref
                         >
                             <Button

@@ -28,7 +28,6 @@ const WidgetCountryCodePage = ({
         <Fragment>
             <Head>
                 <title>Find A Helpline | {country.name}</title>
-                <script src="/widget.min.js"></script>
             </Head>
 
             <OrganizationProvider
@@ -107,6 +106,8 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             countryCode: context.params.widgetCountryCode,
         },
     );
+
+    // key is needed here for link router to work - https://github.com/zeit/next.js/issues/9992
     return {
         props: {
             country,
@@ -115,6 +116,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             humanSupportTypes,
             topics,
             countries,
+            key: context.params.widgetCountryCode,
         },
     };
 };
