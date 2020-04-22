@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         logo: {
-            // maxWidth: '200px',
             width: '200px',
         },
         subheader: {
