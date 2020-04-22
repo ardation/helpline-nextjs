@@ -5,6 +5,7 @@ import OrganizationContext from '../../context/organizationContext';
 import TopBar from '../TopBar';
 import SearchHeader from '../SearchHeader';
 import OrganizationCarousel from '../OrganizationCarousel/OrganizationCarousel';
+import EmbedLink from '../EmbedLink';
 
 type Props = {};
 
@@ -56,6 +57,7 @@ const Widget = ({}: Props): ReactElement => {
                     <OrganizationCarousel organizations={organizations} />
                 </Container>
             </Box>
+            <EmbedLink />
         </Container>
     );
 };
