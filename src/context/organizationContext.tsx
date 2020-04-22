@@ -1,5 +1,4 @@
 import React, { createContext, useState, ReactElement, ReactNode, useEffect } from 'react';
-import { find, filter } from 'lodash/fp';
 import filterAndSortOrganizations from '../util/filterAndSortOrganizations';
 
 type Subdivision = {
@@ -7,18 +6,18 @@ type Subdivision = {
     name: string;
 };
 
-type Country = {
+export type Country = {
     code: string;
     name: string;
     subdivisions: Subdivision[];
-    emergencyNumber?: string;
+    emergencyNumber?: string | undefined;
 };
 
 type Filter = {
     name: string;
 };
 
-type Filters = {
+export type Filters = {
     topics: Filter[] | [];
     categories: Filter[] | [];
     humanSupportTypes: Filter[] | [];
@@ -32,7 +31,7 @@ type OpeningHour = {
     close: string;
 };
 
-type Organization = {
+export type Organization = {
     slug: string;
     name: string;
     alwaysOpen: boolean;
@@ -50,9 +49,9 @@ type Organization = {
 type Props = {
     children: ReactNode;
     countries: Country[];
+    activeCountry?: Country;
     allOrganizations: Organization[];
     filterOptions: Filters;
-    xprops?: any;
 };
 
 type State = {
@@ -62,7 +61,6 @@ type State = {
     organizations: Organization[];
     filterOptions: Filters;
     activeFilters: Filters;
-    setActiveCountry: (country: Country) => void;
     applyFilters: (selectedFilters: Filters) => void;
 };
 
@@ -79,7 +77,6 @@ const initialState: State = {
         contactMethods: [],
         sorts: [],
     },
-    setActiveCountry: undefined,
     applyFilters: undefined,
 };
 
@@ -90,19 +87,15 @@ export const OrganizationProvider = ({
     countries,
     allOrganizations,
     filterOptions,
-    xprops,
+    activeCountry,
 }: Props): ReactElement => {
-    const [activeCountry, setActiveCountry] = useState<Country | undefined>(
-        find(['countryCode', xprops?.countryCode], countries) || undefined,
-    );
-    const [organizations, setOrganizations] = useState<Organization[] | undefined>(undefined);
+    const [organizations, setOrganizations] = useState<Organization[] | undefined>(allOrganizations);
     const [activeFilters, applyFilters] = useState<Filters>(initialState.activeFilters);
     // const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        const orgs = filter(['country.code', activeCountry?.code], allOrganizations);
-        setOrganizations(filterAndSortOrganizations(orgs, activeFilters));
-    }, [activeCountry, activeFilters]);
+        setOrganizations(filterAndSortOrganizations(organizations, activeFilters));
+    }, [activeFilters]);
 
     const ctx = {
         // loading,
@@ -112,7 +105,6 @@ export const OrganizationProvider = ({
         filterOptions,
         activeFilters,
         applyFilters,
-        setActiveCountry,
     };
 
     return <OrganizationContext.Provider value={ctx}>{children}</OrganizationContext.Provider>;
