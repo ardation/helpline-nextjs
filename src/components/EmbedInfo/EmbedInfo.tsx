@@ -142,4 +142,4 @@ const EmbedInfo = ({ countries }: Props): ReactElement => {
     );
 };
 
-export default Embed;
+export default EmbedInfo;
