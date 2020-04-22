@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { ThemeProvider, Box } from '@material-ui/core';
 import theme from '../../theme';
-import { OrganizationProvider } from '../../context/organizationContext';
+import withMockOrganizationProvider from '../../context/organizationProviderMock';
 import SearchHeader from '.';
 
 export default {
@@ -10,17 +10,7 @@ export default {
 
 export const Default = (): ReactElement => (
     <ThemeProvider theme={theme}>
-        <OrganizationProvider
-            allOrganizations={[]}
-            countries={[]}
-            filterOptions={{
-                topics: [{ name: 'Topic' }, { name: 'Topic 2' }],
-                categories: [],
-                humanSupportTypes: [],
-                contactMethods: [],
-                sorts: [],
-            }}
-        >
+        {withMockOrganizationProvider(
             <Box m={2}>
                 <SearchHeader
                     countries={[
@@ -35,8 +25,17 @@ export const Default = (): ReactElement => (
                         },
                     ]}
                 />
-            </Box>
-        </OrganizationProvider>
+            </Box>,
+            {
+                filterOptions: {
+                    topics: [{ name: 'Topic' }, { name: 'Topic 2' }, { name: 'Topic 3' }],
+                    categories: [{ name: 'One of these too' }, { name: 'One more' }],
+                    humanSupportTypes: [{ name: 'And this' }],
+                    contactMethods: [],
+                    sorts: [],
+                },
+            },
+        )}
     </ThemeProvider>
 );
 

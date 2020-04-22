@@ -45,14 +45,28 @@ const useStyles = makeStyles((theme: Theme) =>
             marginTop: theme.spacing(2),
             marginBottom: theme.spacing(2),
         },
+        header: {
+            display: 'grid',
+            gridTemplateColumns: '1fr auto',
+            alignItems: 'top',
+        },
         heading: {
             fontWeight: 'bold',
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '16px',
+            },
         },
         title: {
             marginBottom: theme.spacing(1),
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '12px',
+            },
         },
         button: {
             borderRadius: '1000px',
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '12px',
+            },
         },
     }),
 );
@@ -87,10 +101,15 @@ const OrganizationFilter = ({
 
     return (
         <Container className={classes.container}>
-            <Typography className={classes.heading} variant="h6">
-                Filter &amp; Sort
-            </Typography>
-            <Box mt={2} mb={3}>
+            <Box className={classes.header} mt={2}>
+                <Typography className={classes.heading} variant="h6">
+                    Filter &amp; Sort
+                </Typography>
+                <Button className={classes.button} variant="contained" color="primary" onClick={onClick}>
+                    Apply
+                </Button>
+            </Box>
+            <Box mb={3}>
                 {topics && topics.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Topics</Typography>
@@ -131,9 +150,6 @@ const OrganizationFilter = ({
                     />
                 </Box>
             </Box>
-            <Button className={classes.button} variant="contained" color="primary" onClick={onClick} size="large">
-                Apply
-            </Button>
         </Container>
     );
 };
