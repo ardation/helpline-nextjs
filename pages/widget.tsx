@@ -4,10 +4,10 @@ import router from 'next/router';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
-import { GetWidgetCountriesAndSubdivisions } from '../../types/GetWidgetCountriesAndSubdivisions';
-import { OrganizationProvider } from '../../src/context/organizationContext';
-import Widget from '../../src/components/Widget';
-import LoadingSpinner from '../../src/components/LoadingSpinner';
+import { GetWidgetCountriesAndSubdivisions } from '../types/GetWidgetCountriesAndSubdivisions';
+import { OrganizationProvider } from '../src/context/organizationContext';
+import Widget from '../src/components/Widget';
+import LoadingSpinner from '../src/components/LoadingSpinner';
 
 declare global {
     interface Window {
