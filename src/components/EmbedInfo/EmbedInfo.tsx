@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
             flexDirection: 'column',
             justifyContent: 'center',
             marginTop: theme.spacing(5),
-            marginBottom: theme.spacing(5),
+            marginBottom: theme.spacing(1),
         },
         box: {
             display: 'grid',
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         code: {
             backgroundColor: '#F0F1F5',
+            paddingRight: theme.spacing(2),
             paddingLeft: theme.spacing(2),
             width: '100%',
             fontFamily: 'Courier',
@@ -80,12 +81,12 @@ const Embed = ({ countries }: Props): ReactElement => {
     };
 
     return (
-        <Container maxWidth="sm" className={classes.container} data-testid="embedContainer">
+        <Container maxWidth="xs" className={classes.container} data-testid="embedContainer">
             <Box className={classes.box}>
                 <Box className={classes.logo}>
                     <img src="/logo.svg" alt="find a helpline" />
                 </Box>
-                <Typography component="div">
+                <Typography component="div" data-testid="typographyOne">
                     <p>We’re putting every free mental health helpline in the world at your fingertips.</p>
                     <p>Quick. Easy. Reliable.</p>
                     <h3>Embed the Find A Helpline widget</h3>
@@ -93,7 +94,7 @@ const Embed = ({ countries }: Props): ReactElement => {
                         <span className={classes.steps}>Step 1:</span> Choose the default country for the widget.
                     </p>
                 </Typography>
-                <FormControl className={classes.formControl}>
+                <FormControl className={classes.formControl} data-testid="dropdownForm">
                     <InputLabel id="demo-simple-select-label">Select Country</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -119,13 +120,13 @@ const Embed = ({ countries }: Props): ReactElement => {
                         ;
                     </Select>
                 </FormControl>
-                <Typography component="div">
+                <Typography component="div" data-testid="typographyTwo">
                     <p>
                         <span className={classes.steps}>Step 2:</span> Simply copy the code snippet and paste it in your
                         page’s HTML where you want the widget to appear.
                     </p>
                 </Typography>
-                <Typography className={classes.code}>
+                <Typography className={classes.code} data-testid="typographyThree">
                     <pre>
                         <code>{snippet}</code>
                     </pre>
