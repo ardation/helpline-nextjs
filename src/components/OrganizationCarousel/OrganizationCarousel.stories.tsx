@@ -48,8 +48,6 @@ export const Default = (): ReactElement => (
                 topics: [{ name: 'Topic 1' }, { name: 'Topic 2' }, { name: 'Topic 3' }],
                 categories: [{ name: 'Category 1' }, { name: 'Category 2' }],
                 humanSupportTypes: [],
-                contactMethods: [],
-                sorts: [],
             }}
         >
             <OrganizationCarousel />

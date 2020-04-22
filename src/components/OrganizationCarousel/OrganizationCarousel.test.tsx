@@ -29,8 +29,6 @@ describe('OrganizationCarousel', () => {
                     topics: [{ name: 'Topic' }, { name: 'Topic 2' }],
                     categories: [],
                     humanSupportTypes: [],
-                    contactMethods: [],
-                    sorts: [],
                 }}
             >
                 <OrganizationCarousel />
