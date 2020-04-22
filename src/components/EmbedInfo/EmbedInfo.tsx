@@ -70,7 +70,7 @@ const Embed = ({ countries }: Props): ReactElement => {
     const [selectedCountryCode, setSelectedCountryCode] = useState<string>('US');
     const domainUrl = process.env.NOW_URL ? JSON.stringify(`https://${process.env.NOW_URL}`) : 'http://localhost:3000';
     const classes = useStyles();
-
+const EmbedInfo = ({ countries }: Props): ReactElement => {
     const snippet = `<div id="widget"></div>
 <script src="${domainUrl}/widget.min.js"></script>
 <script>
