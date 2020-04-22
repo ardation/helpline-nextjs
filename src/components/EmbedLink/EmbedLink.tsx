@@ -35,9 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const EmbedLink = (): ReactElement => {
-    const domainUrl = process.env.NOW_URL
-        ? JSON.stringify(`https://${process.env.NOW_URL}/embed`)
-        : 'http://localhost:3000/embed';
+    const domainUrl = process.env.NOW_URL ? `https://${process.env.NOW_URL}/embed` : 'http://localhost:3000/embed';
     const classes = useStyles();
 
     return (

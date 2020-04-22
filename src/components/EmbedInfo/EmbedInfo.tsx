@@ -1,6 +1,9 @@
 import React, { ReactElement, useState, ChangeEvent } from 'react';
+import getConfig from 'next/config';
 import { Container, Box, Typography, FormControl, MenuItem, InputLabel, Select } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+const { serverRuntimeConfig } = getConfig();
 
 type Country = {
     code: string;
@@ -62,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const EmbedInfo = ({ countries }: Props): ReactElement => {
     const [selectedCountryCode, setSelectedCountryCode] = useState<string>('US');
-    const domainUrl = process.env.NOW_URL ? JSON.stringify(`https://${process.env.NOW_URL}`) : 'http://localhost:3000';
+    const domainUrl = serverRuntimeConfig.NOW_URL ? `https://${serverRuntimeConfig.NOW_URL}` : 'http://localhost:3000';
     const classes = useStyles();
 
     const snippet = `<div id="widget"></div>
@@ -127,7 +130,7 @@ const EmbedInfo = ({ countries }: Props): ReactElement => {
                         page’s HTML where you want the widget to appear.
                     </p>
                 </Typography>
-                <Typography className={classes.code} data-testid="typographyThree">
+                <Typography className={classes.code} data-testid="typographyThree" component="span">
                     <pre>
                         <code>{snippet}</code>
                     </pre>
