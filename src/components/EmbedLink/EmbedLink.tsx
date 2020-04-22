@@ -1,7 +1,10 @@
 import React, { ReactElement } from 'react';
+import getConfig from 'next/config';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Box, Button } from '@material-ui/core';
 import CodeIcon from '@material-ui/icons/Code';
+
+const { serverRuntimeConfig } = getConfig();
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -35,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const EmbedLink = (): ReactElement => {
-    const domainUrl = process.env.NOW_URL ? `https://${process.env.NOW_URL}/embed` : 'http://localhost:3000/embed';
+    const domainUrl = serverRuntimeConfig.NOW_URL ? `https://${serverRuntimeConfig.NOW_URL}` : 'http://localhost:3000';
     const classes = useStyles();
 
     return (
