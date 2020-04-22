@@ -104,7 +104,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
         'https://api.findahelpline.com',
         print(query),
         {
-            countryCode: context.params.widgetCountyCode,
+            countryCode: context.params.widgetCountryCode,
         },
     );
     return {
@@ -133,7 +133,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         paths: countries.map((country) => {
             return {
                 params: {
-                    widgetCountyCode: country.code.toLowerCase(),
+                    widgetCountryCode: country.code.toLowerCase(),
                 },
             };
         }),

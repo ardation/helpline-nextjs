@@ -1,10 +1,13 @@
 import Head from 'next/head';
 import React, { Fragment, Component } from 'react';
-import { Container } from '@material-ui/core';
+import router from 'next/router';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { GetWidgetCountriesAndSubdivisions } from '../../types/GetWidgetCountriesAndSubdivisions';
+import { OrganizationProvider } from '../../src/context/organizationContext';
+import Widget from '../../src/components/Widget';
+import LoadingSpinner from '../../src/components/LoadingSpinner';
 
 declare global {
     interface Window {
@@ -29,12 +32,12 @@ class WidgetPage extends Component<GetWidgetCountriesAndSubdivisions, Xprops> {
     componentDidMount(): void {
         if (window.xprops) {
             this.setState({ xprops: window.xprops });
-            document.location.href = `/widget/${window.xprops.countryCode.toLowerCase()}`;
+            router.push(`/widget/${window.xprops.countryCode.toLowerCase()}`);
         }
     }
 
     render(): JSX.Element {
-        const { countries } = this.props;
+        const { countries, topics, categories, humanSupportTypes } = this.props;
         const { xprops } = this.state;
         return (
             <Fragment>
@@ -42,26 +45,24 @@ class WidgetPage extends Component<GetWidgetCountriesAndSubdivisions, Xprops> {
                     <title>Find A Helpline</title>
                     <script src="/widget.min.js"></script>
                 </Head>
-                <Container>
+                <Fragment>
                     {xprops ? (
-                        <div>loading widget for selected default country of {xprops.countryCode}...</div>
+                        // <div>loading widget for selected default country of {xprops.countryCode}...</div>
+                        <LoadingSpinner />
                     ) : (
-                        <ul>
-                            {countries.map((country, key) => {
-                                return (
-                                    <li key={key}>
-                                        {country.code}
-                                        <ul>
-                                            {country.subdivisions.map((subdivision, index) => {
-                                                return <li key={index}>{subdivision.code} </li>;
-                                            })}
-                                        </ul>
-                                    </li>
-                                );
-                            })}
-                        </ul>
+                        <OrganizationProvider
+                            countries={countries}
+                            allOrganizations={[]}
+                            filterOptions={{
+                                topics: topics,
+                                categories: categories,
+                                humanSupportTypes: humanSupportTypes,
+                            }}
+                        >
+                            <Widget />
+                        </OrganizationProvider>
                     )}
-                </Container>
+                </Fragment>
             </Fragment>
         );
     }
@@ -73,6 +74,7 @@ export const getStaticProps = async (): Promise<{ props: GetWidgetCountriesAndSu
             countries {
                 code
                 name
+                emergencyNumber
                 subdivisions {
                     code
                     name

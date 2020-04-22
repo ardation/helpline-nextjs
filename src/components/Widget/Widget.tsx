@@ -10,7 +10,6 @@ type Props = {};
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
-            height: '100vh',
             paddingLeft: 0,
             paddingRight: 0,
         },

@@ -17,6 +17,12 @@ type Filter = {
     name: string;
 };
 
+export type FilterOptions = {
+    topics: Filter[] | [];
+    categories: Filter[] | [];
+    humanSupportTypes: Filter[] | [];
+};
+
 export type Filters = {
     topics: Filter[] | [];
     categories: Filter[] | [];
@@ -50,8 +56,8 @@ type Props = {
     children: ReactNode;
     countries: Country[];
     activeCountry?: Country;
-    allOrganizations: Organization[];
-    filterOptions: Filters;
+    allOrganizations?: Organization[];
+    filterOptions: FilterOptions;
 };
 
 type State = {
@@ -59,7 +65,7 @@ type State = {
     countries: Country[];
     activeCountry?: Country;
     organizations: Organization[];
-    filterOptions: Filters;
+    filterOptions: FilterOptions;
     activeFilters: Filters;
     applyFilters: (selectedFilters: Filters) => void;
 };
