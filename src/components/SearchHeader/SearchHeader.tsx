@@ -75,10 +75,6 @@ const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.down('xs')]: {
                 fontSize: '12px',
             },
-            [theme.breakpoints.down(420)]: {
-                paddingTop: '4px',
-                paddingBottom: '4px',
-            },
         },
         searchButton: {
             flexGrow: 1,

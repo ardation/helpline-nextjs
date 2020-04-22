@@ -4,7 +4,7 @@ import { Container, Box, Theme } from '@material-ui/core';
 import OrganizationContext from '../../context/organizationContext';
 import TopBar from '../TopBar';
 import SearchHeader from '../SearchHeader';
-import WidgetCarousel from '../OrganizationCarousel';
+import OrganizationCarousel from '../OrganizationCarousel/OrganizationCarousel';
 
 type Props = {};
 
@@ -54,7 +54,7 @@ const Widget = ({}: Props): ReactElement => {
                     <TopBar widget country={{ emergencyNumber: activeCountry?.emergencyNumber }} />
                 </div>
                 <Container className={classes.carousel}>
-                    <WidgetCarousel organizations={organizations} />
+                    <OrganizationCarousel organizations={organizations} />
                 </Container>
             </Box>
         </Container>

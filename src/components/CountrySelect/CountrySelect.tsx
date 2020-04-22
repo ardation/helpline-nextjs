@@ -58,10 +58,6 @@ const useStyles = makeStyles((theme: Theme) =>
             '&[class*="MuiOutlinedInput-root"]': {
                 paddingTop: '5px',
                 paddingBottom: '5px',
-                [theme.breakpoints.down(420)]: {
-                    paddingTop: '0',
-                    paddingBottom: '0',
-                },
             },
             '& fieldset': {
                 border: 0,
