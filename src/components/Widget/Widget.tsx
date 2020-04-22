@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingRight: 0,
             border: '1px solid #000',
             borderRadius: '0 0 10px 10px',
+            overflowY: 'scroll',
         },
         header: {
             position: 'relative',

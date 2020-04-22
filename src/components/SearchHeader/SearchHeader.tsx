@@ -93,13 +93,14 @@ const useStyles = makeStyles((theme: Theme) =>
                 display: 'none',
             },
         },
-        filter: {
+        filterContainer: {
             position: 'absolute',
             top: '100%',
             left: 0,
             right: 0,
             zIndex: 1200,
             background: 'white',
+            overflowY: 'scroll',
         },
     }),
 );
@@ -168,14 +169,14 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                 )}
             </Box>
             {showFilter && (
-                <div className={classes.filter}>
+                <Box className={classes.filterContainer}>
                     <OrganizationFilter
                         topics={filterOptions.topics}
                         categories={filterOptions.categories}
                         humanSupportTypes={filterOptions.humanSupportTypes}
                         onChange={(filters): void => applyFilters(filters)}
                     />
-                </div>
+                </Box>
             )}
         </Container>
     );
