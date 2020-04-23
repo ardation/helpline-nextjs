@@ -10,6 +10,7 @@ import { PrevButton, NextButton } from './OrganizationCarouselButtons';
 
 type Props = {
     organizations: Organization[];
+    widget?: boolean;
 };
 
 type size = {
@@ -34,7 +35,7 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const OrganizationCarousel = ({ organizations }: Props): ReactElement => {
+const OrganizationCarousel = ({ organizations, widget }: Props): ReactElement => {
     const classes = useStyles();
     const [embla, setEmbla] = useState(null);
 
@@ -46,8 +47,9 @@ const OrganizationCarousel = ({ organizations }: Props): ReactElement => {
 
     useWindowResize(() => {
         if (typeof window !== 'undefined') {
-            setWidth(window.innerWidth);
+            return setWidth(window.innerWidth);
         }
+        setWidth(1024);
     });
 
     useEffect(() => {
@@ -82,7 +84,7 @@ const OrganizationCarousel = ({ organizations }: Props): ReactElement => {
                     <Container className={classes.carouselWrapper}>
                         {organizations.map((organization, index) => (
                             <Box key={index + organization.slug} p={2}>
-                                <OrganizationCard organization={organization} />
+                                <OrganizationCard widget={widget} organization={organization} />
                             </Box>
                         ))}
                     </Container>

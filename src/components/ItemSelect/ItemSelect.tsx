@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Chip, Box } from '@material-ui/core';
-import { differenceBy, find, xorBy } from 'lodash/fp';
+import { intersectionBy, differenceBy, find, xorBy } from 'lodash/fp';
 
 type Item = {
     name: string;
@@ -13,6 +13,7 @@ type Props = {
     preselectedItems?: Item[];
     single?: boolean;
     hideUnselected?: boolean;
+    showMax?: number;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,10 +47,11 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected }: Props): ReactElement => {
+const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected, showMax }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedItems, setSelectedItems] = useState(preselectedItems || []);
-    const [hide, setHide] = useState(hideUnselected);
+    const [hide, setHide] = useState(hideUnselected || !!showMax);
+    const showAmount = hideUnselected ? intersectionBy('name', items, selectedItems).length : showMax || null;
 
     const onClick = (item: Item): void => {
         const items = single ? [item] : xorBy('name', [item], selectedItems);
@@ -57,12 +59,13 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected 
         onChange(items);
     };
 
+    const itemsBySelected = selectedItems.concat(differenceBy('name', items, selectedItems));
+
     return (
         <Box className={classes.chips}>
-            {items.map((item) => {
-                if (hide && !find(item, selectedItems)) {
-                } else {
-                    return (
+            {itemsBySelected.map(
+                (item, index) =>
+                    (!hide || index < showAmount) && (
                         <Chip
                             color={find(item, selectedItems) ? 'primary' : 'default'}
                             key={item.name}
@@ -75,13 +78,13 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected 
                                 clickableColorPrimary: classes.chipColorPrimary,
                             }}
                         />
-                    );
-                }
-            })}
-            {hide && differenceBy('name', items, selectedItems).length > 0 && (
+                    ),
+            )}
+            {hide && items.length - showAmount > 0 && (
                 <Chip
                     onClick={(): void => setHide(false)}
-                    label={`+${differenceBy('name', items, selectedItems).length} more`}
+                    label={`+${items.length - showAmount} more`}
+                    data-testid="showMoreChip"
                     classes={{
                         root: classes.chipRoot,
                     }}
