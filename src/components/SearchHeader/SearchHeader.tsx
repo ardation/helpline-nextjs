@@ -99,6 +99,7 @@ const useStyles = makeStyles((theme: Theme) =>
             right: 0,
             zIndex: 1200,
             background: 'white',
+            boxShadow: '0px 2px 5px 0px #EEEDF4',
             overflowY: 'scroll',
         },
     }),
@@ -179,7 +180,7 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                         preselectedTopics={activeFilters.topics}
                         preselectedCategories={activeFilters.categories}
                         preselectedHumanSupportTypes={activeFilters.humanSupportTypes}
-                        showMax={10}
+                        showMax={7}
                         onChange={(filters): void => applyFilters(filters)}
                     />
                 </Box>
