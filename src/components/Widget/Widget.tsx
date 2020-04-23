@@ -54,7 +54,7 @@ const Widget = ({}: Props): ReactElement => {
                     <TopBar widget country={{ emergencyNumber: activeCountry?.emergencyNumber }} />
                 </div>
                 <Container className={classes.carousel}>
-                    <OrganizationCarousel organizations={organizations} />
+                    <OrganizationCarousel widget organizations={organizations} />
                 </Container>
             </Box>
             <EmbedLink />
