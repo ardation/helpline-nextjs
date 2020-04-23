@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Chip, Box } from '@material-ui/core';
-import { intersectionBy, find, xorBy } from 'lodash/fp';
+import { intersectionBy, differenceBy, find, xorBy } from 'lodash/fp';
 
 type Item = {
     name: string;
@@ -59,9 +59,11 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected,
         onChange(items);
     };
 
+    const itemsBySelected = selectedItems.concat(differenceBy('name', items, selectedItems));
+
     return (
         <Box className={classes.chips}>
-            {items.map(
+            {itemsBySelected.map(
                 (item, index) =>
                     (!hide || index < showAmount) && (
                         <Chip
@@ -78,7 +80,7 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected,
                         />
                     ),
             )}
-            {hide && (
+            {hide && items.length - showAmount > 0 && (
                 <Chip
                     onClick={(): void => setHide(false)}
                     label={`+${items.length - showAmount} more`}

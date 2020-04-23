@@ -35,8 +35,10 @@ type Props = {
     categories?: Category[];
     humanSupportTypes?: HumanSupportType[];
     topics?: Topic[];
-    preselectedTopics?: Topic[];
     showMax?: number;
+    preselectedTopics?: Topic[];
+    preselectedCategories?: Category[];
+    preselectedHumanSupportTypes?: HumanSupportType[];
     onChange: (changes: Changes) => void;
 };
 
@@ -77,6 +79,8 @@ const OrganizationFilter = ({
     humanSupportTypes,
     topics,
     preselectedTopics,
+    preselectedCategories,
+    preselectedHumanSupportTypes,
     onChange,
     showMax,
 }: Props): ReactElement => {
@@ -136,6 +140,7 @@ const OrganizationFilter = ({
                         <Typography className={classes.title}>Human Support Type</Typography>
                         <ItemSelect
                             items={humanSupportTypes}
+                            preselectedItems={preselectedHumanSupportTypes}
                             onChange={setSelectedHumanSupportTypes}
                             showMax={showMax}
                         />
@@ -144,7 +149,12 @@ const OrganizationFilter = ({
                 {categories && categories.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Categories</Typography>
-                        <ItemSelect items={categories} onChange={setSelectedCategories} showMax={showMax} />
+                        <ItemSelect
+                            items={categories}
+                            preselectedItems={preselectedCategories}
+                            onChange={setSelectedCategories}
+                            showMax={showMax}
+                        />
                     </Box>
                 )}
                 <Box my={2}>
