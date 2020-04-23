@@ -36,6 +36,7 @@ type Props = {
     humanSupportTypes?: HumanSupportType[];
     topics?: Topic[];
     preselectedTopics?: Topic[];
+    showMax?: number;
     onChange: (changes: Changes) => void;
 };
 
@@ -77,6 +78,7 @@ const OrganizationFilter = ({
     topics,
     preselectedTopics,
     onChange,
+    showMax,
 }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedContactMethods, setSelectedContactMethods] = useState<ContactMethod[]>([]);
@@ -118,6 +120,7 @@ const OrganizationFilter = ({
                             preselectedItems={preselectedTopics}
                             onChange={setSelectedTopics}
                             hideUnselected={preselectedTopics && preselectedTopics.length > 0}
+                            showMax={showMax}
                         />
                     </Box>
                 )}
@@ -131,13 +134,17 @@ const OrganizationFilter = ({
                 {humanSupportTypes && humanSupportTypes.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Human Support Type</Typography>
-                        <ItemSelect items={humanSupportTypes} onChange={setSelectedHumanSupportTypes} />
+                        <ItemSelect
+                            items={humanSupportTypes}
+                            onChange={setSelectedHumanSupportTypes}
+                            showMax={showMax}
+                        />
                     </Box>
                 )}
                 {categories && categories.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Categories</Typography>
-                        <ItemSelect items={categories} onChange={setSelectedCategories} />
+                        <ItemSelect items={categories} onChange={setSelectedCategories} showMax={showMax} />
                     </Box>
                 )}
                 <Box my={2}>

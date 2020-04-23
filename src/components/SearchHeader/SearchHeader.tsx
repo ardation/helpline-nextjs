@@ -176,6 +176,7 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                         topics={filterOptions.topics}
                         categories={filterOptions.categories}
                         humanSupportTypes={filterOptions.humanSupportTypes}
+                        showMax={10}
                         onChange={(filters): void => applyFilters(filters)}
                     />
                 </Box>
