@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
-    const { activeCountry, filterOptions, applyFilters } = useContext(OrganizationContext);
+    const { activeCountry, filterOptions, activeFilters, applyFilters } = useContext(OrganizationContext);
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(activeCountry || undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
     const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -176,6 +176,10 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                         topics={filterOptions.topics}
                         categories={filterOptions.categories}
                         humanSupportTypes={filterOptions.humanSupportTypes}
+                        preselectedTopics={activeFilters.topics}
+                        preselectedCategories={activeFilters.categories}
+                        preselectedHumanSupportTypes={activeFilters.humanSupportTypes}
+                        showMax={10}
                         onChange={(filters): void => applyFilters(filters)}
                     />
                 </Box>

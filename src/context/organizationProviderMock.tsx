@@ -21,7 +21,9 @@ const countriesData = [
 ];
 
 const filterData = {
-    topics: [{ name: 'Topic 1' }, { name: 'Topic 2' }, { name: 'Topic 3' }],
+    topics: Array.from(Array(12).keys()).map((i) => ({
+        name: 'Topic ' + i,
+    })),
     categories: [{ name: 'Category 1' }, { name: 'Category 2' }],
     humanSupportTypes: [],
     contactMethods: [],
