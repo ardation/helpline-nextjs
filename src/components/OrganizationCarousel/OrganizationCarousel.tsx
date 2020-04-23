@@ -63,29 +63,31 @@ const OrganizationCarousel = ({ organizations }: Props): ReactElement => {
 
     return (
         <Container className={classes.container}>
-            <ConditionalWrapper
-                condition={width >= 320}
-                wrapper={(children): ReactElement => (
-                    <EmblaCarouselReact
-                        emblaRef={setEmbla}
-                        options={{
-                            loop: false,
-                            align: 'start',
-                            containScroll: true,
-                        }}
-                    >
-                        {children}
-                    </EmblaCarouselReact>
-                )}
-            >
-                <Container className={classes.carouselWrapper}>
-                    {organizations.map((organization, index) => (
-                        <Box key={index + organization.slug} p={2}>
-                            <OrganizationCard organization={organization} />
-                        </Box>
-                    ))}
-                </Container>
-            </ConditionalWrapper>
+            {organizations && organizations.length > 0 && (
+                <ConditionalWrapper
+                    condition={width >= 320}
+                    wrapper={(children): ReactElement => (
+                        <EmblaCarouselReact
+                            emblaRef={setEmbla}
+                            options={{
+                                loop: false,
+                                align: 'start',
+                                containScroll: true,
+                            }}
+                        >
+                            {children}
+                        </EmblaCarouselReact>
+                    )}
+                >
+                    <Container className={classes.carouselWrapper}>
+                        {organizations.map((organization, index) => (
+                            <Box key={index + organization.slug} p={2}>
+                                <OrganizationCard organization={organization} />
+                            </Box>
+                        ))}
+                    </Container>
+                </ConditionalWrapper>
+            )}
             {prevBtnEnabled && <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />}
             {nextBtnEnabled && <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />}
         </Container>
