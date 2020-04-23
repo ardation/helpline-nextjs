@@ -30,9 +30,6 @@ const useStyles = makeStyles(() =>
                 flexDirection: 'column',
                 overflowY: 'scroll',
             },
-            // '& > div': {
-            //     position: 'relative',
-            // },
         },
     }),
 );
@@ -48,7 +45,9 @@ const OrganizationCarousel = ({ organizations }: Props): ReactElement => {
     const [width, setWidth] = useState(undefined);
 
     useWindowResize(() => {
-        setWidth(window.innerWidth);
+        if (typeof window !== 'undefined') {
+            setWidth(window.innerWidth);
+        }
     });
 
     useEffect(() => {
@@ -80,12 +79,11 @@ const OrganizationCarousel = ({ organizations }: Props): ReactElement => {
                 )}
             >
                 <Container className={classes.carouselWrapper}>
-                    {organizations &&
-                        organizations.map((organization, index) => (
-                            <Box key={index + organization.slug} p={2}>
-                                <OrganizationCard organization={organization} />
-                            </Box>
-                        ))}
+                    {organizations.map((organization, index) => (
+                        <Box key={index + organization.slug} p={2}>
+                            <OrganizationCard organization={organization} />
+                        </Box>
+                    ))}
                 </Container>
             </ConditionalWrapper>
             {prevBtnEnabled && <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />}
