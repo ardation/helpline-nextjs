@@ -261,6 +261,7 @@ const OrganizationCard = ({ organization, widget }: Props): ReactElement => {
                         <Button
                             size={widget ? 'small' : 'large'}
                             href={organization.url}
+                            target={widget && '_blank'}
                             className={[classes.button, classes.buttonLink].join(' ')}
                             startIcon={<PublicIcon />}
                             data-testid="url"
