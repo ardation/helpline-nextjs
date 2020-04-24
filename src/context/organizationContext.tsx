@@ -119,7 +119,6 @@ export const OrganizationProvider = ({
         filterOptions,
         activeFilters,
         applyFilters,
-        setActiveCountry,
     };
 
     return <OrganizationContext.Provider value={ctx}>{children}</OrganizationContext.Provider>;

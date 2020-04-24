@@ -7,18 +7,11 @@
 // GraphQL query operation: GetWidgetCountryCodeProps
 // ====================================================
 
-export interface GetWidgetCountryCodeProps_country_subdivisions {
-  __typename: "Subdivision";
-  code: string;
-  name: string;
-}
-
 export interface GetWidgetCountryCodeProps_country {
   __typename: "Country";
   code: string;
   name: string;
   emergencyNumber: string | null;
-  subdivisions: GetWidgetCountryCodeProps_country_subdivisions[];
 }
 
 export interface GetWidgetCountryCodeProps_organizations_nodes_humanSupportTypes {
@@ -34,19 +27,6 @@ export interface GetWidgetCountryCodeProps_organizations_nodes_categories {
 export interface GetWidgetCountryCodeProps_organizations_nodes_topics {
   __typename: "Tag";
   name: string;
-}
-
-export interface GetWidgetCountryCodeProps_countries_subdivisions {
-  __typename: "Subdivision";
-  code: string;
-  name: string;
-}
-
-export interface GetWidgetCountryCodeProps_countries {
-  __typename: "Country";
-  code: string;
-  name: string;
-  subdivisions: GetWidgetCountryCodeProps_countries_subdivisions[];
 }
 
 export interface GetWidgetCountryCodeProps_organizations_nodes_openingHours {
@@ -95,6 +75,20 @@ export interface GetWidgetCountryCodeProps_topics {
   name: string;
 }
 
+export interface GetWidgetCountryCodeProps_countries_subdivisions {
+  __typename: "Subdivision";
+  code: string;
+  name: string;
+}
+
+export interface GetWidgetCountryCodeProps_countries {
+  __typename: "Country";
+  code: string;
+  name: string;
+  emergencyNumber: string | null;
+  subdivisions: GetWidgetCountryCodeProps_countries_subdivisions[];
+}
+
 export interface GetWidgetCountryCodeProps {
   /**
    * Find a country by code
@@ -120,10 +114,6 @@ export interface GetWidgetCountryCodeProps {
    * Find all countries
    */
   countries: GetWidgetCountryCodeProps_countries[];
-  /**
-   * Required to allow same page dynamic link updates to hidrate 
-   */
-  key: string|string[];
 }
 
 export interface GetWidgetCountryCodePropsVariables {

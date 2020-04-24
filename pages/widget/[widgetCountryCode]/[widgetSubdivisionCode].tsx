@@ -147,7 +147,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const query = gql`
-        query GetCountriesAndSubdivisions {
+        query GetWidgetCountriesAndSubdivisions {
             countries {
                 code
                 subdivisions {

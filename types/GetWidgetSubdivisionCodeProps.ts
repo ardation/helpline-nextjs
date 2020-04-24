@@ -36,19 +36,6 @@ export interface GetWidgetSubdivisionCodeProps_organizations_nodes_topics {
   name: string;
 }
 
-export interface GetWidgetSubdivisionCodeProps_countries_subdivisions {
-  __typename: "Subdivision";
-  code: string;
-  name: string;
-}
-
-export interface GetWidgetSubdivisionCodeProps_countries {
-  __typename: "Country";
-  code: string;
-  name: string;
-  subdivisions: GetWidgetSubdivisionCodeProps_countries_subdivisions[];
-}
-
 export interface GetWidgetSubdivisionCodeProps_organizations_nodes_openingHours {
   __typename: "OpeningHour";
   day: string;
@@ -95,6 +82,20 @@ export interface GetWidgetSubdivisionCodeProps_topics {
   name: string;
 }
 
+export interface GetWidgetSubdivisionCodeProps_countries_subdivisions {
+  __typename: "Subdivision";
+  code: string;
+  name: string;
+}
+
+export interface GetWidgetSubdivisionCodeProps_countries {
+  __typename: "Country";
+  code: string;
+  name: string;
+  emergencyNumber: string | null;
+  subdivisions: GetWidgetSubdivisionCodeProps_countries_subdivisions[];
+}
+
 export interface GetWidgetSubdivisionCodeProps {
   /**
    * Find a country by code
@@ -120,10 +121,6 @@ export interface GetWidgetSubdivisionCodeProps {
    * Find all countries
    */
   countries: GetWidgetSubdivisionCodeProps_countries[];
-  /**
-   * Required to allow same page dynamic link updates to hidrate 
-   */
-  key: string|string[];
 }
 
 export interface GetWidgetSubdivisionCodePropsVariables {
