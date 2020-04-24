@@ -40,6 +40,7 @@ type Props = {
     preselectedCategories?: Category[];
     preselectedHumanSupportTypes?: HumanSupportType[];
     onChange: (changes: Changes) => void;
+    onApply?: (value: boolean) => void;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -83,6 +84,7 @@ const OrganizationFilter = ({
     preselectedHumanSupportTypes,
     onChange,
     showMax,
+    onApply,
 }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedContactMethods, setSelectedContactMethods] = useState<ContactMethod[]>([]);
@@ -99,6 +101,7 @@ const OrganizationFilter = ({
             topics: selectedTopics,
             sorts: selectedSorts,
         });
+        onApply && onApply(false);
     };
 
     useEffect(() => {

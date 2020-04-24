@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 import EmblaCarouselReact from 'embla-carousel-react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Box, Container } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Box, Container } from '@material-ui/core';
 import ConditionalWrapper from '../../util/conditionalWrapper';
 import { Organization } from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
@@ -11,11 +11,6 @@ import { PrevButton, NextButton } from './OrganizationCarouselButtons';
 type Props = {
     organizations: Organization[];
     widget?: boolean;
-};
-
-type size = {
-    height?: number;
-    width?: number;
 };
 
 const useStyles = makeStyles(() =>

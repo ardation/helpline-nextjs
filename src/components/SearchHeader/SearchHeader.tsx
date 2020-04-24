@@ -63,20 +63,20 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         inputConatainer: {
             display: 'flex',
-            alignItems: 'center',
+            justifyContent: 'space-between',
         },
         button: {
             textAlign: 'left',
             borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
-            margin: `0 ${theme.spacing(1)}px`,
             [theme.breakpoints.down('xs')]: {
                 fontSize: '12px',
             },
         },
         searchButton: {
             flexGrow: 1,
+            marginRight: theme.spacing(1),
         },
         filterButton: {
             backgroundColor: 'white',
@@ -106,7 +106,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
-    const { activeCountry, filterOptions, activeFilters, applyFilters } = useContext(OrganizationContext);
+    const { activeCountry, activeSubdivision, filterOptions, activeFilters, applyFilters } = useContext(
+        OrganizationContext,
+    );
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(activeCountry || undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
     const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -126,6 +128,7 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                     onCountryChange={setSelectedCountry}
                     onSubdivisionChange={setSelectedSubdivision}
                     defaultCountry={activeCountry || null}
+                    defaultSubdivision={activeSubdivision || null}
                 />
                 {selectedCountry && (
                     <Box className={classes.inputConatainer}>
@@ -182,6 +185,7 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                         preselectedHumanSupportTypes={activeFilters.humanSupportTypes}
                         showMax={7}
                         onChange={(filters): void => applyFilters(filters)}
+                        onApply={setShowFilter}
                     />
                 </Box>
             )}

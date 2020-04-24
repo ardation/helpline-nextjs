@@ -56,6 +56,7 @@ type Props = {
     children: ReactNode;
     countries: Country[];
     activeCountry?: Country;
+    activeSubdivision?: Subdivision;
     allOrganizations?: Organization[];
     filterOptions: FilterOptions;
 };
@@ -64,6 +65,7 @@ type State = {
     // loading: boolean;
     countries: Country[];
     activeCountry?: Country;
+    activeSubdivision?: Subdivision;
     organizations: Organization[];
     filterOptions: FilterOptions;
     activeFilters: Filters;
@@ -74,6 +76,7 @@ const initialState: State = {
     // loading: false,
     countries: [],
     activeCountry: null,
+    activeSubdivision: null,
     organizations: [],
     filterOptions: null,
     activeFilters: {
@@ -94,6 +97,7 @@ export const OrganizationProvider = ({
     allOrganizations,
     filterOptions,
     activeCountry,
+    activeSubdivision,
 }: Props): ReactElement => {
     const [organizations, setOrganizations] = useState<Organization[] | undefined>(allOrganizations);
     const [activeFilters, applyFilters] = useState<Filters>(initialState.activeFilters);
@@ -107,6 +111,7 @@ export const OrganizationProvider = ({
         // loading,
         countries,
         activeCountry,
+        activeSubdivision,
         organizations,
         filterOptions,
         activeFilters,

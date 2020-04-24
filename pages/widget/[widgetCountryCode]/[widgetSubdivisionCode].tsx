@@ -28,17 +28,13 @@ const WidgetSubdivisionCodePage = ({
     countries,
 }: Props): ReactElement => {
     const router = useRouter();
-    const queryTopics = router.query.topics;
-    let preselectedTopics: { name: string }[] = [];
+
     const activeCountry = countries.find((_country) => {
         return _country.code === country.code;
     });
-
-    if (queryTopics) {
-        preselectedTopics = [queryTopics].flat().map((topic) => {
-            return { name: topic };
-        });
-    }
+    const activeSubdivision = activeCountry.subdivisions.find((_subdivision) => {
+        return _subdivision.code === subdivision.code;
+    });
 
     return (
         <Fragment>
@@ -49,6 +45,7 @@ const WidgetSubdivisionCodePage = ({
             </Head>
             <OrganizationProvider
                 activeCountry={activeCountry}
+                activeSubdivision={activeSubdivision}
                 countries={countries}
                 allOrganizations={organizations.nodes}
                 filterOptions={{
