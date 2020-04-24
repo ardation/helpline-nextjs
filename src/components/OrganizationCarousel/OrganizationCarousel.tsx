@@ -21,10 +21,11 @@ const useStyles = makeStyles(() =>
         carouselWrapper: {
             display: 'flex',
             position: 'relative',
+            maxHeight: '420px',
             alignItems: 'flex-start',
             '@media (max-width: 400px)': {
                 flexDirection: 'column',
-                overflowY: 'scroll',
+                overflow: 'scroll',
             },
         },
     }),
