@@ -31,9 +31,6 @@ const useStyles = makeStyles(() =>
                 flexDirection: 'column',
                 overflowY: 'scroll',
             },
-            // '& > div': {
-            //     position: 'relative',
-            // },
         },
     }),
 );
@@ -49,7 +46,10 @@ const OrganizationCarousel = ({ organizations, widget }: Props): ReactElement =>
     const [width, setWidth] = useState(undefined);
 
     useWindowResize(() => {
-        setWidth(window.innerWidth);
+        if (typeof window !== 'undefined') {
+            return setWidth(window.innerWidth);
+        }
+        setWidth(1024);
     });
 
     useEffect(() => {
@@ -65,30 +65,31 @@ const OrganizationCarousel = ({ organizations, widget }: Props): ReactElement =>
 
     return (
         <Container className={classes.container}>
-            <ConditionalWrapper
-                condition={width >= 320}
-                wrapper={(children): ReactElement => (
-                    <EmblaCarouselReact
-                        emblaRef={setEmbla}
-                        options={{
-                            loop: false,
-                            align: 'start',
-                            containScroll: true,
-                        }}
-                    >
-                        {children}
-                    </EmblaCarouselReact>
-                )}
-            >
-                <Container className={classes.carouselWrapper}>
-                    {organizations &&
-                        organizations.map((organization, index) => (
+            {organizations && organizations.length > 0 && (
+                <ConditionalWrapper
+                    condition={width >= 320}
+                    wrapper={(children): ReactElement => (
+                        <EmblaCarouselReact
+                            emblaRef={setEmbla}
+                            options={{
+                                loop: false,
+                                align: 'start',
+                                containScroll: true,
+                            }}
+                        >
+                            {children}
+                        </EmblaCarouselReact>
+                    )}
+                >
+                    <Container className={classes.carouselWrapper}>
+                        {organizations.map((organization, index) => (
                             <Box key={index + organization.slug} p={2}>
                                 <OrganizationCard widget={widget} organization={organization} />
                             </Box>
                         ))}
-                </Container>
-            </ConditionalWrapper>
+                    </Container>
+                </ConditionalWrapper>
+            )}
             {prevBtnEnabled && <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />}
             {nextBtnEnabled && <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />}
         </Container>

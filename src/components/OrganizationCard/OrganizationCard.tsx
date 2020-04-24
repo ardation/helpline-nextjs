@@ -55,11 +55,16 @@ const useStyles = makeStyles((theme: Theme) =>
             border: '1px solid #000',
             borderRadius: '10px',
             gridTemplateColumns: '1fr 88px',
+            minWidth: '23em',
+            minHeight: '19em',
             '& > div': {
                 padding: theme.spacing(2),
             },
-            '@media (max-width: 320px)': {
+            '@media (max-width: 480px)': {
                 flexDirection: 'column',
+            },
+            '@media (max-width: 320px)': {
+                minWidth: 'unset',
             },
         },
         webChatSpacing: {
@@ -133,6 +138,9 @@ const useStyles = makeStyles((theme: Theme) =>
             '& > *': {
                 marginRight: theme.spacing(0.5),
                 marginBottom: theme.spacing(0.5),
+            },
+            '@media (max-width: 480px)': {
+                flexDirection: 'row',
             },
         },
         chip: {
