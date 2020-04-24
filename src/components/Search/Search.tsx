@@ -83,6 +83,10 @@ const Search = ({ topics, countries }: Props): ReactElement => {
                 {selectedCountry && (
                     <Link
                         href={{
+                            pathname: `/[countryCode]${selectedSubdivision ? `/[subdivisionCode]` : ''}`,
+                            query: { topics: selectedTopics.map((topic) => topic.name) },
+                        }}
+                        as={{
                             pathname: `/${selectedCountry.code.toLowerCase()}${
                                 selectedSubdivision ? `/${selectedSubdivision.code.toLowerCase()}` : ''
                             }`,

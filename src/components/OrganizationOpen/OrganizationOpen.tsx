@@ -23,7 +23,7 @@ type Props = {
 const useStyles = makeStyles(() =>
     createStyles({
         body: {
-            fontSize: '0.9375rem',
+            fontSize: 'inherit',
         },
         open: {
             color: '#3FA607',

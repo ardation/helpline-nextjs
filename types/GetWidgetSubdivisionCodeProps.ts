@@ -36,19 +36,6 @@ export interface GetWidgetSubdivisionCodeProps_organizations_nodes_topics {
   name: string;
 }
 
-export interface GetWidgetSubdivisionCodeProps_countries_subdivisions {
-  __typename: "Subdivision";
-  code: string;
-  name: string;
-}
-
-export interface GetWidgetSubdivisionCodeProps_countries {
-  __typename: "Country";
-  code: string;
-  name: string;
-  subdivisions: GetWidgetSubdivisionCodeProps_countries_subdivisions[];
-}
-
 export interface GetWidgetSubdivisionCodeProps_organizations_nodes_openingHours {
   __typename: "OpeningHour";
   day: string;
@@ -93,6 +80,20 @@ export interface GetWidgetSubdivisionCodeProps_humanSupportTypes {
 export interface GetWidgetSubdivisionCodeProps_topics {
   __typename: "Tag";
   name: string;
+}
+
+export interface GetWidgetSubdivisionCodeProps_countries_subdivisions {
+  __typename: "Subdivision";
+  code: string;
+  name: string;
+}
+
+export interface GetWidgetSubdivisionCodeProps_countries {
+  __typename: "Country";
+  code: string;
+  name: string;
+  emergencyNumber: string | null;
+  subdivisions: GetWidgetSubdivisionCodeProps_countries_subdivisions[];
 }
 
 export interface GetWidgetSubdivisionCodeProps {

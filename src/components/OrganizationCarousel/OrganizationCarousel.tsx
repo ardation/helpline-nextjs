@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 import EmblaCarouselReact from 'embla-carousel-react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Box, Container } from '@material-ui/core';
-import { useWindowResize } from 'beautiful-react-hooks';
 import ConditionalWrapper from '../../util/conditionalWrapper';
 import { Organization } from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
@@ -10,11 +10,7 @@ import { PrevButton, NextButton } from './OrganizationCarouselButtons';
 
 type Props = {
     organizations: Organization[];
-};
-
-type size = {
-    height?: number;
-    width?: number;
+    widget?: boolean;
 };
 
 const useStyles = makeStyles(() =>
@@ -25,31 +21,25 @@ const useStyles = makeStyles(() =>
         carouselWrapper: {
             display: 'flex',
             position: 'relative',
+            maxHeight: '420px',
             alignItems: 'flex-start',
-            '@media (max-width: 320px)': {
+            '@media (max-width: 400px)': {
                 flexDirection: 'column',
-                overflowY: 'scroll',
+                overflow: 'scroll',
             },
-            // '& > div': {
-            //     position: 'relative',
-            // },
         },
     }),
 );
 
-const OrganizationCarousel = ({ organizations }: Props): ReactElement => {
+const OrganizationCarousel = ({ organizations, widget }: Props): ReactElement => {
     const classes = useStyles();
     const [embla, setEmbla] = useState(null);
 
     const scrollPrev = useCallback(() => embla.scrollPrev(), [embla]);
     const scrollNext = useCallback(() => embla.scrollNext(), [embla]);
-    const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
-    const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
-    const [width, setWidth] = useState(undefined);
-
-    useWindowResize(() => {
-        setWidth(window.innerWidth);
-    });
+    const [prevBtnEnabled, setPrevBtnEnabled] = useState(true);
+    const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
+    const matches = useMediaQuery('(min-width: 400px)');
 
     useEffect(() => {
         const onSelect = (): void => {
@@ -64,30 +54,31 @@ const OrganizationCarousel = ({ organizations }: Props): ReactElement => {
 
     return (
         <Container className={classes.container}>
-            <ConditionalWrapper
-                condition={width >= 320}
-                wrapper={(children): ReactElement => (
-                    <EmblaCarouselReact
-                        emblaRef={setEmbla}
-                        options={{
-                            loop: false,
-                            align: 'start',
-                            containScroll: true,
-                        }}
-                    >
-                        {children}
-                    </EmblaCarouselReact>
-                )}
-            >
-                <Container className={classes.carouselWrapper}>
-                    {organizations &&
-                        organizations.map((organization, index) => (
+            {organizations && organizations.length > 0 && (
+                <ConditionalWrapper
+                    condition={matches}
+                    wrapper={(children): ReactElement => (
+                        <EmblaCarouselReact
+                            emblaRef={setEmbla}
+                            options={{
+                                loop: false,
+                                align: 'start',
+                                containScroll: true,
+                            }}
+                        >
+                            {children}
+                        </EmblaCarouselReact>
+                    )}
+                >
+                    <Container className={classes.carouselWrapper}>
+                        {organizations.map((organization, index) => (
                             <Box key={index + organization.slug} p={2}>
-                                <OrganizationCard organization={organization} />
+                                <OrganizationCard widget={widget} organization={organization} />
                             </Box>
                         ))}
-                </Container>
-            </ConditionalWrapper>
+                    </Container>
+                </ConditionalWrapper>
+            )}
             {prevBtnEnabled && <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />}
             {nextBtnEnabled && <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />}
         </Container>

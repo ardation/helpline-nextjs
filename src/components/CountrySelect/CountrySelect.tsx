@@ -1,11 +1,12 @@
 /* eslint-disable no-use-before-define */
-import React, { ReactElement, Fragment, useState } from 'react';
+import React, { ReactElement, Fragment, useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Box } from '@material-ui/core';
 import { sortBy } from 'lodash/fp';
+import OrganizationContext from '../../context/organizationContext';
 
 type Subdivision = {
     code: string;
@@ -25,6 +26,7 @@ type Props = {
     onSubdivisionChange: (subdivision: Subdivision) => void;
     inline?: boolean;
     defaultCountry?: Country;
+    defaultSubdivision?: Subdivision;
 };
 
 // ISO 3166-1 alpha-2
@@ -58,6 +60,10 @@ const useStyles = makeStyles((theme: Theme) =>
             '&[class*="MuiOutlinedInput-root"]': {
                 paddingTop: '5px',
                 paddingBottom: '5px',
+                [theme.breakpoints.down(420)]: {
+                    paddingTop: '0',
+                    paddingBottom: '0',
+                },
             },
             '& fieldset': {
                 border: 0,
@@ -97,16 +103,19 @@ const CountrySelect = ({
     onSubdivisionChange,
     inline,
     defaultCountry,
+    defaultSubdivision,
 }: Props): ReactElement => {
     const classes = useStyles();
+    const { setActiveCountry } = useContext(OrganizationContext);
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(defaultCountry ?? null);
-    const setSelectedSubdivision = useState<Subdivision | undefined>(undefined)[1];
+    const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | null>(defaultSubdivision ?? null);
 
     const localOnCountryChange = (country: Country): void => {
         setSelectedCountry(country);
         onCountryChange(country);
-        setSelectedSubdivision(undefined);
-        onSubdivisionChange(undefined);
+        setActiveCountry ? setActiveCountry(country) : null;
+        setSelectedSubdivision(null);
+        onSubdivisionChange(null);
     };
 
     const localOnSubdivisionChange = (subdivision: Subdivision): void => {
@@ -160,6 +169,7 @@ const CountrySelect = ({
                         option: classes.option,
                         paper: classes.paper,
                     }}
+                    value={selectedSubdivision}
                     options={sortBy('name', selectedCountry.subdivisions) as Subdivision[]}
                     getOptionLabel={(option): string => option.name}
                     openOnFocus={true}

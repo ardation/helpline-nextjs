@@ -28,17 +28,13 @@ const WidgetSubdivisionCodePage = ({
     countries,
 }: Props): ReactElement => {
     const router = useRouter();
-    const queryTopics = router.query.topics;
-    let preselectedTopics: { name: string }[] = [];
+
     const activeCountry = countries.find((_country) => {
         return _country.code === country.code;
     });
-
-    if (queryTopics) {
-        preselectedTopics = [queryTopics].flat().map((topic) => {
-            return { name: topic };
-        });
-    }
+    const activeSubdivision = activeCountry.subdivisions.find((_subdivision) => {
+        return _subdivision.code === subdivision.code;
+    });
 
     return (
         <Fragment>
@@ -49,6 +45,7 @@ const WidgetSubdivisionCodePage = ({
             </Head>
             <OrganizationProvider
                 activeCountry={activeCountry}
+                activeSubdivision={activeSubdivision}
                 countries={countries}
                 allOrganizations={organizations.nodes}
                 filterOptions={{
@@ -113,6 +110,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             countries {
                 code
                 name
+                emergencyNumber
                 subdivisions {
                     code
                     name
@@ -132,6 +130,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
         { code: context.params.widgetSubdivisionCode.toString().toUpperCase() },
         country.subdivisions,
     );
+    // key is needed here for link router to work - https://github.com/zeit/next.js/issues/9992
     return {
         props: {
             country,
@@ -141,13 +140,14 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             humanSupportTypes,
             topics,
             countries,
+            key: context.params.widgetSubdivisionCode,
         },
     };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const query = gql`
-        query GetCountriesAndSubdivisions {
+        query GetWidgetCountriesAndSubdivisions {
             countries {
                 code
                 subdivisions {

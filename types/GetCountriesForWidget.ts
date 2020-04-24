@@ -4,18 +4,17 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetCountryCodesAndNames
+// GraphQL query operation: GetCountriesForWidget
 // ====================================================
 
-export interface GetCountryCodesAndNames_countries {
+export interface GetCountriesForWidget_countries {
   __typename: "Country";
   code: string;
-  name: string;
 }
 
-export interface GetCountryCodesAndNames {
+export interface GetCountriesForWidget {
   /**
    * Find all countries
    */
-  countries: GetCountryCodesAndNames_countries[];
+  countries: GetCountriesForWidget_countries[];
 }

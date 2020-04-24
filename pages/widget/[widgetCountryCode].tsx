@@ -28,7 +28,6 @@ const WidgetCountryCodePage = ({
         <Fragment>
             <Head>
                 <title>Find A Helpline | {country.name}</title>
-                <script src="/widget.min.js"></script>
             </Head>
 
             <OrganizationProvider
@@ -55,7 +54,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                 name
                 emergencyNumber
             }
-            organizations(countryCode: $countryCode) {
+            organizations(countryCode: $countryCode, subdivisionCodes: []) {
                 nodes {
                     slug
                     name
@@ -93,6 +92,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             countries {
                 code
                 name
+                emergencyNumber
                 subdivisions {
                     code
                     name
@@ -107,6 +107,8 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             countryCode: context.params.widgetCountryCode,
         },
     );
+
+    // key is needed here for link router to work - https://github.com/zeit/next.js/issues/9992
     return {
         props: {
             country,
@@ -115,13 +117,14 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             humanSupportTypes,
             topics,
             countries,
+            key: context.params.widgetCountryCode,
         },
     };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const query = gql`
-        query GetCountries {
+        query GetCountriesForWidget {
             countries {
                 code
             }
