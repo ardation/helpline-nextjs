@@ -55,16 +55,16 @@ const useStyles = makeStyles((theme: Theme) =>
             border: '1px solid #000',
             borderRadius: '10px',
             gridTemplateColumns: '1fr 88px',
-            minWidth: '23em',
-            minHeight: '19em',
+            width: '60vw',
+            maxWidth: '20rem',
+            // height: '50vh',
+            minHeight: '20rem',
+            flex: 1,
             '& > div': {
                 padding: theme.spacing(2),
             },
-            '@media (max-width: 480px)': {
+            [theme.breakpoints.down(420)]: {
                 flexDirection: 'column',
-            },
-            '@media (max-width: 320px)': {
-                minWidth: 'unset',
             },
         },
         webChatSpacing: {
@@ -139,7 +139,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 marginRight: theme.spacing(0.5),
                 marginBottom: theme.spacing(0.5),
             },
-            '@media (max-width: 480px)': {
+            [theme.breakpoints.down('xs')]: {
                 flexDirection: 'row',
             },
         },
@@ -163,7 +163,7 @@ const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.down('xs')]: {
                 gridRowGap: theme.spacing(1),
             },
-            '@media (max-width: 320px)': {
+            [theme.breakpoints.down(420)]: {
                 borderTopRightRadius: '0',
                 borderBottomLeftRadius: '10px',
                 gridAutoFlow: 'column',
@@ -286,9 +286,10 @@ const OrganizationCard = ({ organization, widget }: Props): ReactElement => {
                 )}
                 {organization.categories.length > 0 && (
                     <Box ml={1} className={classes.chips} data-testid="categories">
-                        {organization.categories.map((category, index) => (
-                            <Chip className={classes.chip} key={index} label={category.name} />
-                        ))}
+                        {organization.categories.map(
+                            (category, index) =>
+                                index < 4 && <Chip className={classes.chip} key={index} label={category.name} />,
+                        )}
                     </Box>
                 )}
             </Box>

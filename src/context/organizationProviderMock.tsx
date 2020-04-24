@@ -41,7 +41,7 @@ export const organizationData = [
         chatUrl: 'https://www.youthline.co.nz/web-chat-counselling.html',
         timezone: 'Pacific/Auckland',
         topics: [{ name: 'Topic 1' }],
-        categories: [{ name: 'Category 1' }],
+        categories: [{ name: 'Category 1' }, { name: 'Category 2' }, { name: 'Category 3' }, { name: 'Category 4' }],
         humanSupportTypes: [],
         openingHours: [
             {
