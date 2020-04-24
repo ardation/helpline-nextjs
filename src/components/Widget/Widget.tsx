@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
             flex: '0 0 auto',
             alignItems: 'flex-start',
             flexDirection: 'column',
-            '@media (min-width: 480px)': {
+            '@media (min-width: 400px)': {
                 overflow: 'scroll',
                 flexDirection: 'row',
             },
