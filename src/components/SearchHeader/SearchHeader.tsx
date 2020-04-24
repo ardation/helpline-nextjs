@@ -63,20 +63,20 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         inputConatainer: {
             display: 'flex',
-            alignItems: 'center',
+            justifyContent: 'space-between',
         },
         button: {
             textAlign: 'left',
             borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
-            margin: `0 ${theme.spacing(1)}px`,
             [theme.breakpoints.down('xs')]: {
                 fontSize: '12px',
             },
         },
         searchButton: {
             flexGrow: 1,
+            marginRight: theme.spacing(1),
         },
         filterButton: {
             backgroundColor: 'white',
@@ -182,6 +182,7 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                         preselectedHumanSupportTypes={activeFilters.humanSupportTypes}
                         showMax={7}
                         onChange={(filters): void => applyFilters(filters)}
+                        onApply={setShowFilter}
                     />
                 </Box>
             )}
