@@ -25,6 +25,7 @@ type Props = {
     onSubdivisionChange: (subdivision: Subdivision) => void;
     inline?: boolean;
     defaultCountry?: Country;
+    defaultSubdivision?: Subdivision;
 };
 
 // ISO 3166-1 alpha-2
@@ -97,16 +98,17 @@ const CountrySelect = ({
     onSubdivisionChange,
     inline,
     defaultCountry,
+    defaultSubdivision,
 }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(defaultCountry ?? null);
-    const setSelectedSubdivision = useState<Subdivision | undefined>(undefined)[1];
+    const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | null>(defaultSubdivision ?? null);
 
     const localOnCountryChange = (country: Country): void => {
         setSelectedCountry(country);
         onCountryChange(country);
-        setSelectedSubdivision(undefined);
-        onSubdivisionChange(undefined);
+        setSelectedSubdivision(null);
+        onSubdivisionChange(null);
     };
 
     const localOnSubdivisionChange = (subdivision: Subdivision): void => {
@@ -160,6 +162,7 @@ const CountrySelect = ({
                         option: classes.option,
                         paper: classes.paper,
                     }}
+                    value={selectedSubdivision}
                     options={sortBy('name', selectedCountry.subdivisions) as Subdivision[]}
                     getOptionLabel={(option): string => option.name}
                     openOnFocus={true}

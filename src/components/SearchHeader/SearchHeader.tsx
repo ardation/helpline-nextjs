@@ -106,7 +106,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
-    const { activeCountry, filterOptions, activeFilters, applyFilters } = useContext(OrganizationContext);
+    const { activeCountry, activeSubdivision, filterOptions, activeFilters, applyFilters } = useContext(
+        OrganizationContext,
+    );
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(activeCountry || undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
     const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -126,6 +128,7 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                     onCountryChange={setSelectedCountry}
                     onSubdivisionChange={setSelectedSubdivision}
                     defaultCountry={activeCountry || null}
+                    defaultSubdivision={activeSubdivision || null}
                 />
                 {selectedCountry && (
                     <Box className={classes.inputConatainer}>
