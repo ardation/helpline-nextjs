@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 import EmblaCarouselReact from 'embla-carousel-react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Box, Container } from '@material-ui/core';
-import { useWindowResize } from 'beautiful-react-hooks';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ConditionalWrapper from '../../util/conditionalWrapper';
 import { Organization } from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
@@ -41,16 +41,9 @@ const OrganizationCarousel = ({ organizations, widget }: Props): ReactElement =>
 
     const scrollPrev = useCallback(() => embla.scrollPrev(), [embla]);
     const scrollNext = useCallback(() => embla.scrollNext(), [embla]);
-    const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
-    const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
-    const [width, setWidth] = useState(undefined);
-
-    useWindowResize(() => {
-        if (typeof window !== 'undefined') {
-            return setWidth(window.innerWidth);
-        }
-        setWidth(1024);
-    });
+    const [prevBtnEnabled, setPrevBtnEnabled] = useState(true);
+    const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
+    const matches = useMediaQuery('(min-width: 320px)');
 
     useEffect(() => {
         const onSelect = (): void => {
@@ -67,7 +60,7 @@ const OrganizationCarousel = ({ organizations, widget }: Props): ReactElement =>
         <Container className={classes.container}>
             {organizations && organizations.length > 0 && (
                 <ConditionalWrapper
-                    condition={width >= 320}
+                    condition={matches}
                     wrapper={(children): ReactElement => (
                         <EmblaCarouselReact
                             emblaRef={setEmbla}
