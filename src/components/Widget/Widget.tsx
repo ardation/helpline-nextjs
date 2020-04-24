@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingRight: 0,
             border: '1px solid #000',
             borderRadius: '0 0 10px 10px',
-            overflowY: 'scroll',
+            overflow: 'scroll',
         },
         header: {
             position: 'relative',
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
             flex: '0 0 auto',
             alignItems: 'flex-start',
             flexDirection: 'column',
-            '@media (min-width: 480px)': {
+            '@media (min-width: 400px)': {
                 overflow: 'scroll',
                 flexDirection: 'row',
             },
