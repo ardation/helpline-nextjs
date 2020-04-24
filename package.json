@@ -20,6 +20,7 @@
         "@material-ui/icons": "^4.9.1",
         "@material-ui/lab": "^4.0.0-alpha.47",
         "beautiful-react-hooks": "^0.23.1",
+        "embla-carousel-react": "^1.3.1",
         "faker": "^4.1.0",
         "graphql": "^14.6.0",
         "graphql-request": "^1.8.2",

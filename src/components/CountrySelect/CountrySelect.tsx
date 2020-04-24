@@ -16,6 +16,7 @@ type Country = {
     code: string;
     name: string;
     subdivisions: Subdivision[];
+    emergencyNumber?: string;
 };
 
 type Props = {
@@ -23,7 +24,7 @@ type Props = {
     onCountryChange: (country: Country) => void;
     onSubdivisionChange: (subdivision: Subdivision) => void;
     inline?: boolean;
-    defaultCountryCode?: string;
+    defaultCountry?: Country;
 };
 
 // ISO 3166-1 alpha-2
@@ -47,6 +48,9 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(0, 1fr))',
             gridGap: theme.spacing(1),
+            [theme.breakpoints.down(420)]: {
+                gridTemplateColumns: '1fr',
+            },
         },
         inputRoot: {
             borderRadius: '48px',
@@ -54,9 +58,16 @@ const useStyles = makeStyles((theme: Theme) =>
             '&[class*="MuiOutlinedInput-root"]': {
                 paddingTop: '5px',
                 paddingBottom: '5px',
+                [theme.breakpoints.down(420)]: {
+                    paddingTop: '0',
+                    paddingBottom: '0',
+                },
             },
             '& fieldset': {
                 border: 0,
+            },
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '12px',
             },
         },
         option: {
@@ -89,14 +100,10 @@ const CountrySelect = ({
     onCountryChange,
     onSubdivisionChange,
     inline,
-    defaultCountryCode,
+    defaultCountry,
 }: Props): ReactElement => {
     const classes = useStyles();
-    const [selectedCountry, setSelectedCountry] = useState<Country | null>(
-        countries.filter((country: Country) => {
-            return country.code === defaultCountryCode;
-        })[0] ?? null,
-    );
+    const [selectedCountry, setSelectedCountry] = useState<Country | null>(defaultCountry ?? null);
     const setSelectedSubdivision = useState<Subdivision | undefined>(undefined)[1];
 
     const localOnCountryChange = (country: Country): void => {

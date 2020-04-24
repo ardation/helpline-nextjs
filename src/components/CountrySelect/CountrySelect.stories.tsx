@@ -41,7 +41,7 @@ export const WithDefaultCountry = (): ReactElement => (
                     ],
                 },
             ]}
-            defaultCountryCode="AU"
+            defaultCountry={{ code: 'AU', name: 'Australia', subdivisions: [] }}
             onCountryChange={action('onCountryChange')}
             onSubdivisionChange={action('onSubdivisionChange')}
         />

@@ -5,34 +5,34 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
-import Chrome from '../src/components/Chrome';
-import { GetCountryCodeProps } from '../types/GetCountryCodeProps';
-import OrganizationList from '../src/components/OrganizationList';
-import Footer from '../src/components/Footer';
+import { GetWidgetCountryCodeProps } from '../../types/GetWidgetCountryCodeProps';
+import OrganizationList from '../../src/components/OrganizationList';
+import Footer from '../../src/components/Footer';
 
-const CountryCodePage = ({
+const WidgetCountryCodePage = ({
     country,
     organizations,
     categories,
     humanSupportTypes,
     topics,
-}: GetCountryCodeProps): ReactElement => {
+    countries,
+}: GetWidgetCountryCodeProps): ReactElement => {
     const router = useRouter();
-    const queryTopics = router.query.topics;
-    let preselectedTopics: { name: string }[] = [];
-
-    if (queryTopics) {
-        preselectedTopics = [queryTopics].flat().map((topic) => {
-            return { name: topic };
-        });
-    }
+    const query = router.query;
+    const preselectedTopics: { name: string }[] = [];
 
     return (
         <Fragment>
             <Head>
                 <title>Find A Helpline | {country.name}</title>
+                <script src="/widget.min.js"></script>
             </Head>
-            <Chrome country={country}>
+            <div className="widget">
+                <div className="search">
+                    countries count: {countries.length} - selected country: {country.name} - query:{' '}
+                    {query.widgetCountyCode}
+                </div>
+
                 <OrganizationList
                     organizations={organizations.nodes}
                     country={country}
@@ -42,20 +42,20 @@ const CountryCodePage = ({
                     topics={topics}
                 />
                 <Footer />
-            </Chrome>
+            </div>
         </Fragment>
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: GetCountryCodeProps }> => {
+export const getStaticProps: GetStaticProps = async (context): Promise<{ props: GetWidgetCountryCodeProps }> => {
     const query = gql`
-        query GetCountryCodeProps($countryCode: String!) {
+        query GetWidgetCountryCodeProps($countryCode: String!) {
             country(code: $countryCode) {
                 code
                 name
                 emergencyNumber
             }
-            organizations(countryCode: $countryCode, subdivisionCodes: []) {
+            organizations(countryCode: $countryCode) {
                 nodes {
                     slug
                     name
@@ -90,13 +90,21 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             topics {
                 name
             }
+            countries {
+                code
+                name
+                subdivisions {
+                    code
+                    name
+                }
+            }
         }
     `;
-    const { country, organizations, categories, humanSupportTypes, topics } = await request(
+    const { country, organizations, categories, humanSupportTypes, topics, countries } = await request(
         'https://api.findahelpline.com',
         print(query),
         {
-            countryCode: context.params.countryCode,
+            countryCode: context.params.widgetCountyCode,
         },
     );
     return {
@@ -106,6 +114,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             categories,
             humanSupportTypes,
             topics,
+            countries,
         },
     };
 };
@@ -124,7 +133,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         paths: countries.map((country) => {
             return {
                 params: {
-                    countryCode: country.code.toLowerCase(),
+                    widgetCountyCode: country.code.toLowerCase(),
                 },
             };
         }),
@@ -132,4 +141,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
 };
 
-export default CountryCodePage;
+export default WidgetCountryCodePage;

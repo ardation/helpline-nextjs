@@ -26,12 +26,6 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        logo: {
-            textAlign: 'left',
-            '& img': {
-                maxWidth: '250px',
-            },
-        },
         container: {
             display: 'flex',
             flexDirection: 'column',
@@ -42,8 +36,27 @@ const useStyles = makeStyles((theme: Theme) =>
             backgroundColor: '#181719',
             position: 'relative',
         },
+        header: {
+            display: 'grid',
+            gridColumnGap: theme.spacing(2),
+            gridTemplateColumns: 'auto 1fr',
+            alignItems: 'end',
+            [theme.breakpoints.down('xs')]: {
+                gridTemplateColumns: '1fr',
+                textAlign: 'left',
+            },
+        },
+        logo: {
+            // maxWidth: '200px',
+            width: '200px',
+        },
         subheader: {
-            color: '#FFFFFF',
+            color: '#EEEDF4',
+            fontWeight: 'lighter',
+            fontSize: theme.typography.fontSize,
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '12px',
+            },
         },
         box: {
             display: 'grid',
@@ -59,6 +72,13 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
             margin: `0 ${theme.spacing(1)}px`,
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '12px',
+            },
+            [theme.breakpoints.down(420)]: {
+                paddingTop: '4px',
+                paddingBottom: '4px',
+            },
         },
         searchButton: {
             flexGrow: 1,
@@ -69,7 +89,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 paddingRight: theme.spacing(1),
             },
             '&:hover': {
-                backgroundColor: '#f0f0f0',
+                backgroundColor: '#EEEDF4',
             },
         },
         sortText: {
@@ -89,25 +109,26 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
-    const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
+    const { activeCountry, filterOptions, applyFilters } = useContext(OrganizationContext);
+    const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(activeCountry || undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
     const [showFilter, setShowFilter] = useState<boolean>(false);
-    const { filterOptions, applyFilters } = useContext(OrganizationContext);
 
     const classes = useStyles();
 
     return (
         <Container className={classes.container}>
             <Box className={classes.box}>
-                <Box className={classes.logo}>
-                    <img src="/logo.svg" alt="find a helpline" />
+                <Box className={classes.header}>
+                    <img className={classes.logo} src="/logo.svg" alt="find a helpline" />
+                    <Typography className={classes.subheader}>Struggling? Talk to a real person, for free.</Typography>
                 </Box>
-                <Typography className={classes.subheader}>Struggling? Talk to a real person, for free.</Typography>
                 <CountrySelect
                     inline
                     countries={countries}
                     onCountryChange={setSelectedCountry}
                     onSubdivisionChange={setSelectedSubdivision}
+                    defaultCountry={activeCountry || null}
                 />
                 {selectedCountry && (
                     <Box className={classes.inputConatainer}>
