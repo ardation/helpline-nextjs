@@ -60,15 +60,14 @@ const Widget = ({}: Props): ReactElement => {
                     <SearchHeader countries={countries} parentPage="widget" />
                     <TopBar widget country={{ emergencyNumber: activeCountry?.emergencyNumber }} />
                 </div>
-                {organizations.length > 0 ? (
-                    <Container className={classes.carousel}>
-                        <OrganizationCarousel widget organizations={organizations} />
-                    </Container>
-                ) : (
+                {!activeCountry && organizations.length > 0 && (
                     <Container className={classes.noResults}>
                         <Typography>Sorry, no results found</Typography>
                     </Container>
                 )}
+                <Container className={classes.carousel}>
+                    <OrganizationCarousel widget organizations={organizations} />
+                </Container>
             </Box>
             <EmbedLink />
         </Container>

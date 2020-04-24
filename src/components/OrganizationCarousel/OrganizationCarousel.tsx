@@ -22,7 +22,7 @@ const useStyles = makeStyles(() =>
             display: 'flex',
             position: 'relative',
             alignItems: 'flex-start',
-            '@media (max-width: 320px)': {
+            '@media (max-width: 400px)': {
                 flexDirection: 'column',
                 overflowY: 'scroll',
             },
@@ -38,7 +38,7 @@ const OrganizationCarousel = ({ organizations, widget }: Props): ReactElement =>
     const scrollNext = useCallback(() => embla.scrollNext(), [embla]);
     const [prevBtnEnabled, setPrevBtnEnabled] = useState(true);
     const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
-    const matches = useMediaQuery('(min-width: 320px)');
+    const matches = useMediaQuery('(min-width: 400px)');
 
     useEffect(() => {
         const onSelect = (): void => {
