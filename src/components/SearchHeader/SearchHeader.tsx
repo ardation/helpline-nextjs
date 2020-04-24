@@ -182,6 +182,7 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                         preselectedHumanSupportTypes={activeFilters.humanSupportTypes}
                         showMax={7}
                         onChange={(filters): void => applyFilters(filters)}
+                        onApply={setShowFilter}
                     />
                 </Box>
             )}
