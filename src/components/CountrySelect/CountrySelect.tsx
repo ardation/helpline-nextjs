@@ -109,7 +109,7 @@ const CountrySelect = ({
     const localOnCountryChange = (country: Country): void => {
         setSelectedCountry(country);
         onCountryChange(country);
-        setActiveCountry(country);
+        setActiveCountry ? setActiveCountry(country) : null;
         setSelectedSubdivision(null);
         onSubdivisionChange(null);
     };
