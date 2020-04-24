@@ -22,6 +22,15 @@ export const WithActiveCountry = (): ReactElement => (
     </ThemeProvider>
 );
 
+export const WithNoResults = (): ReactElement => (
+    <ThemeProvider theme={theme}>
+        {withMockOrganizationProvider(<Widget />, {
+            organizations: [],
+            activeCountry: { code: 'AU', name: 'Australia', subdivisions: [], emergencyNumber: '111' },
+        })}
+    </ThemeProvider>
+);
+
 Default.story = {
     name: 'default',
     parameters: { chromatic: { diffThreshold: 0.7 } },

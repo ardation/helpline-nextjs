@@ -35,7 +35,10 @@ type Props = {
     categories?: Category[];
     humanSupportTypes?: HumanSupportType[];
     topics?: Topic[];
+    showMax?: number;
     preselectedTopics?: Topic[];
+    preselectedCategories?: Category[];
+    preselectedHumanSupportTypes?: HumanSupportType[];
     onChange: (changes: Changes) => void;
 };
 
@@ -76,7 +79,10 @@ const OrganizationFilter = ({
     humanSupportTypes,
     topics,
     preselectedTopics,
+    preselectedCategories,
+    preselectedHumanSupportTypes,
     onChange,
+    showMax,
 }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedContactMethods, setSelectedContactMethods] = useState<ContactMethod[]>([]);
@@ -118,6 +124,7 @@ const OrganizationFilter = ({
                             preselectedItems={preselectedTopics}
                             onChange={setSelectedTopics}
                             hideUnselected={preselectedTopics && preselectedTopics.length > 0}
+                            showMax={showMax}
                         />
                     </Box>
                 )}
@@ -131,13 +138,23 @@ const OrganizationFilter = ({
                 {humanSupportTypes && humanSupportTypes.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Human Support Type</Typography>
-                        <ItemSelect items={humanSupportTypes} onChange={setSelectedHumanSupportTypes} />
+                        <ItemSelect
+                            items={humanSupportTypes}
+                            preselectedItems={preselectedHumanSupportTypes}
+                            onChange={setSelectedHumanSupportTypes}
+                            showMax={showMax}
+                        />
                     </Box>
                 )}
                 {categories && categories.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Categories</Typography>
-                        <ItemSelect items={categories} onChange={setSelectedCategories} />
+                        <ItemSelect
+                            items={categories}
+                            preselectedItems={preselectedCategories}
+                            onChange={setSelectedCategories}
+                            showMax={showMax}
+                        />
                     </Box>
                 )}
                 <Box my={2}>

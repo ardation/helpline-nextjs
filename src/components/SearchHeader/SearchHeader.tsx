@@ -99,13 +99,14 @@ const useStyles = makeStyles((theme: Theme) =>
             right: 0,
             zIndex: 1200,
             background: 'white',
+            boxShadow: '0px 2px 5px 0px #EEEDF4',
             overflowY: 'scroll',
         },
     }),
 );
 
 const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
-    const { activeCountry, filterOptions, applyFilters } = useContext(OrganizationContext);
+    const { activeCountry, filterOptions, activeFilters, applyFilters } = useContext(OrganizationContext);
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(activeCountry || undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
     const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -176,6 +177,10 @@ const SearchHeader = ({ countries, parentPage }: Props): ReactElement => {
                         topics={filterOptions.topics}
                         categories={filterOptions.categories}
                         humanSupportTypes={filterOptions.humanSupportTypes}
+                        preselectedTopics={activeFilters.topics}
+                        preselectedCategories={activeFilters.categories}
+                        preselectedHumanSupportTypes={activeFilters.humanSupportTypes}
+                        showMax={7}
                         onChange={(filters): void => applyFilters(filters)}
                     />
                 </Box>

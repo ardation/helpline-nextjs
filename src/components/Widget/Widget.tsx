@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Container, Box, Theme } from '@material-ui/core';
+import { Container, Box, Theme, Typography } from '@material-ui/core';
 import OrganizationContext from '../../context/organizationContext';
 import TopBar from '../TopBar';
 import SearchHeader from '../SearchHeader';
@@ -39,6 +39,13 @@ const useStyles = makeStyles((theme: Theme) =>
             minWidth: 0,
             padding: theme.spacing(1),
         },
+        noResults: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: theme.spacing(10),
+        },
     }),
 );
 
@@ -53,9 +60,15 @@ const Widget = ({}: Props): ReactElement => {
                     <SearchHeader countries={countries} parentPage="widget" />
                     <TopBar widget country={{ emergencyNumber: activeCountry?.emergencyNumber }} />
                 </div>
-                <Container className={classes.carousel}>
-                    <OrganizationCarousel organizations={organizations} />
-                </Container>
+                {organizations.length > 0 ? (
+                    <Container className={classes.carousel}>
+                        <OrganizationCarousel widget organizations={organizations} />
+                    </Container>
+                ) : (
+                    <Container className={classes.noResults}>
+                        <Typography>Sorry, no results found</Typography>
+                    </Container>
+                )}
             </Box>
             <EmbedLink />
         </Container>
