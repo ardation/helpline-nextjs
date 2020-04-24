@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                 name
                 emergencyNumber
             }
-            organizations(countryCode: $countryCode) {
+            organizations(countryCode: $countryCode, subdivisionCodes: []) {
                 nodes {
                     slug
                     name
