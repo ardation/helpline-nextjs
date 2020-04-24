@@ -6,7 +6,7 @@ describe('NavBar', () => {
     it('should render children', () => {
         const { getByTestId } = render(
             <NavBar>
-                <div data-testId="childElement"></div>
+                <div data-testid="childElement"></div>
             </NavBar>,
         );
         expect(getByTestId('childElement')).toBeTruthy();

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import { OrganizationProvider } from '../../context/organizationContext';
 import SearchHeader from '.';
 
 describe('SearchHeader', () => {
@@ -15,13 +16,30 @@ describe('SearchHeader', () => {
         },
     ];
 
+    const withContextProvider = (WrappedSearchHeader, props) => {
+        return (
+            <OrganizationProvider
+                activeCountry={countries[0]}
+                countries={countries}
+                allOrganizations={[]}
+                filterOptions={{
+                    topics: undefined,
+                    categories: undefined,
+                    humanSupportTypes: undefined,
+                }}
+            >
+                <WrappedSearchHeader {...props} />
+            </OrganizationProvider>
+        );
+    };
+
     it('should show correct text', () => {
-        const { getByText } = render(<SearchHeader countries={countries} />);
+        const { getByText } = render(withContextProvider(SearchHeader, { countries: countries }));
         expect(getByText('Struggling? Talk to a real person, for free.')).toBeTruthy();
     });
 
     it('should change search url after country select', () => {
-        const { getByTestId, getByRole } = render(<SearchHeader countries={countries} />);
+        const { getByTestId, getByRole } = render(withContextProvider(SearchHeader, { countries: countries }));
         const element = getByRole('textbox');
         fireEvent.click(element);
         fireEvent.click(getByRole('listbox').children[0]);
@@ -30,7 +48,7 @@ describe('SearchHeader', () => {
     });
 
     it('should change search url after country and subdivision select', () => {
-        const { getByTestId, getAllByRole } = render(<SearchHeader countries={countries} />);
+        const { getByTestId, getAllByRole } = render(withContextProvider(SearchHeader, { countries: countries }));
         const countryElement = getAllByRole('textbox')[0];
         fireEvent.click(countryElement);
         fireEvent.click(getAllByRole('listbox')[0].children[1]);
@@ -42,7 +60,9 @@ describe('SearchHeader', () => {
     });
 
     it('should change search url with the correct url prefix', () => {
-        const { getByTestId, getByRole } = render(<SearchHeader countries={countries} parentPage="widget" />);
+        const { getByTestId, getByRole } = render(
+            withContextProvider(SearchHeader, { countries: countries, parentPage: 'widget' }),
+        );
         const element = getByRole('textbox');
         fireEvent.click(element);
         fireEvent.click(getByRole('listbox').children[0]);

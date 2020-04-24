@@ -1,11 +1,12 @@
 /* eslint-disable no-use-before-define */
-import React, { ReactElement, Fragment, useState } from 'react';
+import React, { ReactElement, Fragment, useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Box } from '@material-ui/core';
 import { sortBy } from 'lodash/fp';
+import OrganizationContext from '../../context/organizationContext';
 
 type Subdivision = {
     code: string;
@@ -101,12 +102,14 @@ const CountrySelect = ({
     defaultSubdivision,
 }: Props): ReactElement => {
     const classes = useStyles();
+    const { setActiveCountry } = useContext(OrganizationContext);
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(defaultCountry ?? null);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | null>(defaultSubdivision ?? null);
 
     const localOnCountryChange = (country: Country): void => {
         setSelectedCountry(country);
         onCountryChange(country);
+        setActiveCountry(country);
         setSelectedSubdivision(null);
         onSubdivisionChange(null);
     };

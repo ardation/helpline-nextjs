@@ -70,6 +70,7 @@ type State = {
     filterOptions: FilterOptions;
     activeFilters: Filters;
     applyFilters: (selectedFilters: Filters) => void;
+    setActiveCountry: (country: Country) => void;
 };
 
 const initialState: State = {
@@ -87,6 +88,7 @@ const initialState: State = {
         sorts: [],
     },
     applyFilters: undefined,
+    setActiveCountry: undefined,
 };
 
 const OrganizationContext = createContext(initialState);
@@ -102,6 +104,7 @@ export const OrganizationProvider = ({
     const [organizations, setOrganizations] = useState<Organization[] | undefined>(allOrganizations);
     const [activeFilters, applyFilters] = useState<Filters>(initialState.activeFilters);
     // const [loading, setLoading] = useState<boolean>(false);
+    const [_activeCountry, setActiveCountry] = useState<Country>(activeCountry);
 
     useEffect(() => {
         setOrganizations(filterAndSortOrganizations(organizations, activeFilters));
@@ -110,12 +113,13 @@ export const OrganizationProvider = ({
     const ctx = {
         // loading,
         countries,
-        activeCountry,
+        activeCountry: _activeCountry,
         activeSubdivision,
         organizations,
         filterOptions,
         activeFilters,
         applyFilters,
+        setActiveCountry,
     };
 
     return <OrganizationContext.Provider value={ctx}>{children}</OrganizationContext.Provider>;
