@@ -22,7 +22,7 @@ const useStyles = makeStyles(() =>
             display: 'flex',
             position: 'relative',
             alignItems: 'flex-start',
-            '@media (max-width: 320px)': {
+            '@media (max-width: 400px)': {
                 flexDirection: 'column',
                 overflowY: 'scroll',
             },
@@ -62,7 +62,7 @@ const OrganizationCarousel = ({ organizations, widget }: Props): ReactElement =>
         <Container className={classes.container}>
             {organizations && organizations.length > 0 && (
                 <ConditionalWrapper
-                    condition={width >= 320}
+                    condition={width >= 400}
                     wrapper={(children): ReactElement => (
                         <EmblaCarouselReact
                             emblaRef={setEmbla}
