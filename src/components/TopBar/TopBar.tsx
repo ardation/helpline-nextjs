@@ -1,4 +1,4 @@
-import React, { ReactElement, Fragment } from 'react';
+import React, { ReactElement } from 'react';
 import { AppBar, Container, Toolbar, Typography, Button, Hidden } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
@@ -10,6 +10,7 @@ type Country = {
 
 type Props = {
     country?: Country;
+    widget?: boolean;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,7 +22,8 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         appBar: {
-            backgroundColor: '#181719',
+            backgroundColor: (props: Props): string => (props.widget ? '#F0F1F5' : '#181719'),
+            color: (props: Props): string => (props.widget ? '#000' : '#FFF'),
             zIndex: theme.zIndex.drawer + 2,
         },
         toolbar: {
@@ -29,17 +31,19 @@ const useStyles = makeStyles((theme: Theme) =>
             gridGap: theme.spacing(2),
             paddingRight: 0,
             paddingLeft: 0,
+            minHeight: (props: Props): string => props.widget && '56px',
             [theme.breakpoints.down('xs')]: {
                 gridGap: theme.spacing(1),
                 gridRowGap: 0,
-                height: '80px',
+                height: (props: Props): string => (props.widget ? 'auto' : '80px'),
+                minHeight: (props: Props): string => props.widget && '44px',
             },
         },
         toolbarWithCountry: {
             gridTemplateColumns: '1fr auto auto',
             [theme.breakpoints.down('xs')]: {
                 textAlign: 'center',
-                gridTemplateColumns: '1fr 1fr',
+                gridTemplateColumns: (props: Props): string => (props.widget ? '1fr auto' : '1fr 1fr'),
                 alignItems: 'flex-start',
             },
         },
@@ -49,25 +53,25 @@ const useStyles = makeStyles((theme: Theme) =>
         title: {
             minWidth: '80px',
             [theme.breakpoints.down('xs')]: {
-                fontSize: '0.8rem',
+                fontSize: '12px',
             },
         },
         titleWithCountry: {
             [theme.breakpoints.down('xs')]: {
-                gridColumn: '1 / span 2',
+                gridColumn: (props: Props): string => !props.widget && '1 / span 2',
                 alignSelf: 'center',
             },
         },
         button: {
             backgroundColor: '#CC001E',
+            color: '#FFF',
             textAlign: 'left',
             borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
+            alignSelf: 'center',
             [theme.breakpoints.down('xs')]: {
                 fontSize: '0.7rem',
-                paddingRight: theme.spacing(1),
-                paddingLeft: theme.spacing(1),
             },
             '&:hover': {
                 backgroundColor: '#CC001E',
@@ -81,8 +85,8 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const TopBar = ({ country }: Props): ReactElement => {
-    const classes = useStyles();
+const TopBar = ({ country, widget }: Props): ReactElement => {
+    const classes = useStyles({ widget });
 
     return (
         <AppBar className={classes.appBar} position="static">
@@ -94,7 +98,7 @@ const TopBar = ({ country }: Props): ReactElement => {
                     ].join(' ')}
                 >
                     {country ? (
-                        <Fragment>
+                        <>
                             <Typography className={[classes.title, classes.titleWithCountry].join(' ')}>
                                 Are you or someone else in immediate danger?
                             </Typography>
@@ -102,27 +106,29 @@ const TopBar = ({ country }: Props): ReactElement => {
                                 color="inherit"
                                 classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
                                 endIcon={<CallIcon />}
-                                href={`tel:${country.emergencyNumber}`}
+                                href={`tel:${country?.emergencyNumber || 911}`}
                                 data-testid="emergencyServicesButton"
                             >
-                                <Hidden smUp>Call {country.emergencyNumber}</Hidden>
+                                <Hidden smUp>Call {country.emergencyNumber || 911}</Hidden>
                                 <Hidden only="xs">Emergency Services</Hidden>
                             </Button>
-                        </Fragment>
+                        </>
                     ) : (
                         <Typography className={classes.title}>
                             Need to leave quickly? Click to leave this site and open the weather.
                         </Typography>
                     )}
-                    <Button
-                        color="inherit"
-                        classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
-                        endIcon={<DirectionsRunIcon />}
-                        href="https://accuweather.com"
-                        data-testid="leaveQuicklyButton"
-                    >
-                        Leave Quickly
-                    </Button>
+                    {!widget && (
+                        <Button
+                            color="inherit"
+                            classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
+                            endIcon={<DirectionsRunIcon />}
+                            href="https://accuweather.com"
+                            data-testid="leaveQuicklyButton"
+                        >
+                            Leave Quickly
+                        </Button>
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>

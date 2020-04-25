@@ -1,5 +1,5 @@
 import CloseIcon from '@material-ui/icons/Close';
-import React, { ReactElement, Fragment, useState, useEffect } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Typography, Container, Box, Button, Backdrop } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -84,7 +84,7 @@ const OrganizationList = ({
     }, [preselectedTopics]);
 
     return (
-        <Fragment>
+        <>
             <NavBar>
                 <Button
                     className={classes.filterButton}
@@ -138,7 +138,7 @@ const OrganizationList = ({
                     </Box>
                 ))}
             </Container>
-        </Fragment>
+        </>
     );
 };
 

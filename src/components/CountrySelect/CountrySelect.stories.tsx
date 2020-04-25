@@ -27,6 +27,27 @@ export const Default = (): ReactElement => (
     </Box>
 );
 
+export const WithDefaultCountry = (): ReactElement => (
+    <Box m={2}>
+        <CountrySelect
+            countries={[
+                { code: 'AU', name: 'Australia', subdivisions: [] },
+                {
+                    code: 'NZ',
+                    name: 'New Zealand',
+                    subdivisions: [
+                        { name: 'Bay of Plenty', code: 'BOP' },
+                        { name: 'Auckland', code: 'AUK' },
+                    ],
+                },
+            ]}
+            defaultCountry={{ code: 'AU', name: 'Australia', subdivisions: [] }}
+            onCountryChange={action('onCountryChange')}
+            onSubdivisionChange={action('onSubdivisionChange')}
+        />
+    </Box>
+);
+
 Default.story = {
     parameters: { chromatic: { diffThreshold: 0.7 } },
 };

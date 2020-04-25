@@ -1,28 +1,28 @@
 import Head from 'next/head';
-import React, { ReactElement, Fragment } from 'react';
+import React, { ReactElement } from 'react';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import Search from '../src/components/Search';
 import Chrome from '../src/components/Chrome';
-import { GetCountriesAndTopics } from '../types/GetCountriesAndTopics';
+import { GetSearchProps } from '../types/GetSearchProps';
 
-const SearchPage = ({ topics, countries }: GetCountriesAndTopics): ReactElement => {
+const SearchPage = ({ topics, countries }: GetSearchProps): ReactElement => {
     return (
-        <Fragment>
+        <>
             <Head>
                 <title>Find A Helpline</title>
             </Head>
             <Chrome footer={true}>
                 <Search countries={countries} topics={topics} />
             </Chrome>
-        </Fragment>
+        </>
     );
 };
 
-export const getStaticProps = async (): Promise<{ props: GetCountriesAndTopics }> => {
+export const getStaticProps = async (): Promise<{ props: GetSearchProps }> => {
     const query = gql`
-        query GetCountriesAndTopics {
+        query GetSearchProps {
             countries {
                 code
                 name
@@ -36,7 +36,7 @@ export const getStaticProps = async (): Promise<{ props: GetCountriesAndTopics }
             }
         }
     `;
-    const { countries, topics } = await request('https://api.findahelpline.com', print(query));
+    const { countries, topics } = (await request('https://api.findahelpline.com', print(query))) as GetSearchProps;
     return {
         props: {
             countries,

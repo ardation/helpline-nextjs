@@ -1,4 +1,4 @@
-import React, { ReactElement, Fragment } from 'react';
+import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Typography, Chip, Button, Box, Container } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
@@ -118,7 +118,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
-        <Fragment>
+        <>
             <NavBar>
                 <SideBar />
             </NavBar>
@@ -247,7 +247,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                     </Box>
                 </Box>
             </Container>
-        </Fragment>
+        </>
     );
 };
 

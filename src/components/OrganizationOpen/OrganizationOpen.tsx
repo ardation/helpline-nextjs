@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, Fragment } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { useInterval } from 'beautiful-react-hooks';
@@ -23,7 +23,7 @@ type Props = {
 const useStyles = makeStyles(() =>
     createStyles({
         body: {
-            fontSize: '0.9375rem',
+            fontSize: 'inherit',
         },
         open: {
             color: '#3FA607',
@@ -43,23 +43,23 @@ const OrganizationOpen = ({ organization }: Props): ReactElement => {
     return (
         <Typography className={classes.body}>
             {organization.alwaysOpen && (
-                <Fragment>
+                <>
                     <span className={classes.open}>Open</span> &nbsp;&middot;&nbsp; <span>Available 24/7</span>
-                </Fragment>
+                </>
             )}
             {!organization.alwaysOpen && (
-                <Fragment>
+                <>
                     {openStatus.open && (
-                        <Fragment>
+                        <>
                             <span className={classes.open}>Open</span> &nbsp;&middot;&nbsp;{' '}
                             <span>
                                 {openStatus.openTime.local().format('h:mm A')} -{' '}
                                 {openStatus.closeTime.local().format('h:mm A')}
                             </span>
-                        </Fragment>
+                        </>
                     )}
                     {!openStatus.open && <span>Closed</span>}
-                </Fragment>
+                </>
             )}
         </Typography>
     );
