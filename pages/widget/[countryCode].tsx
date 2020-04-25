@@ -5,13 +5,13 @@ import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { GetWidgetCountryCodeProps } from '../../types/GetWidgetCountryCodeProps';
-import { OrganizationProvider } from '../../src/context/organizationContext';
 import Widget from '../../src/components/Widget';
 import { GetWidgetCountryCodePaths } from '../../types/GetWidgetCountryCodePaths';
 
 interface Props extends GetWidgetCountryCodeProps {
     key: string | string[];
 }
+
 const WidgetCountryCodePage = ({
     country,
     organizations,
@@ -20,28 +20,19 @@ const WidgetCountryCodePage = ({
     topics,
     countries,
 }: Props): ReactElement => {
-    const activeCountry = countries.find((_country) => {
-        return _country.code === country.code;
-    });
-
     return (
         <>
             <Head>
                 <title>Find A Helpline | {country.name}</title>
             </Head>
-
-            <OrganizationProvider
-                activeCountry={activeCountry}
+            <Widget
                 countries={countries}
-                allOrganizations={organizations.nodes}
-                filterOptions={{
-                    topics: topics,
-                    categories: categories,
-                    humanSupportTypes: humanSupportTypes,
-                }}
-            >
-                <Widget />
-            </OrganizationProvider>
+                selectedCountry={country}
+                organizations={organizations}
+                topics={topics}
+                categories={categories}
+                humanSupportTypes={humanSupportTypes}
+            />
         </>
     );
 };
@@ -108,7 +99,6 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
         },
     );
 
-    // key is needed here for link router to work - https://github.com/zeit/next.js/issues/9992
     return {
         props: {
             country,
@@ -117,7 +107,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             humanSupportTypes,
             topics,
             countries,
-            key: context.params.countryCode,
+            key: context.params.countryCode, // https://github.com/zeit/next.js/issues/9992
         },
     };
 };

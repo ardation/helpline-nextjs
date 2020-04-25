@@ -9,7 +9,6 @@ import {
     GetWidgetSubdivisionCodeProps,
     GetWidgetSubdivisionCodeProps_country_subdivisions as Subdivision,
 } from '../../../types/GetWidgetSubdivisionCodeProps';
-import { OrganizationProvider } from '../../../src/context/organizationContext';
 import Widget from '../../../src/components/Widget';
 import { GetWidgetCountryCodeSubdivisionCodePaths } from '../../../types/GetWidgetCountryCodeSubdivisionCodePaths';
 
@@ -27,13 +26,6 @@ const WidgetSubdivisionCodePage = ({
     topics,
     countries,
 }: Props): ReactElement => {
-    const activeCountry = countries.find((_country) => {
-        return _country.code === country.code;
-    });
-    const activeSubdivision = activeCountry.subdivisions.find((_subdivision) => {
-        return _subdivision.code === subdivision.code;
-    });
-
     return (
         <>
             <Head>
@@ -41,19 +33,15 @@ const WidgetSubdivisionCodePage = ({
                     Find A Helpline | {subdivision.name}, {country.name}
                 </title>
             </Head>
-            <OrganizationProvider
-                activeCountry={activeCountry}
-                activeSubdivision={activeSubdivision}
+            <Widget
                 countries={countries}
-                allOrganizations={organizations.nodes}
-                filterOptions={{
-                    topics: topics,
-                    categories: categories,
-                    humanSupportTypes: humanSupportTypes,
-                }}
-            >
-                <Widget />
-            </OrganizationProvider>
+                selectedCountry={country}
+                selectedSubdivision={subdivision}
+                organizations={organizations}
+                topics={topics}
+                categories={categories}
+                humanSupportTypes={humanSupportTypes}
+            />
         </>
     );
 };
@@ -120,15 +108,11 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
         'https://api.findahelpline.com',
         print(query),
         {
-            countryCode: context.params.widgetCountryCode,
-            subdivisionCode: context.params.widgetSubdivisionCode,
+            countryCode: context.params.countryCode,
+            subdivisionCode: context.params.subdivisionCode,
         },
     );
-    const subdivision = find(
-        { code: context.params.widgetSubdivisionCode.toString().toUpperCase() },
-        country.subdivisions,
-    );
-    // key is needed here for link router to work - https://github.com/zeit/next.js/issues/9992
+    const subdivision = find({ code: context.params.subdivisionCode.toString().toUpperCase() }, country.subdivisions);
     return {
         props: {
             country,
@@ -138,7 +122,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             humanSupportTypes,
             topics,
             countries,
-            key: context.params.widgetSubdivisionCode,
+            key: context.params.subdivisionCode, // https://github.com/zeit/next.js/issues/9992
         },
     };
 };
@@ -165,8 +149,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 return country.subdivisions.map((subdivision) => {
                     return {
                         params: {
-                            widgetCountryCode: country.code.toLowerCase(),
-                            widgetSubdivisionCode: subdivision.code.toLowerCase(),
+                            countryCode: country.code.toLowerCase(),
+                            subdivisionCode: subdivision.code.toLowerCase(),
                         },
                     };
                 });

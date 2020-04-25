@@ -11,13 +11,11 @@ import OrganizationList from '../src/components/OrganizationList';
 import Footer from '../src/components/Footer';
 import { GetCountryCodePaths } from '../types/GetCountryCodePaths';
 
-const CountryCodePage = ({
-    country,
-    organizations,
-    categories,
-    humanSupportTypes,
-    topics,
-}: GetCountryCodeProps): ReactElement => {
+interface Props extends GetCountryCodeProps {
+    key: string | string[];
+}
+
+const CountryCodePage = ({ country, organizations, categories, humanSupportTypes, topics }: Props): ReactElement => {
     const router = useRouter();
     const queryTopics = router.query.topics;
     let preselectedTopics: { name: string }[] = [];
@@ -48,7 +46,7 @@ const CountryCodePage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: GetCountryCodeProps }> => {
+export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
     const query = gql`
         query GetCountryCodeProps($countryCode: String!) {
             country(code: $countryCode) {
@@ -107,6 +105,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             categories,
             humanSupportTypes,
             topics,
+            key: context.params.countryCode, // https://github.com/zeit/next.js/issues/9992
         },
     };
 };

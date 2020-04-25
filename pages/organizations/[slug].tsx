@@ -10,7 +10,11 @@ import OrganizationItem from '../../src/components/OrganizationItem';
 import Footer from '../../src/components/Footer';
 import { GetOrganizationsSlugPaths } from '../../types/GetOrganizationsSlugPaths';
 
-const OrganizationPage = ({ organization }: GetOrganizationsSlugProps): ReactElement => {
+interface Props extends GetOrganizationsSlugProps {
+    key: string | string[];
+}
+
+const OrganizationPage = ({ organization }: Props): ReactElement => {
     return (
         <>
             <Head>
@@ -24,7 +28,7 @@ const OrganizationPage = ({ organization }: GetOrganizationsSlugProps): ReactEle
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: GetOrganizationsSlugProps }> => {
+export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
     const query = gql`
         query GetOrganizationsSlugProps($slug: String!) {
             organization(slug: $slug) {
@@ -64,6 +68,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
     return {
         props: {
             organization,
+            key: context.params.slug, // https://github.com/zeit/next.js/issues/9992
         },
     };
 };

@@ -17,6 +17,7 @@ import { GetCountryCodeSubdivisionCodePaths } from '../../types/GetCountryCodeSu
 
 interface Props extends GetCountryCodeSubdivisonCodeProps {
     subdivision: Subdivision;
+    key: string | string[];
 }
 
 const SubdivisionCodePage = ({
@@ -126,6 +127,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             categories,
             humanSupportTypes,
             topics,
+            key: context.params.subdivisionCode, // https://github.com/zeit/next.js/issues/9992
         },
     };
 };
