@@ -6,7 +6,3 @@ export default {
 };
 
 export const Default = (): ReactElement => <LoadingSpinner />;
-
-Default.story = {
-    name: 'default',
-};

@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
-import { Box } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core';
+import theme from '../../theme';
 import EmbedInfo from '.';
 
 export default {
@@ -7,17 +8,13 @@ export default {
 };
 
 export const Default = (): ReactElement => (
-    <Box m={2}>
+    <ThemeProvider theme={theme}>
         <EmbedInfo />
-    </Box>
+    </ThemeProvider>
 );
 
-Default.story = {
-    name: 'default',
-};
-
 export const WithCountries = (): ReactElement => (
-    <Box m={2}>
+    <ThemeProvider theme={theme}>
         <EmbedInfo
             countries={[
                 { code: 'AU', name: 'Australia' },
@@ -28,9 +25,5 @@ export const WithCountries = (): ReactElement => (
                 { code: 'US', name: 'United States of America' },
             ]}
         />
-    </Box>
+    </ThemeProvider>
 );
-
-WithCountries.story = {
-    name: 'with countries',
-};

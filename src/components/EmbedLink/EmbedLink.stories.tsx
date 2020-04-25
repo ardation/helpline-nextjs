@@ -11,7 +11,3 @@ export const Default = (): ReactElement => (
         <EmbedLink />
     </Box>
 );
-
-Default.story = {
-    name: 'default',
-};

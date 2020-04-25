@@ -40,6 +40,5 @@ export const Default = (): ReactElement => (
 );
 
 Default.story = {
-    name: 'default',
     parameters: { chromatic: { diffThreshold: 0.7 } },
 };
