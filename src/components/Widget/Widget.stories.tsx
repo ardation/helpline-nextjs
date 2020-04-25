@@ -60,7 +60,7 @@ export default {
 export const Default = (): ReactElement => (
     <ThemeProvider theme={theme}>
         <Widget
-            country={country}
+            preselectedCountry={country}
             countries={countries}
             categories={[]}
             humanSupportTypes={[]}
@@ -73,9 +73,9 @@ export const Default = (): ReactElement => (
 export const WithSubdivision = (): ReactElement => (
     <ThemeProvider theme={theme}>
         <Widget
-            country={country}
+            preselectedCountry={country}
             countries={countries}
-            subdivision={country.subdivisions[0]}
+            preselectedSubdivision={country.subdivisions[0]}
             categories={[]}
             humanSupportTypes={[]}
             topics={[]}

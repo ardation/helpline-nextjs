@@ -26,9 +26,9 @@ type Country = {
 };
 
 type Props = {
-    country: Country;
+    preselectedCountry: Country;
     countries: Country[];
-    subdivision?: Subdivision;
+    preselectedSubdivision?: Subdivision;
     categories: { name: string }[];
     humanSupportTypes: { name: string }[];
     topics: { name: string }[];
@@ -88,8 +88,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const OrganizationList = ({
-    country,
-    subdivision,
+    preselectedCountry,
+    preselectedSubdivision,
     countries,
     categories,
     humanSupportTypes,
@@ -126,8 +126,12 @@ const OrganizationList = ({
                         Filter<span className={classes.sortText}>&nbsp;&amp; Sort</span>
                     </Button>
                 </NavBar>
-                <WidgetSearch preselectedCountry={country} countries={countries} preselectedSubdivision={subdivision} />
-                <TopBar variant="widget" country={country} />
+                <WidgetSearch
+                    preselectedCountry={preselectedCountry}
+                    countries={countries}
+                    preselectedSubdivision={preselectedSubdivision}
+                />
+                <TopBar variant="widget" country={preselectedCountry} />
                 <WidgetOrganizationList organizations={filteredOrganizations} />
             </Box>
             <Box className={classes.embed}>

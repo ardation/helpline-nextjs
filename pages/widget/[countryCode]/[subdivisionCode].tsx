@@ -35,9 +35,9 @@ const WidgetSubdivisionCodePage = ({
             </Head>
             <Widget
                 countries={countries}
-                selectedCountry={country}
-                selectedSubdivision={subdivision}
-                organizations={organizations}
+                preselectedCountry={country}
+                preselectedSubdivision={subdivision}
+                organizations={organizations.nodes}
                 topics={topics}
                 categories={categories}
                 humanSupportTypes={humanSupportTypes}

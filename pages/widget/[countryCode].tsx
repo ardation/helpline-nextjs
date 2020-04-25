@@ -27,8 +27,8 @@ const WidgetCountryCodePage = ({
             </Head>
             <Widget
                 countries={countries}
-                selectedCountry={country}
-                organizations={organizations}
+                preselectedCountry={country}
+                organizations={organizations.nodes}
                 topics={topics}
                 categories={categories}
                 humanSupportTypes={humanSupportTypes}

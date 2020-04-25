@@ -53,7 +53,7 @@ describe('Widget', () => {
         const { getByTestId } = render(
             <Widget
                 countries={countries}
-                country={country}
+                preselectedCountry={country}
                 organizations={organizations}
                 topics={topics}
                 categories={[]}
@@ -67,8 +67,8 @@ describe('Widget', () => {
         const { getByTestId } = render(
             <Widget
                 countries={countries}
-                country={country}
-                subdivision={subdivision}
+                preselectedCountry={country}
+                preselectedSubdivision={subdivision}
                 organizations={organizations}
                 topics={topics}
                 categories={[]}
@@ -82,7 +82,7 @@ describe('Widget', () => {
         const { getByText } = render(
             <Widget
                 countries={countries}
-                country={country}
+                preselectedCountry={country}
                 organizations={organizations}
                 topics={topics}
                 categories={[]}
@@ -97,7 +97,7 @@ describe('Widget', () => {
             const { getByText, getByTestId } = render(
                 <Widget
                     countries={countries}
-                    country={country}
+                    preselectedCountry={country}
                     organizations={organizations}
                     topics={[]}
                     categories={[]}
@@ -116,7 +116,7 @@ describe('Widget', () => {
             const { getByText, getByTestId } = render(
                 <Widget
                     countries={countries}
-                    country={country}
+                    preselectedCountry={country}
                     organizations={organizations}
                     topics={[]}
                     categories={[]}
@@ -133,7 +133,7 @@ describe('Widget', () => {
             const { getByTestId } = render(
                 <Widget
                     countries={countries}
-                    country={country}
+                    preselectedCountry={country}
                     organizations={organizations}
                     topics={[]}
                     categories={[]}
