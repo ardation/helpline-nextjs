@@ -1,53 +1,76 @@
-import React, { useState, useEffect, useCallback, ReactElement } from 'react';
-import EmblaCarouselReact from 'embla-carousel-react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { Box, Container } from '@material-ui/core';
-import EmblaCarousel from 'embla-carousel';
-import ConditionalWrapper from '../../util/conditionalWrapper';
-import { Organization } from '../../context/organizationContext';
-import OrganizationCard from '../OrganizationCard/OrganizationCard';
-import NextButton from './NextButton';
-import PreviousButton from './PreviousButton';
+import React, { useState, useEffect, ReactElement } from 'react';
+import { useEmblaCarousel } from 'embla-carousel-react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Box, Fab } from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import OrganizationCard, { Organization } from '../OrganizationCard/OrganizationCard';
 
 type Props = {
     organizations: Organization[];
-    widget?: boolean;
 };
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        container: {
+        box: {
             position: 'relative',
+            marginTop: theme.spacing(2),
+            marginBottom: theme.spacing(2),
         },
-        carouselWrapper: {
+        container: {
+            marginLeft: '-1rem',
             display: 'flex',
+        },
+        slide: {
+            flex: '0 0 auto',
+            width: '80%',
             position: 'relative',
-            maxHeight: '420px',
-            alignItems: 'flex-start',
-            '@media (max-width: 400px)': {
-                flexDirection: 'column',
-                overflow: 'scroll',
+            paddingLeft: '1rem',
+            [theme.breakpoints.up('sm')]: {
+                width: '40%',
+            },
+        },
+        button: {
+            position: 'absolute',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            fontSize: '3rem',
+            [theme.breakpoints.down('xs')]: {
+                width: 36,
+                height: 36,
+                fontSize: '1.5rem',
+            },
+        },
+        buttonLeft: {
+            left: '0.8rem',
+            [theme.breakpoints.down('xs')]: {
+                left: '0.4rem',
+            },
+        },
+        buttonRight: {
+            right: '0.8rem',
+            [theme.breakpoints.down('xs')]: {
+                right: '0.4rem',
             },
         },
     }),
 );
 
-const WidgetOrganizationList = ({ organizations, widget }: Props): ReactElement => {
+const WidgetOrganizationList = ({ organizations }: Props): ReactElement => {
     const classes = useStyles();
-    const [embla, setEmbla] = useState<EmblaCarousel>(undefined);
+    const [EmblaCarouselReact, embla] = useEmblaCarousel({
+        loop: false,
+    });
 
-    const scrollPrev = useCallback(() => embla.scrollPrev(), [embla]);
-    const scrollNext = useCallback(() => embla.scrollNext(), [embla]);
-    const [showPreviousButton, setShowPreviousButton] = useState(true);
-    const [showNextButton, setShowNextButton] = useState(true);
-    const matches = useMediaQuery('(min-width: 400px)');
+    const [showPreviousButton, setShowPreviousButton] = useState(false);
+    const [showNextButton, setShowNextButton] = useState(false);
 
     useEffect(() => {
         const onSelect = (): void => {
             setShowPreviousButton(embla.canScrollPrev());
             setShowNextButton(embla.canScrollNext());
         };
+
         if (embla) {
             embla.on('select', onSelect);
             onSelect();
@@ -55,35 +78,37 @@ const WidgetOrganizationList = ({ organizations, widget }: Props): ReactElement 
     }, [embla]);
 
     return (
-        <Container className={classes.container}>
+        <Box className={classes.box}>
             {organizations && organizations.length > 0 && (
-                <ConditionalWrapper
-                    condition={matches}
-                    wrapper={(children): ReactElement => (
-                        <EmblaCarouselReact
-                            emblaRef={setEmbla}
-                            options={{
-                                loop: false,
-                                align: 'start',
-                                containScroll: true,
-                            }}
-                        >
-                            {children}
-                        </EmblaCarouselReact>
-                    )}
-                >
-                    <Container className={classes.carouselWrapper}>
-                        {organizations.map((organization, index) => (
-                            <Box key={index + organization.slug} p={2}>
-                                <OrganizationCard widget={widget} organization={organization} />
-                            </Box>
-                        ))}
-                    </Container>
-                </ConditionalWrapper>
+                <>
+                    <EmblaCarouselReact>
+                        <Box className={classes.container}>
+                            {organizations.map((organization) => (
+                                <Box key={organization.slug} className={classes.slide}>
+                                    <OrganizationCard organization={organization} />
+                                </Box>
+                            ))}
+                        </Box>
+                    </EmblaCarouselReact>
+                    <Fab
+                        className={[classes.button, classes.buttonLeft].join(' ')}
+                        disabled={!showPreviousButton}
+                        onClick={(): void => embla.scrollPrev()}
+                        data-testid="previousButton"
+                    >
+                        <ChevronLeftIcon fontSize="inherit" />
+                    </Fab>
+                    <Fab
+                        className={[classes.button, classes.buttonRight].join(' ')}
+                        disabled={!showNextButton}
+                        onClick={(): void => embla.scrollNext()}
+                        data-testid="nextButton"
+                    >
+                        <ChevronRightIcon fontSize="inherit" />
+                    </Fab>
+                </>
             )}
-            {showPreviousButton && <PreviousButton onClick={scrollPrev} enabled={showPreviousButton} />}
-            {showNextButton && <NextButton onClick={scrollNext} enabled={showNextButton} />}
-        </Container>
+        </Box>
     );
 };
 
