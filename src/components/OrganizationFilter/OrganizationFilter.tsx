@@ -35,12 +35,8 @@ type Props = {
     categories?: Category[];
     humanSupportTypes?: HumanSupportType[];
     topics?: Topic[];
-    showMax?: number;
     preselectedTopics?: Topic[];
-    preselectedCategories?: Category[];
-    preselectedHumanSupportTypes?: HumanSupportType[];
     onChange: (changes: Changes) => void;
-    onApply?: (value: boolean) => void;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -49,28 +45,14 @@ const useStyles = makeStyles((theme: Theme) =>
             marginTop: theme.spacing(2),
             marginBottom: theme.spacing(2),
         },
-        header: {
-            display: 'grid',
-            gridTemplateColumns: '1fr auto',
-            alignItems: 'top',
-        },
         heading: {
             fontWeight: 'bold',
-            [theme.breakpoints.down('xs')]: {
-                fontSize: '16px',
-            },
         },
         title: {
             marginBottom: theme.spacing(1),
-            [theme.breakpoints.down('xs')]: {
-                fontSize: '12px',
-            },
         },
         button: {
             borderRadius: '1000px',
-            [theme.breakpoints.down('xs')]: {
-                fontSize: '12px',
-            },
         },
     }),
 );
@@ -80,11 +62,7 @@ const OrganizationFilter = ({
     humanSupportTypes,
     topics,
     preselectedTopics,
-    preselectedCategories,
-    preselectedHumanSupportTypes,
     onChange,
-    showMax,
-    onApply,
 }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedContactMethods, setSelectedContactMethods] = useState<ContactMethod[]>([]);
@@ -101,24 +79,20 @@ const OrganizationFilter = ({
             topics: selectedTopics,
             sorts: selectedSorts,
         });
-        onApply && onApply(false);
     };
 
     useEffect(() => {
-        setSelectedTopics(preselectedTopics);
+        if (preselectedTopics) {
+            setSelectedTopics(preselectedTopics);
+        }
     }, [preselectedTopics]);
 
     return (
         <Container className={classes.container}>
-            <Box className={classes.header} mt={2}>
-                <Typography className={classes.heading} variant="h6">
-                    Filter &amp; Sort
-                </Typography>
-                <Button className={classes.button} variant="contained" color="primary" onClick={onClick}>
-                    Apply
-                </Button>
-            </Box>
-            <Box mb={3}>
+            <Typography className={classes.heading} variant="h6">
+                Filter &amp; Sort
+            </Typography>
+            <Box mt={2} mb={3}>
                 {topics && topics.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Topics</Typography>
@@ -127,7 +101,6 @@ const OrganizationFilter = ({
                             preselectedItems={preselectedTopics}
                             onChange={setSelectedTopics}
                             hideUnselected={preselectedTopics && preselectedTopics.length > 0}
-                            showMax={showMax}
                         />
                     </Box>
                 )}
@@ -141,23 +114,13 @@ const OrganizationFilter = ({
                 {humanSupportTypes && humanSupportTypes.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Human Support Type</Typography>
-                        <ItemSelect
-                            items={humanSupportTypes}
-                            preselectedItems={preselectedHumanSupportTypes}
-                            onChange={setSelectedHumanSupportTypes}
-                            showMax={showMax}
-                        />
+                        <ItemSelect items={humanSupportTypes} onChange={setSelectedHumanSupportTypes} />
                     </Box>
                 )}
                 {categories && categories.length > 0 && (
                     <Box my={2}>
                         <Typography className={classes.title}>Categories</Typography>
-                        <ItemSelect
-                            items={categories}
-                            preselectedItems={preselectedCategories}
-                            onChange={setSelectedCategories}
-                            showMax={showMax}
-                        />
+                        <ItemSelect items={categories} onChange={setSelectedCategories} />
                     </Box>
                 )}
                 <Box my={2}>
@@ -170,6 +133,9 @@ const OrganizationFilter = ({
                     />
                 </Box>
             </Box>
+            <Button className={classes.button} variant="contained" color="primary" onClick={onClick} size="large">
+                Apply
+            </Button>
         </Container>
     );
 };

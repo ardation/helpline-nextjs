@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Chip, Box } from '@material-ui/core';
-import { intersectionBy, differenceBy, find, xorBy } from 'lodash/fp';
+import { differenceBy, find, xorBy } from 'lodash/fp';
 
 type Item = {
     name: string;
@@ -13,7 +13,6 @@ type Props = {
     preselectedItems?: Item[];
     single?: boolean;
     hideUnselected?: boolean;
-    showMax?: number;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,10 +28,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         chipRoot: {
             fontWeight: 600,
-            [theme.breakpoints.down(420)]: {
-                fontSize: '10px',
-                height: '24px',
-            },
         },
         chipColorPrimary: {
             backgroundColor: '#000000',
@@ -47,11 +42,10 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected, showMax }: Props): ReactElement => {
+const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedItems, setSelectedItems] = useState(preselectedItems || []);
-    const [hide, setHide] = useState(hideUnselected || !!showMax);
-    const showAmount = hideUnselected ? intersectionBy('name', items, selectedItems).length : showMax || null;
+    const [hide, setHide] = useState(hideUnselected);
 
     const onClick = (item: Item): void => {
         const items = single ? [item] : xorBy('name', [item], selectedItems);
@@ -59,13 +53,12 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected,
         onChange(items);
     };
 
-    const itemsBySelected = selectedItems.concat(differenceBy('name', items, selectedItems));
-
     return (
         <Box className={classes.chips}>
-            {itemsBySelected.map(
-                (item, index) =>
-                    (!hide || index < showAmount) && (
+            {items.map((item) => {
+                if (hide && !find(item, selectedItems)) {
+                } else {
+                    return (
                         <Chip
                             color={find(item, selectedItems) ? 'primary' : 'default'}
                             key={item.name}
@@ -78,16 +71,13 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, hideUnselected,
                                 clickableColorPrimary: classes.chipColorPrimary,
                             }}
                         />
-                    ),
-            )}
-            {hide && items.length - showAmount > 0 && (
+                    );
+                }
+            })}
+            {hide && differenceBy('name', items, selectedItems).length > 0 && (
                 <Chip
                     onClick={(): void => setHide(false)}
-                    label={`+${items.length - showAmount} more`}
-                    data-testid="showMoreChip"
-                    classes={{
-                        root: classes.chipRoot,
-                    }}
+                    label={`+${differenceBy('name', items, selectedItems).length} more`}
                 />
             )}
         </Box>

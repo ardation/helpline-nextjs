@@ -1,36 +1,85 @@
 import React, { ReactElement } from 'react';
 import { ThemeProvider } from '@material-ui/core';
 import theme from '../../theme';
-import withMockOrganizationProvider, { organizationData } from '../../context/organizationProviderMock';
-import Widget from './Widget';
+import Widget from '.';
 
-const organizations = Array(8).fill(organizationData[0]);
+const organizations = [
+    {
+        slug: 'youthline',
+        name: 'Youthline',
+        alwaysOpen: true,
+        openingHours: [],
+        humanSupportTypes: [{ name: 'Volunteers' }, { name: 'Staff' }],
+        categories: [{ name: 'For youth' }, { name: 'All issues' }],
+        smsNumber: '234',
+        phoneNumber: '0800 376 633',
+        url: 'https://youthline.co.nz/website',
+        chatUrl: 'https://youthline.co.nz/chat',
+        timezone: 'Auckland',
+        topics: [{ name: 'Anxiety' }],
+    },
+    {
+        slug: 'kidscan',
+        name: 'KidsCan',
+        alwaysOpen: false,
+        openingHours: [],
+        humanSupportTypes: [],
+        categories: [],
+        timezone: 'Auckland',
+        topics: [],
+    },
+];
+
+const country = {
+    code: 'NZ',
+    name: 'New Zealand',
+    emergencyNumber: '111',
+    subdivisions: [
+        { name: 'Bay of Plenty', code: 'BOP' },
+        { name: 'Auckland', code: 'AUK' },
+    ],
+};
+
+const countries = [
+    { code: 'AU', name: 'Australia', emergencyNumber: '111', subdivisions: [] },
+    {
+        code: 'NZ',
+        name: 'New Zealand',
+        emergencyNumber: '111',
+        subdivisions: [
+            { name: 'Bay of Plenty', code: 'BOP' },
+            { name: 'Auckland', code: 'AUK' },
+        ],
+    },
+];
 
 export default {
     title: 'Widget',
 };
 
 export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>{withMockOrganizationProvider(<Widget />, { organizations })}</ThemeProvider>
-);
-
-export const WithActiveCountry = (): ReactElement => (
     <ThemeProvider theme={theme}>
-        {withMockOrganizationProvider(<Widget />, {
-            activeCountry: { code: 'AU', name: 'Australia', subdivisions: [], emergencyNumber: '111' },
-        })}
+        <Widget
+            country={country}
+            countries={countries}
+            categories={[]}
+            humanSupportTypes={[]}
+            topics={[]}
+            organizations={organizations}
+        />
     </ThemeProvider>
 );
 
-export const WithNoResults = (): ReactElement => (
+export const WithSubdivision = (): ReactElement => (
     <ThemeProvider theme={theme}>
-        {withMockOrganizationProvider(<Widget />, {
-            organizations: [],
-            activeCountry: { code: 'AU', name: 'Australia', subdivisions: [], emergencyNumber: '111' },
-        })}
+        <Widget
+            country={country}
+            countries={countries}
+            subdivision={country.subdivisions[0]}
+            categories={[]}
+            humanSupportTypes={[]}
+            topics={[]}
+            organizations={organizations}
+        />
     </ThemeProvider>
 );
-
-Default.story = {
-    parameters: { chromatic: { diffThreshold: 0.7 } },
-};

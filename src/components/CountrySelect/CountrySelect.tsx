@@ -26,7 +26,7 @@ type Props = {
     onSubdivisionChange: (subdivision: Subdivision) => void;
     inline?: boolean;
     preselectedCountry?: Country;
-    defaultSubdivision?: Subdivision;
+    preselectedSubdivision?: Subdivision;
 };
 
 // ISO 3166-1 alpha-2
@@ -94,12 +94,12 @@ const CountrySelect = ({
     onSubdivisionChange,
     inline,
     preselectedCountry,
-    defaultSubdivision,
+    preselectedSubdivision,
 }: Props): ReactElement => {
     const classes = useStyles();
     const { setActiveCountry } = useContext(OrganizationContext);
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(preselectedCountry ?? null);
-    const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | null>(defaultSubdivision ?? null);
+    const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | null>(preselectedSubdivision ?? null);
 
     const localOnCountryChange = (country: Country): void => {
         setSelectedCountry(country);
@@ -166,7 +166,16 @@ const CountrySelect = ({
                     openOnFocus={true}
                     onChange={(_e, value: Subdivision): void => localOnSubdivisionChange(value)}
                     renderInput={(params): ReactElement => (
-                        <TextField {...params} placeholder="State or province (optional)" variant="outlined" />
+                        <TextField
+                            {...params}
+                            placeholder="State or province (optional)"
+                            variant="outlined"
+                            inputProps={{
+                                ...params.inputProps,
+                                autoComplete: 'new-password', // disable autocomplete and autofill
+                                'data-testid': 'subdivisionInput',
+                            }}
+                        />
                     )}
                 />
             )}

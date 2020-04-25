@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
             border: '1px solid #000',
             borderRadius: '10px',
             gridTemplateColumns: '1fr 88px',
+            height: 'calc(100% - 2px)',
             '& > div': {
                 padding: theme.spacing(2),
             },

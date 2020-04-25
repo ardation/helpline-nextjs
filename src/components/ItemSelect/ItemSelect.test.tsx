@@ -4,11 +4,6 @@ import ItemSelect from '.';
 
 describe('ItemSelect', () => {
     const items = [{ name: 'happy' }, { name: 'sad' }];
-    const longItems = Array.from(Array(5).keys())
-        .map((i) => ({
-            name: 'Topic ' + i,
-        }))
-        .concat(items);
 
     it('should contain multiple chips', () => {
         const { getAllByTestId } = render(<ItemSelect items={items} onChange={jest.fn()} />);
@@ -60,46 +55,6 @@ describe('ItemSelect', () => {
                 <ItemSelect items={items} preselectedItems={[{ name: 'happy' }]} onChange={jest.fn()} hideUnselected />,
             );
             fireEvent.click(getByText('+1 more'));
-            expect(getByText('sad')).toBeTruthy();
-        });
-    });
-
-    describe('showMax', () => {
-        it('should hide unselected items', () => {
-            const { getByText } = render(
-                <ItemSelect
-                    items={longItems}
-                    preselectedItems={[{ name: 'happy' }]}
-                    onChange={jest.fn()}
-                    showMax={5}
-                />,
-            );
-            expect(() => getByText('sad')).toThrow();
-        });
-
-        it('should show show more button', () => {
-            const { getByTestId } = render(
-                <ItemSelect
-                    items={longItems}
-                    preselectedItems={[{ name: 'happy' }]}
-                    onChange={jest.fn()}
-                    showMax={5}
-                />,
-            );
-            expect(getByTestId('showMoreChip')).toBeTruthy();
-            expect(getByTestId('showMoreChip').innerHTML).toContain('+2');
-        });
-
-        it('should show hidden unselected items when more button is clicked', () => {
-            const { getByTestId, getByText } = render(
-                <ItemSelect
-                    items={longItems}
-                    preselectedItems={[{ name: 'happy' }]}
-                    onChange={jest.fn()}
-                    showMax={5}
-                />,
-            );
-            fireEvent.click(getByTestId('showMoreChip'));
             expect(getByText('sad')).toBeTruthy();
         });
     });
