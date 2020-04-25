@@ -7,6 +7,7 @@ import TopBar from '../TopBar';
 import WidgetSearch from '../WidgetSearch';
 import WidgetOrganizationList from '../WidgetOrganizationList';
 import OrganizationFilter from '../OrganizationFilter';
+import NavBar from '../NavBar';
 
 interface Subdivision {
     code: string;
@@ -91,8 +92,9 @@ const Widget = ({
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <div className={classes.header}>
+                    <NavBar variant="widget" />
                     <WidgetSearch countries={countries} />
-                    <TopBar widget country={selectedCountry} />
+                    <TopBar variant="widget" country={selectedCountry} />
                 </div>
                 <Container className={classes.carousel}>
                     <WidgetOrganizationList organizations={organizations} />

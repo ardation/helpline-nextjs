@@ -16,11 +16,6 @@ describe('SearchHeader', () => {
         },
     ];
 
-    it('should show correct text', () => {
-        const { getByText } = render(<WidgetSearch preselectedCountry={preselectedCountry} countries={countries} />);
-        expect(getByText('Struggling? Talk to a real person, for free.')).toBeTruthy();
-    });
-
     it('should change search url after country select', () => {
         const { getByText, getByRole } = render(
             <WidgetSearch preselectedCountry={preselectedCountry} countries={countries} />,

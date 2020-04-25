@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import { Typography, Box, Button } from '@material-ui/core';
+import { Typography, Box, Button, Container } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Link from 'next/link';
 import CountrySelect from '../CountrySelect';
@@ -22,30 +22,12 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        box: {
-            padding: theme.spacing(2),
+        container: {
+            paddingTop: theme.spacing(2),
+            paddingBottom: theme.spacing(2),
             display: 'grid',
             gridGap: theme.spacing(1),
             backgroundColor: '#181719',
-        },
-        header: {
-            display: 'grid',
-            gridColumnGap: theme.spacing(2),
-            gridTemplateColumns: 'auto 1fr',
-            alignItems: 'end',
-            [theme.breakpoints.down('xs')]: {
-                gridTemplateColumns: '1fr',
-                textAlign: 'left',
-            },
-        },
-        logo: {
-            width: '200px',
-        },
-        subheader: {
-            color: '#FFFFFF',
-            [theme.breakpoints.down('xs')]: {
-                fontSize: '12px',
-            },
         },
         button: {
             borderRadius: '1000px',
@@ -53,18 +35,14 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const SearchHeader = ({ preselectedCountry, countries }: Props): ReactElement => {
+const WidgetSearch = ({ preselectedCountry, countries }: Props): ReactElement => {
     const [selectedCountry, setSelectedCountry] = useState<Country>(preselectedCountry);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
 
     const classes = useStyles();
 
     return (
-        <Box className={classes.box}>
-            <Box className={classes.header}>
-                <img className={classes.logo} src="/logo.svg" alt="find a helpline" />
-                <Typography className={classes.subheader}>Struggling? Talk to a real person, for free.</Typography>
-            </Box>
+        <Container className={classes.container}>
             <CountrySelect
                 countries={countries}
                 onCountryChange={setSelectedCountry}
@@ -87,8 +65,8 @@ const SearchHeader = ({ preselectedCountry, countries }: Props): ReactElement =>
                     </Button>
                 </Link>
             )}
-        </Box>
+        </Container>
     );
 };
 
-export default SearchHeader;
+export default WidgetSearch;
