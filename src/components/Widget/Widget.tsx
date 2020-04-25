@@ -3,10 +3,39 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Box, Theme, Typography, Button } from '@material-ui/core';
 import NextLink from 'next/link';
 import CodeIcon from '@material-ui/icons/Code';
-import OrganizationContext from '../../context/organizationContext';
 import TopBar from '../TopBar';
 import WidgetSearch from '../WidgetSearch';
 import WidgetOrganizationList from '../WidgetOrganizationList';
+import OrganizationFilter from '../OrganizationFilter';
+
+interface Subdivision {
+    code: string;
+    name: string;
+}
+
+interface Country {
+    code: string;
+    name: string;
+    emergencyNumber: string;
+    subdivisions: Subdivision[];
+}
+
+interface Tag {
+    name: string;
+}
+
+interface Organization {
+    name: string;
+}
+
+interface Props {
+    countries: Country[];
+    selectedCountry: Country;
+    organizations: Organization[];
+    topics: Tag[];
+    categories: Tag[];
+    humanSupportTypes: Tag[];
+}
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -48,22 +77,23 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Widget = (): ReactElement => {
+const Widget = ({
+    countries,
+    selectedCountry,
+    organizations,
+    topics,
+    categories,
+    humanSupportTypes,
+}: Props): ReactElement => {
     const classes = useStyles();
-    const { countries, activeCountry, organizations } = useContext(OrganizationContext);
 
     return (
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <div className={classes.header}>
-                    <WidgetSearch countries={countries} parentPage="widget" />
-                    <TopBar widget country={{ emergencyNumber: activeCountry?.emergencyNumber }} />
+                    <WidgetSearch countries={countries} />
+                    <TopBar widget country={selectedCountry} />
                 </div>
-                {!activeCountry && organizations.length > 0 && (
-                    <Container className={classes.noResults}>
-                        <Typography>Sorry, no results found</Typography>
-                    </Container>
-                )}
                 <Container className={classes.carousel}>
                     <WidgetOrganizationList organizations={organizations} />
                 </Container>

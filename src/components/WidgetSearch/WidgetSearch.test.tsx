@@ -1,9 +1,9 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { OrganizationProvider } from '../../context/organizationContext';
-import SearchHeader from '.';
+import WidgetSearch from '.';
 
 describe('SearchHeader', () => {
+    const preselectedCountry = { code: 'AU', name: 'Australia', subdivisions: [] };
     const countries = [
         { code: 'AU', name: 'Australia', subdivisions: [] },
         {
@@ -16,57 +16,28 @@ describe('SearchHeader', () => {
         },
     ];
 
-    const withContextProvider = (WrappedSearchHeader, props): ReactElement => {
-        return (
-            <OrganizationProvider
-                activeCountry={countries[0]}
-                countries={countries}
-                allOrganizations={[]}
-                filterOptions={{
-                    topics: undefined,
-                    categories: undefined,
-                    humanSupportTypes: undefined,
-                }}
-            >
-                <WrappedSearchHeader {...props} />
-            </OrganizationProvider>
-        );
-    };
-
     it('should show correct text', () => {
-        const { getByText } = render(withContextProvider(SearchHeader, { countries: countries }));
+        const { getByText } = render(<WidgetSearch preselectedCountry={preselectedCountry} countries={countries} />);
         expect(getByText('Struggling? Talk to a real person, for free.')).toBeTruthy();
     });
 
     it('should change search url after country select', () => {
-        const { getByTestId, getByRole } = render(withContextProvider(SearchHeader, { countries: countries }));
-        const element = getByRole('textbox');
-        fireEvent.click(element);
+        const { getByText, getByRole } = render(
+            <WidgetSearch preselectedCountry={preselectedCountry} countries={countries} />,
+        );
+        fireEvent.click(getByRole('textbox'));
         fireEvent.click(getByRole('listbox').children[0]);
-        const searchButton = getByTestId('searchButton');
-        expect(searchButton).toHaveAttribute('href', '/au');
+        expect(getByText('Search').parentElement).toHaveAttribute('href', '/widget/au');
     });
 
     it('should change search url after country and subdivision select', () => {
-        const { getByTestId, getAllByRole } = render(withContextProvider(SearchHeader, { countries: countries }));
-        const countryElement = getAllByRole('textbox')[0];
-        fireEvent.click(countryElement);
-        fireEvent.click(getAllByRole('listbox')[0].children[1]);
-        const subdivisionElement = getAllByRole('textbox')[1];
-        fireEvent.click(subdivisionElement);
-        fireEvent.click(getAllByRole('listbox')[0].children[1]);
-        const searchButton = getByTestId('searchButton');
-        expect(searchButton).toHaveAttribute('href', '/nz/bop');
-    });
-
-    it('should change search url with the correct url prefix', () => {
-        const { getByTestId, getByRole } = render(
-            withContextProvider(SearchHeader, { countries: countries, parentPage: 'widget' }),
+        const { getByText, getAllByRole } = render(
+            <WidgetSearch preselectedCountry={preselectedCountry} countries={countries} />,
         );
-        const element = getByRole('textbox');
-        fireEvent.click(element);
-        fireEvent.click(getByRole('listbox').children[0]);
-        const searchButton = getByTestId('searchButton');
-        expect(searchButton).toHaveAttribute('href', '/widget/au');
+        fireEvent.click(getAllByRole('textbox')[0]);
+        fireEvent.click(getAllByRole('listbox')[0].children[1]);
+        fireEvent.click(getAllByRole('textbox')[1]);
+        fireEvent.click(getAllByRole('listbox')[0].children[1]);
+        expect(getByText('Search').parentElement).toHaveAttribute('href', '/widget/nz/bop');
     });
 });

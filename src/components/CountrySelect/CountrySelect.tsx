@@ -5,7 +5,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Box } from '@material-ui/core';
-import { sortBy } from 'lodash/fp';
+import { sortBy, compact } from 'lodash/fp';
 import OrganizationContext from '../../context/organizationContext';
 
 type Subdivision = {
@@ -25,7 +25,7 @@ type Props = {
     onCountryChange: (country: Country) => void;
     onSubdivisionChange: (subdivision: Subdivision) => void;
     inline?: boolean;
-    defaultCountry?: Country;
+    preselectedCountry?: Country;
     defaultSubdivision?: Subdivision;
 };
 
@@ -46,11 +46,9 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'grid',
             gridGap: theme.spacing(1),
         },
-        inlineGrid: {
-            display: 'grid',
+        inline: {
             gridTemplateColumns: 'repeat(auto-fit, minmax(0, 1fr))',
-            gridGap: theme.spacing(1),
-            [theme.breakpoints.down(420)]: {
+            [theme.breakpoints.down('xs')]: {
                 gridTemplateColumns: '1fr',
             },
         },
@@ -60,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) =>
             '&[class*="MuiOutlinedInput-root"]': {
                 paddingTop: '5px',
                 paddingBottom: '5px',
-                [theme.breakpoints.down(420)]: {
+                [theme.breakpoints.down('xs')]: {
                     paddingTop: '0',
                     paddingBottom: '0',
                 },
@@ -102,12 +100,12 @@ const CountrySelect = ({
     onCountryChange,
     onSubdivisionChange,
     inline,
-    defaultCountry,
+    preselectedCountry,
     defaultSubdivision,
 }: Props): ReactElement => {
     const classes = useStyles();
     const { setActiveCountry } = useContext(OrganizationContext);
-    const [selectedCountry, setSelectedCountry] = useState<Country | null>(defaultCountry ?? null);
+    const [selectedCountry, setSelectedCountry] = useState<Country | null>(preselectedCountry ?? null);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | null>(defaultSubdivision ?? null);
 
     const localOnCountryChange = (country: Country): void => {
@@ -124,7 +122,7 @@ const CountrySelect = ({
     };
 
     return (
-        <Box className={inline ? classes.inlineGrid : classes.box}>
+        <Box className={compact([classes.box, inline && classes.inline]).join(' ')}>
             <Autocomplete
                 value={selectedCountry}
                 style={{ width: 300 }}

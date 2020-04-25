@@ -27,7 +27,7 @@ export const Default = (): ReactElement => (
     </Box>
 );
 
-export const WithDefaultCountry = (): ReactElement => (
+export const WithPreselectedCountry = (): ReactElement => (
     <Box m={2}>
         <CountrySelect
             countries={[
@@ -41,9 +41,38 @@ export const WithDefaultCountry = (): ReactElement => (
                     ],
                 },
             ]}
-            defaultCountry={{ code: 'AU', name: 'Australia', subdivisions: [] }}
+            preselectedCountry={{ code: 'AU', name: 'Australia', subdivisions: [] }}
             onCountryChange={action('onCountryChange')}
             onSubdivisionChange={action('onSubdivisionChange')}
+        />
+    </Box>
+);
+
+export const WithInline = (): ReactElement => (
+    <Box m={2}>
+        <CountrySelect
+            countries={[
+                { code: 'AU', name: 'Australia', subdivisions: [] },
+                {
+                    code: 'NZ',
+                    name: 'New Zealand',
+                    subdivisions: [
+                        { name: 'Bay of Plenty', code: 'BOP' },
+                        { name: 'Auckland', code: 'AUK' },
+                    ],
+                },
+            ]}
+            preselectedCountry={{
+                code: 'NZ',
+                name: 'New Zealand',
+                subdivisions: [
+                    { name: 'Bay of Plenty', code: 'BOP' },
+                    { name: 'Auckland', code: 'AUK' },
+                ],
+            }}
+            onCountryChange={action('onCountryChange')}
+            onSubdivisionChange={action('onSubdivisionChange')}
+            inline
         />
     </Box>
 );

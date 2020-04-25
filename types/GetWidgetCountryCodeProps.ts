@@ -7,11 +7,18 @@
 // GraphQL query operation: GetWidgetCountryCodeProps
 // ====================================================
 
+export interface GetWidgetCountryCodeProps_country_subdivisions {
+  __typename: "Subdivision";
+  code: string;
+  name: string;
+}
+
 export interface GetWidgetCountryCodeProps_country {
   __typename: "Country";
   code: string;
   name: string;
   emergencyNumber: string | null;
+  subdivisions: GetWidgetCountryCodeProps_country_subdivisions[];
 }
 
 export interface GetWidgetCountryCodeProps_organizations_nodes_humanSupportTypes {
