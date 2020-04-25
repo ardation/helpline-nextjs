@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { OrganizationProvider } from '../../context/organizationContext';
 import SearchHeader from '.';
@@ -16,7 +16,7 @@ describe('SearchHeader', () => {
         },
     ];
 
-    const withContextProvider = (WrappedSearchHeader, props) => {
+    const withContextProvider = (WrappedSearchHeader, props): ReactElement => {
         return (
             <OrganizationProvider
                 activeCountry={countries[0]}

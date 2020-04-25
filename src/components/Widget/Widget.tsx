@@ -1,13 +1,12 @@
 import React, { ReactElement, useContext } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Container, Box, Theme, Typography } from '@material-ui/core';
+import { Container, Box, Theme, Typography, Button } from '@material-ui/core';
+import NextLink from 'next/link';
+import CodeIcon from '@material-ui/icons/Code';
 import OrganizationContext from '../../context/organizationContext';
 import TopBar from '../TopBar';
-import SearchHeader from '../SearchHeader';
-import OrganizationCarousel from '../OrganizationCarousel/OrganizationCarousel';
-import EmbedLink from '../EmbedLink';
-
-type Props = {};
+import WidgetSearch from '../WidgetSearch';
+import WidgetOrganizationList from '../WidgetOrganizationList';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -49,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Widget = ({}: Props): ReactElement => {
+const Widget = (): ReactElement => {
     const classes = useStyles();
     const { countries, activeCountry, organizations } = useContext(OrganizationContext);
 
@@ -57,7 +56,7 @@ const Widget = ({}: Props): ReactElement => {
         <Container className={classes.container}>
             <Box maxWidth="md">
                 <div className={classes.header}>
-                    <SearchHeader countries={countries} parentPage="widget" />
+                    <WidgetSearch countries={countries} parentPage="widget" />
                     <TopBar widget country={{ emergencyNumber: activeCountry?.emergencyNumber }} />
                 </div>
                 {!activeCountry && organizations.length > 0 && (
@@ -66,10 +65,20 @@ const Widget = ({}: Props): ReactElement => {
                     </Container>
                 )}
                 <Container className={classes.carousel}>
-                    <OrganizationCarousel widget organizations={organizations} />
+                    <WidgetOrganizationList organizations={organizations} />
                 </Container>
             </Box>
-            <EmbedLink />
+            <NextLink href="/embed" passHref>
+                <Button
+                    startIcon={<CodeIcon />}
+                    color="primary"
+                    component="a"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Embed Find A Helpline on your website
+                </Button>
+            </NextLink>
         </Container>
     );
 };

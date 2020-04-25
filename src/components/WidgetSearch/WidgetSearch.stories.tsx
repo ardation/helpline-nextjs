@@ -2,10 +2,10 @@ import React, { ReactElement } from 'react';
 import { ThemeProvider, Box } from '@material-ui/core';
 import theme from '../../theme';
 import withMockOrganizationProvider from '../../context/organizationProviderMock';
-import SearchHeader from '.';
+import WidgetSearch from '.';
 
 export default {
-    title: 'SearchHeader',
+    title: 'WidgetSearch',
 };
 
 export const Default = (): ReactElement => (

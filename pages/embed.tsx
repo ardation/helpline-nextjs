@@ -3,7 +3,7 @@ import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import Head from 'next/head';
-import EmbedInfo from '../src/components/EmbedInfo';
+import Embed from '../src/components/Embed';
 import Chrome from '../src/components/Chrome';
 import { GetEmbedProps } from '../types/GetEmbedProps';
 
@@ -14,7 +14,7 @@ const EmbedPage = ({ countries }: GetEmbedProps): ReactElement => {
                 <title>Find A Helpline</title>
             </Head>
             <Chrome footer={true}>
-                <EmbedInfo countries={countries} />
+                <Embed countries={countries} />
             </Chrome>
         </>
     );

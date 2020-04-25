@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Fab } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 type Props = {
@@ -40,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export const PrevButton = ({ enabled, onClick }: Props): ReactElement => {
+const PreviousButton = ({ enabled, onClick }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
@@ -56,18 +55,4 @@ export const PrevButton = ({ enabled, onClick }: Props): ReactElement => {
     );
 };
 
-export const NextButton = ({ enabled, onClick }: Props): ReactElement => {
-    const classes = useStyles();
-
-    return (
-        <Fab
-            onClick={onClick}
-            aria-label="scroll-next"
-            data-testid="scroll-next"
-            className={`${classes.fab} ${classes.nextIcon}`}
-            disabled={!enabled}
-        >
-            <ChevronRightIcon className={`${classes.icon}`} />
-        </Fab>
-    );
-};
+export default PreviousButton;

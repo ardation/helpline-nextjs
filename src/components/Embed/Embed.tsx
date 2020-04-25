@@ -8,7 +8,7 @@ type Country = {
 };
 
 type Props = {
-    countries?: Country[];
+    countries: Country[];
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const EmbedInfo = ({ countries }: Props): ReactElement => {
+const Embed = ({ countries }: Props): ReactElement => {
     const [selectedCountryCode, setSelectedCountryCode] = useState<string>('US');
     const domainUrl = process.env.NOW_URL ? JSON.stringify(`https://${process.env.NOW_URL}`) : 'http://localhost:3000';
     const classes = useStyles();
@@ -103,22 +103,15 @@ const EmbedInfo = ({ countries }: Props): ReactElement => {
                         value={selectedCountryCode}
                         onChange={handleChange}
                     >
-                        {countries ? (
-                            countries.map(
-                                (country): ReactElement => {
-                                    return (
-                                        <MenuItem key={country.code} value={country.code}>
-                                            {country.name}
-                                        </MenuItem>
-                                    );
-                                },
-                            )
-                        ) : (
-                            <MenuItem value="US" data-testid="defaultMenuItem">
-                                United States of America
-                            </MenuItem>
+                        {countries.map(
+                            (country): ReactElement => {
+                                return (
+                                    <MenuItem key={country.code} value={country.code}>
+                                        {country.name}
+                                    </MenuItem>
+                                );
+                            },
                         )}
-                        ;
                     </Select>
                 </FormControl>
                 <Typography component="div" data-testid="typographyTwo">
@@ -137,4 +130,4 @@ const EmbedInfo = ({ countries }: Props): ReactElement => {
     );
 };
 
-export default EmbedInfo;
+export default Embed;

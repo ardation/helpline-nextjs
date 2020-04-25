@@ -3,10 +3,12 @@ import EmblaCarouselReact from 'embla-carousel-react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Box, Container } from '@material-ui/core';
+import EmblaCarousel from 'embla-carousel';
 import ConditionalWrapper from '../../util/conditionalWrapper';
 import { Organization } from '../../context/organizationContext';
 import OrganizationCard from '../OrganizationCard/OrganizationCard';
-import { PrevButton, NextButton } from './OrganizationCarouselButtons';
+import NextButton from './NextButton';
+import PreviousButton from './PreviousButton';
 
 type Props = {
     organizations: Organization[];
@@ -31,20 +33,20 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const OrganizationCarousel = ({ organizations, widget }: Props): ReactElement => {
+const WidgetOrganizationList = ({ organizations, widget }: Props): ReactElement => {
     const classes = useStyles();
-    const [embla, setEmbla] = useState(null);
+    const [embla, setEmbla] = useState<EmblaCarousel>(undefined);
 
     const scrollPrev = useCallback(() => embla.scrollPrev(), [embla]);
     const scrollNext = useCallback(() => embla.scrollNext(), [embla]);
-    const [prevBtnEnabled, setPrevBtnEnabled] = useState(true);
-    const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
+    const [showPreviousButton, setShowPreviousButton] = useState(true);
+    const [showNextButton, setShowNextButton] = useState(true);
     const matches = useMediaQuery('(min-width: 400px)');
 
     useEffect(() => {
         const onSelect = (): void => {
-            setPrevBtnEnabled(embla.canScrollPrev());
-            setNextBtnEnabled(embla.canScrollNext());
+            setShowPreviousButton(embla.canScrollPrev());
+            setShowNextButton(embla.canScrollNext());
         };
         if (embla) {
             embla.on('select', onSelect);
@@ -79,10 +81,10 @@ const OrganizationCarousel = ({ organizations, widget }: Props): ReactElement =>
                     </Container>
                 </ConditionalWrapper>
             )}
-            {prevBtnEnabled && <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />}
-            {nextBtnEnabled && <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />}
+            {showPreviousButton && <PreviousButton onClick={scrollPrev} enabled={showPreviousButton} />}
+            {showNextButton && <NextButton onClick={scrollNext} enabled={showNextButton} />}
         </Container>
     );
 };
 
-export default OrganizationCarousel;
+export default WidgetOrganizationList;
