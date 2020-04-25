@@ -1,4 +1,4 @@
-import React, { ReactElement, Fragment } from 'react';
+import React, { ReactElement } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
@@ -7,15 +7,15 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { find, flatten } from 'lodash/fp';
 import Chrome from '../../src/components/Chrome';
-import { GetCountriesAndSubdivisions } from '../../types/GetCountriesAndSubdivisions';
-import {
-    GetSubdivisionCodeProps,
-    GetSubdivisionCodeProps_country_subdivisions as Subdivision,
-} from '../../types/GetSubdivisionCodeProps';
 import OrganizationList from '../../src/components/OrganizationList';
 import Footer from '../../src/components/Footer';
+import {
+    GetCountryCodeSubdivisonCodeProps,
+    GetCountryCodeSubdivisonCodeProps_country_subdivisions as Subdivision,
+} from '../../types/GetCountryCodeSubdivisonCodeProps';
+import { GetCountryCodeSubdivisionCodePaths } from '../../types/GetCountryCodeSubdivisionCodePaths';
 
-interface Props extends GetSubdivisionCodeProps {
+interface Props extends GetCountryCodeSubdivisonCodeProps {
     subdivision: Subdivision;
 }
 
@@ -38,7 +38,7 @@ const SubdivisionCodePage = ({
     }
 
     return (
-        <Fragment>
+        <>
             <Head>
                 <title>
                     Find A Helpline | {subdivision.name}, {country.name}
@@ -56,13 +56,13 @@ const SubdivisionCodePage = ({
                 />
                 <Footer />
             </Chrome>
-        </Fragment>
+        </>
     );
 };
 
 export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
     const query = gql`
-        query GetSubdivisionCodeProps($countryCode: String!, $subdivisionCode: String!) {
+        query GetCountryCodeSubdivisonCodeProps($countryCode: String!, $subdivisionCode: String!) {
             country(code: $countryCode) {
                 code
                 name
@@ -109,14 +109,14 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             }
         }
     `;
-    const { country, organizations, categories, humanSupportTypes, topics } = await request(
+    const { country, organizations, categories, humanSupportTypes, topics } = (await request(
         'https://api.findahelpline.com',
         print(query),
         {
             countryCode: context.params.countryCode,
             subdivisionCode: context.params.subdivisionCode,
         },
-    );
+    )) as GetCountryCodeSubdivisonCodeProps;
     const subdivision = find({ code: context.params.subdivisionCode.toString().toUpperCase() }, country.subdivisions);
     return {
         props: {
@@ -132,7 +132,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const query = gql`
-        query GetCountriesAndSubdivisions {
+        query GetCountryCodeSubdivisionCodePaths {
             countries {
                 code
                 subdivisions {
@@ -141,7 +141,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
             }
         }
     `;
-    const { countries } = (await request('https://api.findahelpline.com', print(query))) as GetCountriesAndSubdivisions;
+    const { countries } = (await request(
+        'https://api.findahelpline.com',
+        print(query),
+    )) as GetCountryCodeSubdivisionCodePaths;
 
     return {
         paths: flatten(

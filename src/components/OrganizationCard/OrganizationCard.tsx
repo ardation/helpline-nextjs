@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Chip, Button, Box, Fab } from '@material-ui/core';
+import { Typography, Chip, Button, Box, Fab, Tooltip } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
@@ -45,6 +45,7 @@ export type Organization = {
 
 type Props = {
     organization: Organization;
+    widget?: boolean;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,10 +55,15 @@ const useStyles = makeStyles((theme: Theme) =>
             border: '1px solid #000',
             borderRadius: '10px',
             gridTemplateColumns: '1fr 88px',
+            width: '60vw',
+            maxWidth: '20rem',
+            // height: '50vh',
+            minHeight: '20rem',
+            flex: 1,
             '& > div': {
                 padding: theme.spacing(2),
             },
-            '@media (max-width: 320px)': {
+            [theme.breakpoints.down(420)]: {
                 flexDirection: 'column',
             },
         },
@@ -78,21 +84,42 @@ const useStyles = makeStyles((theme: Theme) =>
             flexDirection: 'column',
             minWidth: 0,
         },
+        header: {
+            display: 'grid',
+            gridTemplateColumns: '1fr auto',
+        },
         heading: {
             fontWeight: 'bold',
-            textDecoration: 'underline',
+            textDecoration: (props: Props): string => !props.widget && 'underline',
             color: theme.palette.text.primary,
+            marginRight: theme.spacing(1),
+            [theme.breakpoints.down(420)]: {
+                fontSize: '16px',
+            },
+        },
+        truncate: {
+            display: '-webkit-box',
+            '-webkit-box-orient': 'vertical',
+            '-webkit-line-clamp': 2,
+            overflow: 'hidden',
         },
         chipAlwaysOpen: {
             color: '#FFFFFF',
             fontWeight: 'bold',
             backgroundColor: theme.palette.secondary.main,
             textDecoration: 'none',
-            marginLeft: theme.spacing(2),
+            [theme.breakpoints.down(420)]: {
+                fontSize: '10px',
+                height: '24px',
+            },
         },
         button: {
             textTransform: 'none',
             lineHeight: '1.5',
+            [theme.breakpoints.down(420)]: {
+                textAlign: 'left',
+                fontSize: '12px',
+            },
         },
         buttonDisabled: {
             color: `${theme.palette.text.primary} !important`,
@@ -112,11 +139,18 @@ const useStyles = makeStyles((theme: Theme) =>
                 marginRight: theme.spacing(0.5),
                 marginBottom: theme.spacing(0.5),
             },
+            [theme.breakpoints.down('xs')]: {
+                flexDirection: 'row',
+            },
         },
         chip: {
             color: '#FFFFFF',
             backgroundColor: theme.palette.text.primary,
             fontWeight: 600,
+            [theme.breakpoints.down(420)]: {
+                fontSize: '10px',
+                height: '24px',
+            },
         },
         side: {
             display: 'grid',
@@ -126,42 +160,63 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'center',
             gridRowGap: theme.spacing(2),
             gridAutoRows: 'min-content',
-            '@media (max-width: 320px)': {
+            [theme.breakpoints.down('xs')]: {
+                gridRowGap: theme.spacing(1),
+            },
+            [theme.breakpoints.down(420)]: {
                 borderTopRightRadius: '0',
                 borderBottomLeftRadius: '10px',
                 gridAutoFlow: 'column',
+                gridTemplateColumns: '1fr 1fr 1fr',
             },
         },
         fab: {
             fontSize: '2rem',
+            '&.MuiFab-sizeMedium': {
+                fontSize: '1.5rem',
+                [theme.breakpoints.down('xs')]: {
+                    fontSize: '1rem',
+                    height: '40px',
+                    width: '40px',
+                },
+            },
         },
         fabLabel: {
             textTransform: 'uppercase',
             fontSize: '0.8rem',
             lineHeight: '1rem',
             paddingTop: theme.spacing(1),
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '10px',
+            },
         },
     }),
 );
 
-const OrganizationCard = ({ organization }: Props): ReactElement => {
-    const classes = useStyles();
+const OrganizationCard = ({ organization, widget }: Props): ReactElement => {
+    const classes = useStyles({ widget });
 
     return (
         <Box className={classes.box}>
             <Box className={classes.grid}>
                 <Box ml={1}>
-                    <Typography variant="h6">
-                        <Link href="/organizations/[slug]" as={`/organizations/${organization.slug}`} passHref>
-                            <a className={classes.heading}>{organization.name}</a>
-                        </Link>
+                    <Typography variant="h6" className={classes.header}>
+                        {widget ? (
+                            <Tooltip className={classes.truncate} title={organization.name} arrow placement="top">
+                                <strong className={classes.heading}>{organization.name}</strong>
+                            </Tooltip>
+                        ) : (
+                            <Link href="/organizations/[slug]" as={`/organizations/${organization.slug}`} passHref>
+                                <a className={classes.heading}>{organization.name}</a>
+                            </Link>
+                        )}
                         {organization.alwaysOpen && <Chip className={classes.chipAlwaysOpen} label="24/7" />}
                     </Typography>
                 </Box>
                 {(organization.alwaysOpen || organization.openingHours.length > 0) && (
                     <Box data-testid="open">
                         <Button
-                            size="large"
+                            size={widget ? 'small' : 'large'}
                             classes={{ root: classes.button, disabled: classes.buttonDisabled }}
                             startIcon={<AccessTimeIcon />}
                             disabled
@@ -173,7 +228,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                 {organization.humanSupportTypes.length > 0 && (
                     <Box>
                         <Button
-                            size="large"
+                            size={widget ? 'small' : 'large'}
                             classes={{ root: classes.button, disabled: classes.buttonDisabled }}
                             startIcon={<AccountCircleIcon />}
                             disabled
@@ -188,7 +243,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                         {organization.smsNumber && (
                             <Button
                                 href={`sms:${organization.smsNumber}`}
-                                size="large"
+                                size={widget ? 'small' : 'large'}
                                 className={[classes.button, classes.buttonLink].join(' ')}
                                 startIcon={<SmsOutlinedIcon />}
                                 data-testid="smsNumber"
@@ -199,7 +254,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                         {organization.phoneNumber && (
                             <Button
                                 href={`tel:${organization.phoneNumber}`}
-                                size="large"
+                                size={widget ? 'small' : 'large'}
                                 className={[classes.button, classes.buttonLink].join(' ')}
                                 startIcon={<PhoneIcon />}
                                 data-testid="phoneNumber"
@@ -212,8 +267,9 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                 {organization.url && (
                     <Box>
                         <Button
-                            size="large"
+                            size={widget ? 'small' : 'large'}
                             href={organization.url}
+                            target={widget && '_blank'}
                             className={[classes.button, classes.buttonLink].join(' ')}
                             startIcon={<PublicIcon />}
                             data-testid="url"
@@ -230,9 +286,10 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                 )}
                 {organization.categories.length > 0 && (
                     <Box ml={1} className={classes.chips} data-testid="categories">
-                        {organization.categories.map((category, index) => (
-                            <Chip className={classes.chip} key={index} label={category.name} />
-                        ))}
+                        {organization.categories.map(
+                            (category, index) =>
+                                index < 4 && <Chip className={classes.chip} key={index} label={category.name} />,
+                        )}
                     </Box>
                 )}
             </Box>
@@ -245,6 +302,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                                 color="primary"
                                 aria-label="text"
                                 data-testid="smsNumberFab"
+                                size={widget ? 'medium' : 'large'}
                                 className={classes.fab}
                             >
                                 <SmsOutlinedIcon fontSize="inherit" />
@@ -259,6 +317,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                                 color="primary"
                                 aria-label="call"
                                 data-testid="phoneNumberFab"
+                                size={widget ? 'medium' : 'large'}
                                 className={classes.fab}
                             >
                                 <PhoneIcon fontSize="inherit" />
@@ -273,6 +332,7 @@ const OrganizationCard = ({ organization }: Props): ReactElement => {
                                 color="primary"
                                 aria-label="text"
                                 data-testid="chatUrlFab"
+                                size={widget ? 'medium' : 'large'}
                                 className={classes.fab}
                             >
                                 <MessageOutlinedIcon fontSize="inherit" />

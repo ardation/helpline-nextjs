@@ -1,11 +1,12 @@
 /* eslint-disable no-use-before-define */
-import React, { ReactElement, Fragment, useState } from 'react';
+import React, { ReactElement, useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Box } from '@material-ui/core';
 import { sortBy } from 'lodash/fp';
+import OrganizationContext from '../../context/organizationContext';
 
 type Subdivision = {
     code: string;
@@ -16,12 +17,16 @@ type Country = {
     code: string;
     name: string;
     subdivisions: Subdivision[];
+    emergencyNumber?: string;
 };
 
 type Props = {
     countries: Country[];
     onCountryChange: (country: Country) => void;
     onSubdivisionChange: (subdivision: Subdivision) => void;
+    inline?: boolean;
+    defaultCountry?: Country;
+    defaultSubdivision?: Subdivision;
 };
 
 // ISO 3166-1 alpha-2
@@ -41,15 +46,30 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'grid',
             gridGap: theme.spacing(1),
         },
+        inlineGrid: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(0, 1fr))',
+            gridGap: theme.spacing(1),
+            [theme.breakpoints.down(420)]: {
+                gridTemplateColumns: '1fr',
+            },
+        },
         inputRoot: {
             borderRadius: '48px',
             backgroundColor: '#EEEDF4',
             '&[class*="MuiOutlinedInput-root"]': {
                 paddingTop: '5px',
                 paddingBottom: '5px',
+                [theme.breakpoints.down(420)]: {
+                    paddingTop: '0',
+                    paddingBottom: '0',
+                },
             },
             '& fieldset': {
                 border: 0,
+            },
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '12px',
             },
         },
         option: {
@@ -77,16 +97,25 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange }: Props): ReactElement => {
+const CountrySelect = ({
+    countries,
+    onCountryChange,
+    onSubdivisionChange,
+    inline,
+    defaultCountry,
+    defaultSubdivision,
+}: Props): ReactElement => {
     const classes = useStyles();
-    const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
-    const setSelectedSubdivision = useState<Subdivision | undefined>(undefined)[1];
+    const { setActiveCountry } = useContext(OrganizationContext);
+    const [selectedCountry, setSelectedCountry] = useState<Country | null>(defaultCountry ?? null);
+    const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | null>(defaultSubdivision ?? null);
 
     const localOnCountryChange = (country: Country): void => {
         setSelectedCountry(country);
         onCountryChange(country);
-        setSelectedSubdivision(undefined);
-        onSubdivisionChange(undefined);
+        setActiveCountry ? setActiveCountry(country) : null;
+        setSelectedSubdivision(null);
+        onSubdivisionChange(null);
     };
 
     const localOnSubdivisionChange = (subdivision: Subdivision): void => {
@@ -95,8 +124,9 @@ const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange }: Prop
     };
 
     return (
-        <Box className={classes.box}>
+        <Box className={inline ? classes.inlineGrid : classes.box}>
             <Autocomplete
+                value={selectedCountry}
                 style={{ width: 300 }}
                 options={sortBy('name', countries) as Country[]}
                 classes={{
@@ -111,10 +141,10 @@ const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange }: Prop
                 autoHighlight
                 getOptionLabel={(option): string => option.name}
                 renderOption={(option): ReactElement => (
-                    <Fragment>
+                    <>
                         <span data-testid="countryFlag">{countryToFlag(option.code)}</span>
                         {option.name}
-                    </Fragment>
+                    </>
                 )}
                 openOnFocus={true}
                 onChange={(_e, value: Country): void => localOnCountryChange(value)}
@@ -139,6 +169,7 @@ const CountrySelect = ({ countries, onCountryChange, onSubdivisionChange }: Prop
                         option: classes.option,
                         paper: classes.paper,
                     }}
+                    value={selectedSubdivision}
                     options={sortBy('name', selectedCountry.subdivisions) as Subdivision[]}
                     getOptionLabel={(option): string => option.name}
                     openOnFocus={true}

@@ -1,4 +1,4 @@
-import React, { ReactElement, Fragment, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Drawer, List, ListItem, ListItemText, IconButton, Divider, ListItemIcon } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -20,7 +20,7 @@ const SideBar = (): ReactElement => {
     const [open, setOpen] = useState(false);
 
     return (
-        <Fragment>
+        <>
             <IconButton onClick={(): void => setOpen(true)} size="small" data-testid="menuButton">
                 <MenuIcon />
             </IconButton>
@@ -76,7 +76,7 @@ const SideBar = (): ReactElement => {
                     </List>
                 </div>
             </Drawer>
-        </Fragment>
+        </>
     );
 };
 

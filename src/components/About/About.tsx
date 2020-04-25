@@ -1,4 +1,4 @@
-import React, { ReactElement, Fragment } from 'react';
+import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Container, Typography, Button, Box, Link } from '@material-ui/core';
 import NextLink from 'next/link';
@@ -80,7 +80,7 @@ const About = (): ReactElement => {
     const classes = useStyles();
 
     return (
-        <Fragment>
+        <>
             <NavBar>
                 <SideBar />
             </NavBar>
@@ -204,7 +204,7 @@ const About = (): ReactElement => {
                 </Box>
             </Box>
             <Footer />
-        </Fragment>
+        </>
     );
 };
 

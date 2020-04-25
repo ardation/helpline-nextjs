@@ -4,34 +4,34 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetCountriesAndTopics
+// GraphQL query operation: GetSearchProps
 // ====================================================
 
-export interface GetCountriesAndTopics_countries_subdivisions {
+export interface GetSearchProps_countries_subdivisions {
   __typename: "Subdivision";
   code: string;
   name: string;
 }
 
-export interface GetCountriesAndTopics_countries {
+export interface GetSearchProps_countries {
   __typename: "Country";
   code: string;
   name: string;
-  subdivisions: GetCountriesAndTopics_countries_subdivisions[];
+  subdivisions: GetSearchProps_countries_subdivisions[];
 }
 
-export interface GetCountriesAndTopics_topics {
+export interface GetSearchProps_topics {
   __typename: "Tag";
   name: string;
 }
 
-export interface GetCountriesAndTopics {
+export interface GetSearchProps {
   /**
    * Find all countries
    */
-  countries: GetCountriesAndTopics_countries[];
+  countries: GetSearchProps_countries[];
   /**
    * Find all topics
    */
-  topics: GetCountriesAndTopics_topics[];
+  topics: GetSearchProps_topics[];
 }
