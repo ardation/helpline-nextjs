@@ -47,7 +47,7 @@ const OrganizationOpen = ({ organization }: Props): ReactElement => {
     }
 
     return (
-        <Typography className={classes.body}>
+        <Typography className={classes.body} component="div">
             {organization.alwaysOpen && (
                 <>
                     <span className={classes.open}>Open</span>{' '}
