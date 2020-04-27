@@ -32,4 +32,4 @@ yarn-error.log*
 .now
 
 # files copied across at run time
-/public/widget*
+/public/widget.min.js
