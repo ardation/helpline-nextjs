@@ -46,6 +46,7 @@ export interface GetOrganizationsSlugProps_organization {
   url: string | null;
   chatUrl: string | null;
   timezone: string;
+  featured: boolean;
   humanSupportTypes: GetOrganizationsSlugProps_organization_humanSupportTypes[];
   categories: GetOrganizationsSlugProps_organization_categories[];
   topics: GetOrganizationsSlugProps_organization_topics[];

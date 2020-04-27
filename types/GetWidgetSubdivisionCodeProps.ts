@@ -53,6 +53,7 @@ export interface GetWidgetSubdivisionCodeProps_organizations_nodes {
   url: string | null;
   chatUrl: string | null;
   timezone: string;
+  featured: boolean;
   humanSupportTypes: GetWidgetSubdivisionCodeProps_organizations_nodes_humanSupportTypes[];
   categories: GetWidgetSubdivisionCodeProps_organizations_nodes_categories[];
   topics: GetWidgetSubdivisionCodeProps_organizations_nodes_topics[];

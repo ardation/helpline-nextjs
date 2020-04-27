@@ -127,7 +127,6 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                     <Box ml={1}>
                         <Typography variant="h6">
                             <a className={classes.heading}>{organization.name}</a>
-                            {organization.alwaysOpen && <Chip className={classes.chipAlwaysOpen} label="24/7" />}
                             <span className={classes.country}>{organization.country.name}</span>
                         </Typography>
                     </Box>

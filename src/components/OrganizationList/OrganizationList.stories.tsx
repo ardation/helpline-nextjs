@@ -18,6 +18,7 @@ const organizations = [
         chatUrl: 'https://youthline.co.nz/chat',
         timezone: 'Pacific/Auckland',
         topics: [{ name: 'Anxiety' }],
+        featured: false,
     },
     {
         slug: 'youthline',
@@ -32,6 +33,7 @@ const organizations = [
         chatUrl: 'https://youthline.co.nz/chat',
         timezone: 'Pacific/Auckland',
         topics: [{ name: 'Stress' }],
+        featured: false,
     },
 ];
 

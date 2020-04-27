@@ -68,7 +68,7 @@ const OrganizationList = ({
             categories: [],
             humanSupportTypes: [],
             topics: preselectedTopics,
-            sorts: [{ name: 'A – Z' }],
+            sorts: [{ name: 'Featured' }],
         });
     };
     const [filteredOrganizations, setOrganizations] = useState(filterByPreselectedTopics());

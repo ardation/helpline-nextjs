@@ -16,6 +16,7 @@ const organization = {
     chatUrl: 'https://youthline.co.nz',
     timezone: 'Pacific/Auckland',
     topics: [],
+    featured: false,
 };
 
 export default {
@@ -95,7 +96,25 @@ export const NotAlwaysOpen = (): ReactElement => (
     </ThemeProvider>
 );
 
-export const WithVariant = (): ReactElement => (
+export const WithFeatured = (): ReactElement => (
+    <ThemeProvider theme={theme}>
+        <Box m={2}>
+            <OrganizationCard organization={{ ...organization, featured: true }} />
+        </Box>
+    </ThemeProvider>
+);
+
+export const WithLongTitle = (): ReactElement => (
+    <ThemeProvider theme={theme}>
+        <Box m={2}>
+            <OrganizationCard
+                organization={{ ...organization, name: 'The quick brown fox jumps over the lazy dog', featured: true }}
+            />
+        </Box>
+    </ThemeProvider>
+);
+
+export const WhenVariant = (): ReactElement => (
     <ThemeProvider theme={theme}>
         <Box m={2}>
             <OrganizationCard organization={organization} variant="widget" />

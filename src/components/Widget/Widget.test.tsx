@@ -17,6 +17,7 @@ describe('Widget', () => {
             chatUrl: 'https://website.co.nz/chat',
             timezone: 'Pacific/Auckland',
             topics: [],
+            featured: false,
         },
         {
             slug: 'kidscan',
@@ -27,6 +28,7 @@ describe('Widget', () => {
             categories: [],
             timezone: 'Pacific/Auckland',
             topics: [],
+            featured: false,
         },
     ];
     const countries = [

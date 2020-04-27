@@ -24,7 +24,7 @@ describe('OrganizationCard', () => {
 
     it('should have open element', () => {
         const { getByText } = render(<OrganizationCard organization={organization} />);
-        expect(getByText('Available 24/7')).toBeTruthy();
+        expect(getByText('24/7')).toBeTruthy();
     });
 
     describe('not alwaysOpen', () => {

@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Typography, Chip } from '@material-ui/core';
 import { useTimeout } from 'beautiful-react-hooks';
 import isOpen, { IsOpenStatus } from '../../util/isOpen';
 
@@ -20,7 +20,7 @@ type Props = {
     organization: Organization;
 };
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         body: {
             fontSize: 'inherit',
@@ -28,6 +28,12 @@ const useStyles = makeStyles(() =>
         open: {
             color: '#3FA607',
             fontWeight: 'bold',
+        },
+        chip: {
+            color: '#FFFFFF',
+            fontWeight: 'bold',
+            backgroundColor: theme.palette.secondary.main,
+            marginLeft: theme.spacing(1),
         },
     }),
 );
@@ -44,7 +50,8 @@ const OrganizationOpen = ({ organization }: Props): ReactElement => {
         <Typography className={classes.body}>
             {organization.alwaysOpen && (
                 <>
-                    <span className={classes.open}>Open</span> &nbsp;&middot;&nbsp; <span>Available 24/7</span>
+                    <span className={classes.open}>Open</span>{' '}
+                    <Chip size="small" className={classes.chip} label="24/7" />
                 </>
             )}
             {!organization.alwaysOpen && (

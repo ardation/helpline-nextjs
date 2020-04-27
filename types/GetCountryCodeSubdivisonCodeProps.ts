@@ -53,6 +53,7 @@ export interface GetCountryCodeSubdivisonCodeProps_organizations_nodes {
   url: string | null;
   chatUrl: string | null;
   timezone: string;
+  featured: boolean;
   humanSupportTypes: GetCountryCodeSubdivisonCodeProps_organizations_nodes_humanSupportTypes[];
   categories: GetCountryCodeSubdivisonCodeProps_organizations_nodes_categories[];
   topics: GetCountryCodeSubdivisonCodeProps_organizations_nodes_topics[];

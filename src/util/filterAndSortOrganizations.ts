@@ -70,6 +70,13 @@ const sortOrganizations = (sorts: Sort[], organizations: Organization[]): Organi
     if (sorts.length === 0) {
         return organizations;
     }
+    if (find({ name: 'Featured' }, sorts)) {
+        return sortBy((organization) => {
+            const featured = organization.featured ? 'A' : 'B';
+            const open = isOpen(organization).open ? `A ${organization.name}` : `B ${organization.name}`;
+            return `${featured} ${open} ${organization.name}`;
+        }, organizations);
+    }
     if (find({ name: 'A – Z' }, sorts)) {
         return sortBy('name', organizations);
     }

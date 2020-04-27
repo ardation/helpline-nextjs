@@ -16,6 +16,7 @@ const organizations = [
         chatUrl: 'https://youthline.co.nz/chat',
         timezone: 'Pacific/Auckland',
         topics: [],
+        featured: false,
     },
     {
         slug: 'kidscan',
@@ -26,6 +27,7 @@ const organizations = [
         categories: [],
         timezone: 'Pacific/Auckland',
         topics: [],
+        featured: false,
     },
 ];
 

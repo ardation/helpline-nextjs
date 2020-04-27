@@ -8,6 +8,7 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import PublicIcon from '@material-ui/icons/Public';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import Link from 'next/link';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import OrganizationOpen from '../OrganizationOpen';
 
 type OpeningHour = {
@@ -41,6 +42,7 @@ export type Organization = {
     url?: string;
     chatUrl?: string;
     timezone: string;
+    featured: boolean;
 };
 
 type Props = {
@@ -80,21 +82,31 @@ const useStyles = makeStyles((theme: Theme) =>
             flexDirection: 'column',
             minWidth: 0,
         },
-        heading: {
-            fontWeight: 'bold',
-            textDecoration: 'underline',
-            color: theme.palette.text.primary,
+        header: {
+            display: 'grid',
+            gridTemplateColumns: '1fr auto',
+            marginLeft: theme.spacing(1),
+            gridGap: theme.spacing(1),
+            alignItems: 'center',
         },
-        chipAlwaysOpen: {
-            color: '#FFFFFF',
-            fontWeight: 'bold',
-            backgroundColor: theme.palette.secondary.main,
-            textDecoration: 'none',
-            marginLeft: theme.spacing(2),
+        heading: {
+            '& a': {
+                fontWeight: 'bold',
+                textDecoration: 'underline',
+                color: theme.palette.text.primary,
+            },
+        },
+        featured: {
+            color: '#FFD300',
         },
         button: {
             textTransform: 'none',
             lineHeight: '1.5',
+        },
+        buttonOpen: {
+            paddingTop: 0,
+            paddingBottom: 0,
+            height: '38px',
         },
         buttonDisabled: {
             color: `${theme.palette.text.primary} !important`,
@@ -152,22 +164,29 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
     return (
         <Box className={classes.box}>
             <Box className={classes.grid}>
-                <Box ml={1}>
-                    <Typography variant="h6">
-                        {variant === 'widget' && <a className={classes.heading}>{organization.name}</a>}
+                <Box className={classes.header}>
+                    <Typography variant="h6" className={classes.heading}>
+                        {variant === 'widget' && <a>{organization.name}</a>}
                         {!variant && (
                             <Link href="/organizations/[slug]" as={`/organizations/${organization.slug}`} passHref>
-                                <a className={classes.heading}>{organization.name}</a>
+                                <a>{organization.name}</a>
                             </Link>
                         )}
-                        {organization.alwaysOpen && <Chip className={classes.chipAlwaysOpen} label="24/7" />}
                     </Typography>
+                    {organization.featured && (
+                        <span className={classes.featured}>
+                            <BookmarkIcon />
+                        </span>
+                    )}
                 </Box>
                 {(organization.alwaysOpen || organization.openingHours.length > 0) && (
                     <Box data-testid="open">
                         <Button
                             size="large"
-                            classes={{ root: classes.button, disabled: classes.buttonDisabled }}
+                            classes={{
+                                root: [classes.button, classes.buttonOpen].join(' '),
+                                disabled: classes.buttonDisabled,
+                            }}
                             startIcon={<AccessTimeIcon />}
                             disabled
                         >

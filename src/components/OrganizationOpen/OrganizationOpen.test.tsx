@@ -20,7 +20,7 @@ describe('OrganizationOpen', () => {
 
     it('should contain alwaysOpen', () => {
         const { getByText } = render(<OrganizationOpen organization={organization} />);
-        expect(getByText('Available 24/7')).toBeTruthy();
+        expect(getByText('24/7')).toBeTruthy();
     });
 
     describe('currently closed', () => {

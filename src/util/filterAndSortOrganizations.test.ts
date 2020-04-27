@@ -14,6 +14,7 @@ describe('filterAndSortOrganizations', () => {
         url: 'https://youthline.co.nz/website',
         chatUrl: 'https://youthline.co.nz/chat',
         timezone: 'Pacific/Auckland',
+        featured: false,
     };
     const filteredOrganization = {
         slug: 'aaa',
@@ -28,6 +29,7 @@ describe('filterAndSortOrganizations', () => {
         url: 'https://test.co.nz/website',
         chatUrl: undefined,
         timezone: 'Pacific/Auckland',
+        featured: false,
     };
     const organizations = [organization, filteredOrganization];
     let changes;
@@ -113,6 +115,7 @@ describe('filterAndSortOrganizations', () => {
             url: 'https://test.co.nz/website',
             chatUrl: undefined,
             timezone: 'Pacific/Auckland',
+            featured: true,
         };
 
         const closedLastOrganization = {
@@ -128,7 +131,18 @@ describe('filterAndSortOrganizations', () => {
             url: 'https://test.co.nz/website',
             chatUrl: undefined,
             timezone: 'Pacific/Auckland',
+            featured: true,
         };
+
+        it('sorts by Featured', () => {
+            changes.sorts = [{ name: 'Featured' }];
+            expect(
+                filterAndSortOrganizations(
+                    [alwaysOpenLastOrganization, closedLastOrganization, organization, filteredOrganization],
+                    changes,
+                ),
+            ).toEqual([alwaysOpenLastOrganization, closedLastOrganization, filteredOrganization, organization]);
+        });
 
         it('sorts by A – Z', () => {
             changes.sorts = [{ name: 'A – Z' }];

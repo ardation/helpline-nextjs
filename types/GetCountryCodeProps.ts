@@ -46,6 +46,7 @@ export interface GetCountryCodeProps_organizations_nodes {
   url: string | null;
   chatUrl: string | null;
   timezone: string;
+  featured: boolean;
   humanSupportTypes: GetCountryCodeProps_organizations_nodes_humanSupportTypes[];
   categories: GetCountryCodeProps_organizations_nodes_categories[];
   topics: GetCountryCodeProps_organizations_nodes_topics[];
