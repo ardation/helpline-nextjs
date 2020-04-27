@@ -68,14 +68,7 @@ const Embed = ({ countries }: Props): ReactElement => {
     const snippet = `<div id="widget"></div>
 
 <script src="${domainUrl}/widget.min.js"></script>
-<script>
-    Widget.default.render(
-        {
-            countryCode: '${selectedCountryCode}',
-        },
-        "#widget"
-    );
-</script>`;
+<script>Widget.default({ countryCode: '${selectedCountryCode.toLowerCase()}' }).render('#widget');</script>`;
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
         setSelectedCountryCode(event.target.value);

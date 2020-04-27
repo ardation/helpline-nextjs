@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "cross-env NODE_ENV=development npx webpack --config webpack.config.js && next dev",
-        "build": "cross-env NODE_ENV=production npx webpack --config webpack.config.js && next build",
+        "dev": "npx webpack --config webpack.config.js && next dev",
+        "build": "npx webpack --config webpack.config.js && next build",
         "start": "next start",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "lint:ci": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
@@ -25,7 +25,6 @@
         "graphql": "^14.6.0",
         "graphql-request": "^1.8.2",
         "graphql-tag": "^2.10.3",
-        "jsx-pragmatic": "^2.0.10",
         "lodash": "^4.17.15",
         "moment-timezone": "^0.5.28",
         "next": "9.3.2",
@@ -52,7 +51,6 @@
         "@typescript-eslint/parser": "^2.26.0",
         "babel-loader": "^8.1.0",
         "babel-preset-react-app": "^9.1.2",
-        "cross-env": "^7.0.2",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.10.1",
         "eslint-plugin-import": "^2.20.2",
@@ -68,7 +66,7 @@
         "ts-jest": "^25.3.0",
         "typescript": "^3.8.3",
         "webpack-cli": "^3.3.11",
-        "zoid": "^6.0.79"
+        "zoid": "^9.0.42"
     },
     "husky": {
         "hooks": {
