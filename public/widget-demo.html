@@ -6,12 +6,7 @@
         <div id="widget"></div>
         <script src="/widget.min.js"></script>
         <script>
-            Widget.default.render(
-                {
-                    countryCode: 'US',
-                },
-                '#widget',
-            );
+            Widget.default({ countryCode: 'us' }).render('#widget');
         </script>
     </body>
 </html>

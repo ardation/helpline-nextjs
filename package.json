@@ -25,6 +25,7 @@
         "graphql": "^14.6.0",
         "graphql-request": "^1.8.2",
         "graphql-tag": "^2.10.3",
+        "jsx-pragmatic": "^2.0.10",
         "lodash": "^4.17.15",
         "moment-timezone": "^0.5.28",
         "next": "9.3.2",

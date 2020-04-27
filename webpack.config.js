@@ -48,13 +48,8 @@ module.exports = {
         ],
     },
     plugins: [
-        new webpack.DefinePlugin({
-            DOMAIN_URL: () => {
-                return {
-                    development: 'http://localhost:3000',
-                    production: `https://${process.env.NOW_URL}`,
-                }[process.env.NODE_ENV];
-            },
+        new webpack.EnvironmentPlugin({
+            NOW_URL: 'http://localhost:3000',
         }),
     ],
 };
