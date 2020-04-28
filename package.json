@@ -16,7 +16,7 @@
         "chromatic": "chromatic"
     },
     "dependencies": {
-        "@material-ui/core": "^4.9.8",
+        "@material-ui/core": "^4.9.12",
         "@material-ui/icons": "^4.9.1",
         "@material-ui/lab": "^4.0.0-alpha.47",
         "beautiful-react-hooks": "^0.23.1",
