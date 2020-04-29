@@ -62,7 +62,7 @@
         "husky": "^4.2.3",
         "jest": "^25.2.6",
         "jsx-dom": "^6.4.14-beta.3",
-        "lint-staged": "^10.0.9",
+        "lint-staged": "^10.2.0",
         "prettier": "^2.0.2",
         "storybook-chromatic": "^3.5.2",
         "ts-jest": "^25.3.0",
