@@ -27,7 +27,7 @@
         "graphql-tag": "^2.10.3",
         "lodash": "^4.17.15",
         "moment-timezone": "^0.5.28",
-        "next": "9.3.2",
+        "next": "9.3.6",
         "react": "16.13.1",
         "react-div-100vh": "^0.3.8",
         "react-dom": "16.13.1",
