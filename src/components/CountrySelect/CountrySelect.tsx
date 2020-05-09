@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React, { ReactElement, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import { Autocomplete } from '@material-ui/lab';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Box } from '@material-ui/core';
