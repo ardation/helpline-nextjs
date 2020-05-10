@@ -13,6 +13,7 @@ import TextTruncate from 'react-text-truncate';
 import { OutboundLink } from 'react-ga';
 import OrganizationOpen from '../OrganizationOpen';
 import Chips from '../Chips';
+import OrganizationRating from '../OrganizationRating';
 
 type OpeningHour = {
     day: string;
@@ -46,6 +47,8 @@ export type Organization = {
     chatUrl?: string;
     timezone: string;
     featured: boolean;
+    rating: number;
+    reviewCount: number;
 };
 
 type Props = {
@@ -172,6 +175,9 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                             <WhatshotIcon />
                         </Box>
                     )}
+                </Box>
+                <Box ml={1}>
+                    <OrganizationRating organization={organization} variant={variant} />
                 </Box>
                 {(organization.alwaysOpen || organization.openingHours.length > 0) && (
                     <Box data-testid="open">

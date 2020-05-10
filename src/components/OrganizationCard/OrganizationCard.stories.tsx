@@ -17,6 +17,8 @@ const organization = {
     timezone: 'Pacific/Auckland',
     topics: [],
     featured: false,
+    rating: 3.67,
+    reviewCount: 20,
 };
 
 export default {
