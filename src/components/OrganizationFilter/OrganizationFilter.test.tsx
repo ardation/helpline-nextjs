@@ -1,6 +1,10 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import ReactGA from 'react-ga';
+import { mocked } from 'ts-jest/utils';
 import OrganizationFilter from '.';
+
+jest.mock('react-ga');
 
 const topics = [{ name: 'Anxiety' }, { name: 'Bullying' }, { name: 'Depression' }, { name: 'School' }];
 const preselectedTopics = [{ name: 'Anxiety' }, { name: 'Depression' }];
@@ -16,9 +20,26 @@ const categories = [
 ];
 
 describe('OrganizationFilter', () => {
+    let mock;
+
+    beforeEach(() => {
+        mock = mocked(ReactGA.event).mockReturnValue();
+    });
+
     it('should contain correct text', () => {
         const { getByText } = render(<OrganizationFilter onChange={jest.fn()} />);
         expect(getByText('Filter & Sort')).toBeTruthy();
+    });
+
+    it('should call event', () => {
+        const onChange = (): void => {
+            expect(mock).toHaveBeenCalledWith({
+                category: 'User',
+                action: 'Changed Filters',
+            });
+        };
+        const { getByText } = render(<OrganizationFilter onChange={onChange} />);
+        fireEvent.click(getByText('Apply'));
     });
 
     it('should allow topics to be changed', () => {

@@ -1,6 +1,10 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import ReactGA from 'react-ga';
+import { mocked } from 'ts-jest/utils';
 import Widget from '.';
+
+jest.mock('react-ga');
 
 describe('Widget', () => {
     const organizations = [
@@ -89,6 +93,7 @@ describe('Widget', () => {
     });
 
     it('should allow organizations to be filtered', () => {
+        mocked(ReactGA.event).mockReturnValue();
         const createElement = document.createElement.bind(document);
         // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         document.createElement = (tagName: string) => {

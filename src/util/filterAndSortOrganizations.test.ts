@@ -15,6 +15,8 @@ describe('filterAndSortOrganizations', () => {
         chatUrl: 'https://youthline.co.nz/chat',
         timezone: 'Pacific/Auckland',
         featured: false,
+        rating: 5,
+        reviewCount: 10,
     };
     const filteredOrganization = {
         slug: 'aaa',
@@ -30,6 +32,8 @@ describe('filterAndSortOrganizations', () => {
         chatUrl: undefined,
         timezone: 'Pacific/Auckland',
         featured: false,
+        rating: 5,
+        reviewCount: 10,
     };
     const organizations = [organization, filteredOrganization];
     let changes;
@@ -116,6 +120,8 @@ describe('filterAndSortOrganizations', () => {
             chatUrl: undefined,
             timezone: 'Pacific/Auckland',
             featured: true,
+            rating: 5,
+            reviewCount: 10,
         };
 
         const closedLastOrganization = {
@@ -132,6 +138,8 @@ describe('filterAndSortOrganizations', () => {
             chatUrl: undefined,
             timezone: 'Pacific/Auckland',
             featured: true,
+            rating: 5,
+            reviewCount: 10,
         };
 
         it('sorts by Featured', () => {

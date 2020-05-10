@@ -254,7 +254,7 @@ const ReviewModal = ({ organization, open, notice, grecaptcha }: Props): ReactEl
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
                                                     disabled={isSubmitting}
-                                                    inputProps={{ 'data-testId': 'content' }}
+                                                    inputProps={{ 'data-testid': 'content' }}
                                                 />
                                             </Grid>
                                             <Grid item>
