@@ -45,6 +45,7 @@ export interface GetWidgetSubdivisionCodeProps_organizations_nodes_openingHours 
 
 export interface GetWidgetSubdivisionCodeProps_organizations_nodes {
   __typename: "Organization";
+  id: string;
   slug: string;
   name: string;
   alwaysOpen: boolean;
@@ -54,6 +55,8 @@ export interface GetWidgetSubdivisionCodeProps_organizations_nodes {
   chatUrl: string | null;
   timezone: string;
   featured: boolean;
+  rating: number;
+  reviewCount: number;
   humanSupportTypes: GetWidgetSubdivisionCodeProps_organizations_nodes_humanSupportTypes[];
   categories: GetWidgetSubdivisionCodeProps_organizations_nodes_categories[];
   topics: GetWidgetSubdivisionCodeProps_organizations_nodes_topics[];

@@ -45,6 +45,7 @@ export interface GetCountryCodeSubdivisonCodeProps_organizations_nodes_openingHo
 
 export interface GetCountryCodeSubdivisonCodeProps_organizations_nodes {
   __typename: "Organization";
+  id: string;
   slug: string;
   name: string;
   alwaysOpen: boolean;
@@ -54,6 +55,8 @@ export interface GetCountryCodeSubdivisonCodeProps_organizations_nodes {
   chatUrl: string | null;
   timezone: string;
   featured: boolean;
+  rating: number;
+  reviewCount: number;
   humanSupportTypes: GetCountryCodeSubdivisonCodeProps_organizations_nodes_humanSupportTypes[];
   categories: GetCountryCodeSubdivisonCodeProps_organizations_nodes_categories[];
   topics: GetCountryCodeSubdivisonCodeProps_organizations_nodes_topics[];

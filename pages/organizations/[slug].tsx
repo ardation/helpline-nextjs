@@ -32,6 +32,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
     const query = gql`
         query GetOrganizationsSlugProps($slug: String!) {
             organization(slug: $slug) {
+                id
                 slug
                 name
                 alwaysOpen
@@ -41,6 +42,13 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                 chatUrl
                 timezone
                 featured
+                rating
+                reviewCount
+                reviews {
+                    rating
+                    content
+                    createdAt
+                }
                 humanSupportTypes {
                     name
                 }

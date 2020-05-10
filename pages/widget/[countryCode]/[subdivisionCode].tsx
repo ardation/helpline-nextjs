@@ -61,6 +61,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             }
             organizations(countryCode: $countryCode, subdivisionCodes: [$subdivisionCode]) {
                 nodes {
+                    id
                     slug
                     name
                     alwaysOpen
@@ -70,6 +71,8 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                     chatUrl
                     timezone
                     featured
+                    rating
+                    reviewCount
                     humanSupportTypes {
                         name
                     }

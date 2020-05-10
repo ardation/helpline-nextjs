@@ -7,6 +7,13 @@
 // GraphQL query operation: GetOrganizationsSlugProps
 // ====================================================
 
+export interface GetOrganizationsSlugProps_organization_reviews {
+  __typename: "Review";
+  rating: number;
+  content: string | null;
+  createdAt: any;
+}
+
 export interface GetOrganizationsSlugProps_organization_humanSupportTypes {
   __typename: "Tag";
   name: string;
@@ -38,6 +45,7 @@ export interface GetOrganizationsSlugProps_organization_country {
 
 export interface GetOrganizationsSlugProps_organization {
   __typename: "Organization";
+  id: string;
   slug: string;
   name: string;
   alwaysOpen: boolean;
@@ -47,6 +55,9 @@ export interface GetOrganizationsSlugProps_organization {
   chatUrl: string | null;
   timezone: string;
   featured: boolean;
+  rating: number;
+  reviewCount: number;
+  reviews: GetOrganizationsSlugProps_organization_reviews[];
   humanSupportTypes: GetOrganizationsSlugProps_organization_humanSupportTypes[];
   categories: GetOrganizationsSlugProps_organization_categories[];
   topics: GetOrganizationsSlugProps_organization_topics[];
