@@ -17,6 +17,8 @@ const organizations = [
         timezone: 'Pacific/Auckland',
         topics: [],
         featured: false,
+        rating: 5,
+        reviewCount: 10,
     },
     {
         slug: 'kidscan',
@@ -28,6 +30,8 @@ const organizations = [
         timezone: 'Pacific/Auckland',
         topics: [],
         featured: false,
+        rating: 5,
+        reviewCount: 10,
     },
 ];
 

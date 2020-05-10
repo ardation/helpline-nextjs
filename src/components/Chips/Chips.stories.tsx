@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
-import { ThemeProvider, Box } from '@material-ui/core';
-import theme from '../../theme';
+import { Box } from '@material-ui/core';
 import Chips from '.';
 
 export default {
@@ -8,17 +7,13 @@ export default {
 };
 
 export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <Chips items={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <Chips items={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]} />
+    </Box>
 );
 
 export const WhenMax = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <Chips items={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]} max={2} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <Chips items={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]} max={2} />
+    </Box>
 );

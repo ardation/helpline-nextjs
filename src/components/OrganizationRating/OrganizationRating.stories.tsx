@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
-import { ThemeProvider, Box } from '@material-ui/core';
-import theme from '../../theme';
+import { Box } from '@material-ui/core';
 import OrganizationRating from '.';
 
 const organization = {
@@ -14,25 +13,19 @@ export default {
 };
 
 export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationRating organization={organization} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationRating organization={organization} />
+    </Box>
 );
 
 export const WhenWidget = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationRating organization={organization} variant="widget" />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationRating organization={organization} variant="widget" />
+    </Box>
 );
 
 export const WhenItem = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationRating organization={organization} variant="item" />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationRating organization={organization} variant="item" />
+    </Box>
 );

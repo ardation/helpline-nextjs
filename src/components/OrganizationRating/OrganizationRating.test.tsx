@@ -16,6 +16,11 @@ describe('OrganizationOpen', () => {
         expect(getByTestId('reviewsLink')).toHaveAttribute('href', '/organizations/abc');
     });
 
+    it('should should shorten rating', () => {
+        const { getByText } = render(<OrganizationOpen organization={{ ...organization, rating: 3.565 }} />);
+        expect(getByText('3.6')).toBeTruthy();
+    });
+
     describe('widget', () => {
         it('should not show link', () => {
             const { getByTestId } = render(<OrganizationOpen organization={organization} variant="widget" />);

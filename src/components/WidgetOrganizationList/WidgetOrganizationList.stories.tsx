@@ -1,6 +1,4 @@
 import React, { ReactElement } from 'react';
-import { ThemeProvider } from '@material-ui/core';
-import theme from '../../theme';
 import WidgetOrganizationList from '.';
 
 const organizations = Array(8).fill({
@@ -16,23 +14,17 @@ const organizations = Array(8).fill({
     chatUrl: 'https://youthline.co.nz/chat',
     timezone: 'Pacific/Auckland',
     topics: [],
+    rating: 5,
+    reviewCount: 10,
 });
 
 export default {
     title: 'WidgetOrganizationList',
 };
 
-export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <WidgetOrganizationList organizations={organizations} />
-    </ThemeProvider>
-);
+export const Default = (): ReactElement => <WidgetOrganizationList organizations={organizations} />;
 
-export const WhenEmpty = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <WidgetOrganizationList organizations={[]} />
-    </ThemeProvider>
-);
+export const WhenEmpty = (): ReactElement => <WidgetOrganizationList organizations={[]} />;
 
 Default.story = {
     parameters: { chromatic: { diffThreshold: 0.7 } },

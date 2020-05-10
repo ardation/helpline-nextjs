@@ -1,6 +1,4 @@
 import React, { ReactElement } from 'react';
-import { ThemeProvider } from '@material-ui/core';
-import theme from '../../theme';
 import Chrome from '../Chrome';
 import OrganizationList from '.';
 
@@ -19,6 +17,8 @@ const organizations = [
         timezone: 'Pacific/Auckland',
         topics: [{ name: 'Anxiety' }],
         featured: false,
+        rating: 5,
+        reviewCount: 10,
     },
     {
         slug: 'youthline',
@@ -34,6 +34,8 @@ const organizations = [
         timezone: 'Pacific/Auckland',
         topics: [{ name: 'Stress' }],
         featured: false,
+        rating: 5,
+        reviewCount: 10,
     },
 ];
 
@@ -42,62 +44,54 @@ export default {
 };
 
 export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Chrome country={{ emergencyNumber: '111' }}>
-            <OrganizationList
-                country={{ name: 'New Zealand' }}
-                categories={[]}
-                humanSupportTypes={[]}
-                preselectedTopics={[]}
-                topics={[]}
-                organizations={organizations}
-            />
-        </Chrome>
-    </ThemeProvider>
+    <Chrome country={{ emergencyNumber: '111' }}>
+        <OrganizationList
+            country={{ name: 'New Zealand' }}
+            categories={[]}
+            humanSupportTypes={[]}
+            preselectedTopics={[]}
+            topics={[]}
+            organizations={organizations}
+        />
+    </Chrome>
 );
 
 export const WithSubdivision = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Chrome country={{ emergencyNumber: '111' }}>
-            <OrganizationList
-                country={{ name: 'New Zealand' }}
-                subdivision={{ name: 'Auckland' }}
-                categories={[]}
-                humanSupportTypes={[]}
-                preselectedTopics={[]}
-                topics={[]}
-                organizations={organizations}
-            />
-        </Chrome>
-    </ThemeProvider>
+    <Chrome country={{ emergencyNumber: '111' }}>
+        <OrganizationList
+            country={{ name: 'New Zealand' }}
+            subdivision={{ name: 'Auckland' }}
+            categories={[]}
+            humanSupportTypes={[]}
+            preselectedTopics={[]}
+            topics={[]}
+            organizations={organizations}
+        />
+    </Chrome>
 );
 
 export const WithTopics = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Chrome country={{ emergencyNumber: '111' }}>
-            <OrganizationList
-                country={{ name: 'New Zealand' }}
-                categories={[]}
-                humanSupportTypes={[]}
-                preselectedTopics={[{ name: 'Anxiety' }, { name: 'Stress' }]}
-                topics={[{ name: 'Anxiety' }, { name: 'Bullying' }, { name: 'Stress' }]}
-                organizations={organizations}
-            />
-        </Chrome>
-    </ThemeProvider>
+    <Chrome country={{ emergencyNumber: '111' }}>
+        <OrganizationList
+            country={{ name: 'New Zealand' }}
+            categories={[]}
+            humanSupportTypes={[]}
+            preselectedTopics={[{ name: 'Anxiety' }, { name: 'Stress' }]}
+            topics={[{ name: 'Anxiety' }, { name: 'Bullying' }, { name: 'Stress' }]}
+            organizations={organizations}
+        />
+    </Chrome>
 );
 
 export const WhenEmpty = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Chrome country={{ emergencyNumber: '111' }}>
-            <OrganizationList
-                country={{ name: 'New Zealand' }}
-                categories={[]}
-                humanSupportTypes={[]}
-                preselectedTopics={[]}
-                topics={[]}
-                organizations={[]}
-            />
-        </Chrome>
-    </ThemeProvider>
+    <Chrome country={{ emergencyNumber: '111' }}>
+        <OrganizationList
+            country={{ name: 'New Zealand' }}
+            categories={[]}
+            humanSupportTypes={[]}
+            preselectedTopics={[]}
+            topics={[]}
+            organizations={[]}
+        />
+    </Chrome>
 );

@@ -7,6 +7,8 @@ describe('OrganizationItem', () => {
 
     beforeEach(() => {
         organization = {
+            id: 'abc',
+            rating: 5,
             slug: 'youthline',
             name: 'Youthline',
             alwaysOpen: true,
@@ -19,6 +21,7 @@ describe('OrganizationItem', () => {
             chatUrl: 'https://chatyouthline.co.nz/chat',
             timezone: 'Pacific/Auckland',
             country: { name: 'New Zealand' },
+            reviews: [],
         };
     });
 

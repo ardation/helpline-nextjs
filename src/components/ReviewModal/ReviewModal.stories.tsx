@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
-import { ThemeProvider } from '@material-ui/core';
-import theme from '../../theme';
+import stubOrganizationReviewCreate from '../../../tests/stubs/stubOrganizationReviewCreate';
 import ReviewModal from '.';
 
 const organization = {
+    id: 'c1d74c09-ecb0-46f3-902e-1feb22aad7ad',
     slug: 'youthline',
     name: 'Youthline Youthline Youthline Youthline',
     alwaysOpen: true,
@@ -18,26 +18,16 @@ const organization = {
     country: {
         name: 'New Zealand',
     },
+    rating: 5,
+    reviewCount: 5,
+    reviews: [],
 };
 
 export default {
     title: 'ReviewModal',
+    decorators: [stubOrganizationReviewCreate],
 };
 
-export const WhenButton = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <ReviewModal organization={organization} />
-    </ThemeProvider>
-);
-
-export const WhenOpen = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <ReviewModal organization={organization} open={true} />
-    </ThemeProvider>
-);
-
-export const WhenNotice = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <ReviewModal organization={organization} open={true} notice={true} />
-    </ThemeProvider>
-);
+export const WhenButton = (): ReactElement => <ReviewModal organization={organization} />;
+export const WhenOpen = (): ReactElement => <ReviewModal organization={organization} open={true} />;
+export const WhenNotice = (): ReactElement => <ReviewModal organization={organization} open={true} notice={true} />;

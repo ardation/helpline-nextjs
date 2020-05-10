@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
-import { ThemeProvider, Box } from '@material-ui/core';
-import theme from '../../theme';
+import { Box } from '@material-ui/core';
 import OrganizationOpen from '.';
 
 const organization = {
@@ -24,27 +23,19 @@ export default {
 };
 
 export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationOpen organization={organization} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationOpen organization={organization} />
+    </Box>
 );
 
 export const Closed = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationOpen organization={{ ...organization, alwaysOpen: false }} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationOpen organization={{ ...organization, alwaysOpen: false }} />
+    </Box>
 );
 
 export const Opened = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationOpen
-                organization={{ ...organization, alwaysOpen: false, openingHours: completeOpeningHours }}
-            />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationOpen organization={{ ...organization, alwaysOpen: false, openingHours: completeOpeningHours }} />
+    </Box>
 );

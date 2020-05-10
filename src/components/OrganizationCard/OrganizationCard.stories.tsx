@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
-import { ThemeProvider, Box } from '@material-ui/core';
-import theme from '../../theme';
+import { Box } from '@material-ui/core';
 import OrganizationCard from '.';
 
 const organization = {
@@ -26,123 +25,101 @@ export default {
 };
 
 export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard organization={organization} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard organization={organization} />
+    </Box>
 );
 
 export const Basic = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard
-                organization={{
-                    ...organization,
-                    smsNumber: undefined,
-                    phoneNumber: undefined,
-                    chatUrl: undefined,
-                    url: undefined,
-                    categories: [],
-                    humanSupportTypes: [],
-                    alwaysOpen: false,
-                }}
-            />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard
+            organization={{
+                ...organization,
+                smsNumber: undefined,
+                phoneNumber: undefined,
+                chatUrl: undefined,
+                url: undefined,
+                categories: [],
+                humanSupportTypes: [],
+                alwaysOpen: false,
+            }}
+        />
+    </Box>
 );
 
 export const NoSmsNumber = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard organization={{ ...organization, smsNumber: undefined }} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard organization={{ ...organization, smsNumber: undefined }} />
+    </Box>
 );
 
 export const NoPhoneNumber = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard organization={{ ...organization, phoneNumber: undefined }} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard organization={{ ...organization, phoneNumber: undefined }} />
+    </Box>
 );
 
 export const NoChatUrl = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard organization={{ ...organization, chatUrl: undefined }} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard organization={{ ...organization, chatUrl: undefined }} />
+    </Box>
 );
 
 export const NoUrl = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard organization={{ ...organization, url: undefined }} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard organization={{ ...organization, url: undefined }} />
+    </Box>
 );
 
 export const NotAlwaysOpen = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard
-                organization={{
-                    ...organization,
-                    alwaysOpen: false,
-                    openingHours: [{ day: 'sunday', open: '2000-01-01T09:00:00Z', close: '2000-01-01T15:00:00Z' }],
-                }}
-            />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard
+            organization={{
+                ...organization,
+                alwaysOpen: false,
+                openingHours: [{ day: 'sunday', open: '2000-01-01T09:00:00Z', close: '2000-01-01T15:00:00Z' }],
+            }}
+        />
+    </Box>
 );
 
 export const WithFeatured = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard organization={{ ...organization, featured: true }} />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard organization={{ ...organization, featured: true }} />
+    </Box>
 );
 
 export const WithLongTitle = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard
-                organization={{
-                    ...organization,
-                    name: 'The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog',
-                    featured: true,
-                }}
-            />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard
+            organization={{
+                ...organization,
+                name: 'The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog',
+                featured: true,
+            }}
+        />
+    </Box>
 );
 
 export const WithManyCategories = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard
-                organization={{
-                    ...organization,
-                    categories: [
-                        { name: 'For everyone' },
-                        { name: 'For youth' },
-                        { name: 'All issues' },
-                        { name: 'For women' },
-                        { name: 'For men' },
-                    ],
-                }}
-            />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard
+            organization={{
+                ...organization,
+                categories: [
+                    { name: 'For everyone' },
+                    { name: 'For youth' },
+                    { name: 'All issues' },
+                    { name: 'For women' },
+                    { name: 'For men' },
+                ],
+            }}
+        />
+    </Box>
 );
 
 export const WhenVariant = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <OrganizationCard organization={organization} variant="widget" />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <OrganizationCard organization={organization} variant="widget" />
+    </Box>
 );

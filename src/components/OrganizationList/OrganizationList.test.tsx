@@ -29,6 +29,8 @@ describe('OrganizationList', () => {
                 chatUrl: 'https://youthline.co.nz/chat',
                 timezone: 'Pacific/Auckland',
                 topics: [],
+                rating: 5,
+                reviewCount: 10,
             },
             {
                 slug: 'kidscan',
@@ -39,6 +41,8 @@ describe('OrganizationList', () => {
                 categories: [],
                 timezone: 'Pacific/Auckland',
                 topics: [],
+                rating: 5,
+                reviewCount: 10,
             },
         ];
         country = { name: 'New Zealand' };

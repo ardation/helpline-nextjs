@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import { action } from '@storybook/addon-actions';
-import { ThemeProvider, Box } from '@material-ui/core';
-import theme from '../../theme';
+import { Box } from '@material-ui/core';
 import ItemSelect from '.';
 
 export default {
@@ -9,50 +8,42 @@ export default {
 };
 
 export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <ItemSelect
-                items={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]}
-                onChange={action('onChange')}
-            />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <ItemSelect
+            items={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]}
+            onChange={action('onChange')}
+        />
+    </Box>
 );
 
 export const WithSingle = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <ItemSelect
-                items={[{ name: 'A - Z' }, { name: 'Top Rated' }, { name: 'Open Now' }]}
-                onChange={action('onChange')}
-                single
-            />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <ItemSelect
+            items={[{ name: 'A - Z' }, { name: 'Top Rated' }, { name: 'Open Now' }]}
+            onChange={action('onChange')}
+            single
+        />
+    </Box>
 );
 
 export const WithMax = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <ItemSelect
-                items={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]}
-                preselectedItems={[{ name: 'Bullying' }]}
-                onChange={action('onChange')}
-                max={2}
-            />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <ItemSelect
+            items={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]}
+            preselectedItems={[{ name: 'Bullying' }]}
+            onChange={action('onChange')}
+            max={2}
+        />
+    </Box>
 );
 
 export const WithPreselectedItemsAndMax = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Box m={2}>
-            <ItemSelect
-                items={[{ name: 'Abuse' }, { name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]}
-                preselectedItems={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]}
-                onChange={action('onChange')}
-                max={2}
-            />
-        </Box>
-    </ThemeProvider>
+    <Box m={2}>
+        <ItemSelect
+            items={[{ name: 'Abuse' }, { name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]}
+            preselectedItems={[{ name: 'Anxiety' }, { name: 'Body image' }, { name: 'Bullying' }]}
+            onChange={action('onChange')}
+            max={2}
+        />
+    </Box>
 );

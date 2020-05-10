@@ -4,6 +4,9 @@ import OrganizationCard from '.';
 
 describe('OrganizationCard', () => {
     let organization = {
+        id: 'abc',
+        rating: 5,
+        reviewCount: 10,
         slug: 'youthline',
         name: 'Youthline',
         alwaysOpen: true,
@@ -17,6 +20,7 @@ describe('OrganizationCard', () => {
         timezone: 'Pacific/Auckland',
         topics: [],
         featured: false,
+        reviews: [],
     };
 
     beforeEach(() => {

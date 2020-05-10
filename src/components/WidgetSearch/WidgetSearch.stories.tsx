@@ -1,6 +1,4 @@
 import React, { ReactElement } from 'react';
-import { ThemeProvider } from '@material-ui/core';
-import theme from '../../theme';
 import WidgetSearch from '.';
 
 export default {
@@ -8,29 +6,27 @@ export default {
 };
 
 export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <WidgetSearch
-            countries={[
-                { code: 'AU', name: 'Australia', subdivisions: [] },
-                {
-                    code: 'NZ',
-                    name: 'New Zealand',
-                    subdivisions: [
-                        { name: 'Bay of Plenty', code: 'BOP' },
-                        { name: 'Auckland', code: 'AUK' },
-                    ],
-                },
-            ]}
-            preselectedCountry={{
+    <WidgetSearch
+        countries={[
+            { code: 'AU', name: 'Australia', subdivisions: [] },
+            {
                 code: 'NZ',
                 name: 'New Zealand',
                 subdivisions: [
                     { name: 'Bay of Plenty', code: 'BOP' },
                     { name: 'Auckland', code: 'AUK' },
                 ],
-            }}
-        />
-    </ThemeProvider>
+            },
+        ]}
+        preselectedCountry={{
+            code: 'NZ',
+            name: 'New Zealand',
+            subdivisions: [
+                { name: 'Bay of Plenty', code: 'BOP' },
+                { name: 'Auckland', code: 'AUK' },
+            ],
+        }}
+    />
 );
 
 Default.story = {

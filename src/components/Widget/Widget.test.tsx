@@ -18,6 +18,8 @@ describe('Widget', () => {
             timezone: 'Pacific/Auckland',
             topics: [],
             featured: false,
+            rating: 5,
+            reviewCount: 10,
         },
         {
             slug: 'kidscan',
@@ -29,6 +31,8 @@ describe('Widget', () => {
             timezone: 'Pacific/Auckland',
             topics: [],
             featured: false,
+            rating: 5,
+            reviewCount: 10,
         },
     ];
     const countries = [

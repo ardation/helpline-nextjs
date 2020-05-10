@@ -1,6 +1,4 @@
 import React, { ReactElement } from 'react';
-import { ThemeProvider } from '@material-ui/core';
-import theme from '../../theme';
 import Widget from '.';
 
 const organizations = [
@@ -18,6 +16,8 @@ const organizations = [
         timezone: 'Pacific/Auckland',
         topics: [{ name: 'Anxiety' }],
         featured: false,
+        rating: 5,
+        reviewCount: 10,
     },
     {
         slug: 'kidscan',
@@ -29,6 +29,8 @@ const organizations = [
         timezone: 'Pacific/Auckland',
         topics: [],
         featured: false,
+        rating: 5,
+        reviewCount: 10,
     },
 ];
 
@@ -60,28 +62,24 @@ export default {
 };
 
 export const Default = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Widget
-            preselectedCountry={country}
-            countries={countries}
-            categories={[]}
-            humanSupportTypes={[]}
-            topics={[]}
-            organizations={organizations}
-        />
-    </ThemeProvider>
+    <Widget
+        preselectedCountry={country}
+        countries={countries}
+        categories={[]}
+        humanSupportTypes={[]}
+        topics={[]}
+        organizations={organizations}
+    />
 );
 
 export const WithSubdivision = (): ReactElement => (
-    <ThemeProvider theme={theme}>
-        <Widget
-            preselectedCountry={country}
-            countries={countries}
-            preselectedSubdivision={country.subdivisions[0]}
-            categories={[]}
-            humanSupportTypes={[]}
-            topics={[]}
-            organizations={organizations}
-        />
-    </ThemeProvider>
+    <Widget
+        preselectedCountry={country}
+        countries={countries}
+        preselectedSubdivision={country.subdivisions[0]}
+        categories={[]}
+        humanSupportTypes={[]}
+        topics={[]}
+        organizations={organizations}
+    />
 );
