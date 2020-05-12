@@ -21,10 +21,17 @@ describe('OrganizationOpen', () => {
         expect(getByText('3.6')).toBeTruthy();
     });
 
-    describe('widget', () => {
+    describe('item', () => {
         it('should not show link', () => {
-            const { getByTestId } = render(<OrganizationOpen organization={organization} variant="widget" />);
+            const { getByTestId } = render(<OrganizationOpen organization={organization} variant="item" />);
             expect(() => getByTestId('reviewsLink')).toThrow();
+        });
+    });
+
+    describe('widget', () => {
+        it('should show link with target', () => {
+            const { getByTestId } = render(<OrganizationOpen organization={organization} variant="widget" />);
+            expect(getByTestId('reviewsLink')).toHaveAttribute('target', '_parent');
         });
     });
 });

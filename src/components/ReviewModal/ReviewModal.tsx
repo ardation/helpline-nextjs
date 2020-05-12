@@ -23,6 +23,7 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { request } from 'graphql-request';
 import { Formik } from 'formik';
+import TextTruncate from 'react-text-truncate';
 import { Organization } from '../OrganizationItem/OrganizationItem';
 
 type Props = {
@@ -81,6 +82,12 @@ const useStyles = makeStyles((theme: Theme) =>
         alert: {
             paddingTop: 0,
             paddingBottom: 0,
+        },
+        rating: {
+            fontSize: '3rem',
+        },
+        title: {
+            fontWeight: 'bold',
         },
     }),
 );
@@ -173,7 +180,7 @@ const ReviewModal = ({ organization, open, notice, grecaptcha }: Props): ReactEl
                 <Box>
                     {reviewReceived ? (
                         <Alert severity="success" className={classes.alert}>
-                            We&apos;ve received your review.
+                            Thanks for your review! It will appear here shortly.
                         </Alert>
                     ) : (
                         <Button variant="outlined" className={classes.button} onClick={handleOpen}>
@@ -208,9 +215,10 @@ const ReviewModal = ({ organization, open, notice, grecaptcha }: Props): ReactEl
                                         <Grid container wrap="nowrap" direction="column" spacing={2}>
                                             <Grid item>
                                                 <Grid container wrap="nowrap" alignItems="center" spacing={2}>
-                                                    <Grid item xs zeroMinWidth>
-                                                        <Typography noWrap variant="h5">
-                                                            Rate &amp; Review {organization.name}
+                                                    <Grid item xs>
+                                                        <Typography className={classes.title} variant="h5">
+                                                            <TextTruncate line={1} text={organization.name} />
+                                                            <small>Rate &amp; Review</small>
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -235,10 +243,10 @@ const ReviewModal = ({ organization, open, notice, grecaptcha }: Props): ReactEl
                                                 <Rating
                                                     name="rating"
                                                     value={rating}
-                                                    size="large"
                                                     onChange={(_event, value): void => setFieldValue('rating', value)}
                                                     onBlur={handleBlur}
                                                     disabled={isSubmitting}
+                                                    className={classes.rating}
                                                 />
                                             </Grid>
                                             <Grid item>
@@ -247,7 +255,7 @@ const ReviewModal = ({ organization, open, notice, grecaptcha }: Props): ReactEl
                                                     value={content}
                                                     label="Your Review"
                                                     multiline
-                                                    rows={2}
+                                                    rows={4}
                                                     variant="outlined"
                                                     fullWidth
                                                     color="primary"
@@ -259,7 +267,7 @@ const ReviewModal = ({ organization, open, notice, grecaptcha }: Props): ReactEl
                                             </Grid>
                                             <Grid item>
                                                 <Typography>
-                                                    How many minutes did you wait to talk with someone?
+                                                    Approximately how many minutes did you wait to talk with someone?
                                                 </Typography>
                                                 <Grid container spacing={2} alignItems="center">
                                                     <Grid item>

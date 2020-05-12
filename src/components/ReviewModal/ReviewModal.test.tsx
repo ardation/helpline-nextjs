@@ -100,7 +100,7 @@ describe('NavBar', () => {
                 responseTime: 30,
             }),
         );
-        expect(getByText("We've received your review.")).toBeTruthy();
+        expect(getByText('Thanks for your review! It will appear here shortly.')).toBeTruthy();
     });
 
     describe('open', () => {

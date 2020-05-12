@@ -27,7 +27,7 @@ const OrganizationRating = ({ organization, variant }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
-        <Grid container direction="row" spacing={2} alignItems="center">
+        <Grid container direction="row" spacing={1} alignItems="center">
             <Grid item>
                 <Typography>{organization.rating.toFixed(1)}</Typography>
             </Grid>
@@ -36,12 +36,16 @@ const OrganizationRating = ({ organization, variant }: Props): ReactElement => {
             </Grid>
             <Grid item>
                 <Typography>
-                    {(variant === 'widget' || variant === 'item') && <>({organization.reviewCount})</>}
-                    {!variant && (
+                    {variant === 'item' && <>({organization.reviewCount})</>}
+                    {variant !== 'item' && (
                         <>
                             {'('}
                             <Link href="/organizations/[slug]" as={`/organizations/${organization.slug}`} passHref>
-                                <a data-testid="reviewsLink" className={classes.link}>
+                                <a
+                                    data-testid="reviewsLink"
+                                    className={classes.link}
+                                    target={variant === 'widget' ? '_parent' : '_self'}
+                                >
                                     {organization.reviewCount}
                                 </a>
                             </Link>
