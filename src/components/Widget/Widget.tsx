@@ -1,7 +1,7 @@
 import CloseIcon from '@material-ui/icons/Close';
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, Button, Backdrop } from '@material-ui/core';
+import { Box, Button, Backdrop, NoSsr } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CodeIcon from '@material-ui/icons/Code';
 import { OutboundLink } from 'react-ga';
@@ -132,7 +132,9 @@ const OrganizationList = ({
             />
             <Box className={classes.box}>
                 <TopBar variant="widget" country={preselectedCountry} />
-                <WidgetOrganizationList organizations={filteredOrganizations} />
+                <NoSsr>
+                    <WidgetOrganizationList organizations={filteredOrganizations} />
+                </NoSsr>
             </Box>
             <Box className={classes.embed}>
                 <OutboundLink

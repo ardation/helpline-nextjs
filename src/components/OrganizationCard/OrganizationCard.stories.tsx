@@ -82,14 +82,36 @@ export const NoUrl = (): ReactElement => (
     </ThemeProvider>
 );
 
-export const NotAlwaysOpen = (): ReactElement => (
+export const Open = (): ReactElement => (
     <ThemeProvider theme={theme}>
         <Box m={2}>
             <OrganizationCard
                 organization={{
                     ...organization,
                     alwaysOpen: false,
-                    openingHours: [{ day: 'sunday', open: '2000-01-01T09:00:00Z', close: '2000-01-01T15:00:00Z' }],
+                    openingHours: [
+                        { day: 'sunday', open: '2000-01-01T12:00:00Z', close: '2000-01-01T23:59:59Z' },
+                        { day: 'monday', open: '2000-01-01T12:00:00Z', close: '2000-01-01T23:59:59Z' },
+                        { day: 'tuesday', open: '2000-01-01T12:00:00Z', close: '2000-01-01T23:59:59Z' },
+                        { day: 'wednesday', open: '2000-01-01T12:00:00Z', close: '2000-01-01T23:59:59Z' },
+                        { day: 'thursday', open: '2000-01-01T12:00:00Z', close: '2000-01-01T23:59:59Z' },
+                        { day: 'friday', open: '2000-01-01T12:00:00Z', close: '2000-01-01T23:59:59Z' },
+                        { day: 'saturday', open: '2000-01-01T12:00:00Z', close: '2000-01-01T23:59:59Z' },
+                    ],
+                }}
+            />
+        </Box>
+    </ThemeProvider>
+);
+
+export const Closed = (): ReactElement => (
+    <ThemeProvider theme={theme}>
+        <Box m={2}>
+            <OrganizationCard
+                organization={{
+                    ...organization,
+                    alwaysOpen: false,
+                    openingHours: [{ day: 'sunday', open: '2000-01-01T12:00:59Z', close: '2000-01-01T12:01:00Z' }],
                 }}
             />
         </Box>
