@@ -34,6 +34,8 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 'bold',
             backgroundColor: theme.palette.secondary.main,
             marginLeft: theme.spacing(1),
+            height: '20px',
+            alignItems: 'flex-end',
         },
     }),
 );
@@ -58,7 +60,8 @@ const OrganizationOpen = ({ organization }: Props): ReactElement => {
                 <>
                     {openStatus.open && (
                         <>
-                            <span className={classes.open}>Open</span> &nbsp;&middot;&nbsp;{' '}
+                            <span className={classes.open}>Open</span>
+                            <br />
                             <span>
                                 {openStatus.openTime.local().format('h:mm A')} -{' '}
                                 {openStatus.closeTime.local().format('h:mm A')}

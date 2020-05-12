@@ -74,6 +74,10 @@ const useStyles = makeStyles((theme: Theme) =>
             background: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(/bg1.jpg) center center',
             backgroundSize: 'cover',
         },
+        link: {
+            textDecoration: 'none',
+            color: theme.palette.primary.main,
+        },
     }),
 );
 
@@ -150,6 +154,7 @@ const About = (): ReactElement => {
                                 to="https://www.livefortomorrow.co"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                className={classes.link}
                             >
                                 Live For Tomorrow
                             </OutboundLink>

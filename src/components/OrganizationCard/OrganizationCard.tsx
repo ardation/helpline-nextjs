@@ -107,9 +107,8 @@ const useStyles = makeStyles((theme: Theme) =>
             lineHeight: '1.5',
         },
         buttonOpen: {
-            paddingTop: 0,
-            paddingBottom: 0,
-            height: '38px',
+            textAlign: 'left',
+            alignItems: 'flex-start',
         },
         buttonDisabled: {
             color: `${theme.palette.text.primary} !important`,
