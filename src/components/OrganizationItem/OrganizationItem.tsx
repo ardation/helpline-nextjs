@@ -13,6 +13,7 @@ import NavBar from '../NavBar';
 import SideBar from '../SideBar';
 import ReviewModal from '../ReviewModal';
 import OrganizationRating from '../OrganizationRating';
+import Reviews from '../Reviews';
 
 type OpeningHour = {
     day: string;
@@ -264,6 +265,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                     </Box>
                 </Box>
             </Container>
+            {organization.reviews.length > 0 && <Reviews reviews={organization.reviews} />}
         </>
     );
 };
