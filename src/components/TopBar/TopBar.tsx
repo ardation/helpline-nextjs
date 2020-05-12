@@ -1,4 +1,4 @@
-import React, { ReactElement, Fragment } from 'react';
+import React, { ReactElement } from 'react';
 import { AppBar, Container, Toolbar, Typography, Button, Hidden } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
@@ -74,6 +74,7 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
             color: '#FFFFFF',
+            width: '100%',
             [theme.breakpoints.down('xs')]: {
                 fontSize: '0.7rem',
                 paddingRight: theme.spacing(1),
