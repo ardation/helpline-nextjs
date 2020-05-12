@@ -1,6 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { Box, Container, Typography, Button } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import ReactGA from 'react-ga';
 import ItemSelect from '../ItemSelect/ItemSelect';
 
 type ContactMethod = {
@@ -77,6 +78,10 @@ const OrganizationFilter = ({
     const [selectedSorts, setSelectedSorts] = useState<Sort[]>([{ name: 'Featured' }]);
 
     const onClick = (): void => {
+        ReactGA.event({
+            category: 'User',
+            action: 'Changed Filters',
+        });
         onChange({
             contactMethods: selectedContactMethods,
             categories: selectedCategories,

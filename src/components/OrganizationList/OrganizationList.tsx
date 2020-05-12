@@ -1,7 +1,7 @@
 import CloseIcon from '@material-ui/icons/Close';
 import React, { ReactElement, useState, useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Container, Box, Button, Backdrop } from '@material-ui/core';
+import { Typography, Container, Box, Button, Backdrop, NoSsr } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import OrganizationCard, { Organization } from '../OrganizationCard/OrganizationCard';
 import formatArrayIntoSentence from '../../util/formatArrayIntoSentence';
@@ -133,12 +133,14 @@ const OrganizationList = ({
                         }.`}
                     </Typography>
                 </Box>
-                {filteredOrganizations.map((organization) => (
-                    <Box key={organization.slug} my={2}>
-                        <OrganizationCard organization={organization} />
-                    </Box>
-                ))}
-                {filteredOrganizations.length == 0 && <OrganizationEmpty />}
+                <NoSsr>
+                    {filteredOrganizations.map((organization) => (
+                        <Box key={organization.slug} my={2}>
+                            <OrganizationCard organization={organization} />
+                        </Box>
+                    ))}
+                    {filteredOrganizations.length == 0 && <OrganizationEmpty />}
+                </NoSsr>
             </Container>
         </>
     );
