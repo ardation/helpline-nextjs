@@ -23,7 +23,6 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { request } from 'graphql-request';
 import { Formik } from 'formik';
-import TextTruncate from 'react-text-truncate';
 import { Organization } from '../OrganizationItem/OrganizationItem';
 
 type Props = {
@@ -87,6 +86,9 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: '3rem',
         },
         title: {
+            fontWeight: 'bold',
+        },
+        subtitle: {
             fontWeight: 'bold',
         },
     }),
@@ -215,10 +217,12 @@ const ReviewModal = ({ organization, open, notice, grecaptcha }: Props): ReactEl
                                         <Grid container wrap="nowrap" direction="column" spacing={2}>
                                             <Grid item>
                                                 <Grid container wrap="nowrap" alignItems="center" spacing={2}>
-                                                    <Grid item xs>
-                                                        <Typography className={classes.title} variant="h5">
-                                                            <TextTruncate line={1} text={organization.name} />
-                                                            <small>Rate &amp; Review</small>
+                                                    <Grid item xs zeroMinWidth>
+                                                        <Typography noWrap className={classes.title} variant="h5">
+                                                            {organization.name}
+                                                        </Typography>
+                                                        <Typography className={classes.subtitle}>
+                                                            Rate &amp; Review
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
