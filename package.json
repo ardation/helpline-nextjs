@@ -71,7 +71,7 @@
         "jsx-dom": "^6.4.15",
         "lint-staged": "^10.2.2",
         "prettier": "^2.0.5",
-        "ts-jest": "^25.3.0",
+        "ts-jest": "^25.5.1",
         "typescript": "^3.8.3",
         "webpack-cli": "^3.3.11",
         "zoid": "^9.0.42"
