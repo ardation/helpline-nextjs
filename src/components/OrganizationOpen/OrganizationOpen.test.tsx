@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, act } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
 import moment from 'moment-timezone';
 import isOpen from '../../util/isOpen';
@@ -38,6 +38,14 @@ describe('OrganizationOpen', () => {
             expect(isOpen).toHaveBeenCalledWith(organization);
             expect(getByText('Closed')).toBeTruthy();
         });
+
+        it('should allow expand', () => {
+            const { getByText, getByTestId } = render(
+                <OrganizationOpen organization={organization} expandable={true} />,
+            );
+            fireEvent.click(getByTestId('expandable'));
+            expect(getByText('wednesday')).toBeTruthy();
+        });
     });
 
     describe('currently open', () => {
@@ -49,6 +57,7 @@ describe('OrganizationOpen', () => {
             };
             mocked(isOpen).mockReturnValue({
                 open: true,
+                day: 'wednesday',
                 openTime: moment('00:00', 'h:mm a'),
                 closeTime: moment('23:59', 'h:mm a'),
             });
@@ -57,24 +66,15 @@ describe('OrganizationOpen', () => {
         it('should contain Open', () => {
             const { getByText } = render(<OrganizationOpen organization={organization} />);
             expect(isOpen).toHaveBeenCalledWith(organization);
-            expect(getByText('12:00 AM - 11:59 PM')).toBeTruthy();
+            expect(getByText('12:00 AM–11:59 PM')).toBeTruthy();
         });
 
-        describe('useFakeTimers', () => {
-            beforeEach(() => jest.useFakeTimers());
-
-            it('should update open status', async () => {
-                const { getByText } = render(<OrganizationOpen organization={organization} />);
-                expect(isOpen).toHaveBeenCalledWith(organization);
-                expect(getByText('12:00 AM - 11:59 PM')).toBeTruthy();
-                mocked(isOpen).mockReturnValue({
-                    open: false,
-                });
-                act(() => {
-                    jest.runTimersToTime(1000);
-                });
-                expect(getByText('Closed')).toBeTruthy();
-            });
+        it('should allow expand', () => {
+            const { getByText, getByTestId } = render(
+                <OrganizationOpen organization={organization} expandable={true} />,
+            );
+            fireEvent.click(getByTestId('expandable'));
+            expect(getByText('wednesday')).toBeTruthy();
         });
     });
 });

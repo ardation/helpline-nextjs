@@ -9,13 +9,23 @@ const organization = {
 };
 
 const completeOpeningHours = [
-    { day: 'monday', open: 'T00:00', close: 'T23:59' },
-    { day: 'tuesday', open: 'T00:00', close: 'T23:59' },
-    { day: 'wednesday', open: 'T00:00', close: 'T23:59' },
-    { day: 'thursday', open: 'T00:00', close: 'T23:59' },
-    { day: 'friday', open: 'T00:00', close: 'T23:59' },
-    { day: 'saturday', open: 'T00:00', close: 'T23:59' },
-    { day: 'sunday', open: 'T00:00', close: 'T23:59' },
+    { day: 'monday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T23:59:00Z' },
+    { day: 'tuesday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T23:59:00Z' },
+    { day: 'wednesday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T23:59:00Z' },
+    { day: 'thursday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T23:59:00Z' },
+    { day: 'friday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T23:59:00Z' },
+    { day: 'saturday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T23:59:00Z' },
+    { day: 'sunday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T23:59:00Z' },
+];
+
+const emptyOpeningHours = [
+    { day: 'monday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'tuesday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'wednesday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'thursday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'friday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'saturday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'sunday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
 ];
 
 export default {
@@ -28,14 +38,23 @@ export const Default = (): ReactElement => (
     </Box>
 );
 
-export const Closed = (): ReactElement => (
+export const WhenClosed = (): ReactElement => (
     <Box m={2}>
-        <OrganizationOpen organization={{ ...organization, alwaysOpen: false }} />
+        <OrganizationOpen organization={{ ...organization, alwaysOpen: false, openingHours: emptyOpeningHours }} />
     </Box>
 );
 
-export const Opened = (): ReactElement => (
+export const WhenOpened = (): ReactElement => (
     <Box m={2}>
         <OrganizationOpen organization={{ ...organization, alwaysOpen: false, openingHours: completeOpeningHours }} />
+    </Box>
+);
+
+export const WithExpandable = (): ReactElement => (
+    <Box m={2}>
+        <OrganizationOpen
+            organization={{ ...organization, alwaysOpen: false, openingHours: completeOpeningHours }}
+            expandable={true}
+        />
     </Box>
 );

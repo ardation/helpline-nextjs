@@ -25,6 +25,16 @@ const organization = {
     reviews: [],
 };
 
+const emptyOpeningHours = [
+    { day: 'monday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'tuesday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'wednesday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'thursday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'friday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'saturday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'sunday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+];
+
 export default {
     title: 'OrganizationItem',
     decorators: [stubOrganizationReviewCreate],
@@ -66,7 +76,7 @@ export const NotAlwaysOpen = (): ReactElement => (
         organization={{
             ...organization,
             alwaysOpen: false,
-            openingHours: [{ day: 'sunday', open: '2000-01-01T09:00:00Z', close: '2000-01-01T15:00:00Z' }],
+            openingHours: emptyOpeningHours,
         }}
     />
 );

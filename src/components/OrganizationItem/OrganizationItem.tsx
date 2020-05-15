@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Chip, Button, Box, Container } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import { Typography, Chip, Button, Box, Container, NoSsr } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -161,14 +160,9 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                     </Box>
                     {(organization.alwaysOpen || organization.openingHours.length > 0) && (
                         <Box data-testid="open">
-                            <Button
-                                size="large"
-                                classes={{ root: classes.button, disabled: classes.buttonDisabled }}
-                                startIcon={<AccessTimeIcon />}
-                                disabled
-                            >
-                                <OrganizationOpen organization={organization} />
-                            </Button>
+                            <NoSsr>
+                                <OrganizationOpen organization={organization} expandable={true} />
+                            </NoSsr>
                         </Box>
                     )}
                     {organization.humanSupportTypes.length > 0 && (

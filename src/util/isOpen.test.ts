@@ -54,8 +54,9 @@ describe('isOpen', () => {
             });
 
             it('should return open', () => {
-                const { open, openTime, closeTime } = isOpen(organization);
+                const { open, openTime, closeTime, day } = isOpen(organization);
                 expect(open).toEqual(true);
+                expect(day).toEqual('wednesday');
                 expect(openTime.toISOString()).toEqual('2020-04-07T12:00:00.000Z');
                 expect(closeTime.toISOString()).toEqual('2020-04-08T11:59:00.000Z');
             });
