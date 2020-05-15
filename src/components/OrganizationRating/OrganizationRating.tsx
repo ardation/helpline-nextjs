@@ -44,7 +44,8 @@ const OrganizationRating = ({ organization, variant }: Props): ReactElement => {
                                 <a
                                     data-testid="reviewsLink"
                                     className={classes.link}
-                                    target={variant === 'widget' ? '_parent' : '_self'}
+                                    target={variant === 'widget' ? '_blank' : '_self'}
+                                    rel={variant === 'widget' ? 'noopener noreferrer' : ''}
                                 >
                                     {organization.reviewCount}
                                 </a>
