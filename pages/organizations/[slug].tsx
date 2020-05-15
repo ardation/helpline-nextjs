@@ -44,6 +44,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                 featured
                 rating
                 reviewCount
+                notes
                 reviews {
                     rating
                     content
@@ -62,6 +63,9 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                     day
                     open
                     close
+                }
+                subdivisions {
+                    name
                 }
                 country {
                     code

@@ -18,6 +18,7 @@ const organization = {
     url: 'https://www.youthline.co.nz/learn-and-grow.html',
     chatUrl: 'https://youthline.co.nz',
     timezone: 'Pacific/Auckland',
+    subdivisions: [{ name: 'Auckland' }],
     country: {
         name: 'New Zealand',
     },
@@ -80,6 +81,19 @@ const reviews = [
     },
 ];
 
+export const NoSubdivisions = (): ReactElement => (
+    <OrganizationItem organization={{ ...organization, subdivisions: [] }} />
+);
+
 export const WithReviews = (): ReactElement => (
     <OrganizationItem organization={{ ...organization, reviews: reviews }} />
+);
+
+export const WithNotes = (): ReactElement => (
+    <OrganizationItem
+        organization={{
+            ...organization,
+            notes: 'The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.',
+        }}
+    />
 );

@@ -23,5 +23,6 @@ export interface OrganizationReviewCreateVariables {
   organizationId: string;
   rating: number;
   responseTime: number;
+  content?: string | null;
   recaptchaToken: string;
 }

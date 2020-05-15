@@ -36,6 +36,11 @@ export interface GetOrganizationsSlugProps_organization_openingHours {
   close: any;
 }
 
+export interface GetOrganizationsSlugProps_organization_subdivisions {
+  __typename: "Subdivision";
+  name: string;
+}
+
 export interface GetOrganizationsSlugProps_organization_country {
   __typename: "Country";
   code: string;
@@ -57,11 +62,13 @@ export interface GetOrganizationsSlugProps_organization {
   featured: boolean;
   rating: number;
   reviewCount: number;
+  notes: string | null;
   reviews: GetOrganizationsSlugProps_organization_reviews[];
   humanSupportTypes: GetOrganizationsSlugProps_organization_humanSupportTypes[];
   categories: GetOrganizationsSlugProps_organization_categories[];
   topics: GetOrganizationsSlugProps_organization_topics[];
   openingHours: GetOrganizationsSlugProps_organization_openingHours[];
+  subdivisions: GetOrganizationsSlugProps_organization_subdivisions[];
   country: GetOrganizationsSlugProps_organization_country;
 }
 
