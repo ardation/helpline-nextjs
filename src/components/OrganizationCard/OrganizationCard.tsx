@@ -175,9 +175,11 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                         </Box>
                     )}
                 </Box>
-                <Box ml={1}>
-                    <OrganizationRating organization={organization} variant={variant} />
-                </Box>
+                {variant !== 'widget' && (
+                    <Box ml={1}>
+                        <OrganizationRating organization={organization} variant={variant} />
+                    </Box>
+                )}
                 {(organization.alwaysOpen || organization.openingHours.length > 0) && (
                     <Box data-testid="open">
                         <Button
