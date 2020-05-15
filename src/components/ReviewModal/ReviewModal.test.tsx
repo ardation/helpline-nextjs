@@ -28,6 +28,7 @@ describe('NavBar', () => {
         rating: 5,
         reviewCount: 5,
         reviews: [],
+        subdivisions: [],
     };
     const query = gql`
         mutation OrganizationReviewCreate(
