@@ -48,6 +48,6 @@ describe('Contact', () => {
                 recaptchaToken: undefined,
             }),
         );
-        expect(getByText("Thanks for your message! We'll be in touch shortly.")).toBeTruthy();
+        expect(getByText("We'll be in touch shortly.")).toBeTruthy();
     });
 });

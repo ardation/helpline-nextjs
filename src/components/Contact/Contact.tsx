@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useRef } from 'react';
 import { Button, Typography, Link, TextField, Grid, Container, CircularProgress } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Alert } from '@material-ui/lab';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import ReCAPTCHA from 'react-google-recaptcha';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
@@ -41,10 +41,6 @@ const useStyles = makeStyles((theme: Theme) =>
             '& > a': {
                 color: '#AAAAAA',
             },
-        },
-        alert: {
-            paddingTop: 0,
-            paddingBottom: 0,
         },
         title: {
             fontWeight: 'bold',
@@ -118,8 +114,9 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
                                 </Grid>
                                 {contactReceived && (
                                     <Grid item>
-                                        <Alert severity="success" className={classes.alert}>
-                                            Thanks for your message! We&apos;ll be in touch shortly.
+                                        <Alert severity="success">
+                                            <AlertTitle>Thanks for your message!</AlertTitle>
+                                            We&apos;ll be in touch shortly.
                                         </Alert>
                                     </Grid>
                                 )}
