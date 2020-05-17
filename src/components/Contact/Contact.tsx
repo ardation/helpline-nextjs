@@ -131,7 +131,7 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         disabled={isSubmitting}
-                                        inputProps={{ 'data-testid': 'email' }}
+                                        inputProps={{ 'data-testid': 'email', readOnly: contactReceived }}
                                         error={errors.email && touched.email && true}
                                         helperText={touched.email && errors.email}
                                     />
@@ -147,7 +147,7 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         disabled={isSubmitting}
-                                        inputProps={{ 'data-testid': 'subject' }}
+                                        inputProps={{ 'data-testid': 'subject', readOnly: contactReceived }}
                                         error={errors.subject && touched.subject && true}
                                         helperText={touched.subject && errors.subject}
                                     />
@@ -165,7 +165,7 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         disabled={isSubmitting}
-                                        inputProps={{ 'data-testid': 'message' }}
+                                        inputProps={{ 'data-testid': 'message', readOnly: contactReceived }}
                                         error={errors.message && touched.message && true}
                                         helperText={touched.message && errors.message}
                                     />
