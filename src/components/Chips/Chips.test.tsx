@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import Chips from '.';
 
-describe('ItemSelect', () => {
+describe('Chips', () => {
     const items = [{ name: 'happy' }, { name: 'sad' }];
 
     it('should contain multiple chips', () => {

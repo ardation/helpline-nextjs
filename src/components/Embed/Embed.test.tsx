@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import EmbedInfo from '.';
+import Embed from '.';
 
-describe('EmbedInfo', () => {
+describe('Embed', () => {
     const countries = [
         { code: 'AU', name: 'Australia' },
         {
@@ -13,7 +13,7 @@ describe('EmbedInfo', () => {
     ];
 
     it('should render EmbedInfo with countries', () => {
-        const { getByTestId, getByAltText } = render(<EmbedInfo countries={countries} />);
+        const { getByTestId, getByAltText } = render(<Embed countries={countries} />);
         expect(getByTestId('embedContainer')).toBeTruthy();
         expect(getByAltText('find a helpline')).toBeTruthy();
         expect(getByTestId('typographyOne')).toBeTruthy();

@@ -8,7 +8,7 @@ import ReviewModal from '.';
 
 jest.mock('graphql-request');
 
-describe('NavBar', () => {
+describe('ReviewModal', () => {
     const organization = {
         id: 'c1d74c09-ecb0-46f3-902e-1feb22aad7ad',
         slug: 'youthline',
