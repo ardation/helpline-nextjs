@@ -55,7 +55,7 @@
         "@types/react-google-recaptcha": "^1.1.2",
         "@types/react-text-truncate": "^0.14.0",
         "@typescript-eslint/eslint-plugin": "^2.33.0",
-        "@typescript-eslint/parser": "^2.33.0",
+        "@typescript-eslint/parser": "^2.34.0",
         "babel-loader": "^8.1.0",
         "babel-preset-react-app": "^9.1.2",
         "chromatic": "^4.0.2",
