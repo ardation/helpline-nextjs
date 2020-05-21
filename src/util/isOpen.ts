@@ -29,11 +29,13 @@ const isOpen = ({ alwaysOpen, openingHours, timezone }: Organization): IsOpenSta
     const openTime = moment.tz(`${date} ${openingHour.open.match(/T(\d\d:\d\d)/)[1]}`, 'YYYY-MM-DD HH:mm', timezone);
     const closeTime = moment.tz(`${date} ${openingHour.close.match(/T(\d\d:\d\d)/)[1]}`, 'YYYY-MM-DD HH:mm', timezone);
     const open = now.isBetween(openTime, closeTime, null, '[)');
-    return { open, openTime, closeTime };
+    const day = openingHour.day;
+    return { open, day, openTime, closeTime };
 };
 
 export type IsOpenStatus = {
     open: boolean;
+    day?: string;
     openTime?: moment.Moment;
     closeTime?: moment.Moment;
 };

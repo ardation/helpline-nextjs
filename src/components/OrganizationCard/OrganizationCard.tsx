@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Button, Box, Fab } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import { Typography, Button, Box, Fab, NoSsr } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -109,10 +108,6 @@ const useStyles = makeStyles((theme: Theme) =>
             textTransform: 'none',
             lineHeight: '1.5',
         },
-        buttonOpen: {
-            textAlign: 'left',
-            alignItems: 'flex-start',
-        },
         buttonDisabled: {
             color: `${theme.palette.text.primary} !important`,
         },
@@ -175,22 +170,16 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                         </Box>
                     )}
                 </Box>
-                <Box ml={1}>
-                    <OrganizationRating organization={organization} variant={variant} />
-                </Box>
+                {variant !== 'widget' && (
+                    <Box ml={1}>
+                        <OrganizationRating organization={organization} variant={variant} />
+                    </Box>
+                )}
                 {(organization.alwaysOpen || organization.openingHours.length > 0) && (
                     <Box data-testid="open">
-                        <Button
-                            size="large"
-                            classes={{
-                                root: [classes.button, classes.buttonOpen].join(' '),
-                                disabled: classes.buttonDisabled,
-                            }}
-                            startIcon={<AccessTimeIcon />}
-                            disabled
-                        >
+                        <NoSsr>
                             <OrganizationOpen organization={organization} />
-                        </Button>
+                        </NoSsr>
                     </Box>
                 )}
                 {organization.humanSupportTypes.length > 0 && (

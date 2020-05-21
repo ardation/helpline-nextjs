@@ -1,8 +1,12 @@
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Chip } from '@material-ui/core';
-import { useTimeout } from 'beautiful-react-hooks';
-import isOpen, { IsOpenStatus } from '../../util/isOpen';
+import { Typography, Chip, Button, IconButton, Box, Grid, Collapse } from '@material-ui/core';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import CloseIcon from '@material-ui/icons/Close';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import moment from 'moment-timezone';
+import { compact } from 'lodash/fp';
+import isOpen from '../../util/isOpen';
 
 type OpeningHour = {
     day: string;
@@ -18,6 +22,7 @@ type Organization = {
 
 type Props = {
     organization: Organization;
+    expandable?: boolean;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,41 +42,109 @@ const useStyles = makeStyles((theme: Theme) =>
             height: '20px',
             alignItems: 'flex-end',
         },
+        button: {
+            textTransform: 'none',
+            lineHeight: '1.5',
+            textAlign: 'left',
+            alignItems: 'flex-start',
+        },
+        buttonDisabled: {
+            color: `${theme.palette.text.primary} !important`,
+        },
+        openingHour: {
+            display: 'inline-block',
+            fontWeight: 'inherit',
+            fontSize: theme.typography.fontSize,
+        },
+        day: {
+            width: '100px',
+            textTransform: 'capitalize',
+        },
+        active: {
+            fontWeight: 'bold',
+        },
     }),
 );
 
-const OrganizationOpen = ({ organization }: Props): ReactElement => {
+const OrganizationOpen = ({ organization, expandable }: Props): ReactElement => {
     const classes = useStyles();
-    const [openStatus, setOpenStatus] = useState<IsOpenStatus>(isOpen(organization));
+    const [expanded, setExpanded] = useState(false);
+    const openStatus = isOpen(organization);
 
-    if (!organization.alwaysOpen) {
-        useTimeout(() => setOpenStatus(isOpen(organization)), 1000);
-    }
+    const toTime = (time: string): string => {
+        const date = moment.tz(organization.timezone).format('YYYY-MM-DD');
+        return moment
+            .tz(`${date} ${time.match(/T(\d\d:\d\d)/)[1]}`, 'YYYY-MM-DD HH:mm', organization.timezone)
+            .local()
+            .format('h:mm A');
+    };
 
     return (
-        <Typography className={classes.body} component="div">
-            {organization.alwaysOpen && (
-                <>
-                    <span className={classes.open}>Open</span>{' '}
-                    <Chip size="small" className={classes.chip} label="24/7" />
-                </>
-            )}
-            {!organization.alwaysOpen && (
-                <>
-                    {openStatus.open && (
+        <>
+            <Button
+                size="large"
+                classes={{ root: classes.button, disabled: classes.buttonDisabled }}
+                startIcon={<AccessTimeIcon />}
+                disabled
+            >
+                <Typography className={classes.body} component="div">
+                    {organization.alwaysOpen && (
                         <>
-                            <span className={classes.open}>Open</span>
-                            <br />
-                            <span>
-                                {openStatus.openTime.local().format('h:mm A')} -{' '}
-                                {openStatus.closeTime.local().format('h:mm A')}
-                            </span>
+                            <span className={classes.open}>Open</span>{' '}
+                            <Chip size="small" className={classes.chip} label="24/7" />
                         </>
                     )}
-                    {!openStatus.open && <span>Closed</span>}
+                    {!organization.alwaysOpen && (
+                        <>
+                            {openStatus.open && (
+                                <>
+                                    <span className={classes.open}>Open</span>
+                                    <br />
+                                    <span>
+                                        {openStatus.openTime.local().format('h:mm A')}–
+                                        {openStatus.closeTime.local().format('h:mm A')}
+                                    </span>
+                                </>
+                            )}
+                            {!openStatus.open && <span>Closed</span>}
+                        </>
+                    )}
+                </Typography>
+            </Button>
+            {!organization.alwaysOpen && expandable && (
+                <>
+                    <IconButton size="small" data-testid="expandable" onClick={(): void => setExpanded(!expanded)}>
+                        {expanded && <CloseIcon />}
+                        {!expanded && <ExpandMoreIcon />}
+                    </IconButton>
+                    <Collapse in={expanded}>
+                        <Box ml={5}>
+                            <Grid container direction="column" spacing={1}>
+                                {organization.openingHours.map((openingHour, index) => (
+                                    <Grid
+                                        className={compact([
+                                            openStatus.open && openStatus.day === openingHour.day && classes.active,
+                                        ]).join(' ')}
+                                        item
+                                        key={index}
+                                    >
+                                        <Typography
+                                            className={[classes.openingHour, classes.day].join(' ')}
+                                            component="div"
+                                        >
+                                            {openingHour.day}
+                                        </Typography>{' '}
+                                        <Typography className={classes.openingHour} component="div">
+                                            {toTime(openingHour.open)}–{toTime(openingHour.close)}
+                                        </Typography>
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Box>
+                    </Collapse>
                 </>
             )}
-        </Typography>
+        </>
     );
 };
 

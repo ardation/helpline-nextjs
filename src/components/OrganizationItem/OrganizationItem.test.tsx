@@ -21,7 +21,9 @@ describe('OrganizationItem', () => {
             url: 'https://youthline.co.nz/website',
             chatUrl: 'https://chatyouthline.co.nz/chat',
             timezone: 'Pacific/Auckland',
+            subdivisions: [{ name: 'Auckland' }, { name: 'Wellington' }],
             country: { name: 'New Zealand' },
+            notes: 'abc',
             reviews: [
                 {
                     rating: 5,
@@ -42,6 +44,22 @@ describe('OrganizationItem', () => {
     it('should have open element', () => {
         const { getByText } = render(<OrganizationItem organization={organization} />);
         expect(getByText('24/7')).toBeTruthy();
+    });
+
+    it('should show country and subdivisions', () => {
+        const { getByText } = render(<OrganizationItem organization={organization} />);
+        expect(getByText('Auckland, Wellington, New Zealand')).toBeTruthy();
+    });
+
+    describe('no subdivisions', () => {
+        beforeEach(() => {
+            organization = { ...organization, subdivisions: [] };
+        });
+
+        it('should show country', () => {
+            const { getByText } = render(<OrganizationItem organization={organization} />);
+            expect(getByText('New Zealand')).toBeTruthy();
+        });
     });
 
     describe('not alwaysOpen', () => {
@@ -180,6 +198,22 @@ describe('OrganizationItem', () => {
         it('should not show reviews', () => {
             const { getByText } = render(<OrganizationItem organization={organization} />);
             expect(() => getByText('Read reviews')).toThrow();
+        });
+    });
+
+    it('should show notes', () => {
+        const { getByText } = render(<OrganizationItem organization={organization} />);
+        expect(getByText('abc')).toBeTruthy();
+    });
+
+    describe('no notes', () => {
+        beforeEach(() => {
+            organization = { ...organization, notes: undefined };
+        });
+
+        it('should not show notes', () => {
+            const { getByText } = render(<OrganizationItem organization={organization} />);
+            expect(() => getByText('Accessibility Notes')).toThrow();
         });
     });
 });

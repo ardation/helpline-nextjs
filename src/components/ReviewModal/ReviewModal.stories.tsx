@@ -21,6 +21,7 @@ const organization = {
     rating: 5,
     reviewCount: 5,
     reviews: [],
+    subdivisions: [],
 };
 
 export default {

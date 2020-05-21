@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Chip, Button, Box, Container } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import { Typography, Chip, Button, Box, Container, NoSsr } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -29,6 +28,10 @@ type Category = {
     name: string;
 };
 
+type Subdivision = {
+    name: string;
+};
+
 type Country = {
     name: string;
 };
@@ -52,10 +55,12 @@ export type Organization = {
     url?: string;
     chatUrl?: string;
     timezone: string;
+    subdivisions: Subdivision[];
     country: Country;
     rating: number;
     reviewCount: number;
     reviews: Review[];
+    notes?: string;
 };
 
 type Props = {
@@ -120,7 +125,6 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 600,
         },
         country: {
-            marginLeft: theme.spacing(2),
             color: theme.palette.secondary.main,
             fontSize: '0.9rem',
         },
@@ -137,10 +141,15 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
             </NavBar>
             <Container className={classes.container} maxWidth="sm">
                 <Box className={classes.grid}>
-                    <Box ml={1}>
-                        <Typography variant="h6">
-                            <a className={classes.heading}>{organization.name}</a>
-                            <span className={classes.country}>{organization.country.name}</span>
+                    <Box ml={1} mb={1}>
+                        <Typography variant="h6" className={classes.heading}>
+                            {organization.name}
+                        </Typography>
+                        <Typography className={classes.country}>
+                            {organization.subdivisions.length > 0 && (
+                                <>{organization.subdivisions.map(({ name }) => name).join(', ')},</>
+                            )}{' '}
+                            {organization.country.name}
                         </Typography>
                     </Box>
                     <Box ml={1}>
@@ -151,14 +160,9 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                     </Box>
                     {(organization.alwaysOpen || organization.openingHours.length > 0) && (
                         <Box data-testid="open">
-                            <Button
-                                size="large"
-                                classes={{ root: classes.button, disabled: classes.buttonDisabled }}
-                                startIcon={<AccessTimeIcon />}
-                                disabled
-                            >
-                                <OrganizationOpen organization={organization} />
-                            </Button>
+                            <NoSsr>
+                                <OrganizationOpen organization={organization} expandable={true} />
+                            </NoSsr>
                         </Box>
                     )}
                     {organization.humanSupportTypes.length > 0 && (
@@ -249,6 +253,12 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                             {organization.categories.map((category, index) => (
                                 <Chip className={classes.chip} key={index} label={category.name} />
                             ))}
+                        </Box>
+                    )}
+                    {organization.notes && (
+                        <Box ml={1} mb={1} mt={2}>
+                            <Typography className={classes.heading}>Accessibility Notes</Typography>
+                            <Typography>{organization.notes}</Typography>
                         </Box>
                     )}
                     <Box my={1} ml={1}>

@@ -18,11 +18,22 @@ const organization = {
     url: 'https://www.youthline.co.nz/learn-and-grow.html',
     chatUrl: 'https://youthline.co.nz',
     timezone: 'Pacific/Auckland',
+    subdivisions: [{ name: 'Auckland' }],
     country: {
         name: 'New Zealand',
     },
     reviews: [],
 };
+
+const emptyOpeningHours = [
+    { day: 'monday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'tuesday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'wednesday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'thursday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'friday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'saturday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+    { day: 'sunday', open: '2000-01-01T00:00:00Z', close: '2000-01-01T00:01:00Z' },
+];
 
 export default {
     title: 'OrganizationItem',
@@ -65,7 +76,7 @@ export const NotAlwaysOpen = (): ReactElement => (
         organization={{
             ...organization,
             alwaysOpen: false,
-            openingHours: [{ day: 'sunday', open: '2000-01-01T09:00:00Z', close: '2000-01-01T15:00:00Z' }],
+            openingHours: emptyOpeningHours,
         }}
     />
 );
@@ -80,6 +91,19 @@ const reviews = [
     },
 ];
 
+export const NoSubdivisions = (): ReactElement => (
+    <OrganizationItem organization={{ ...organization, subdivisions: [] }} />
+);
+
 export const WithReviews = (): ReactElement => (
     <OrganizationItem organization={{ ...organization, reviews: reviews }} />
+);
+
+export const WithNotes = (): ReactElement => (
+    <OrganizationItem
+        organization={{
+            ...organization,
+            notes: 'The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.',
+        }}
+    />
 );
