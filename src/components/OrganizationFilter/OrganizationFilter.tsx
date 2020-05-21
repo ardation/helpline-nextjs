@@ -1,6 +1,6 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import SwipeableViews from 'react-swipeable-views';
-import { Box, Typography, Button, Tab, Tabs } from '@material-ui/core';
+import { Box, Typography, Button, Tab, Tabs, Container } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ReactGA from 'react-ga';
 import ItemSelect from '../ItemSelect/ItemSelect';
@@ -44,8 +44,7 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
-            marginTop: theme.spacing(2),
-            marginBottom: theme.spacing(2),
+            padding: 0,
         },
         header: {
             display: 'grid',
@@ -121,7 +120,7 @@ const OrganizationFilter = ({
     }, [preselectedTopics]);
 
     return (
-        <>
+        <Container className={classes.container}>
             <Box m={2}>
                 <Box my={2} className={classes.header}>
                     <Typography className={classes.heading} variant="h6">
@@ -192,7 +191,7 @@ const OrganizationFilter = ({
                     <ItemSelect items={categories || []} onChange={setSelectedCategories} />
                 </Box>
             </SwipeableViews>
-        </>
+        </Container>
     );
 };
 
