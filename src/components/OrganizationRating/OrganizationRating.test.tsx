@@ -31,7 +31,7 @@ describe('OrganizationRating', () => {
     describe('widget', () => {
         it('should show link with target', () => {
             const { getByTestId } = render(<OrganizationRating organization={organization} variant="widget" />);
-            expect(getByTestId('reviewsLink')).toHaveAttribute('target', '_parent');
+            expect(getByTestId('reviewsLink')).toHaveAttribute('target', '_blank');
         });
     });
 });
