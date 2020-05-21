@@ -49,7 +49,9 @@ describe('OrganizationFilter', () => {
         const { getByText } = render(
             <OrganizationFilter topics={topics} preselectedTopics={preselectedTopics} onChange={onChange} />,
         );
+        fireEvent.click(getByText('Topics (2)'));
         fireEvent.click(getByText('Bullying'));
+        expect(getByText('Topics (3)')).toBeTruthy();
         fireEvent.click(getByText('Apply'));
     });
 
@@ -78,8 +80,10 @@ describe('OrganizationFilter', () => {
             expect(categories).toEqual([{ name: 'All issues' }, { name: 'All ages' }]);
         };
         const { getByText } = render(<OrganizationFilter categories={categories} onChange={onChange} />);
+        fireEvent.click(getByText('Categories'));
         fireEvent.click(getByText('All ages'));
         fireEvent.click(getByText('All issues'));
+        expect(getByText('Categories (2)')).toBeTruthy();
         fireEvent.click(getByText('Apply'));
     });
 
