@@ -20,6 +20,7 @@ describe('OrganizationCard', () => {
         timezone: 'Pacific/Auckland',
         topics: [],
         featured: false,
+        verified: false,
         reviews: [],
     };
 
@@ -186,6 +187,29 @@ describe('OrganizationCard', () => {
         it('should not have href', () => {
             const { getByTestId } = render(<OrganizationCard organization={organization} variant="widget" />);
             expect(getByTestId('headingLink')).not.toHaveAttribute('href');
+        });
+    });
+
+    describe('featured', () => {
+        beforeEach(() => {
+            organization = { ...organization, featured: true };
+        });
+
+        it('should have featured icon', () => {
+            const { getByTestId } = render(<OrganizationCard organization={organization} />);
+            expect(getByTestId('featured')).toBeTruthy();
+        });
+    });
+
+    describe('verified', () => {
+        beforeEach(() => {
+            organization = { ...organization, featured: true, verified: true };
+        });
+
+        it('should have verfied icon but not featured icon', () => {
+            const { getByTestId } = render(<OrganizationCard organization={organization} />);
+            expect(() => getByTestId('featured')).toThrow();
+            expect(getByTestId('verified')).toBeTruthy();
         });
     });
 });

@@ -55,6 +55,7 @@ export interface GetWidgetSubdivisionCodeProps_organizations_nodes {
   chatUrl: string | null;
   timezone: string;
   featured: boolean;
+  verified: boolean;
   rating: number;
   reviewCount: number;
   humanSupportTypes: GetWidgetSubdivisionCodeProps_organizations_nodes_humanSupportTypes[];

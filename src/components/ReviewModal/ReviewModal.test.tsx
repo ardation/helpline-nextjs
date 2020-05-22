@@ -29,6 +29,8 @@ describe('ReviewModal', () => {
         reviewCount: 5,
         reviews: [],
         subdivisions: [],
+        verified: false,
+        featured: false,
     };
     const query = gql`
         mutation OrganizationReviewCreate(

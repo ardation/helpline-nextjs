@@ -216,4 +216,27 @@ describe('OrganizationItem', () => {
             expect(() => getByText('Accessibility Notes')).toThrow();
         });
     });
+
+    describe('featured', () => {
+        beforeEach(() => {
+            organization = { ...organization, featured: true };
+        });
+
+        it('should have featured icon', () => {
+            const { getByTestId } = render(<OrganizationItem organization={organization} />);
+            expect(getByTestId('featured')).toBeTruthy();
+        });
+    });
+
+    describe('verified', () => {
+        beforeEach(() => {
+            organization = { ...organization, featured: true, verified: true };
+        });
+
+        it('should have verfied icon but not featured icon', () => {
+            const { getByTestId } = render(<OrganizationItem organization={organization} />);
+            expect(() => getByTestId('featured')).toThrow();
+            expect(getByTestId('verified')).toBeTruthy();
+        });
+    });
 });
