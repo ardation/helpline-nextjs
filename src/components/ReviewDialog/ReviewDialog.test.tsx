@@ -69,7 +69,7 @@ describe('ReviewDialog', () => {
     });
 
     it('should pop up modal when button clicked', () => {
-        const { getByText } = render(<ReviewDialog organization={organization} />);
+        const { getByText } = render(<ReviewDialog organization={organization} button={true} />);
         const button = getByText('Leave a Review');
         fireEvent.click(button);
         expect(getByText('Give a rating out of five.')).toBeTruthy();
@@ -89,7 +89,7 @@ describe('ReviewDialog', () => {
     it('should allow review to be submitted', async () => {
         const mockFn = jest.fn().mockName('onClose');
         const { queryByText, getByText, getByTestId, getByLabelText, getByRole, rerender } = render(
-            <ReviewDialog organization={organization} onClose={mockFn} />,
+            <ReviewDialog organization={organization} onClose={mockFn} button={true} />,
         );
         fireEvent.click(getByText('Leave a Review'));
         fireEvent.click(getByLabelText('3 Stars'));
@@ -110,7 +110,7 @@ describe('ReviewDialog', () => {
         );
         expect(getByText('Thanks for your review! It will appear here shortly.')).toBeTruthy();
         expect(mockFn).toHaveBeenCalled();
-        rerender(<ReviewDialog organization={organization} onClose={mockFn} open={true} />);
+        rerender(<ReviewDialog organization={organization} onClose={mockFn} open={true} button={true} />);
         expect(queryByText('Give a rating out of Five.')).not.toBeInTheDocument();
     });
 
@@ -126,6 +126,18 @@ describe('ReviewDialog', () => {
             expect(queryByText('Give a rating out of five.')).not.toBeInTheDocument();
             rerender(<ReviewDialog organization={organization} open={true} />);
             expect(queryByText('Give a rating out of five.')).toBeInTheDocument();
+        });
+    });
+
+    describe('button', () => {
+        it('should show button', () => {
+            const { queryByText } = render(<ReviewDialog organization={organization} button={true} />);
+            expect(queryByText('Leave a Review')).toBeInTheDocument();
+        });
+
+        it('should hide button', () => {
+            const { queryByText } = render(<ReviewDialog organization={organization} button={false} />);
+            expect(queryByText('Leave a Review')).toBeInTheDocument();
         });
     });
 });

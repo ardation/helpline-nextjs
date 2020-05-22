@@ -2,6 +2,7 @@ import filterAndSortOrganizations from './filterAndSortOrganizations';
 
 describe('filterAndSortOrganizations', () => {
     const organization = {
+        id: 'bbb',
         slug: 'bbb',
         name: 'Beta',
         alwaysOpen: false,
@@ -20,6 +21,7 @@ describe('filterAndSortOrganizations', () => {
         reviewCount: 10,
     };
     const filteredOrganization = {
+        id: 'aaa',
         slug: 'aaa',
         name: 'Alpha',
         alwaysOpen: true,
@@ -109,6 +111,7 @@ describe('filterAndSortOrganizations', () => {
 
     describe('when sort provided', () => {
         const alwaysOpenLastOrganization = {
+            id: 'ooo',
             slug: 'ooo',
             name: 'Omega',
             alwaysOpen: true,
@@ -128,6 +131,7 @@ describe('filterAndSortOrganizations', () => {
         };
 
         const closedLastOrganization = {
+            id: 'ooo',
             slug: 'ooo',
             name: 'Omega',
             alwaysOpen: false,

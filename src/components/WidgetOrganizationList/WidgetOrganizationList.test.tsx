@@ -4,6 +4,7 @@ import WidgetOrganizationList from '.';
 
 const organizations = [
     {
+        id: 'youthline',
         slug: 'youthline',
         name: 'Youthline',
         alwaysOpen: true,
@@ -22,6 +23,7 @@ const organizations = [
         reviewCount: 10,
     },
     {
+        id: 'kidscan',
         slug: 'kidscan',
         name: 'KidsCan',
         alwaysOpen: true,

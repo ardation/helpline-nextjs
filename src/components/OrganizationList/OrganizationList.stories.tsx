@@ -4,6 +4,7 @@ import OrganizationList from '.';
 
 const organizations = [
     {
+        id: 'youthline',
         slug: 'youthline',
         name: 'Youthline',
         alwaysOpen: true,
@@ -22,6 +23,7 @@ const organizations = [
         reviewCount: 10,
     },
     {
+        id: 'youthline',
         slug: 'youthline',
         name: 'Youthline',
         alwaysOpen: true,

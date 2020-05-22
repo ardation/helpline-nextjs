@@ -31,5 +31,5 @@ export default {
     decorators: [stubOrganizationReviewCreate],
 };
 
-export const WhenButton = (): ReactElement => <ReviewDialog organization={organization} />;
+export const WhenButton = (): ReactElement => <ReviewDialog organization={organization} button={true} />;
 export const WhenOpen = (): ReactElement => <ReviewDialog organization={organization} open={true} />;

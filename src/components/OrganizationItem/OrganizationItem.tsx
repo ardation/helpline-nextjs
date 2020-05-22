@@ -9,6 +9,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import { OutboundLink } from 'react-ga';
 import OrganizationOpen from '../OrganizationOpen';
 import NavBar from '../NavBar';
 import SideBar from '../SideBar';
@@ -184,7 +185,12 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                         <OrganizationRating organization={organization} variant="item" />
                     </Box>
                     <Box ml={1} my={1}>
-                        <ReviewDialog organization={organization} open={dialogOpen} onClose={onDialogClose} />
+                        <ReviewDialog
+                            organization={organization}
+                            open={dialogOpen}
+                            onClose={onDialogClose}
+                            button={true}
+                        />
                     </Box>
                     {(organization.alwaysOpen || organization.openingHours.length > 0) && (
                         <Box data-testid="open">
@@ -210,77 +216,97 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                     )}
                     {organization.url && (
                         <Box>
-                            <Button
-                                size="large"
-                                href={organization.url}
-                                className={[classes.button, classes.buttonLink].join(' ')}
-                                startIcon={<PublicIcon />}
-                                data-testid="url"
-                                onClick={onLinkClick}
+                            <OutboundLink
+                                eventLabel={organization.url}
+                                to={organization.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                {
-                                    organization.url
-                                        .replace('http://', '')
-                                        .replace('https://', '')
-                                        .replace('www.', '')
-                                        .split(/[/?#]/)[0]
-                                }
-                            </Button>
-                        </Box>
-                    )}
-                    {(organization.smsNumber || organization.phoneNumber || organization.chatUrl) && (
-                        <Box ml={1}>
-                            {organization.smsNumber && (
                                 <Button
-                                    variant="contained"
-                                    href={`sms:${organization.smsNumber}`}
                                     size="large"
-                                    color="primary"
-                                    className={[classes.button, classes.buttonHighlight].join(' ')}
-                                    startIcon={<SmsOutlinedIcon />}
-                                    data-testid="smsNumber"
+                                    className={[classes.button, classes.buttonLink].join(' ')}
+                                    startIcon={<PublicIcon />}
+                                    data-testid="url"
                                     onClick={onLinkClick}
-                                >
-                                    {organization.smsNumber}
-                                </Button>
-                            )}
-                            {organization.phoneNumber && (
-                                <Button
-                                    variant="contained"
-                                    href={`tel:${organization.phoneNumber}`}
-                                    size="large"
-                                    color="primary"
-                                    className={[classes.button, classes.buttonHighlight].join(' ')}
-                                    startIcon={<PhoneIcon />}
-                                    data-testid="phoneNumber"
-                                    onClick={onLinkClick}
-                                >
-                                    {organization.phoneNumber}
-                                </Button>
-                            )}
-                            {organization.chatUrl && (
-                                <Button
-                                    variant="contained"
-                                    href={organization.chatUrl}
-                                    size="large"
-                                    color="primary"
-                                    className={[classes.button, classes.buttonHighlight].join(' ')}
-                                    startIcon={<MessageOutlinedIcon />}
-                                    data-testid="chatUrl"
-                                    onClick={onLinkClick}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
                                 >
                                     {
-                                        organization.chatUrl
+                                        organization.url
                                             .replace('http://', '')
                                             .replace('https://', '')
                                             .replace('www.', '')
                                             .split(/[/?#]/)[0]
                                     }
                                 </Button>
+                            </OutboundLink>
+                        </Box>
+                    )}
+                    {(organization.smsNumber || organization.phoneNumber || organization.chatUrl) && (
+                        <Box ml={1}>
+                            {organization.smsNumber && (
+                                <OutboundLink
+                                    eventLabel={`sms:${organization.smsNumber}`}
+                                    to={`sms:${organization.smsNumber}`}
+                                    target="_parent"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Button
+                                        variant="contained"
+                                        size="large"
+                                        color="primary"
+                                        className={[classes.button, classes.buttonHighlight].join(' ')}
+                                        startIcon={<SmsOutlinedIcon />}
+                                        data-testid="smsNumber"
+                                        onClick={onLinkClick}
+                                    >
+                                        {organization.smsNumber}
+                                    </Button>
+                                </OutboundLink>
+                            )}
+                            {organization.phoneNumber && (
+                                <OutboundLink
+                                    eventLabel={`tel:${organization.phoneNumber}`}
+                                    to={`tel:${organization.phoneNumber}`}
+                                    target="_parent"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Button
+                                        variant="contained"
+                                        size="large"
+                                        color="primary"
+                                        className={[classes.button, classes.buttonHighlight].join(' ')}
+                                        startIcon={<PhoneIcon />}
+                                        data-testid="phoneNumber"
+                                        onClick={onLinkClick}
+                                    >
+                                        {organization.phoneNumber}
+                                    </Button>
+                                </OutboundLink>
+                            )}
+                            {organization.chatUrl && (
+                                <OutboundLink
+                                    eventLabel={organization.chatUrl}
+                                    to={organization.chatUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Button
+                                        variant="contained"
+                                        size="large"
+                                        color="primary"
+                                        className={[classes.button, classes.buttonHighlight].join(' ')}
+                                        startIcon={<MessageOutlinedIcon />}
+                                        data-testid="chatUrl"
+                                        onClick={onLinkClick}
+                                    >
+                                        {
+                                            organization.chatUrl
+                                                .replace('http://', '')
+                                                .replace('https://', '')
+                                                .replace('www.', '')
+                                                .split(/[/?#]/)[0]
+                                        }
+                                    </Button>
+                                </OutboundLink>
                             )}
                         </Box>
                     )}

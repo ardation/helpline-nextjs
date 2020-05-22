@@ -21,13 +21,18 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { request } from 'graphql-request';
 import { Formik } from 'formik';
-import { Organization } from '../OrganizationItem/OrganizationItem';
+
+type Organization = {
+    id: string;
+    name: string;
+};
 
 type Props = {
     organization: Organization;
     open?: boolean;
     grecaptcha?: object;
     onClose?: () => void;
+    button?: boolean;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -118,7 +123,7 @@ const MySlider = withStyles({
     },
 })(Slider);
 
-const ReviewDialog = ({ organization, open, grecaptcha, onClose }: Props): ReactElement => {
+const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props): ReactElement => {
     const classes = useStyles();
     const [dialogOpen, setDialogOpen] = useState(open || false);
     const [reviewReceived, setReviewReceived] = useState(false);
@@ -175,17 +180,19 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose }: Props): React
 
     return (
         <>
-            <Box>
-                {reviewReceived ? (
-                    <Alert severity="success" className={classes.alert}>
-                        Thanks for your review! It will appear here shortly.
-                    </Alert>
-                ) : (
-                    <Button variant="outlined" className={classes.button} onClick={handleOpen}>
-                        Leave a Review
-                    </Button>
-                )}
-            </Box>
+            {button && (
+                <Box>
+                    {reviewReceived ? (
+                        <Alert severity="success" className={classes.alert}>
+                            Thanks for your review! It will appear here shortly.
+                        </Alert>
+                    ) : (
+                        <Button variant="outlined" className={classes.button} onClick={handleOpen}>
+                            Leave a Review
+                        </Button>
+                    )}
+                </Box>
+            )}
             <Dialog
                 classes={{
                     paper: classes.dialogPaper,

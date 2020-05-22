@@ -9,6 +9,7 @@ jest.mock('react-ga');
 describe('Widget', () => {
     const organizations = [
         {
+            id: 'youthline',
             slug: 'youthline',
             name: 'Youthline',
             alwaysOpen: true,
@@ -27,6 +28,7 @@ describe('Widget', () => {
             reviewCount: 10,
         },
         {
+            id: 'kidscan',
             slug: 'kidscan',
             name: 'KidsCan',
             alwaysOpen: true,
