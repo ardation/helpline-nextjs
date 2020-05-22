@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Typography, Chip, Button, Box, Container, NoSsr } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -10,7 +10,7 @@ import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import OrganizationOpen from '../OrganizationOpen';
 import NavBar from '../NavBar';
 import SideBar from '../SideBar';
-import ReviewModal from '../ReviewModal';
+import ReviewDialog from '../ReviewDialog';
 import OrganizationRating from '../OrganizationRating';
 import Reviews from '../Reviews';
 
@@ -133,6 +133,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const OrganizationItem = ({ organization }: Props): ReactElement => {
     const classes = useStyles();
+    const [dialogOpen, setDialogOpen] = useState(false);
+
+    const onDialogClose = (): void => {
+        setDialogOpen(false);
+    };
+
+    const onLinkClick = (): void => {
+        setDialogOpen(true);
+    };
 
     return (
         <>
@@ -156,7 +165,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                         <OrganizationRating organization={organization} variant="item" />
                     </Box>
                     <Box ml={1} my={1}>
-                        <ReviewModal organization={organization} />
+                        <ReviewDialog organization={organization} open={dialogOpen} onClose={onDialogClose} />
                     </Box>
                     {(organization.alwaysOpen || organization.openingHours.length > 0) && (
                         <Box data-testid="open">
@@ -188,6 +197,9 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                                 className={[classes.button, classes.buttonLink].join(' ')}
                                 startIcon={<PublicIcon />}
                                 data-testid="url"
+                                onClick={onLinkClick}
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 {
                                     organization.url
@@ -210,6 +222,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                                     className={[classes.button, classes.buttonHighlight].join(' ')}
                                     startIcon={<SmsOutlinedIcon />}
                                     data-testid="smsNumber"
+                                    onClick={onLinkClick}
                                 >
                                     {organization.smsNumber}
                                 </Button>
@@ -223,6 +236,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                                     className={[classes.button, classes.buttonHighlight].join(' ')}
                                     startIcon={<PhoneIcon />}
                                     data-testid="phoneNumber"
+                                    onClick={onLinkClick}
                                 >
                                     {organization.phoneNumber}
                                 </Button>
@@ -236,6 +250,9 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                                     className={[classes.button, classes.buttonHighlight].join(' ')}
                                     startIcon={<MessageOutlinedIcon />}
                                     data-testid="chatUrl"
+                                    onClick={onLinkClick}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     {
                                         organization.chatUrl

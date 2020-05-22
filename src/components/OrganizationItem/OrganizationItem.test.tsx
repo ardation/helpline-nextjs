@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import moment from 'moment-timezone';
 import OrganizationItem from '.';
 
@@ -89,11 +89,16 @@ describe('OrganizationItem', () => {
         });
     });
 
-    it('should contain url', () => {
-        const { getByTestId } = render(<OrganizationItem organization={organization} />);
+    it('should contain url', async () => {
+        const { getByTestId, queryByTestId } = render(<OrganizationItem organization={organization} />);
         const element = getByTestId('url');
         expect(element).toHaveAttribute('href', 'https://youthline.co.nz/website');
         expect(element).toHaveTextContent('youthline.co.nz');
+        fireEvent.click(element);
+        const closeElement = getByTestId('close');
+        expect(closeElement).toBeInTheDocument();
+        fireEvent.click(closeElement);
+        await waitFor(() => expect(queryByTestId('close')).not.toBeInTheDocument());
     });
 
     describe('no url', () => {
@@ -107,11 +112,16 @@ describe('OrganizationItem', () => {
         });
     });
 
-    it('should contain smsNumber', () => {
-        const { getByTestId } = render(<OrganizationItem organization={organization} />);
+    it('should contain smsNumber', async () => {
+        const { getByTestId, queryByTestId } = render(<OrganizationItem organization={organization} />);
         const element = getByTestId('smsNumber');
         expect(element).toHaveAttribute('href', 'sms:234');
         expect(element).toHaveTextContent('234');
+        fireEvent.click(element);
+        const closeElement = getByTestId('close');
+        expect(closeElement).toBeInTheDocument();
+        fireEvent.click(closeElement);
+        await waitFor(() => expect(queryByTestId('close')).not.toBeInTheDocument());
     });
 
     describe('no smsNumber', () => {
@@ -125,11 +135,16 @@ describe('OrganizationItem', () => {
         });
     });
 
-    it('should contain phoneNumber', () => {
-        const { getByTestId } = render(<OrganizationItem organization={organization} />);
+    it('should contain phoneNumber', async () => {
+        const { getByTestId, queryByTestId } = render(<OrganizationItem organization={organization} />);
         const element = getByTestId('phoneNumber');
         expect(element).toHaveAttribute('href', 'tel:0800 376 633');
         expect(element).toHaveTextContent('0800 376 633');
+        fireEvent.click(element);
+        const closeElement = getByTestId('close');
+        expect(closeElement).toBeInTheDocument();
+        fireEvent.click(closeElement);
+        await waitFor(() => expect(queryByTestId('close')).not.toBeInTheDocument());
     });
 
     describe('no phoneNumber', () => {
@@ -143,11 +158,16 @@ describe('OrganizationItem', () => {
         });
     });
 
-    it('should contain chatUrl', () => {
-        const { getByTestId } = render(<OrganizationItem organization={organization} />);
+    it('should contain chatUrl', async () => {
+        const { getByTestId, queryByTestId } = render(<OrganizationItem organization={organization} />);
         const element = getByTestId('chatUrl');
         expect(element).toHaveAttribute('href', 'https://chatyouthline.co.nz/chat');
         expect(element).toHaveTextContent('chatyouthline.co.nz');
+        fireEvent.click(element);
+        const closeElement = getByTestId('close');
+        expect(closeElement).toBeInTheDocument();
+        fireEvent.click(closeElement);
+        await waitFor(() => expect(queryByTestId('close')).not.toBeInTheDocument());
     });
 
     describe('no chatUrl', () => {

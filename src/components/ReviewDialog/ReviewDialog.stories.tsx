@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import stubOrganizationReviewCreate from '../../../tests/stubs/stubOrganizationReviewCreate';
-import ReviewModal from '.';
+import ReviewDialog from '.';
 
 const organization = {
     id: 'c1d74c09-ecb0-46f3-902e-1feb22aad7ad',
@@ -25,10 +25,9 @@ const organization = {
 };
 
 export default {
-    title: 'ReviewModal',
+    title: 'ReviewDialog',
     decorators: [stubOrganizationReviewCreate],
 };
 
-export const WhenButton = (): ReactElement => <ReviewModal organization={organization} />;
-export const WhenOpen = (): ReactElement => <ReviewModal organization={organization} open={true} />;
-export const WhenNotice = (): ReactElement => <ReviewModal organization={organization} open={true} notice={true} />;
+export const WhenButton = (): ReactElement => <ReviewDialog organization={organization} />;
+export const WhenOpen = (): ReactElement => <ReviewDialog organization={organization} open={true} />;
