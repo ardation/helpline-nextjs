@@ -8,6 +8,7 @@ import PublicIcon from '@material-ui/icons/Public';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import Link from 'next/link';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import TextTruncate from 'react-text-truncate';
 import { OutboundLink } from 'react-ga';
 import OrganizationOpen from '../OrganizationOpen';
@@ -46,6 +47,7 @@ export type Organization = {
     chatUrl?: string;
     timezone: string;
     featured: boolean;
+    verified: boolean;
     rating: number;
     reviewCount: number;
 };
@@ -102,6 +104,9 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         featured: {
             color: '#FFD300',
+            paddingTop: '2px',
+        },
+        verified: {
             paddingTop: '2px',
         },
         button: {
@@ -164,9 +169,14 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                             </Link>
                         )}
                     </Typography>
-                    {organization.featured && (
-                        <Box className={classes.featured}>
+                    {organization.featured && !organization.verified && (
+                        <Box className={classes.featured} data-testid="featured">
                             <WhatshotIcon />
+                        </Box>
+                    )}
+                    {organization.verified && (
+                        <Box className={classes.verified} data-testid="verified">
+                            <VerifiedUserIcon />
                         </Box>
                     )}
                 </Box>

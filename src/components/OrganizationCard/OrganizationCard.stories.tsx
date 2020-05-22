@@ -16,6 +16,7 @@ const organization = {
     timezone: 'Pacific/Auckland',
     topics: [],
     featured: false,
+    verified: false,
     rating: 3.67,
     reviewCount: 20,
 };
@@ -103,9 +104,15 @@ export const Closed = (): ReactElement => (
     </Box>
 );
 
-export const WithFeatured = (): ReactElement => (
+export const WhenFeatured = (): ReactElement => (
     <Box m={2}>
         <OrganizationCard organization={{ ...organization, featured: true }} />
+    </Box>
+);
+
+export const WhenVerfied = (): ReactElement => (
+    <Box m={2}>
+        <OrganizationCard organization={{ ...organization, verified: true, featured: true }} />
     </Box>
 );
 

@@ -66,6 +66,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                     chatUrl
                     timezone
                     featured
+                    verified
                     rating
                     reviewCount
                     humanSupportTypes {

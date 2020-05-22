@@ -141,7 +141,7 @@ const OrganizationFilter = ({
             <Box my={2}>
                 <Typography className={classes.title}>Sort by</Typography>
                 <ItemSelect
-                    items={[{ name: 'Featured' }, { name: 'A – Z' }, { name: 'Open now' }]}
+                    items={[{ name: 'Featured' }, { name: 'Verified' }, { name: 'A – Z' }, { name: 'Open now' }]}
                     preselectedItems={selectedSorts}
                     onChange={setSelectedSorts}
                     single

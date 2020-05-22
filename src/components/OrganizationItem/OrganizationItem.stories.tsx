@@ -23,6 +23,8 @@ const organization = {
         name: 'New Zealand',
     },
     reviews: [],
+    featured: false,
+    verified: false,
 };
 
 const emptyOpeningHours = [
@@ -97,6 +99,12 @@ export const NoSubdivisions = (): ReactElement => (
 
 export const WithReviews = (): ReactElement => (
     <OrganizationItem organization={{ ...organization, reviews: reviews }} />
+);
+
+export const WhenFeatured = (): ReactElement => <OrganizationItem organization={{ ...organization, featured: true }} />;
+
+export const WhenVerified = (): ReactElement => (
+    <OrganizationItem organization={{ ...organization, featured: true, verified: true }} />
 );
 
 export const WithNotes = (): ReactElement => (
