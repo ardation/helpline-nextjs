@@ -1,5 +1,6 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { Box, Container, Typography, Button } from '@material-ui/core';
+import SwipeableViews from 'react-swipeable-views';
+import { Box, Typography, Button, Tab, Tabs, Container } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ReactGA from 'react-ga';
 import ItemSelect from '../ItemSelect/ItemSelect';
@@ -43,8 +44,7 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
-            marginTop: theme.spacing(2),
-            marginBottom: theme.spacing(2),
+            padding: 0,
         },
         header: {
             display: 'grid',
@@ -59,6 +59,19 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         button: {
             borderRadius: '1000px',
+        },
+        tabs: {
+            borderTop: '1px solid #000',
+        },
+        tab: {
+            padding: theme.spacing(1, 0),
+            textTransform: 'capitalize',
+            '&.Mui-selected': {
+                fontWeight: 'bold',
+            },
+        },
+        tabPanel: {
+            padding: theme.spacing(0, 2, 2, 2),
         },
     }),
 );
@@ -76,6 +89,15 @@ const OrganizationFilter = ({
     const [selectedHumanSupportTypes, setSelectedHumanSupportTypes] = useState<HumanSupportType[]>([]);
     const [selectedTopics, setSelectedTopics] = useState<Topic[]>([]);
     const [selectedSorts, setSelectedSorts] = useState<Sort[]>([{ name: 'Featured' }]);
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (_event: React.ChangeEvent<{}>, newValue: number): void => {
+        setValue(newValue);
+    };
+
+    const handleChangeIndex = (value: number): void => {
+        setValue(value);
+    };
 
     const onClick = (): void => {
         ReactGA.event({
@@ -99,54 +121,81 @@ const OrganizationFilter = ({
 
     return (
         <Container className={classes.container}>
-            <Box my={2} className={classes.header}>
-                <Typography className={classes.heading} variant="h6">
-                    Filter &amp; Sort
-                </Typography>
-                <Button className={classes.button} variant="contained" color="primary" onClick={onClick} size="large">
-                    Apply
-                </Button>
-            </Box>
-            <hr />
-            <Box my={2}>
-                <Typography className={classes.title}>Contact Method</Typography>
-                <ItemSelect
-                    items={[{ name: 'Phone' }, { name: 'Text' }, { name: 'Web Chat' }]}
-                    onChange={setSelectedContactMethods}
-                />
-            </Box>
-            {humanSupportTypes && humanSupportTypes.length > 0 && (
-                <Box my={2}>
-                    <Typography className={classes.title}>Live Support Type</Typography>
-                    <ItemSelect items={humanSupportTypes} onChange={setSelectedHumanSupportTypes} max={7} />
+            <Box m={2}>
+                <Box my={2} className={classes.header}>
+                    <Typography className={classes.heading} variant="h6">
+                        Filter &amp; Sort
+                    </Typography>
+                    <Button
+                        className={classes.button}
+                        variant="contained"
+                        color="primary"
+                        onClick={onClick}
+                        size="large"
+                    >
+                        Apply
+                    </Button>
                 </Box>
-            )}
-            {topics && topics.length > 0 && (
-                <Box my={2}>
-                    <Typography className={classes.title}>Topics</Typography>
+                <Tabs
+                    onChange={handleChange}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    variant="fullWidth"
+                    className={classes.tabs}
+                    value={value}
+                >
+                    <Tab className={classes.tab} label="Options" />
+                    <Tab
+                        className={classes.tab}
+                        label={`Topics${selectedTopics.length > 0 ? ` (${selectedTopics.length})` : ''}`}
+                    />
+                    <Tab
+                        className={classes.tab}
+                        label={`Categories${selectedCategories.length > 0 ? ` (${selectedCategories.length})` : ''}`}
+                    />
+                </Tabs>
+            </Box>
+            <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
+                <Box className={classes.tabPanel}>
+                    <Box mb={2}>
+                        <Typography className={classes.title}>Contact Method</Typography>
+                        <ItemSelect
+                            items={[{ name: 'Phone' }, { name: 'Text' }, { name: 'Web Chat' }]}
+                            onChange={setSelectedContactMethods}
+                        />
+                    </Box>
+                    {humanSupportTypes && humanSupportTypes.length > 0 && (
+                        <Box my={2}>
+                            <Typography className={classes.title}>Live Support Type</Typography>
+                            <ItemSelect items={humanSupportTypes} onChange={setSelectedHumanSupportTypes} max={7} />
+                        </Box>
+                    )}
+                    <Box my={2}>
+                        <Typography className={classes.title}>Sort by</Typography>
+                        <ItemSelect
+                            items={[
+                                { name: 'Featured' },
+                                { name: 'Verified' },
+                                { name: 'A – Z' },
+                                { name: 'Open now' },
+                            ]}
+                            preselectedItems={selectedSorts}
+                            onChange={setSelectedSorts}
+                            single
+                        />
+                    </Box>
+                </Box>
+                <Box className={classes.tabPanel}>
                     <ItemSelect
-                        items={topics}
+                        items={topics || []}
                         preselectedItems={preselectedTopics}
                         onChange={setSelectedTopics}
-                        max={7}
                     />
                 </Box>
-            )}
-            {categories && categories.length > 0 && (
-                <Box my={2}>
-                    <Typography className={classes.title}>Categories</Typography>
-                    <ItemSelect items={categories} onChange={setSelectedCategories} max={7} />
+                <Box className={classes.tabPanel}>
+                    <ItemSelect items={categories || []} onChange={setSelectedCategories} />
                 </Box>
-            )}
-            <Box my={2}>
-                <Typography className={classes.title}>Sort by</Typography>
-                <ItemSelect
-                    items={[{ name: 'Featured' }, { name: 'Verified' }, { name: 'A – Z' }, { name: 'Open now' }]}
-                    preselectedItems={selectedSorts}
-                    onChange={setSelectedSorts}
-                    single
-                />
-            </Box>
+            </SwipeableViews>
         </Container>
     );
 };
