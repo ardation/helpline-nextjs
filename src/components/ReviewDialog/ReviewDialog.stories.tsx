@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react';
-import stubOrganizationReviewCreate from '../../../tests/stubs/stubOrganizationReviewCreate';
 import ReviewDialog from '.';
 
 const organization = {
@@ -28,7 +27,6 @@ const organization = {
 
 export default {
     title: 'ReviewDialog',
-    decorators: [stubOrganizationReviewCreate],
 };
 
 export const WhenButton = (): ReactElement => <ReviewDialog organization={organization} button={true} />;

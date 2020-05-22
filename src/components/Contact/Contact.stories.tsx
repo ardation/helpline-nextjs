@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
-import stubContactCreate from '../../../tests/stubs/stubContactCreate';
+import stubContactCreateDecorator from '../../../tests/stubs/stubContactCreateDecorator';
 import Contact from '.';
 
 export default {
     title: 'Contact',
-    decorators: [stubContactCreate],
+    decorators: [stubContactCreateDecorator],
 };
 
 export const Default = (): ReactElement => <Contact />;

@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import moment from 'moment-timezone';
-import stubOrganizationReviewCreate from '../../../tests/stubs/stubOrganizationReviewCreate';
 import OrganizationItem from '.';
 
 const organization = {
@@ -39,7 +38,6 @@ const emptyOpeningHours = [
 
 export default {
     title: 'OrganizationItem',
-    decorators: [stubOrganizationReviewCreate],
 };
 
 export const Default = (): ReactElement => <OrganizationItem organization={organization} />;

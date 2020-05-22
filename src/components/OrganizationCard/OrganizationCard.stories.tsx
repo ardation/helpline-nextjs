@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import { Box } from '@material-ui/core';
-import stubOrganizationReviewCreate from '../../../tests/stubs/stubOrganizationReviewCreate';
 import OrganizationCard from '.';
 
 const organization = {
@@ -25,7 +24,6 @@ const organization = {
 
 export default {
     title: 'OrganizationCard',
-    decorators: [stubOrganizationReviewCreate],
 };
 
 export const Default = (): ReactElement => (

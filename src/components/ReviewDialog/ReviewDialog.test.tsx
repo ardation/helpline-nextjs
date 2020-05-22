@@ -137,7 +137,7 @@ describe('ReviewDialog', () => {
 
         it('should hide button', () => {
             const { queryByText } = render(<ReviewDialog organization={organization} button={false} />);
-            expect(queryByText('Leave a Review')).toBeInTheDocument();
+            expect(queryByText('Leave a Review')).not.toBeInTheDocument();
         });
     });
 });
