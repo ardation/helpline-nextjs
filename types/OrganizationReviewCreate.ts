@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface OrganizationReviewCreate_organizationReviewCreate {
-  __typename: "CreateMutationPayload";
+  __typename: "OrganizationReviewCreateMutationPayload";
   /**
    * A unique identifier for the client performing the mutation.
    */

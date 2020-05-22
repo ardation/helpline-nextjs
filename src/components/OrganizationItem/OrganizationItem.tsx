@@ -7,6 +7,8 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import PublicIcon from '@material-ui/icons/Public';
 import CreateIcon from '@material-ui/icons/Create';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import OrganizationOpen from '../OrganizationOpen';
 import NavBar from '../NavBar';
 import SideBar from '../SideBar';
@@ -61,6 +63,8 @@ export type Organization = {
     reviewCount: number;
     reviews: Review[];
     notes?: string;
+    featured: boolean;
+    verified: boolean;
 };
 
 type Props = {
@@ -128,6 +132,15 @@ const useStyles = makeStyles((theme: Theme) =>
             color: theme.palette.secondary.main,
             fontSize: '0.9rem',
         },
+        featured: {
+            marginLeft: '5px',
+            marginBottom: '-2px',
+            color: '#FFD300',
+        },
+        verified: {
+            marginLeft: '5px',
+            marginBottom: '-2px',
+        },
     }),
 );
 
@@ -144,6 +157,12 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                     <Box ml={1} mb={1}>
                         <Typography variant="h6" className={classes.heading}>
                             {organization.name}
+                            {organization.featured && !organization.verified && (
+                                <WhatshotIcon className={classes.featured} data-testid="featured" />
+                            )}
+                            {organization.verified && (
+                                <VerifiedUserIcon className={classes.verified} data-testid="verified" />
+                            )}
                         </Typography>
                         <Typography className={classes.country}>
                             {organization.subdivisions.length > 0 && (

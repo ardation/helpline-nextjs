@@ -60,6 +60,7 @@ export interface GetOrganizationsSlugProps_organization {
   chatUrl: string | null;
   timezone: string;
   featured: boolean;
+  verified: boolean;
   rating: number;
   reviewCount: number;
   notes: string | null;

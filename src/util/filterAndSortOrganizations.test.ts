@@ -15,6 +15,7 @@ describe('filterAndSortOrganizations', () => {
         chatUrl: 'https://youthline.co.nz/chat',
         timezone: 'Pacific/Auckland',
         featured: false,
+        verified: false,
         rating: 5,
         reviewCount: 10,
     };
@@ -32,6 +33,7 @@ describe('filterAndSortOrganizations', () => {
         chatUrl: undefined,
         timezone: 'Pacific/Auckland',
         featured: false,
+        verified: false,
         rating: 5,
         reviewCount: 10,
     };
@@ -120,6 +122,7 @@ describe('filterAndSortOrganizations', () => {
             chatUrl: undefined,
             timezone: 'Pacific/Auckland',
             featured: true,
+            verified: true,
             rating: 5,
             reviewCount: 10,
         };
@@ -138,12 +141,23 @@ describe('filterAndSortOrganizations', () => {
             chatUrl: undefined,
             timezone: 'Pacific/Auckland',
             featured: true,
+            verified: true,
             rating: 5,
             reviewCount: 10,
         };
 
         it('sorts by Featured', () => {
             changes.sorts = [{ name: 'Featured' }];
+            expect(
+                filterAndSortOrganizations(
+                    [alwaysOpenLastOrganization, closedLastOrganization, organization, filteredOrganization],
+                    changes,
+                ),
+            ).toEqual([alwaysOpenLastOrganization, closedLastOrganization, filteredOrganization, organization]);
+        });
+
+        it('sorts by Verified', () => {
+            changes.sorts = [{ name: 'Verified' }];
             expect(
                 filterAndSortOrganizations(
                     [alwaysOpenLastOrganization, closedLastOrganization, organization, filteredOrganization],
