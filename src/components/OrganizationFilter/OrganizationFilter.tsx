@@ -72,6 +72,9 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         tabPanel: {
             padding: theme.spacing(0, 2, 2, 2),
+            [theme.breakpoints.up('sm')]: {
+                padding: theme.spacing(0, 3, 3, 3),
+            },
         },
     }),
 );
@@ -121,7 +124,7 @@ const OrganizationFilter = ({
 
     return (
         <Container className={classes.container}>
-            <Box m={2}>
+            <Box className={classes.tabPanel}>
                 <Box my={2} className={classes.header}>
                     <Typography className={classes.heading} variant="h6">
                         Filter &amp; Sort
