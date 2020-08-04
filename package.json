@@ -37,7 +37,7 @@
         "react-moment": "^0.9.7",
         "react-swipeable-views": "^0.13.9",
         "react-text-truncate": "^0.16.0",
-        "yup": "^0.28.5"
+        "yup": "^0.29.3"
     },
     "devDependencies": {
         "@babel/core": "^7.9.6",
