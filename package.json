@@ -72,7 +72,7 @@
         "husky": "^4.2.3",
         "jest": "^25.5.4",
         "jsx-dom": "^6.4.15",
-        "lint-staged": "^10.2.4",
+        "lint-staged": "^10.4.0",
         "prettier": "^2.0.5",
         "ts-jest": "^25.5.1",
         "typescript": "^3.9.2",
