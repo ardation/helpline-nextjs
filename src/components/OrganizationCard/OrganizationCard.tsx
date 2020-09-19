@@ -187,14 +187,24 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                         </Typography>
                         {organization.featured && !organization.verified && (
                             <Box className={classes.featured} data-testid="featured">
-                                <Tooltip title="Featured by Find A Helpline" placement="left" arrow>
+                                <Tooltip
+                                    title="Featured by Find A Helpline"
+                                    placement="left"
+                                    arrow
+                                    disableFocusListener
+                                >
                                     <WhatshotIcon />
                                 </Tooltip>
                             </Box>
                         )}
                         {organization.verified && (
                             <Box className={classes.verified} data-testid="verified">
-                                <Tooltip title="Verified by Find A Helpline" placement="left" arrow>
+                                <Tooltip
+                                    title="Verified by Find A Helpline"
+                                    placement="left"
+                                    arrow
+                                    disableFocusListener
+                                >
                                     <CheckCircleIcon />
                                 </Tooltip>
                             </Box>

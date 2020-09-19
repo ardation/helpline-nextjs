@@ -169,12 +169,22 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                         <Typography variant="h6" className={classes.heading}>
                             {organization.name}
                             {organization.featured && !organization.verified && (
-                                <Tooltip title="Featured by Find A Helpline" placement="left" arrow>
+                                <Tooltip
+                                    title="Featured by Find A Helpline"
+                                    placement="left"
+                                    arrow
+                                    disableFocusListener
+                                >
                                     <WhatshotIcon className={classes.featured} data-testid="featured" />
                                 </Tooltip>
                             )}
                             {organization.verified && (
-                                <Tooltip title="Verified by Find A Helpline" placement="left" arrow>
+                                <Tooltip
+                                    title="Verified by Find A Helpline"
+                                    placement="left"
+                                    arrow
+                                    disableFocusListener
+                                >
                                     <CheckCircleIcon className={classes.verified} data-testid="verified" />
                                 </Tooltip>
                             )}
