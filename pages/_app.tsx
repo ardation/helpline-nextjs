@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { AppProps } from 'next/app';
 import { Router } from 'next/router';
 import ReactGA from 'react-ga';
+import { hotjar } from 'react-hotjar';
 import theme from '../src/theme';
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
@@ -18,6 +19,10 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         Router.events.on('routeChangeComplete', (url) => {
             ReactGA.pageview(url);
         });
+
+        if (process.env.NODE_ENV === 'production') {
+            hotjar.initialize(parseInt(process.env.HOTJAR_ID), 6);
+        }
     }, []);
 
     return (
