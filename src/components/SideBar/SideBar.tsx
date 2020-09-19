@@ -6,6 +6,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import EmailIcon from '@material-ui/icons/Email';
 import Link from 'next/link';
+import PowerIcon from '@material-ui/icons/Power';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -46,7 +47,7 @@ const SideBar = (): ReactElement => {
                         <Link href="/get-the-widget" passHref>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <EmailIcon />
+                                    <PowerIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Get the Widget" />
                             </ListItem>
