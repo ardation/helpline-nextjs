@@ -229,6 +229,12 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
                             isSubmitting,
                         }): ReactElement => (
                             <form onSubmit={handleSubmit}>
+                                <ReCAPTCHA
+                                    ref={recaptchaRef}
+                                    size="invisible"
+                                    sitekey={process.env.RECAPTCHA_KEY}
+                                    grecaptcha={grecaptcha}
+                                />
                                 <Grid container wrap="nowrap" direction="column" spacing={2}>
                                     {open && (
                                         <Grid item>
@@ -310,12 +316,6 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
                                         </Button>
                                     </Grid>
                                     <Grid item>
-                                        <ReCAPTCHA
-                                            ref={recaptchaRef}
-                                            size="invisible"
-                                            sitekey={process.env.RECAPTCHA_KEY}
-                                            grecaptcha={grecaptcha}
-                                        />
                                         <Typography className={classes.recaptcha}>
                                             This site is protected by reCAPTCHA and the Google{' '}
                                             <a
