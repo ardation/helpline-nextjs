@@ -10,17 +10,13 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         links: {
             display: 'grid',
-            gridGap: theme.spacing(1),
+            gridGap: theme.spacing(2),
             gridAutoFlow: 'column',
             fontSize: '0.8rem',
-            marginBottom: theme.spacing(1),
+            marginBottom: theme.spacing(2),
+            justifyContent: 'center',
         },
         link: {
-            color: '#999999',
-        },
-        copyright: {
-            fontSize: '0.8rem',
-            fontWeight: 'bold',
             color: '#999999',
         },
     }),
@@ -31,7 +27,29 @@ const Footer = (): ReactElement => {
 
     return (
         <Container maxWidth="xs">
-            <Box my={2} className={classes.box}>
+            <Box my={3} className={classes.box}>
+                <Typography className={classes.links}>
+                    <NextLink href="/about" passHref>
+                        <Link className={classes.link} data-testid="about">
+                            About
+                        </Link>
+                    </NextLink>
+                    <NextLink href="/get-the-widget" passHref>
+                        <Link className={classes.link} data-testid="getTheWidget">
+                            Get The Widget
+                        </Link>
+                    </NextLink>
+                    <NextLink href="/contact" passHref>
+                        <Link className={classes.link} data-testid="contact">
+                            Contact
+                        </Link>
+                    </NextLink>
+                    <NextLink href="/gratitude" passHref>
+                        <Link className={classes.link} data-testid="gratitude">
+                            Gratitude
+                        </Link>
+                    </NextLink>
+                </Typography>
                 <Typography className={classes.links}>
                     <NextLink href="/privacy" passHref>
                         <Link className={classes.link} data-testid="privacy">
@@ -43,19 +61,6 @@ const Footer = (): ReactElement => {
                             Terms of Service
                         </Link>
                     </NextLink>
-                    <NextLink href="/about" passHref>
-                        <Link className={classes.link} data-testid="about">
-                            About
-                        </Link>
-                    </NextLink>
-                    <NextLink href="/contact" passHref>
-                        <Link className={classes.link} data-testid="contact">
-                            Contact
-                        </Link>
-                    </NextLink>
-                </Typography>
-                <Typography className={classes.copyright} data-testid="copyright">
-                    Powered by Live For Tomorrow &copy; {new Date().getFullYear()}
                 </Typography>
             </Box>
         </Container>
