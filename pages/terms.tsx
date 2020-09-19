@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import Legal from '../src/components/Legal';
 import Chrome from '../src/components/Chrome';
 
-const ContactPage = (): ReactElement => {
+const TermsPage = (): ReactElement => {
     return (
         <>
             <Head>
@@ -16,4 +16,4 @@ const ContactPage = (): ReactElement => {
     );
 };
 
-export default ContactPage;
+export default TermsPage;
