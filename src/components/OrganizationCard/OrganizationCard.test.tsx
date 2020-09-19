@@ -71,7 +71,7 @@ describe('OrganizationCard', () => {
     it('should contain smsNumber', async () => {
         const { getByTestId, queryByTestId } = render(<OrganizationCard organization={organization} />);
         const element = getByTestId('smsNumber');
-        expect(element.parentElement).toHaveAttribute('href', 'sms:234');
+        expect(element).toHaveAttribute('href', 'sms:234');
         expect(element).toHaveTextContent('234');
         fireEvent.click(element);
         const closeElement = getByTestId('close');
@@ -83,7 +83,7 @@ describe('OrganizationCard', () => {
     it('should contain smsNumberFab', async () => {
         const { getByTestId, queryByTestId } = render(<OrganizationCard organization={organization} />);
         const element = getByTestId('smsNumberFab');
-        expect(element.parentElement).toHaveAttribute('href', 'sms:234');
+        expect(element).toHaveAttribute('href', 'sms:234');
         fireEvent.click(element);
         const closeElement = getByTestId('close');
         expect(closeElement).toBeInTheDocument();
@@ -105,7 +105,7 @@ describe('OrganizationCard', () => {
     it('should contain phoneNumber', async () => {
         const { getByTestId, queryByTestId } = render(<OrganizationCard organization={organization} />);
         const element = getByTestId('phoneNumber');
-        expect(element.parentElement).toHaveAttribute('href', 'tel:0800 376 633');
+        expect(element).toHaveAttribute('href', 'tel:0800 376 633');
         expect(element).toHaveTextContent('0800 376 633');
         fireEvent.click(element);
         const closeElement = getByTestId('close');
@@ -117,7 +117,7 @@ describe('OrganizationCard', () => {
     it('should contain phoneNumberFab', async () => {
         const { getByTestId, queryByTestId } = render(<OrganizationCard organization={organization} />);
         const element = getByTestId('phoneNumberFab');
-        expect(element.parentElement).toHaveAttribute('href', 'tel:0800 376 633');
+        expect(element).toHaveAttribute('href', 'tel:0800 376 633');
         fireEvent.click(element);
         const closeElement = getByTestId('close');
         expect(closeElement).toBeInTheDocument();
@@ -139,7 +139,7 @@ describe('OrganizationCard', () => {
     it('should contain url', async () => {
         const { getByTestId, queryByTestId } = render(<OrganizationCard organization={organization} />);
         const element = getByTestId('url');
-        expect(element.parentElement).toHaveAttribute('href', 'https://youthline.co.nz/website');
+        expect(element).toHaveAttribute('href', 'https://youthline.co.nz/website');
         expect(element).toHaveTextContent('youthline.co.nz');
         fireEvent.click(element);
         const closeElement = getByTestId('close');
@@ -178,7 +178,7 @@ describe('OrganizationCard', () => {
     it('should contain chatUrlFab', async () => {
         const { getByTestId, queryByTestId } = render(<OrganizationCard organization={organization} />);
         const element = getByTestId('chatUrlFab');
-        expect(element.parentElement).toHaveAttribute('href', 'https://youthline.co.nz/chat');
+        expect(element).toHaveAttribute('href', 'https://youthline.co.nz/chat');
         fireEvent.click(element);
         const closeElement = getByTestId('close');
         expect(closeElement).toBeInTheDocument();

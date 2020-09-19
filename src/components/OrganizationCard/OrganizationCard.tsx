@@ -10,7 +10,8 @@ import Link from 'next/link';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import TextTruncate from 'react-text-truncate';
-import { OutboundLink } from 'react-ga';
+import { outboundLink } from 'react-ga';
+import { noop } from 'lodash/fp';
 import OrganizationOpen from '../OrganizationOpen';
 import Chips from '../Chips';
 import OrganizationRating from '../OrganizationRating';
@@ -158,8 +159,9 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
         setDialogOpen(false);
     };
 
-    const onLinkClick = (): void => {
+    const onLinkClick = (label) => (): void => {
         setDialogOpen(true);
+        outboundLink({ label }, noop);
     };
 
     return (
@@ -223,67 +225,55 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                     {(organization.smsNumber || organization.phoneNumber) && (
                         <Box>
                             {organization.smsNumber && (
-                                <OutboundLink
-                                    eventLabel={`sms:${organization.smsNumber}`}
-                                    to={`sms:${organization.smsNumber}`}
+                                <Button
+                                    size="large"
+                                    className={[classes.button, classes.buttonLink].join(' ')}
+                                    startIcon={<SmsOutlinedIcon />}
+                                    data-testid="smsNumber"
+                                    onClick={onLinkClick(`sms:${organization.smsNumber}`)}
+                                    href={`sms:${organization.smsNumber}`}
                                     target="_parent"
                                     rel="noopener noreferrer"
                                 >
-                                    <Button
-                                        size="large"
-                                        className={[classes.button, classes.buttonLink].join(' ')}
-                                        startIcon={<SmsOutlinedIcon />}
-                                        data-testid="smsNumber"
-                                        onClick={onLinkClick}
-                                    >
-                                        {organization.smsNumber}
-                                    </Button>
-                                </OutboundLink>
+                                    {organization.smsNumber}
+                                </Button>
                             )}
                             {organization.phoneNumber && (
-                                <OutboundLink
-                                    eventLabel={`tel:${organization.phoneNumber}`}
-                                    to={`tel:${organization.phoneNumber}`}
+                                <Button
+                                    size="large"
+                                    className={[classes.button, classes.buttonLink].join(' ')}
+                                    startIcon={<PhoneIcon />}
+                                    data-testid="phoneNumber"
+                                    onClick={onLinkClick(`tel:${organization.phoneNumber}`)}
+                                    href={`tel:${organization.phoneNumber}`}
                                     target="_parent"
                                     rel="noopener noreferrer"
                                 >
-                                    <Button
-                                        size="large"
-                                        className={[classes.button, classes.buttonLink].join(' ')}
-                                        startIcon={<PhoneIcon />}
-                                        data-testid="phoneNumber"
-                                        onClick={onLinkClick}
-                                    >
-                                        {organization.phoneNumber}
-                                    </Button>
-                                </OutboundLink>
+                                    {organization.phoneNumber}
+                                </Button>
                             )}
                         </Box>
                     )}
                     {organization.url && (
                         <Box>
-                            <OutboundLink
-                                eventLabel={organization.url}
-                                to={organization.url}
+                            <Button
+                                size="large"
+                                className={[classes.button, classes.buttonLink].join(' ')}
+                                startIcon={<PublicIcon />}
+                                data-testid="url"
+                                onClick={onLinkClick(organization.url)}
+                                href={organization.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <Button
-                                    size="large"
-                                    className={[classes.button, classes.buttonLink].join(' ')}
-                                    startIcon={<PublicIcon />}
-                                    data-testid="url"
-                                    onClick={onLinkClick}
-                                >
-                                    {
-                                        organization.url
-                                            .replace('http://', '')
-                                            .replace('https://', '')
-                                            .replace('www.', '')
-                                            .split(/[/?#]/)[0]
-                                    }
-                                </Button>
-                            </OutboundLink>
+                                {
+                                    organization.url
+                                        .replace('http://', '')
+                                        .replace('https://', '')
+                                        .replace('www.', '')
+                                        .split(/[/?#]/)[0]
+                                }
+                            </Button>
                         </Box>
                     )}
                     {organization.categories.length > 0 && (
@@ -296,64 +286,52 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                     <Box className={classes.side} data-testid="fabs">
                         {organization.smsNumber && (
                             <Box>
-                                <OutboundLink
-                                    eventLabel={`sms:${organization.smsNumber}`}
-                                    to={`sms:${organization.smsNumber}`}
+                                <Fab
+                                    color="primary"
+                                    aria-label="text"
+                                    data-testid="smsNumberFab"
+                                    className={classes.fab}
+                                    onClick={onLinkClick(`sms:${organization.smsNumber}`)}
+                                    href={`sms:${organization.smsNumber}`}
                                     target="_parent"
                                     rel="noopener noreferrer"
-                                    onClick={onLinkClick}
                                 >
-                                    <Fab
-                                        color="primary"
-                                        aria-label="text"
-                                        data-testid="smsNumberFab"
-                                        className={classes.fab}
-                                    >
-                                        <SmsOutlinedIcon fontSize="inherit" />
-                                    </Fab>
-                                </OutboundLink>
+                                    <SmsOutlinedIcon fontSize="inherit" />
+                                </Fab>
                                 <Typography className={classes.fabLabel}>Text</Typography>
                             </Box>
                         )}
                         {organization.phoneNumber && (
                             <Box>
-                                <OutboundLink
-                                    eventLabel={`tel:${organization.phoneNumber}`}
-                                    to={`tel:${organization.phoneNumber}`}
+                                <Fab
+                                    color="primary"
+                                    aria-label="call"
+                                    data-testid="phoneNumberFab"
+                                    className={classes.fab}
+                                    onClick={onLinkClick(`tel:${organization.phoneNumber}`)}
+                                    href={`tel:${organization.phoneNumber}`}
                                     target="_parent"
                                     rel="noopener noreferrer"
-                                    onClick={onLinkClick}
                                 >
-                                    <Fab
-                                        color="primary"
-                                        aria-label="call"
-                                        data-testid="phoneNumberFab"
-                                        className={classes.fab}
-                                    >
-                                        <PhoneIcon fontSize="inherit" />
-                                    </Fab>
-                                </OutboundLink>
+                                    <PhoneIcon fontSize="inherit" />
+                                </Fab>
                                 <Typography className={classes.fabLabel}>Call</Typography>
                             </Box>
                         )}
                         {organization.chatUrl && (
                             <Box>
-                                <OutboundLink
-                                    eventLabel={organization.chatUrl}
-                                    to={organization.chatUrl}
+                                <Fab
+                                    color="primary"
+                                    aria-label="web chat"
+                                    data-testid="chatUrlFab"
+                                    className={classes.fab}
+                                    onClick={onLinkClick(organization.chatUrl)}
+                                    href={organization.chatUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    onClick={onLinkClick}
                                 >
-                                    <Fab
-                                        color="primary"
-                                        aria-label="web chat"
-                                        data-testid="chatUrlFab"
-                                        className={classes.fab}
-                                    >
-                                        <MessageOutlinedIcon fontSize="inherit" />
-                                    </Fab>
-                                </OutboundLink>
+                                    <MessageOutlinedIcon fontSize="inherit" />
+                                </Fab>
                                 <Typography className={classes.fabLabel}>
                                     Web<span className={classes.webChatSpacing}>&nbsp;</span>
                                     <br className={classes.webChatLineBreak} />
