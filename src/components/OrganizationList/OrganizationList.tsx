@@ -1,8 +1,9 @@
 import CloseIcon from '@material-ui/icons/Close';
 import React, { ReactElement, useState, useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Container, Box, Button, Backdrop, NoSsr } from '@material-ui/core';
+import { Typography, Container, Box, Button, Backdrop } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import AddIcon from '@material-ui/icons/Add';
 import OrganizationCard, { Organization } from '../OrganizationCard/OrganizationCard';
 import formatArrayIntoSentence from '../../util/formatArrayIntoSentence';
 import NavBar from '../NavBar';
@@ -36,10 +37,15 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingBottom: theme.spacing(2),
             background: '#FFFFFF',
         },
-        filterButton: {
+        button: {
             borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
+        },
+        showMore: {
+            display: 'flex',
+            justifyContent: 'center',
+            margin: theme.spacing(5, 0),
         },
         sortText: {
             '@media (max-width: 320px)': {
@@ -71,11 +77,17 @@ const OrganizationList = ({
         });
     };
     const [filteredOrganizations, setOrganizations] = useState(filterByPreselectedTopics());
+    const [limit, setLimit] = useState(10);
 
     const onChange = (changes): void => {
         setSelectedTopics(changes.topics);
         setOrganizations(filterAndSortOrganizations(organizations, changes));
         setShowFilters(false);
+        setLimit(10);
+    };
+
+    const onClick = (): void => {
+        setLimit((limit) => limit + 10);
     };
 
     useEffect(() => {
@@ -87,7 +99,7 @@ const OrganizationList = ({
         <>
             <NavBar>
                 <Button
-                    className={classes.filterButton}
+                    className={classes.button}
                     onClick={(): void => setShowFilters(true)}
                     endIcon={<FilterListIcon />}
                     data-testid="filter"
@@ -106,7 +118,7 @@ const OrganizationList = ({
                 <Box onClick={(e): void => e.stopPropagation()}>
                     <NavBar>
                         <Button
-                            className={classes.filterButton}
+                            className={classes.button}
                             onClick={(): void => setShowFilters(false)}
                             endIcon={<CloseIcon />}
                         >
@@ -134,14 +146,25 @@ const OrganizationList = ({
                         }.`}
                     </Typography>
                 </Box>
-                <NoSsr>
-                    {filteredOrganizations.map((organization) => (
-                        <Box key={organization.slug} my={2}>
-                            <OrganizationCard organization={organization} />
-                        </Box>
-                    ))}
-                    {filteredOrganizations.length == 0 && <OrganizationEmpty />}
-                </NoSsr>
+                {filteredOrganizations.slice(0, limit).map((organization) => (
+                    <Box key={organization.slug} my={2} data-testid="OrganizationCard">
+                        <OrganizationCard organization={organization} />
+                    </Box>
+                ))}
+                {filteredOrganizations.length == 0 && <OrganizationEmpty />}
+                {filteredOrganizations.length > limit && (
+                    <Box className={classes.showMore}>
+                        <Button
+                            startIcon={<AddIcon />}
+                            onClick={onClick}
+                            variant="contained"
+                            className={classes.button}
+                            color="primary"
+                        >
+                            Show More
+                        </Button>
+                    </Box>
+                )}
             </Container>
         </>
     );

@@ -7,7 +7,7 @@ import OrganizationList from '.';
 jest.mock('react-ga');
 
 describe('OrganizationList', () => {
-    let organizations, country, subdivision, topics;
+    let organizations, organization, country, subdivision, topics;
 
     beforeEach(() => {
         const createElement = document.createElement.bind(document);
@@ -19,23 +19,24 @@ describe('OrganizationList', () => {
             }
             return element;
         };
+        organization = {
+            slug: 'youthline',
+            name: 'Youthline',
+            alwaysOpen: true,
+            openingHours: [],
+            humanSupportTypes: [{ name: 'Volunteers' }, { name: 'Staff' }],
+            categories: [{ name: 'For youth' }, { name: 'All issues' }],
+            smsNumber: '234',
+            phoneNumber: '0800 376 633',
+            url: 'https://youthline.co.nz/website',
+            chatUrl: 'https://youthline.co.nz/chat',
+            timezone: 'Pacific/Auckland',
+            topics: [],
+            rating: 5,
+            reviewCount: 10,
+        };
         organizations = [
-            {
-                slug: 'youthline',
-                name: 'Youthline',
-                alwaysOpen: true,
-                openingHours: [],
-                humanSupportTypes: [{ name: 'Volunteers' }, { name: 'Staff' }],
-                categories: [{ name: 'For youth' }, { name: 'All issues' }],
-                smsNumber: '234',
-                phoneNumber: '0800 376 633',
-                url: 'https://youthline.co.nz/website',
-                chatUrl: 'https://youthline.co.nz/chat',
-                timezone: 'Pacific/Auckland',
-                topics: [],
-                rating: 5,
-                reviewCount: 10,
-            },
+            organization,
             {
                 slug: 'kidscan',
                 name: 'KidsCan',
@@ -97,6 +98,36 @@ describe('OrganizationList', () => {
         expect(getByTestId('youthline') && getByTestId('kidscan')).toBeTruthy();
     });
 
+    it('should allow show more button to be clicked', () => {
+        const { getByRole, queryByRole, getAllByTestId } = render(
+            <OrganizationList
+                country={country}
+                subdivision={subdivision}
+                organizations={[
+                    { ...organization, slug: 'org-1' },
+                    { ...organization, slug: 'org-2' },
+                    { ...organization, slug: 'org-3' },
+                    { ...organization, slug: 'org-4' },
+                    { ...organization, slug: 'org-5' },
+                    { ...organization, slug: 'org-6' },
+                    { ...organization, slug: 'org-7' },
+                    { ...organization, slug: 'org-8' },
+                    { ...organization, slug: 'org-9' },
+                    { ...organization, slug: 'org-10' },
+                    { ...organization, slug: 'org-11' },
+                ]}
+                topics={topics}
+                categories={[]}
+                humanSupportTypes={[]}
+                preselectedTopics={[]}
+            />,
+        );
+        expect(getAllByTestId('OrganizationCard').length).toEqual(10);
+        fireEvent.click(getByRole('button', { name: 'Show More' }));
+        expect(getAllByTestId('OrganizationCard').length).toEqual(11);
+        expect(queryByRole('button', { name: 'Show More' })).not.toBeInTheDocument();
+    });
+
     describe('filter', () => {
         it('should allow organizations to be filtered', () => {
             mocked(ReactGA.event).mockReturnValue();
@@ -150,6 +181,41 @@ describe('OrganizationList', () => {
             expect(getByTestId('backdrop')).toHaveStyle({ opacity: 1 });
             fireEvent.click(getByTestId('backdrop'));
             expect(getByTestId('backdrop')).toHaveStyle({ opacity: 0 });
+        });
+
+        it('should allow show more button to be clicked', () => {
+            const { getByRole, queryByRole, getAllByTestId, getByTestId, getByText } = render(
+                <OrganizationList
+                    country={country}
+                    subdivision={subdivision}
+                    organizations={[
+                        { ...organization, slug: 'org-1' },
+                        { ...organization, slug: 'org-2' },
+                        { ...organization, slug: 'org-3' },
+                        { ...organization, slug: 'org-4' },
+                        { ...organization, slug: 'org-5' },
+                        { ...organization, slug: 'org-6' },
+                        { ...organization, slug: 'org-7' },
+                        { ...organization, slug: 'org-8' },
+                        { ...organization, slug: 'org-9' },
+                        { ...organization, slug: 'org-10' },
+                        { ...organization, slug: 'org-11' },
+                    ]}
+                    topics={topics}
+                    categories={[]}
+                    humanSupportTypes={[]}
+                    preselectedTopics={[]}
+                />,
+            );
+            expect(getAllByTestId('OrganizationCard').length).toEqual(10);
+            fireEvent.click(getByRole('button', { name: 'Show More' }));
+            expect(getAllByTestId('OrganizationCard').length).toEqual(11);
+            fireEvent.click(getByTestId('filter'));
+            fireEvent.click(getByText('Phone'));
+            fireEvent.click(getByText('Apply'));
+            expect(getByTestId('backdrop')).toHaveStyle({ opacity: 0 });
+            expect(getAllByTestId('OrganizationCard').length).toEqual(10);
+            expect(queryByRole('button', { name: 'Show More' })).toBeInTheDocument();
         });
     });
 
