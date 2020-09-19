@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Chip, Button, Box, Container, NoSsr } from '@material-ui/core';
+import { Typography, Chip, Button, Box, Container, NoSsr, Tooltip } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -8,8 +8,8 @@ import PublicIcon from '@material-ui/icons/Public';
 import CreateIcon from '@material-ui/icons/Create';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import { OutboundLink } from 'react-ga';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import OrganizationOpen from '../OrganizationOpen';
 import NavBar from '../NavBar';
 import SideBar from '../SideBar';
@@ -141,6 +141,7 @@ const useStyles = makeStyles((theme: Theme) =>
         verified: {
             marginLeft: '5px',
             marginBottom: '-2px',
+            color: '#999',
         },
     }),
 );
@@ -168,10 +169,14 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                         <Typography variant="h6" className={classes.heading}>
                             {organization.name}
                             {organization.featured && !organization.verified && (
-                                <WhatshotIcon className={classes.featured} data-testid="featured" />
+                                <Tooltip title="Featured by Find A Helpline" placement="left" arrow>
+                                    <WhatshotIcon className={classes.featured} data-testid="featured" />
+                                </Tooltip>
                             )}
                             {organization.verified && (
-                                <VerifiedUserIcon className={classes.verified} data-testid="verified" />
+                                <Tooltip title="Verified by Find A Helpline" placement="left" arrow>
+                                    <CheckCircleIcon className={classes.verified} data-testid="verified" />
+                                </Tooltip>
                             )}
                         </Typography>
                         <Typography className={classes.country}>

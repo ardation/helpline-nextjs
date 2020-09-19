@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Button, Box, Fab, NoSsr } from '@material-ui/core';
+import { Typography, Button, Box, Fab, NoSsr, Tooltip } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -8,10 +8,10 @@ import PublicIcon from '@material-ui/icons/Public';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import Link from 'next/link';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import TextTruncate from 'react-text-truncate';
 import { outboundLink } from 'react-ga';
 import { noop } from 'lodash/fp';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import OrganizationOpen from '../OrganizationOpen';
 import Chips from '../Chips';
 import OrganizationRating from '../OrganizationRating';
@@ -111,6 +111,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         verified: {
             paddingTop: '2px',
+            color: '#999',
         },
         button: {
             textTransform: 'none',
@@ -186,12 +187,16 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                         </Typography>
                         {organization.featured && !organization.verified && (
                             <Box className={classes.featured} data-testid="featured">
-                                <WhatshotIcon />
+                                <Tooltip title="Featured by Find A Helpline" placement="left" arrow>
+                                    <WhatshotIcon />
+                                </Tooltip>
                             </Box>
                         )}
                         {organization.verified && (
                             <Box className={classes.verified} data-testid="verified">
-                                <VerifiedUserIcon />
+                                <Tooltip title="Verified by Find A Helpline" placement="left" arrow>
+                                    <CheckCircleIcon />
+                                </Tooltip>
                             </Box>
                         )}
                     </Box>
