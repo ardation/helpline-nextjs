@@ -8,6 +8,7 @@ import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { OutboundLink } from 'react-ga';
 import NavBar from '../NavBar';
 import SideBar from '../SideBar';
@@ -78,6 +79,12 @@ const useStyles = makeStyles((theme: Theme) =>
             textDecoration: 'none',
             color: theme.palette.primary.main,
         },
+        containerContent: {
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            flexGrow: 1,
+        },
     }),
 );
 
@@ -90,7 +97,7 @@ const About = (): ReactElement => {
                 <SideBar />
             </NavBar>
             <Box className={[classes.container, classes.background0].join(' ')}>
-                <Container maxWidth="xs">
+                <Container className={classes.containerContent} maxWidth="xs">
                     <Box mb={3}>
                         <Typography variant="h5">
                             You want help.
@@ -106,6 +113,9 @@ const About = (): ReactElement => {
                         </NextLink>
                     </Box>
                 </Container>
+                <Box>
+                    <ArrowDownwardIcon />
+                </Box>
             </Box>
             <Box className={classes.page}>
                 <Box className={classes.content}>
