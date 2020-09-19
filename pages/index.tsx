@@ -7,7 +7,7 @@ import Search from '../src/components/Search';
 import Chrome from '../src/components/Chrome';
 import { GetSearchProps } from '../types/GetSearchProps';
 
-const SearchPage = ({ topics, countries }: GetSearchProps): ReactElement => {
+const IndexPage = ({ topics, countries }: GetSearchProps): ReactElement => {
     return (
         <>
             <Head>
@@ -45,4 +45,4 @@ export const getStaticProps = async (): Promise<{ props: GetSearchProps }> => {
     };
 };
 
-export default SearchPage;
+export default IndexPage;
