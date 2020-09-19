@@ -21,6 +21,11 @@ describe('OrganizationRating', () => {
         expect(getByText('3.6')).toBeTruthy();
     });
 
+    it('should not show review when reviewCount 0', () => {
+        const { queryByTestId } = render(<OrganizationRating organization={{ ...organization, reviewCount: 0 }} />);
+        expect(queryByTestId('reviewsLink')).not.toBeInTheDocument();
+    });
+
     describe('item', () => {
         it('should not show link', () => {
             const { getByTestId } = render(<OrganizationRating organization={organization} variant="item" />);

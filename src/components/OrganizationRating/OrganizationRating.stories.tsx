@@ -29,3 +29,9 @@ export const WhenItem = (): ReactElement => (
         <OrganizationRating organization={organization} variant="item" />
     </Box>
 );
+
+export const WhenZero = (): ReactElement => (
+    <Box m={2}>
+        <OrganizationRating organization={{ ...organization, reviewCount: 0 }} />
+    </Box>
+);

@@ -72,6 +72,12 @@ export const NoUrl = (): ReactElement => (
     </Box>
 );
 
+export const NoReviewCount = (): ReactElement => (
+    <Box m={2}>
+        <OrganizationCard organization={{ ...organization, reviewCount: 0 }} />
+    </Box>
+);
+
 export const Open = (): ReactElement => (
     <Box m={2}>
         <OrganizationCard
@@ -115,7 +121,6 @@ export const WhenVerfied = (): ReactElement => (
         <OrganizationCard organization={{ ...organization, verified: true, featured: true }} />
     </Box>
 );
-
 export const WithLongTitle = (): ReactElement => (
     <Box m={2}>
         <OrganizationCard
