@@ -6,6 +6,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import EmailIcon from '@material-ui/icons/Email';
 import ExtensionIcon from '@material-ui/icons/Extension';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import Link from 'next/link';
 
 const useStyles = makeStyles(() =>
@@ -58,6 +59,14 @@ const SideBar = (): ReactElement => {
                                     <EmailIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Contact" />
+                            </ListItem>
+                        </Link>
+                        <Link href="/gratitude" passHref>
+                            <ListItem button component="a">
+                                <ListItemIcon>
+                                    <FavoriteIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Gratitude" />
                             </ListItem>
                         </Link>
                         <Divider />
