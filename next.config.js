@@ -4,4 +4,11 @@ module.exports = {
         RECAPTCHA_KEY: process.env.RECAPTCHA_KEY,
         HOTJAR_ID: 1995997,
     },
+    webpack: (config) => {
+        config.module.rules.push({
+            test: /\.md$/,
+            use: 'raw-loader',
+        });
+        return config;
+    },
 };

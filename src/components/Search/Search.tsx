@@ -67,7 +67,9 @@ const Search = ({ topics, countries }: Props): ReactElement => {
                     </Box>
                 )}
                 {!selectedCountry && (
-                    <Typography>Struggling? Talk to a real person about what&apos;s going on, for free.</Typography>
+                    <Typography>
+                        Struggling? Get free, confidential support from a real human over phone, text or webchat.
+                    </Typography>
                 )}
                 <CountrySelect
                     countries={countries}

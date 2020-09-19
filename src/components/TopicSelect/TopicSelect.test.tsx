@@ -7,7 +7,7 @@ describe('TopicSelect', () => {
 
     it('should contain correct text', () => {
         const { getByText } = render(<TopicSelect topics={topics} onChange={jest.fn()} />);
-        expect(getByText('Select topics (optional)')).toBeTruthy();
+        expect(getByText('Select topic or topics (optional)')).toBeInTheDocument();
     });
 
     it('should contain multiple chips', () => {

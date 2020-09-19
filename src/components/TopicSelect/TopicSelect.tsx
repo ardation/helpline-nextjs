@@ -54,7 +54,7 @@ const TopicSelect = ({ topics, onChange }: Props): ReactElement => {
     return (
         <Box className={classes.box}>
             <Box mb={1} className={classes.heading}>
-                <Typography className={classes.text}>Select topics (optional)</Typography>
+                <Typography className={classes.text}>Select topic or topics (optional)</Typography>
             </Box>
             <ItemSelect items={topics} onChange={onChange} max={10} />
         </Box>
