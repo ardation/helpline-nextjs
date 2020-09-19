@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import Chrome from '../src/components/Chrome';
 import Gratitude from '../src/components/Gratitude';
 
-const PrivacyPage = (): ReactElement => {
+const GratitudePage = (): ReactElement => {
     return (
         <>
             <Head>
@@ -16,4 +16,4 @@ const PrivacyPage = (): ReactElement => {
     );
 };
 
-export default PrivacyPage;
+export default GratitudePage;
