@@ -24,15 +24,25 @@ describe('Search', () => {
         const element = getByRole('textbox');
         fireEvent.click(element);
         fireEvent.click(getByRole('listbox').children[0]);
-        expect(getByText('What would you like help with?')).toBeTruthy();
+        expect(getByText('What would you like help with?')).toBeInTheDocument();
+        expect(getByRole('button', { name: 'A note from our founder' }).parentElement).toHaveAttribute(
+            'href',
+            'https://bit.ly/fah-founders-note',
+        );
+        expect(getByRole('button', { name: 'Hear when we launch in your country' }).parentElement).toHaveAttribute(
+            'href',
+            'https://livefortomorrow.typeform.com/to/ErmyL3tv',
+        );
     });
 
     it('should change search url after country select', () => {
-        const { getByTestId, getByRole } = render(<Search countries={countries} topics={topics} />);
+        const { getByTestId, getByRole, queryByRole } = render(<Search countries={countries} topics={topics} />);
         const element = getByRole('textbox');
         fireEvent.click(element);
         fireEvent.click(getByRole('listbox').children[0]);
         expect(getByTestId('searchButton')).toHaveAttribute('href', '/au');
+        expect(queryByRole('button', { name: 'A note from our founder' })).not.toBeInTheDocument();
+        expect(queryByRole('button', { name: 'Hear when we launch in your country' })).not.toBeInTheDocument();
     });
 
     it('should change search url after country and subdivision select', () => {

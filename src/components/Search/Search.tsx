@@ -2,6 +2,9 @@ import React, { ReactElement, useState } from 'react';
 import { Typography, Box, Button, Container } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Link from 'next/link';
+import { OutboundLink } from 'react-ga';
+import MailIcon from '@material-ui/icons/Mail';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import TopicSelect from '../TopicSelect';
 import CountrySelect from '../CountrySelect';
 
@@ -49,6 +52,25 @@ const useStyles = makeStyles((theme: Theme) =>
         button: {
             borderRadius: '1000px',
         },
+        links: {
+            margin: '0 auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+        },
+        buttonRoot: {
+            color: '#000',
+            textDecoration: 'underline',
+            textTransform: 'none',
+            textAlign: 'left',
+            '&:hover': {
+                textDecoration: 'underline',
+                color: theme.palette.primary.main,
+            },
+        },
+        link: {
+            color: '#000',
+        },
     }),
 );
 
@@ -76,6 +98,40 @@ const Search = ({ topics, countries }: Props): ReactElement => {
                     onCountryChange={setSelectedCountry}
                     onSubdivisionChange={setSelectedSubdivision}
                 />
+                {!selectedCountry && (
+                    <Box className={classes.links}>
+                        <OutboundLink
+                            eventLabel="https://bit.ly/fah-founders-note"
+                            to="https://bit.ly/fah-founders-note"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={classes.link}
+                        >
+                            <Button
+                                startIcon={<LoyaltyIcon />}
+                                classes={{ root: classes.buttonRoot, label: classes.link }}
+                                color="primary"
+                            >
+                                A note from our founder
+                            </Button>
+                        </OutboundLink>
+                        <OutboundLink
+                            eventLabel="https://livefortomorrow.typeform.com/to/ErmyL3tv"
+                            to="https://livefortomorrow.typeform.com/to/ErmyL3tv"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={classes.link}
+                        >
+                            <Button
+                                startIcon={<MailIcon />}
+                                classes={{ root: classes.buttonRoot, label: classes.link }}
+                                color="primary"
+                            >
+                                Hear when we launch in your country
+                            </Button>
+                        </OutboundLink>
+                    </Box>
+                )}
                 {selectedCountry && (
                     <Typography variant="h6">
                         <strong>What would you like help with?</strong>
