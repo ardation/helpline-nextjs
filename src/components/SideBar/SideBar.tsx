@@ -43,6 +43,14 @@ const SideBar = (): ReactElement => {
                                 <ListItemText primary="About" />
                             </ListItem>
                         </Link>
+                        <Link href="/get-the-widget" passHref>
+                            <ListItem button component="a">
+                                <ListItemIcon>
+                                    <EmailIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Get the Widget" />
+                            </ListItem>
+                        </Link>
                         <Link href="/contact" passHref>
                             <ListItem button component="a">
                                 <ListItemIcon>

@@ -22,6 +22,12 @@ describe('SideBar', () => {
         expect(getByText('About').parentElement.parentElement).toHaveAttribute('href', '/about');
     });
 
+    it('should contain get-the-widget link', () => {
+        const { getByText, getByTestId } = render(<SideBar />);
+        fireEvent.click(getByTestId('menuButton'));
+        expect(getByText('Get the Widget').parentElement.parentElement).toHaveAttribute('href', '/get-the-widget');
+    });
+
     it('should contain contact link', () => {
         const { getByText, getByTestId } = render(<SideBar />);
         fireEvent.click(getByTestId('menuButton'));
