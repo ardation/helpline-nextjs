@@ -81,7 +81,7 @@
         "raw-loader": "^4.0.1",
         "ts-jest": "^25.5.1",
         "typescript": "^3.9.7",
-        "webpack-cli": "^3.3.11",
+        "webpack-cli": "^3.3.12",
         "zoid": "^9.0.42"
     },
     "husky": {
