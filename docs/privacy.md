@@ -14,7 +14,7 @@
 
 1. We may change this policy by uploading a revised policy onto our Websites. The change will apply from the date that we upload the revised policy
 
-2. This policy was last updated on 16 September 2020.
+2. This policy was last updated on 19 September 2020.
 
 ## 3. Definitions
 
@@ -100,6 +100,8 @@ Please note that a business that supports our services and products may be locat
 2. Google Analytics' scripts are incorporated into our Websites. You can find more about Google Analytics' use of cookies here: [https://support.google.com/](https://support.google.com/analytics/answer/6004245). We do not and will not assist or permit any third party to pass information to Google that Google could use or recognize as personally identifiable information
 
 3. Our Websites also use the software system reCaptcha when you complete a review of the service or when using our [Contact Us form](https://findahelpline.com/contact). reCaptcha is governed by Google's [policy](https://policies.google.com/privacy) and [terms of service](https://policies.google.com/terms).
+
+4. Our Websites use Hotjar in order to better understand our users’ needs and to optimize our Services and user experience. Hotjar uses cookies and other technologies to collect data on our users’ behavior and their devices. This includes a device's IP address (processed during your session and stored in a de-identified form), device screen size, device type (unique device identifiers), browser information, geographic location (country only), and the preferred language used to display our website. Hotjar stores this information on our behalf in a pseudonymized user profile. Hotjar is contractually forbidden to sell any of the data collected on our behalf.
 
 ## 6. Live For Tomorrow Guides
 
