@@ -35,7 +35,12 @@ const Footer = (): ReactElement => {
                 <Typography className={classes.links}>
                     <NextLink href="/privacy" passHref>
                         <Link className={classes.link} data-testid="privacy">
-                            Privacy
+                            Privacy Policy
+                        </Link>
+                    </NextLink>
+                    <NextLink href="/terms" passHref>
+                        <Link className={classes.link} data-testid="terms">
+                            Terms of Service
                         </Link>
                     </NextLink>
                     <NextLink href="/about" passHref>

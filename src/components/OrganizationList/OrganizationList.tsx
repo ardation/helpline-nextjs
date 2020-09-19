@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
             background: '#FFFFFF',
         },
         filterButton: {
-            background: '#FFFFFF',
             borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
@@ -92,6 +91,8 @@ const OrganizationList = ({
                     onClick={(): void => setShowFilters(true)}
                     endIcon={<FilterListIcon />}
                     data-testid="filter"
+                    variant="contained"
+                    color="primary"
                 >
                     Filter<span className={classes.sortText}>&nbsp;&amp; Sort</span>
                 </Button>

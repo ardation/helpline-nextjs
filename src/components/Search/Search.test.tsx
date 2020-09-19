@@ -18,7 +18,9 @@ describe('Search', () => {
 
     it('should show correct text', () => {
         const { getByText, getByRole } = render(<Search countries={countries} topics={topics} />);
-        expect(getByText("Struggling? Talk to a real person about what's going on, for free.")).toBeTruthy();
+        expect(
+            getByText('Struggling? Get free, confidential support from a real human over phone, text or webchat.'),
+        ).toBeTruthy();
         const element = getByRole('textbox');
         fireEvent.click(element);
         fireEvent.click(getByRole('listbox').children[0]);
