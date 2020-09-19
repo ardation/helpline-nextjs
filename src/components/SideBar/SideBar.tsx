@@ -65,14 +65,6 @@ const SideBar = (): ReactElement => {
                                 />
                             </ListItem>
                         </Link>
-                        <Link href="/volunteer" passHref>
-                            <ListItem button component="a">
-                                <ListItemText
-                                    primary="Help Crowdsource"
-                                    primaryTypographyProps={{ variant: 'body2' }}
-                                />
-                            </ListItem>
-                        </Link>
                     </List>
                 </div>
             </Drawer>

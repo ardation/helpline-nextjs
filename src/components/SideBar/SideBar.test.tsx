@@ -39,10 +39,4 @@ describe('SideBar', () => {
         fireEvent.click(getByTestId('menuButton'));
         expect(getByText('Terms of Service').parentElement.parentElement).toHaveAttribute('href', '/terms');
     });
-
-    it('should contain crowdsource link', () => {
-        const { getByText, getByTestId } = render(<SideBar />);
-        fireEvent.click(getByTestId('menuButton'));
-        expect(getByText('Help Crowdsource').parentElement.parentElement).toHaveAttribute('href', '/volunteer');
-    });
 });

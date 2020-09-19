@@ -18,11 +18,6 @@ describe('Footer', () => {
         expect(getByTestId('contact')).toHaveAttribute('href', '/contact');
     });
 
-    it('should contain crowdsource link', () => {
-        const { getByTestId } = render(<Footer />);
-        expect(getByTestId('crowdsource')).toHaveAttribute('href', '/volunteer');
-    });
-
     it('should have correct text', () => {
         const { getByText } = render(<Footer />);
         expect(getByText(`Powered by Live For Tomorrow © ${new Date().getFullYear()}`)).toBeTruthy();

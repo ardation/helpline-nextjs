@@ -138,8 +138,8 @@ const OrganizationList = ({
             </Box>
             <Box className={classes.embed}>
                 <OutboundLink
-                    eventLabel="https://zealnz.typeform.com/to/enT1Qk"
-                    to="https://zealnz.typeform.com/to/enT1Qk"
+                    eventLabel="https://livefortomorrow.typeform.com/to/TT2N2v3r"
+                    to="https://livefortomorrow.typeform.com/to/TT2N2v3r"
                     target="_blank"
                     rel="noopener noreferrer"
                 >

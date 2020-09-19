@@ -328,7 +328,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                             size="small"
                             className={[classes.button, classes.buttonLink].join(' ')}
                             startIcon={<CreateIcon />}
-                            href={`https://zealnz.typeform.com/to/mMLYXV?remote_id=${organization.slug}`}
+                            href={`https://livefortomorrow.typeform.com/to/oc0aZHWI?remote_id=${organization.slug}`}
                             target="_blank"
                             rel="noopener noreferrer"
                         >

@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Container, Box, Typography, Button } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import PublicIcon from '@material-ui/icons/Public';
 import EmailIcon from '@material-ui/icons/Email';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { OutboundLink } from 'react-ga';
@@ -82,20 +81,9 @@ const TopBar = (): ReactElement => {
                 </div>
                 <div>
                     <Button
-                        startIcon={<PublicIcon />}
-                        classes={{ root: classes.buttonRoot, label: classes.link }}
-                        href="https://findahelpline.com/volunteer"
-                        color="primary"
-                        data-testid="crowdsourceHelplines"
-                    >
-                        Help us crowdsource helplines
-                    </Button>
-                </div>
-                <div>
-                    <Button
                         startIcon={<EmailIcon />}
                         classes={{ root: classes.buttonRoot, label: classes.link }}
-                        href="https://zealnz.typeform.com/to/BtdlLP"
+                        href="https://livefortomorrow.typeform.com/to/ErmyL3tv"
                         color="primary"
                         data-testid="launchMailingList"
                     >
