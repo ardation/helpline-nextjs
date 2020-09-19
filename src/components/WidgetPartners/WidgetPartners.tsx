@@ -67,11 +67,10 @@ const useStyles = makeStyles((theme: Theme) =>
         cta: {
             textAlign: 'center',
         },
-        arrow: {
-            position: 'absolute',
-            bottom: 0,
-            margin: `0 auto ${theme.spacing(2)}px`,
-            width: '100%',
+        containerContent: {
+            display: 'flex',
+            alignItems: 'center',
+            flexGrow: 1,
         },
     }),
 );
@@ -87,12 +86,12 @@ const WidgetPartners = (): ReactElement => {
                 <SideBar />
             </NavBar>
             <Box className={[classes.container, classes.background0].join(' ')}>
-                <Container maxWidth="xs">
+                <Container className={classes.containerContent} maxWidth="xs">
                     <Box mb={3}>
                         <Typography variant="h5">Connect your users to free mental health help, in seconds.</Typography>
                     </Box>
                 </Container>
-                <Box className={classes.arrow}>
+                <Box>
                     <ArrowDownwardIcon />
                 </Box>
             </Box>
