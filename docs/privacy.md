@@ -97,7 +97,7 @@ Please note that a business that supports our services and products may be locat
 
 1. Our Find A Helpline Website uses cookies through Google Analytics. We use these cookies to track and analyse non-personally identifiable data to learn more about how our Find A Helpline Website is used. You may disable cookies by changing the settings on your browser, although this may mean that you cannot use all of the features of the Find A Helpline Website.
 
-2. Google Analytics' scripts are incorporated into our Websites. You can find more about Google Analytics' use of cookies here: [https://support.google.com/analytics/answer/6004245](https://support.google.com/analytics/answer/6004245). We do not and will not assist or permit any third party to pass information to Google that Google could use or recognize as personally identifiable information
+2. Google Analytics' scripts are incorporated into our Websites. You can find more about Google Analytics' use of cookies here: [https://support.google.com/](https://support.google.com/analytics/answer/6004245). We do not and will not assist or permit any third party to pass information to Google that Google could use or recognize as personally identifiable information
 
 3. Our Websites also use the software system reCaptcha when you complete a review of the service or when using our [Contact Us form](https://findahelpline.com/contact). reCaptcha is governed by Google's [policy](https://policies.google.com/privacy) and [terms of service](https://policies.google.com/terms).
 
