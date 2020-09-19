@@ -54,7 +54,7 @@ const SideBar = (): ReactElement => {
                         <Divider />
                         <Link href="/privacy" passHref>
                             <ListItem button component="a">
-                                <ListItemText primary="Privacy" primaryTypographyProps={{ variant: 'body2' }} />
+                                <ListItemText primary="Privacy Policy" primaryTypographyProps={{ variant: 'body2' }} />
                             </ListItem>
                         </Link>
                         <Link href="/terms" passHref>

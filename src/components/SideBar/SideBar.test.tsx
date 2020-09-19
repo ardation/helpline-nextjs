@@ -31,7 +31,7 @@ describe('SideBar', () => {
     it('should contain privacy link', () => {
         const { getByText, getByTestId } = render(<SideBar />);
         fireEvent.click(getByTestId('menuButton'));
-        expect(getByText('Privacy').parentElement.parentElement).toHaveAttribute('href', '/privacy');
+        expect(getByText('Privacy Policy').parentElement.parentElement).toHaveAttribute('href', '/privacy');
     });
 
     it('should contain terms link', () => {
