@@ -147,18 +147,28 @@ const OrganizationFilter = ({
                     className={classes.tabs}
                     value={value}
                 >
-                    <Tab className={classes.tab} label="Options" />
                     <Tab
                         className={classes.tab}
                         label={`Topics${selectedTopics.length > 0 ? ` (${selectedTopics.length})` : ''}`}
                     />
                     <Tab
                         className={classes.tab}
-                        label={`Categories${selectedCategories.length > 0 ? ` (${selectedCategories.length})` : ''}`}
+                        label={`Specialty${selectedCategories.length > 0 ? ` (${selectedCategories.length})` : ''}`}
                     />
+                    <Tab className={classes.tab} label="Other Options" />
                 </Tabs>
             </Box>
             <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
+                <Box className={classes.tabPanel}>
+                    <ItemSelect
+                        items={topics || []}
+                        preselectedItems={preselectedTopics}
+                        onChange={setSelectedTopics}
+                    />
+                </Box>
+                <Box className={classes.tabPanel}>
+                    <ItemSelect items={categories || []} onChange={setSelectedCategories} />
+                </Box>
                 <Box className={classes.tabPanel}>
                     <Box mb={2}>
                         <Typography className={classes.title}>Contact Method</Typography>
@@ -187,16 +197,6 @@ const OrganizationFilter = ({
                             single
                         />
                     </Box>
-                </Box>
-                <Box className={classes.tabPanel}>
-                    <ItemSelect
-                        items={topics || []}
-                        preselectedItems={preselectedTopics}
-                        onChange={setSelectedTopics}
-                    />
-                </Box>
-                <Box className={classes.tabPanel}>
-                    <ItemSelect items={categories || []} onChange={setSelectedCategories} />
                 </Box>
             </SwipeableViews>
         </Container>

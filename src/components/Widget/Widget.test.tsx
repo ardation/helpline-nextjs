@@ -120,6 +120,7 @@ describe('Widget', () => {
         );
         expect(getByTestId('youthline') && getByTestId('kidscan')).toBeTruthy();
         fireEvent.click(getByTestId('filter'));
+        fireEvent.click(getByText('Other Options'));
         fireEvent.click(getByText('Phone'));
         fireEvent.click(getByText('Apply'));
         expect(getByTestId('backdrop')).toHaveStyle({ opacity: 0 });

@@ -60,6 +60,7 @@ describe('OrganizationFilter', () => {
             expect(contactMethods).toEqual([{ name: 'Text' }, { name: 'Phone' }]);
         };
         const { getByText } = render(<OrganizationFilter onChange={onChange} />);
+        fireEvent.click(getByText('Other Options'));
         fireEvent.click(getByText('Phone'));
         fireEvent.click(getByText('Text'));
         fireEvent.click(getByText('Apply'));
@@ -70,6 +71,7 @@ describe('OrganizationFilter', () => {
             expect(humanSupportTypes).toEqual([{ name: 'Counsellors' }, { name: 'Volunteers' }]);
         };
         const { getByText } = render(<OrganizationFilter humanSupportTypes={humanSupportTypes} onChange={onChange} />);
+        fireEvent.click(getByText('Other Options'));
         fireEvent.click(getByText('Volunteers'));
         fireEvent.click(getByText('Counsellors'));
         fireEvent.click(getByText('Apply'));
@@ -80,10 +82,10 @@ describe('OrganizationFilter', () => {
             expect(categories).toEqual([{ name: 'All issues' }, { name: 'All ages' }]);
         };
         const { getByText } = render(<OrganizationFilter categories={categories} onChange={onChange} />);
-        fireEvent.click(getByText('Categories'));
+        fireEvent.click(getByText('Specialty'));
         fireEvent.click(getByText('All ages'));
         fireEvent.click(getByText('All issues'));
-        expect(getByText('Categories (2)')).toBeTruthy();
+        expect(getByText('Specialty (2)')).toBeTruthy();
         fireEvent.click(getByText('Apply'));
     });
 
@@ -92,6 +94,7 @@ describe('OrganizationFilter', () => {
             expect(sorts).toEqual([{ name: 'Open now' }]);
         };
         const { getByText } = render(<OrganizationFilter onChange={onChange} />);
+        fireEvent.click(getByText('Other Options'));
         fireEvent.click(getByText('A – Z'));
         fireEvent.click(getByText('Open now'));
         fireEvent.click(getByText('Apply'));
