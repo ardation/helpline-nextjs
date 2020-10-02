@@ -4,17 +4,16 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetEmbedProps
+// GraphQL query operation: GetInfluencerPaths
 // ====================================================
 
-export interface GetEmbedProps_countries {
+export interface GetInfluencerPaths_countries {
   code: string;
-  name: string;
 }
 
-export interface GetEmbedProps {
+export interface GetInfluencerPaths {
   /**
    * Find all countries
    */
-  countries: GetEmbedProps_countries[];
+  countries: GetInfluencerPaths_countries[];
 }

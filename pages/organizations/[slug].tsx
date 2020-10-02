@@ -97,10 +97,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
             }
         }
     `;
-    const { organizations } = (await request(
-        'https://api.findahelpline.com',
-        print(query),
-    )) as GetOrganizationsSlugPaths;
+    const { organizations } = await request<GetOrganizationsSlugPaths>('https://api.findahelpline.com', print(query));
 
     return {
         paths: organizations.nodes.map((organization) => {

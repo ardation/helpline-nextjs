@@ -8,12 +8,10 @@
 // ====================================================
 
 export interface GetOrganizationsSlugPaths_organizations_nodes {
-  __typename: "Organization";
   slug: string;
 }
 
 export interface GetOrganizationsSlugPaths_organizations {
-  __typename: "OrganizationConnection";
   /**
    * A list of nodes.
    */

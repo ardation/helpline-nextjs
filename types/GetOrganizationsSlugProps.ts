@@ -8,48 +8,40 @@
 // ====================================================
 
 export interface GetOrganizationsSlugProps_organization_reviews {
-  __typename: "Review";
   rating: number;
   content: string | null;
   createdAt: any;
 }
 
 export interface GetOrganizationsSlugProps_organization_humanSupportTypes {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetOrganizationsSlugProps_organization_categories {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetOrganizationsSlugProps_organization_topics {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetOrganizationsSlugProps_organization_openingHours {
-  __typename: "OpeningHour";
   day: string;
   open: any;
   close: any;
 }
 
 export interface GetOrganizationsSlugProps_organization_subdivisions {
-  __typename: "Subdivision";
   name: string;
 }
 
 export interface GetOrganizationsSlugProps_organization_country {
-  __typename: "Country";
   code: string;
   name: string;
   emergencyNumber: string | null;
 }
 
 export interface GetOrganizationsSlugProps_organization {
-  __typename: "Organization";
   id: string;
   slug: string;
   name: string;

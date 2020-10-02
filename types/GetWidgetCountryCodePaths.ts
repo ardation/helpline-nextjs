@@ -8,7 +8,6 @@
 // ====================================================
 
 export interface GetWidgetCountryCodePaths_countries {
-  __typename: "Country";
   code: string;
 }
 

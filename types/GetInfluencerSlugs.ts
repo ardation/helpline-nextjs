@@ -4,17 +4,16 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetEmbedProps
+// GraphQL query operation: GetInfluencerSlugs
 // ====================================================
 
-export interface GetEmbedProps_countries {
-  code: string;
-  name: string;
+export interface GetInfluencerSlugs_influencers {
+  slug: string;
 }
 
-export interface GetEmbedProps {
+export interface GetInfluencerSlugs {
   /**
-   * Find all countries
+   * Find all influencers
    */
-  countries: GetEmbedProps_countries[];
+  influencers: GetInfluencerSlugs_influencers[];
 }

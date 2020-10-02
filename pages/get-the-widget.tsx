@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import WidgetPartners from '../src/components/WidgetPartners';
 import { WidgetProps } from '../src/components/Widget/Widget';
-import { GetWidgetCountryCodeProps } from '../types/GetWidgetCountryCodeProps';
+import { GetTheWidgetProps } from '../types/GetTheWidgetProps';
 import Chrome from '../src/components/Chrome';
 
 const GetTheWidgetPage = (widgetProps: WidgetProps): ReactElement => {
@@ -24,7 +24,7 @@ const GetTheWidgetPage = (widgetProps: WidgetProps): ReactElement => {
 
 export const getStaticProps: GetStaticProps = async (): Promise<{ props: WidgetProps }> => {
     const query = gql`
-        query GetWidgetCountryCodeProps($countryCode: String!) {
+        query GetTheWidgetProps($countryCode: String!) {
             country(code: $countryCode) {
                 code
                 name
@@ -86,7 +86,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<{ props: WidgetP
         }
     `;
     const { country, organizations, categories, humanSupportTypes, topics, countries } = await request<
-        GetWidgetCountryCodeProps
+        GetTheWidgetProps
     >('https://api.findahelpline.com', print(query), {
         countryCode: 'nz',
     });

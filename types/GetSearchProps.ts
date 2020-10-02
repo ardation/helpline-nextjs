@@ -8,20 +8,17 @@
 // ====================================================
 
 export interface GetSearchProps_countries_subdivisions {
-  __typename: "Subdivision";
   code: string;
   name: string;
 }
 
 export interface GetSearchProps_countries {
-  __typename: "Country";
   code: string;
   name: string;
   subdivisions: GetSearchProps_countries_subdivisions[];
 }
 
 export interface GetSearchProps_topics {
-  __typename: "Tag";
   name: string;
 }
 

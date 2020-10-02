@@ -8,12 +8,10 @@
 // ====================================================
 
 export interface GetWidgetCountryCodeSubdivisionCodePaths_countries_subdivisions {
-  __typename: "Subdivision";
   code: string;
 }
 
 export interface GetWidgetCountryCodeSubdivisionCodePaths_countries {
-  __typename: "Country";
   code: string;
   subdivisions: GetWidgetCountryCodeSubdivisionCodePaths_countries_subdivisions[];
 }

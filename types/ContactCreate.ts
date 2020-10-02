@@ -8,7 +8,6 @@
 // ====================================================
 
 export interface ContactCreate_contactCreate {
-  __typename: "ContactCreateMutationPayload";
   /**
    * A unique identifier for the client performing the mutation.
    */

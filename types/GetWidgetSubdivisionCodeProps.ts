@@ -8,13 +8,11 @@
 // ====================================================
 
 export interface GetWidgetSubdivisionCodeProps_country_subdivisions {
-  __typename: "Subdivision";
   code: string;
   name: string;
 }
 
 export interface GetWidgetSubdivisionCodeProps_country {
-  __typename: "Country";
   code: string;
   name: string;
   emergencyNumber: string | null;
@@ -22,29 +20,24 @@ export interface GetWidgetSubdivisionCodeProps_country {
 }
 
 export interface GetWidgetSubdivisionCodeProps_organizations_nodes_humanSupportTypes {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetWidgetSubdivisionCodeProps_organizations_nodes_categories {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetWidgetSubdivisionCodeProps_organizations_nodes_topics {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetWidgetSubdivisionCodeProps_organizations_nodes_openingHours {
-  __typename: "OpeningHour";
   day: string;
   open: any;
   close: any;
 }
 
 export interface GetWidgetSubdivisionCodeProps_organizations_nodes {
-  __typename: "Organization";
   id: string;
   slug: string;
   name: string;
@@ -65,7 +58,6 @@ export interface GetWidgetSubdivisionCodeProps_organizations_nodes {
 }
 
 export interface GetWidgetSubdivisionCodeProps_organizations {
-  __typename: "OrganizationConnection";
   /**
    * A list of nodes.
    */
@@ -73,28 +65,23 @@ export interface GetWidgetSubdivisionCodeProps_organizations {
 }
 
 export interface GetWidgetSubdivisionCodeProps_categories {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetWidgetSubdivisionCodeProps_humanSupportTypes {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetWidgetSubdivisionCodeProps_topics {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetWidgetSubdivisionCodeProps_countries_subdivisions {
-  __typename: "Subdivision";
   code: string;
   name: string;
 }
 
 export interface GetWidgetSubdivisionCodeProps_countries {
-  __typename: "Country";
   code: string;
   name: string;
   emergencyNumber: string | null;

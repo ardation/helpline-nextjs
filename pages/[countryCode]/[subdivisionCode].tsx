@@ -115,14 +115,12 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             }
         }
     `;
-    const { country, organizations, categories, humanSupportTypes, topics } = (await request(
-        'https://api.findahelpline.com',
-        print(query),
-        {
-            countryCode: context.params.countryCode,
-            subdivisionCode: context.params.subdivisionCode,
-        },
-    )) as GetCountryCodeSubdivisonCodeProps;
+    const { country, organizations, categories, humanSupportTypes, topics } = await request<
+        GetCountryCodeSubdivisonCodeProps
+    >('https://api.findahelpline.com', print(query), {
+        countryCode: context.params.countryCode,
+        subdivisionCode: context.params.subdivisionCode,
+    });
     const subdivision = find({ code: context.params.subdivisionCode.toString().toUpperCase() }, country.subdivisions);
     return {
         props: {
@@ -148,10 +146,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
             }
         }
     `;
-    const { countries } = (await request(
+    const { countries } = await request<GetCountryCodeSubdivisionCodePaths>(
         'https://api.findahelpline.com',
         print(query),
-    )) as GetCountryCodeSubdivisionCodePaths;
+    );
 
     return {
         paths: flatten(

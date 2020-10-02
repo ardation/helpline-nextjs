@@ -44,6 +44,8 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         submit: {
             borderRadius: '1000px',
+            fontWeight: 'bold',
+            textTransform: 'none',
             width: '100%',
         },
         button: {

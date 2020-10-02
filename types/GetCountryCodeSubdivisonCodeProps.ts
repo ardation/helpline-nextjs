@@ -8,13 +8,11 @@
 // ====================================================
 
 export interface GetCountryCodeSubdivisonCodeProps_country_subdivisions {
-  __typename: "Subdivision";
   code: string;
   name: string;
 }
 
 export interface GetCountryCodeSubdivisonCodeProps_country {
-  __typename: "Country";
   code: string;
   name: string;
   emergencyNumber: string | null;
@@ -22,29 +20,24 @@ export interface GetCountryCodeSubdivisonCodeProps_country {
 }
 
 export interface GetCountryCodeSubdivisonCodeProps_organizations_nodes_humanSupportTypes {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetCountryCodeSubdivisonCodeProps_organizations_nodes_categories {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetCountryCodeSubdivisonCodeProps_organizations_nodes_topics {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetCountryCodeSubdivisonCodeProps_organizations_nodes_openingHours {
-  __typename: "OpeningHour";
   day: string;
   open: any;
   close: any;
 }
 
 export interface GetCountryCodeSubdivisonCodeProps_organizations_nodes {
-  __typename: "Organization";
   id: string;
   slug: string;
   name: string;
@@ -65,7 +58,6 @@ export interface GetCountryCodeSubdivisonCodeProps_organizations_nodes {
 }
 
 export interface GetCountryCodeSubdivisonCodeProps_organizations {
-  __typename: "OrganizationConnection";
   /**
    * A list of nodes.
    */
@@ -73,17 +65,14 @@ export interface GetCountryCodeSubdivisonCodeProps_organizations {
 }
 
 export interface GetCountryCodeSubdivisonCodeProps_categories {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetCountryCodeSubdivisonCodeProps_humanSupportTypes {
-  __typename: "Tag";
   name: string;
 }
 
 export interface GetCountryCodeSubdivisonCodeProps_topics {
-  __typename: "Tag";
   name: string;
 }
 

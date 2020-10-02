@@ -36,7 +36,7 @@ export const getStaticProps = async (): Promise<{ props: GetSearchProps }> => {
             }
         }
     `;
-    const { countries, topics } = (await request('https://api.findahelpline.com', print(query))) as GetSearchProps;
+    const { countries, topics } = await request<GetSearchProps>('https://api.findahelpline.com', print(query));
     return {
         props: {
             countries,

@@ -29,7 +29,7 @@ export const getStaticProps = async (): Promise<{ props: GetEmbedProps }> => {
             }
         }
     `;
-    const { countries } = (await request('https://api.findahelpline.com', print(query))) as GetEmbedProps;
+    const { countries } = await request<GetEmbedProps>('https://api.findahelpline.com', print(query));
     return {
         props: {
             countries,
