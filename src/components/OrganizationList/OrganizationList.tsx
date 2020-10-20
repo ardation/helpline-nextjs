@@ -73,7 +73,7 @@ const OrganizationList = ({
             categories: [],
             humanSupportTypes: [],
             topics: preselectedTopics,
-            sorts: [{ name: 'Featured' }],
+            sorts: [{ name: preselectedTopics.length > 0 ? 'Relevance' : 'Featured' }],
         });
     };
     const [filteredOrganizations, setOrganizations] = useState(filterByPreselectedTopics());

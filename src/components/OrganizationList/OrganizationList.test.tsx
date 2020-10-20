@@ -31,9 +31,10 @@ describe('OrganizationList', () => {
             url: 'https://youthline.co.nz/website',
             chatUrl: 'https://youthline.co.nz/chat',
             timezone: 'Pacific/Auckland',
-            topics: [],
-            rating: 5,
+            topics: [{ name: 'Bullying' }, { name: 'Depression' }],
+            rating: 6,
             reviewCount: 10,
+            featured: true,
         };
         organizations = [
             organization,
@@ -45,14 +46,14 @@ describe('OrganizationList', () => {
                 humanSupportTypes: [],
                 categories: [],
                 timezone: 'Pacific/Auckland',
-                topics: [],
+                topics: [{ name: 'Bullying' }],
                 rating: 5,
                 reviewCount: 10,
             },
         ];
         country = { name: 'New Zealand' };
         subdivision = { name: 'Auckland' };
-        topics = [];
+        topics = [{ name: 'Bullying' }, { name: 'Depression' }];
     });
 
     it('should display country name', () => {
@@ -237,11 +238,11 @@ describe('OrganizationList', () => {
                     preselectedTopics={topics}
                 />,
             );
-            expect(getByText('Helplines in New Zealand for anxiety, bullying, and depression.')).toBeTruthy();
+            expect(getByText('Helplines in New Zealand for anxiety, bullying, and depression.')).toBeInTheDocument();
         });
 
         it('should allow preselectedTopics to be updated', () => {
-            const { getByText, rerender } = render(
+            const { getByText, getAllByTestId, rerender } = render(
                 <OrganizationList
                     country={country}
                     organizations={organizations}
@@ -251,7 +252,11 @@ describe('OrganizationList', () => {
                     preselectedTopics={[]}
                 />,
             );
-            expect(getByText('Helplines in New Zealand.')).toBeTruthy();
+            expect(getByText('Helplines in New Zealand.')).toBeInTheDocument();
+            expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
+                '6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzFor youthAll issuesTextCallWeb Chat',
+                '5.0(10)Open 24/7',
+            ]);
             rerender(
                 <OrganizationList
                     country={country}
@@ -262,7 +267,11 @@ describe('OrganizationList', () => {
                     preselectedTopics={topics}
                 />,
             );
-            expect(getByText('Helplines in New Zealand for anxiety, bullying, and depression.')).toBeTruthy();
+            expect(getByText('Helplines in New Zealand for anxiety, bullying, and depression.')).toBeInTheDocument();
+            expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
+                '5.0(10)Open 24/7',
+                '6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzFor youthAll issuesTextCallWeb Chat',
+            ]);
         });
     });
 });
