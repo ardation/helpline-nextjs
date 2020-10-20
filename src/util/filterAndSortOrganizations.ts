@@ -22,7 +22,7 @@ type Sort = {
     name: string;
 };
 
-type Filters = {
+export type Filters = {
     categories: Category[];
     contactMethods: ContactMethod[];
     humanSupportTypes: HumanSupportType[];
@@ -92,6 +92,9 @@ const sortOrganizations = (sorts: Sort[], organizations: Organization[]): Organi
             (organization) => (isOpen(organization).open ? `A ${organization.name}` : `B ${organization.name}`),
             organizations,
         );
+    }
+    if (find({ name: 'Relevance' }, sorts)) {
+        return sortBy((organization) => organization.topics.length, organizations);
     }
 };
 

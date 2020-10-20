@@ -31,6 +31,20 @@ describe('OrganizationFilter', () => {
         expect(getByText('Filter & Sort')).toBeTruthy();
     });
 
+    it('should have defaults', () => {
+        const onChange = (changes): void => {
+            expect(changes).toEqual({
+                categories: [],
+                contactMethods: [],
+                humanSupportTypes: [],
+                sorts: [{ name: 'Featured' }],
+                topics: [],
+            });
+        };
+        const { getByText } = render(<OrganizationFilter onChange={onChange} />);
+        fireEvent.click(getByText('Apply'));
+    });
+
     it('should call event', () => {
         const onChange = (): void => {
             expect(mock).toHaveBeenCalledWith({
@@ -43,15 +57,43 @@ describe('OrganizationFilter', () => {
     });
 
     it('should allow topics to be changed', () => {
-        const onChange = ({ topics }): void => {
+        const onChange = ({ topics, sorts }): void => {
             expect(topics).toEqual([{ name: 'Bullying' }, { name: 'Anxiety' }, { name: 'Depression' }]);
+            expect(sorts).toEqual([{ name: 'Relevance' }]);
         };
         const { getByText } = render(
             <OrganizationFilter topics={topics} preselectedTopics={preselectedTopics} onChange={onChange} />,
         );
         fireEvent.click(getByText('Topics (2)'));
         fireEvent.click(getByText('Bullying'));
-        expect(getByText('Topics (3)')).toBeTruthy();
+        expect(getByText('Topics (3)')).toBeInTheDocument();
+        fireEvent.click(getByText('Apply'));
+    });
+
+    it('should changed sort to relevance when topic is selected', () => {
+        const onChange = ({ topics, sorts }): void => {
+            expect(topics).toEqual([{ name: 'Bullying' }]);
+            expect(sorts).toEqual([{ name: 'Relevance' }]);
+        };
+        const { getByText } = render(<OrganizationFilter topics={topics} onChange={onChange} />);
+        fireEvent.click(getByText('Topics'));
+        fireEvent.click(getByText('Bullying'));
+        expect(getByText('Topics (1)')).toBeInTheDocument();
+        fireEvent.click(getByText('Apply'));
+    });
+
+    it('should changed sort to featured when topic is unselected', () => {
+        const onChange = ({ topics, sorts }): void => {
+            expect(topics).toEqual([]);
+            expect(sorts).toEqual([{ name: 'Featured' }]);
+        };
+        const { getByText } = render(
+            <OrganizationFilter topics={topics} preselectedTopics={preselectedTopics} onChange={onChange} />,
+        );
+        fireEvent.click(getByText('Topics (2)'));
+        fireEvent.click(getByText('Anxiety'));
+        fireEvent.click(getByText('Depression'));
+        expect(getByText('Topics')).toBeInTheDocument();
         fireEvent.click(getByText('Apply'));
     });
 
@@ -91,12 +133,13 @@ describe('OrganizationFilter', () => {
 
     it('should allow sorts to be changed', () => {
         const onChange = ({ sorts }): void => {
-            expect(sorts).toEqual([{ name: 'Open now' }]);
+            expect(sorts).toEqual([{ name: 'Relevance' }]);
         };
         const { getByText } = render(<OrganizationFilter onChange={onChange} />);
         fireEvent.click(getByText('Support Type'));
         fireEvent.click(getByText('A – Z'));
         fireEvent.click(getByText('Open now'));
+        fireEvent.click(getByText('Relevance'));
         fireEvent.click(getByText('Apply'));
     });
 });

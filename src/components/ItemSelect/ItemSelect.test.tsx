@@ -35,6 +35,14 @@ describe('ItemSelect', () => {
         expect(getByText('happy').parentElement.className).toContain('MuiChip-colorPrimary');
     });
 
+    it('should allow preselectedItems to be updated', () => {
+        const { getByText, rerender } = render(
+            <ItemSelect items={items} preselectedItems={[{ name: 'happy' }]} onChange={jest.fn()} />,
+        );
+        rerender(<ItemSelect items={items} preselectedItems={[{ name: 'angry' }]} onChange={jest.fn()} />);
+        expect(getByText('angry').parentElement.className).toContain('MuiChip-colorPrimary');
+    });
+
     describe('single', () => {
         it('should only allow single chip to be selected', () => {
             let counter = 0;

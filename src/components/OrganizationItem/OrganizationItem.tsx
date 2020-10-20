@@ -143,6 +143,9 @@ const useStyles = makeStyles((theme: Theme) =>
             marginBottom: '-2px',
             color: '#999',
         },
+        outboundLink: {
+            textDecoration: 'none',
+        },
     }),
 );
 
@@ -253,6 +256,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                                     to={`sms:${organization.smsNumber}`}
                                     target="_parent"
                                     rel="noopener noreferrer"
+                                    className={classes.outboundLink}
                                 >
                                     <Button
                                         variant="contained"
@@ -273,6 +277,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                                     to={`tel:${organization.phoneNumber}`}
                                     target="_parent"
                                     rel="noopener noreferrer"
+                                    className={classes.outboundLink}
                                 >
                                     <Button
                                         variant="contained"
@@ -293,6 +298,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                                     to={organization.chatUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    className={classes.outboundLink}
                                 >
                                     <Button
                                         variant="contained"

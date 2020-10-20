@@ -91,7 +91,9 @@ const OrganizationFilter = ({
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
     const [selectedHumanSupportTypes, setSelectedHumanSupportTypes] = useState<HumanSupportType[]>([]);
     const [selectedTopics, setSelectedTopics] = useState<Topic[]>([]);
-    const [selectedSorts, setSelectedSorts] = useState<Sort[]>([{ name: 'Featured' }]);
+    const [selectedSorts, setSelectedSorts] = useState<Sort[]>([
+        { name: preselectedTopics?.length ? 'Relevance' : 'Featured' },
+    ]);
     const [value, setValue] = React.useState(0);
 
     const handleChange = (_event: React.ChangeEvent<{}>, newValue: number): void => {
@@ -100,6 +102,15 @@ const OrganizationFilter = ({
 
     const handleChangeIndex = (value: number): void => {
         setValue(value);
+    };
+
+    const handleSelectedTopicsChange = (topics: Topic[]): void => {
+        setSelectedTopics(topics);
+        if (topics.length > 0 && selectedSorts[0]?.name === 'Featured') {
+            setSelectedSorts([{ name: 'Relevance' }]);
+        } else if (topics.length === 0 && selectedSorts[0]?.name === 'Relevance') {
+            setSelectedSorts([{ name: 'Featured' }]);
+        }
     };
 
     const onClick = (): void => {
@@ -163,7 +174,7 @@ const OrganizationFilter = ({
                     <ItemSelect
                         items={topics || []}
                         preselectedItems={preselectedTopics}
-                        onChange={setSelectedTopics}
+                        onChange={handleSelectedTopicsChange}
                     />
                 </Box>
                 <Box className={classes.tabPanel}>
@@ -187,6 +198,7 @@ const OrganizationFilter = ({
                         <Typography className={classes.title}>Sort by</Typography>
                         <ItemSelect
                             items={[
+                                { name: 'Relevance' },
                                 { name: 'Featured' },
                                 { name: 'Verified' },
                                 { name: 'A – Z' },

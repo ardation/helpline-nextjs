@@ -1,4 +1,4 @@
-import filterAndSortOrganizations from './filterAndSortOrganizations';
+import filterAndSortOrganizations, { Filters } from './filterAndSortOrganizations';
 
 describe('filterAndSortOrganizations', () => {
     const organization = {
@@ -9,7 +9,7 @@ describe('filterAndSortOrganizations', () => {
         openingHours: [],
         humanSupportTypes: [{ name: 'Volunteers' }, { name: 'Staff' }],
         categories: [{ name: 'For youth' }, { name: 'All issues' }],
-        topics: [{ name: 'Depression' }, { name: 'School' }, { name: 'Pride' }],
+        topics: [{ name: 'Depression' }, { name: 'School' }, { name: 'Pride' }, { name: 'Family' }],
         smsNumber: '234',
         phoneNumber: '0800 376 633',
         url: 'https://youthline.co.nz/website',
@@ -28,7 +28,7 @@ describe('filterAndSortOrganizations', () => {
         openingHours: [],
         humanSupportTypes: [{ name: 'Migrants' }, { name: 'AI' }],
         categories: [{ name: 'For men' }, { name: 'All issues' }],
-        topics: [{ name: 'Anxiety' }, { name: 'Bullying' }],
+        topics: [{ name: 'Anxiety' }, { name: 'School' }, { name: 'Stress' }],
         smsNumber: '',
         phoneNumber: null,
         url: 'https://test.co.nz/website',
@@ -40,7 +40,7 @@ describe('filterAndSortOrganizations', () => {
         reviewCount: 10,
     };
     const organizations = [organization, filteredOrganization];
-    let changes;
+    let changes: Filters;
 
     beforeEach(() => {
         changes = {
@@ -118,7 +118,7 @@ describe('filterAndSortOrganizations', () => {
             openingHours: [],
             humanSupportTypes: [{ name: 'Migrants' }, { name: 'AI' }],
             categories: [{ name: 'For men' }, { name: 'All issues' }],
-            topics: [{ name: 'Anxiety' }, { name: 'Bullying' }],
+            topics: [{ name: 'School' }],
             smsNumber: '',
             phoneNumber: null,
             url: 'https://test.co.nz/website',
@@ -183,6 +183,16 @@ describe('filterAndSortOrganizations', () => {
                     changes,
                 ),
             ).toEqual([filteredOrganization, alwaysOpenLastOrganization, organization, closedLastOrganization]);
+        });
+
+        it('sorts by Relevance', () => {
+            changes.sorts = [{ name: 'Relevance' }];
+            expect(
+                filterAndSortOrganizations(
+                    [alwaysOpenLastOrganization, closedLastOrganization, organization, filteredOrganization],
+                    changes,
+                ),
+            ).toEqual([alwaysOpenLastOrganization, closedLastOrganization, filteredOrganization, organization]);
         });
     });
 });

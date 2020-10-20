@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Chip, Box } from '@material-ui/core';
 import { differenceBy, find, xorBy } from 'lodash/fp';
@@ -67,6 +67,10 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, max }: Props): 
         setSelectedItems(items);
         onChange(items);
     };
+
+    useEffect(() => {
+        if (preselectedItems && preselectedItems !== selectedItems) setSelectedItems(preselectedItems);
+    }, [preselectedItems]);
 
     return (
         <Box className={classes.chips}>
