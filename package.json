@@ -79,7 +79,7 @@
         "jest-raw-loader": "^1.0.1",
         "jsx-dom": "^6.4.15",
         "lint-staged": "^10.4.0",
-        "prettier": "^2.0.5",
+        "prettier": "^2.1.2",
         "raw-loader": "^4.0.1",
         "ts-jest": "^25.5.1",
         "typescript": "^3.9.7",
