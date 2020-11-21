@@ -41,6 +41,21 @@ const organizations = [
         rating: 5,
         reviewCount: 10,
     },
+    {
+        id: 'kidscan',
+        slug: 'kidscan',
+        name: 'KidsCan',
+        alwaysOpen: false,
+        openingHours: [],
+        humanSupportTypes: [],
+        categories: [],
+        timezone: 'Pacific/Auckland',
+        topics: [],
+        featured: false,
+        verified: false,
+        rating: 5,
+        reviewCount: 10,
+    },
 ];
 
 export default {
@@ -93,9 +108,9 @@ export const WhenEmpty = (): ReactElement => (
             country={{ name: 'New Zealand' }}
             categories={[]}
             humanSupportTypes={[]}
-            preselectedTopics={[]}
-            topics={[]}
-            organizations={[]}
+            preselectedTopics={[{ name: 'Bullying' }]}
+            topics={[{ name: 'Bullying' }]}
+            organizations={organizations}
         />
     </Chrome>
 );

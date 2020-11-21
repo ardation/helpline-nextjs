@@ -79,6 +79,8 @@ const OrganizationList = ({
     const [filteredOrganizations, setOrganizations] = useState(filterByPreselectedTopics());
     const [limit, setLimit] = useState(10);
 
+    const alwaysOpenOrganizations = organizations.filter((organization) => organization.alwaysOpen);
+
     const onChange = (changes): void => {
         setSelectedTopics(changes.topics);
         setOrganizations(filterAndSortOrganizations(organizations, changes));
@@ -146,12 +148,14 @@ const OrganizationList = ({
                         }.`}
                     </Typography>
                 </Box>
-                {filteredOrganizations.slice(0, limit).map((organization) => (
-                    <Box key={organization.slug} my={2} data-testid="OrganizationCard">
-                        <OrganizationCard organization={organization} />
-                    </Box>
-                ))}
-                {filteredOrganizations.length == 0 && <OrganizationEmpty />}
+                {filteredOrganizations.length === 0 && <OrganizationEmpty organizations={alwaysOpenOrganizations} />}
+                {(filteredOrganizations.length > 0 ? filteredOrganizations : alwaysOpenOrganizations)
+                    .slice(0, limit)
+                    .map((organization) => (
+                        <Box key={organization.slug} my={2} data-testid="OrganizationCard">
+                            <OrganizationCard organization={organization} />
+                        </Box>
+                    ))}
                 {filteredOrganizations.length > limit && (
                     <Box className={classes.showMore}>
                         <Button

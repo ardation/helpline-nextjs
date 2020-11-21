@@ -123,7 +123,7 @@ const CountrySelect = ({
                 popupIcon={<SearchIcon />}
                 autoHighlight
                 getOptionLabel={(option): string => option.name}
-                getOptionSelected={(option, value): boolean => option.code == value.code}
+                getOptionSelected={(option, value): boolean => option.code === value.code}
                 renderOption={(option): ReactElement => (
                     <Grid container spacing={2}>
                         <Grid item>
@@ -160,7 +160,7 @@ const CountrySelect = ({
                     value={selectedSubdivision}
                     options={sortBy('name', selectedCountry.subdivisions) as Subdivision[]}
                     getOptionLabel={(option): string => option.name}
-                    getOptionSelected={(option, value): boolean => option.code == value.code}
+                    getOptionSelected={(option, value): boolean => option.code === value.code}
                     blurOnSelect="touch"
                     openOnFocus
                     onChange={(_e, value: Subdivision): void => localOnSubdivisionChange(value)}
@@ -168,13 +168,13 @@ const CountrySelect = ({
                         <TextField
                             {...params}
                             placeholder={
-                                (selectedCountry.locality == LocalityEnum.COUNTY && 'Refine by county (optional)') ||
-                                (selectedCountry.locality == LocalityEnum.LOCATION &&
+                                (selectedCountry.locality === LocalityEnum.COUNTY && 'Refine by county (optional)') ||
+                                (selectedCountry.locality === LocalityEnum.LOCATION &&
                                     'Refine by location (optional)') ||
-                                (selectedCountry.locality == LocalityEnum.PROVINCE &&
+                                (selectedCountry.locality === LocalityEnum.PROVINCE &&
                                     'Refine by province (optional)') ||
-                                (selectedCountry.locality == LocalityEnum.REGION && 'Refine by region (optional)') ||
-                                (selectedCountry.locality == LocalityEnum.STATE && 'Refine by state (optional)')
+                                (selectedCountry.locality === LocalityEnum.REGION && 'Refine by region (optional)') ||
+                                (selectedCountry.locality === LocalityEnum.STATE && 'Refine by state (optional)')
                             }
                             variant="outlined"
                             inputProps={{

@@ -14,7 +14,7 @@ describe('ItemSelect', () => {
     it('should allow chip to be toggled', () => {
         let counter = 0;
         const onChange = (items): void => {
-            if (counter == 0) {
+            if (counter === 0) {
                 expect(items).toEqual([{ name: 'happy' }]);
             } else {
                 expect(items).toEqual([]);
@@ -47,7 +47,7 @@ describe('ItemSelect', () => {
         it('should only allow single chip to be selected', () => {
             let counter = 0;
             const onChange = (items): void => {
-                if (counter == 0) {
+                if (counter === 0) {
                     expect(items).toEqual([{ name: 'happy' }]);
                 } else {
                     expect(items).toEqual([{ name: 'sad' }]);

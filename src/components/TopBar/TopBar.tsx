@@ -97,7 +97,7 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
 
     return (
         <AppBar
-            className={compact([classes.appBar, variant == 'widget' && classes.appBarWidget]).join(' ')}
+            className={compact([classes.appBar, variant === 'widget' && classes.appBarWidget]).join(' ')}
             position="static"
         >
             <Container className={country && classes.container}>

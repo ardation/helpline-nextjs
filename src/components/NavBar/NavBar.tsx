@@ -48,12 +48,12 @@ const NavBar = ({ children, variant }: Props): ReactElement => {
 
     return (
         <AppBar
-            className={compact([classes.appBar, variant == 'widget' && classes.appBarWidget]).join(' ')}
+            className={compact([classes.appBar, variant === 'widget' && classes.appBarWidget]).join(' ')}
             position="static"
         >
             <Container className={classes.container}>
                 <Box className={classes.logo}>
-                    {variant == 'widget' ? (
+                    {variant === 'widget' ? (
                         <img src="/logo.svg" alt="find a helpline" />
                     ) : (
                         <Link href="/" passHref>
@@ -62,7 +62,7 @@ const NavBar = ({ children, variant }: Props): ReactElement => {
                             </a>
                         </Link>
                     )}
-                    {variant == 'widget' && <Typography>Struggling? Talk to a real person, for free.</Typography>}
+                    {variant === 'widget' && <Typography>Struggling? Talk to a real person, for free.</Typography>}
                 </Box>
                 <Box>{children}</Box>
             </Container>

@@ -41,7 +41,7 @@ describe('OrganizationList', () => {
             {
                 slug: 'kidscan',
                 name: 'KidsCan',
-                alwaysOpen: true,
+                alwaysOpen: false,
                 openingHours: [],
                 humanSupportTypes: [],
                 categories: [],
@@ -255,7 +255,7 @@ describe('OrganizationList', () => {
             expect(getByText('Helplines in New Zealand.')).toBeInTheDocument();
             expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
                 '6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzFor youthAll issuesTextCallWeb Chat',
-                '5.0(10)Open 24/7',
+                '5.0(10)',
             ]);
             rerender(
                 <OrganizationList
@@ -269,7 +269,27 @@ describe('OrganizationList', () => {
             );
             expect(getByText('Helplines in New Zealand for anxiety, bullying, and depression.')).toBeInTheDocument();
             expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
-                '5.0(10)Open 24/7',
+                '5.0(10)',
+                '6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzFor youthAll issuesTextCallWeb Chat',
+            ]);
+        });
+    });
+
+    describe('empty', () => {
+        it('should display all 24/7 helplines', () => {
+            const { getByText, getByTestId, getAllByTestId } = render(
+                <OrganizationList
+                    country={country}
+                    organizations={organizations}
+                    topics={[{ name: 'Racism' }]}
+                    categories={[]}
+                    humanSupportTypes={[]}
+                    preselectedTopics={[{ name: 'Racism' }]}
+                />,
+            );
+            expect(getByText('Helplines in New Zealand for racism.')).toBeInTheDocument();
+            expect(getByTestId('OrganizationEmptyDefault')).toBeInTheDocument();
+            expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
                 '6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzFor youthAll issuesTextCallWeb Chat',
             ]);
         });

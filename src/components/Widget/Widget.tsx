@@ -135,7 +135,10 @@ const Widget = ({
             <Box className={classes.box}>
                 <TopBar variant="widget" country={preselectedCountry} />
                 <NoSsr>
-                    <WidgetOrganizationList organizations={filteredOrganizations} />
+                    <WidgetOrganizationList
+                        filteredOrganizations={filteredOrganizations}
+                        organizations={organizations}
+                    />
                 </NoSsr>
             </Box>
             <Box className={classes.embed}>

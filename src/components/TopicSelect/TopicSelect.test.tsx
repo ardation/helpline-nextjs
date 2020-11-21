@@ -19,7 +19,7 @@ describe('TopicSelect', () => {
     it('should allow chip to be toggled', () => {
         let counter = 0;
         const onChange = (topics): void => {
-            if (counter == 0) {
+            if (counter === 0) {
                 expect(topics).toEqual([{ name: 'happy' }]);
             } else {
                 expect(topics).toEqual([]);

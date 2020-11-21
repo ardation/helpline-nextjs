@@ -26,7 +26,7 @@ const organizations = [
         id: 'kidscan',
         slug: 'kidscan',
         name: 'KidsCan',
-        alwaysOpen: true,
+        alwaysOpen: false,
         openingHours: [],
         humanSupportTypes: [],
         categories: [],
@@ -41,7 +41,7 @@ const organizations = [
 
 describe('WidgetOrganizationList', () => {
     it('should hide carousel when no organizations', () => {
-        const { getByTestId } = render(<WidgetOrganizationList organizations={[]} />);
+        const { getByTestId } = render(<WidgetOrganizationList filteredOrganizations={[]} organizations={[]} />);
         expect(() => getByTestId('previousButton')).toThrow();
         expect(() => getByTestId('nextButton')).toThrow();
     });
@@ -60,7 +60,25 @@ describe('WidgetOrganizationList', () => {
         });
 
         it('should toggle buttons disabled state', () => {
-            const { getByTestId } = render(<WidgetOrganizationList organizations={organizations} />);
+            const { getByTestId } = render(
+                <WidgetOrganizationList filteredOrganizations={organizations} organizations={organizations} />,
+            );
+            const previousButton = getByTestId('previousButton');
+            const nextButton = getByTestId('nextButton');
+            expect(previousButton).toBeDisabled();
+            fireEvent.click(nextButton);
+            expect(previousButton).not.toBeDisabled();
+            expect(nextButton).toBeDisabled();
+            fireEvent.click(previousButton);
+            expect(previousButton).toBeDisabled();
+            expect(nextButton).not.toBeDisabled();
+        });
+
+        it('should show empty state', () => {
+            const { getByTestId } = render(
+                <WidgetOrganizationList filteredOrganizations={[]} organizations={organizations} />,
+            );
+            expect(getByTestId('OrganizationEmptyWidget')).toBeInTheDocument();
             const previousButton = getByTestId('previousButton');
             const nextButton = getByTestId('nextButton');
             expect(previousButton).toBeDisabled();

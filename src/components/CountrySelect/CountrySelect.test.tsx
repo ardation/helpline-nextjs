@@ -55,7 +55,7 @@ describe('CountrySelect', () => {
     it('should call onSubdivisionChange', () => {
         let counter = 0;
         const onSubdivisionChange = (subdivision): void => {
-            if (counter == 0) {
+            if (counter === 0) {
                 expect(subdivision).toEqual(null);
             } else {
                 expect(subdivision).toEqual({ name: 'Bay of Plenty', code: 'BOP' });
