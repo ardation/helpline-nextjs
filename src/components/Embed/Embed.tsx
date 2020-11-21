@@ -1,14 +1,25 @@
 import React, { ReactElement, useState, ChangeEvent, useEffect } from 'react';
 import { Container, Box, Typography, FormControl, MenuItem, InputLabel, Select } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Alert } from '@material-ui/lab';
+import { isUndefined, omitBy } from 'lodash/fp';
+import { GetEmbedProps } from '../../../types/GetEmbedProps';
+import Search from '../Search';
 
-type Country = {
+type Subdivision = {
     code: string;
     name: string;
 };
 
-type Props = {
-    countries: Country[];
+type Country = {
+    code: string;
+    name: string;
+    subdivisions: Subdivision[];
+    locality: LocalityEnum;
+};
+
+type Topic = {
+    name: string;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -31,8 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         code: {
             backgroundColor: '#F0F1F5',
-            paddingRight: theme.spacing(2),
-            paddingLeft: theme.spacing(2),
+            padding: theme.spacing(2),
             width: '100%',
             fontFamily: 'Courier',
         },
@@ -60,28 +70,33 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Embed = ({ countries }: Props): ReactElement => {
-    const [selectedCountryCode, setSelectedCountryCode] = useState<string>('US');
+const Embed = ({ countries, topics }: GetEmbedProps): ReactElement => {
     const classes = useStyles();
-
     const [snippet, setSnippet] = useState('');
 
-    const updateSnippet = (): void => {
-        let host = window.location.host;
-        if (host.includes('chromatic')) {
-            host = 'findahelpline.com';
-        }
-        setSnippet(
-            `<div id="widget"></div>
-<script src="${window.location.protocol}//${host}/widget.min.js"></script>
-<script>Widget.default({ countryCode: '${selectedCountryCode.toLowerCase()}' }).render('#widget');</script>`,
-        );
-    };
+    const updateSnippet = (): void => {};
 
     useEffect(updateSnippet);
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        setSelectedCountryCode(event.target.value);
+    const handleChange = (country?: Country, subdivision?: Subdivision, topics: Topics[]): void => {
+        if (country) {
+            let host = window.location.host;
+            if (host.includes('chromatic')) {
+                host = 'findahelpline.com';
+            }
+            const attributes = omitBy(isUndefined, {
+                countryCode: country.code.toLowerCase(),
+                subdivisionCode: subdivision?.code?.toLowerCase(),
+                topics: topics.length === 0 ? undefined : topics.map(({ name }) => name),
+            });
+            setSnippet(
+                `<div id="fah-widget"></div>
+                <script src="${window.location.protocol}//${host}/widget.min.js"></script>
+                <script>Widget.default(${JSON.stringify(attributes)}).render('#fah-widget');</script>`,
+            );
+        } else {
+            setSnippet('');
+        }
     };
 
     return (
@@ -95,39 +110,23 @@ const Embed = ({ countries }: Props): ReactElement => {
                     <p>Quick. Easy. Reliable.</p>
                     <h3>Embed the Find A Helpline widget</h3>
                     <p>
-                        <span className={classes.steps}>Step 1:</span> Choose the default country for the widget.
+                        <span className={classes.steps}>Step 1:</span> Setup your filters for the widget.
                     </p>
                 </Typography>
-                <FormControl className={classes.formControl} data-testid="dropdownForm">
-                    <InputLabel id="demo-simple-select-label">Select Country</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={selectedCountryCode}
-                        onChange={handleChange}
-                    >
-                        {countries.map(
-                            (country): ReactElement => {
-                                return (
-                                    <MenuItem key={country.code} value={country.code}>
-                                        {country.name}
-                                    </MenuItem>
-                                );
-                            },
-                        )}
-                    </Select>
-                </FormControl>
+                <Search countries={countries} topics={topics} variant="embed" onChange={handleChange} />
                 <Typography component="div" data-testid="typographyTwo">
                     <p>
                         <span className={classes.steps}>Step 2:</span> Simply copy the code snippet and paste it in your
                         page’s HTML where you want the widget to appear.
                     </p>
                 </Typography>
-                <Typography className={classes.code} data-testid="typographyThree" component="div">
-                    <pre>
+                {snippet === '' ? (
+                    <Alert severity="info">Select country before snippet is available.</Alert>
+                ) : (
+                    <Typography className={classes.code} data-testid="typographyThree" component="div">
                         <code>{snippet}</code>
-                    </pre>
-                </Typography>
+                    </Typography>
+                )}
             </Box>
         </Container>
     );
