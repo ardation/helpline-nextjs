@@ -48,14 +48,29 @@ describe('Search', () => {
     });
 
     it('should change search url after country and subdivision select', () => {
-        const { getByTestId, getAllByRole } = render(<Search countries={countries} topics={topics} />);
-        const countryElement = getAllByRole('textbox')[0];
-        fireEvent.click(countryElement);
-        fireEvent.click(getAllByRole('listbox')[0].children[1]);
-        const subdivisionElement = getAllByRole('textbox')[1];
-        fireEvent.click(subdivisionElement);
-        fireEvent.click(getAllByRole('listbox')[0].children[1]);
-        expect(getByTestId('searchButton')).toHaveAttribute('href', '/nz/bop');
+        const handleChange = jest.fn();
+        const { getByTestId, getByRole, getByText } = render(
+            <Search countries={countries} topics={topics} onChange={handleChange} />,
+        );
+        fireEvent.click(getByRole('combobox', { name: 'country' }));
+        fireEvent.click(getByText('New Zealand'));
+        fireEvent.click(getByRole('combobox', { name: 'subdivision' }));
+        fireEvent.click(getByText('Auckland'));
+        fireEvent.click(getByText('happy'));
+        expect(getByTestId('searchButton')).toHaveAttribute('href', '/nz/auk?topics=happy');
+        expect(handleChange).toHaveBeenCalledWith(
+            [{ name: 'happy' }],
+            {
+                code: 'NZ',
+                name: 'New Zealand',
+                subdivisions: [
+                    { name: 'Bay of Plenty', code: 'BOP' },
+                    { name: 'Auckland', code: 'AUK' },
+                ],
+                locality: LocalityEnum.LOCATION,
+            },
+            { name: 'Auckland', code: 'AUK' },
+        );
     });
 
     it('should change search url after topic select', () => {
