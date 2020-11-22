@@ -24,6 +24,7 @@ const SubdivisionCodePage = ({
     country,
     subdivision,
     organizations,
+    organizationsWhenEmpty,
     categories,
     humanSupportTypes,
     topics,
@@ -48,6 +49,7 @@ const SubdivisionCodePage = ({
             <Chrome country={country}>
                 <OrganizationList
                     organizations={organizations.nodes}
+                    organizationsWhenEmpty={organizationsWhenEmpty.nodes}
                     country={country}
                     subdivision={subdivision}
                     preselectedTopics={preselectedTopics}
@@ -74,35 +76,10 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                 }
             }
             organizations(countryCode: $countryCode, subdivisionCodes: [$subdivisionCode]) {
-                nodes {
-                    id
-                    slug
-                    name
-                    alwaysOpen
-                    smsNumber
-                    phoneNumber
-                    url
-                    chatUrl
-                    timezone
-                    featured
-                    verified
-                    rating
-                    reviewCount
-                    humanSupportTypes {
-                        name
-                    }
-                    categories {
-                        name
-                    }
-                    topics {
-                        name
-                    }
-                    openingHours {
-                        day
-                        open
-                        close
-                    }
-                }
+                ...organizationConnectionFields
+            }
+            organizationsWhenEmpty: organizations(countryCode: $countryCode, subdivisionCodes: [], featured: true) {
+                ...organizationConnectionFields
             }
             categories {
                 name
@@ -114,8 +91,39 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                 name
             }
         }
+        fragment organizationConnectionFields on OrganizationConnection {
+            nodes {
+                id
+                slug
+                name
+                alwaysOpen
+                smsNumber
+                phoneNumber
+                url
+                chatUrl
+                timezone
+                featured
+                verified
+                rating
+                reviewCount
+                humanSupportTypes {
+                    name
+                }
+                categories {
+                    name
+                }
+                topics {
+                    name
+                }
+                openingHours {
+                    day
+                    open
+                    close
+                }
+            }
+        }
     `;
-    const { country, organizations, categories, humanSupportTypes, topics } = await request<
+    const { country, organizations, organizationsWhenEmpty, categories, humanSupportTypes, topics } = await request<
         GetCountryCodeSubdivisonCodeProps
     >('https://api.findahelpline.com', print(query), {
         countryCode: context.params.countryCode,
@@ -127,6 +135,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             country,
             subdivision,
             organizations,
+            organizationsWhenEmpty,
             categories,
             humanSupportTypes,
             topics,

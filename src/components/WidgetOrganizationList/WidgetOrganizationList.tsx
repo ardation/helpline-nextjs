@@ -8,8 +8,8 @@ import OrganizationCard, { Organization } from '../OrganizationCard/Organization
 import OrganizationEmpty from '../OrganizationEmpty';
 
 type Props = {
-    filteredOrganizations: Organization[];
     organizations: Organization[];
+    organizationsWhenEmpty: Organization[];
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const WidgetOrganizationList = ({ filteredOrganizations, organizations }: Props): ReactElement => {
+const WidgetOrganizationList = ({ organizations, organizationsWhenEmpty }: Props): ReactElement => {
     const classes = useStyles();
     const [EmblaCarouselReact, embla] = useEmblaCarousel({
         align: 'start',
@@ -72,8 +72,6 @@ const WidgetOrganizationList = ({ filteredOrganizations, organizations }: Props)
 
     const [showPreviousButton, setShowPreviousButton] = useState(false);
     const [showNextButton, setShowNextButton] = useState(false);
-
-    const alwaysOpenOrganizations = organizations.filter((organization) => organization.alwaysOpen);
 
     useEffect(() => {
         const onSelect = (): void => {
@@ -94,29 +92,27 @@ const WidgetOrganizationList = ({ filteredOrganizations, organizations }: Props)
                 align: 'start',
             });
         }
-    }, [filteredOrganizations]);
+    }, [organizations]);
 
     return (
         <Box className={classes.box}>
-            {filteredOrganizations.length === 0 && organizations.length === 0 && (
-                <OrganizationEmpty organizations={organizations} variant="widget" />
+            {organizations.length === 0 && organizationsWhenEmpty.length === 0 && (
+                <OrganizationEmpty organizations={organizationsWhenEmpty} variant="widget" />
             )}
-            {(filteredOrganizations.length > 0 || organizations.length > 0) && (
+            {(organizations.length > 0 || organizationsWhenEmpty.length > 0) && (
                 <>
                     <EmblaCarouselReact>
                         <Box className={classes.container}>
-                            {filteredOrganizations.length === 0 && (
+                            {organizations.length === 0 && (
                                 <Box className={classes.slide}>
-                                    <OrganizationEmpty organizations={alwaysOpenOrganizations} variant="widget" />
+                                    <OrganizationEmpty organizations={organizationsWhenEmpty} variant="widget" />
                                 </Box>
                             )}
-                            {(filteredOrganizations.length > 0 ? filteredOrganizations : alwaysOpenOrganizations).map(
-                                (organization) => (
-                                    <Box key={organization.slug} className={classes.slide}>
-                                        <OrganizationCard organization={organization} variant="widget" />
-                                    </Box>
-                                ),
-                            )}
+                            {(organizations.length > 0 ? organizations : organizationsWhenEmpty).map((organization) => (
+                                <Box key={organization.slug} className={classes.slide}>
+                                    <OrganizationCard organization={organization} variant="widget" />
+                                </Box>
+                            ))}
                         </Box>
                     </EmblaCarouselReact>
                     <Fab

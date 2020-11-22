@@ -71,6 +71,7 @@ export const Default = (): ReactElement => (
             preselectedTopics={[]}
             topics={[]}
             organizations={organizations}
+            organizationsWhenEmpty={organizations}
         />
     </Chrome>
 );
@@ -85,6 +86,7 @@ export const WithSubdivision = (): ReactElement => (
             preselectedTopics={[]}
             topics={[]}
             organizations={organizations}
+            organizationsWhenEmpty={organizations}
         />
     </Chrome>
 );
@@ -98,6 +100,7 @@ export const WithTopics = (): ReactElement => (
             preselectedTopics={[{ name: 'Anxiety' }, { name: 'Stress' }]}
             topics={[{ name: 'Anxiety' }, { name: 'Bullying' }, { name: 'Stress' }]}
             organizations={organizations}
+            organizationsWhenEmpty={organizations}
         />
     </Chrome>
 );
@@ -111,6 +114,7 @@ export const WhenEmpty = (): ReactElement => (
             preselectedTopics={[{ name: 'Bullying' }]}
             topics={[{ name: 'Bullying' }]}
             organizations={organizations}
+            organizationsWhenEmpty={organizations}
         />
     </Chrome>
 );

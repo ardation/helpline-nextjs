@@ -61,6 +61,51 @@ export interface GetCountryCodeProps_organizations {
   nodes: (GetCountryCodeProps_organizations_nodes | null)[] | null;
 }
 
+export interface GetCountryCodeProps_organizationsWhenEmpty_nodes_humanSupportTypes {
+  name: string;
+}
+
+export interface GetCountryCodeProps_organizationsWhenEmpty_nodes_categories {
+  name: string;
+}
+
+export interface GetCountryCodeProps_organizationsWhenEmpty_nodes_topics {
+  name: string;
+}
+
+export interface GetCountryCodeProps_organizationsWhenEmpty_nodes_openingHours {
+  day: string;
+  open: any;
+  close: any;
+}
+
+export interface GetCountryCodeProps_organizationsWhenEmpty_nodes {
+  id: string;
+  slug: string;
+  name: string;
+  alwaysOpen: boolean;
+  smsNumber: string | null;
+  phoneNumber: string | null;
+  url: string | null;
+  chatUrl: string | null;
+  timezone: string;
+  featured: boolean;
+  verified: boolean;
+  rating: number;
+  reviewCount: number;
+  humanSupportTypes: GetCountryCodeProps_organizationsWhenEmpty_nodes_humanSupportTypes[];
+  categories: GetCountryCodeProps_organizationsWhenEmpty_nodes_categories[];
+  topics: GetCountryCodeProps_organizationsWhenEmpty_nodes_topics[];
+  openingHours: GetCountryCodeProps_organizationsWhenEmpty_nodes_openingHours[];
+}
+
+export interface GetCountryCodeProps_organizationsWhenEmpty {
+  /**
+   * A list of nodes.
+   */
+  nodes: (GetCountryCodeProps_organizationsWhenEmpty_nodes | null)[] | null;
+}
+
 export interface GetCountryCodeProps_categories {
   name: string;
 }
@@ -82,6 +127,10 @@ export interface GetCountryCodeProps {
    * Find all organizations
    */
   organizations: GetCountryCodeProps_organizations;
+  /**
+   * Find all organizations
+   */
+  organizationsWhenEmpty: GetCountryCodeProps_organizationsWhenEmpty;
   /**
    * Find all categories
    */

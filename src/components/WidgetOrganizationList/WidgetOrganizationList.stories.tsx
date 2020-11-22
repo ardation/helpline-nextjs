@@ -43,15 +43,15 @@ export default {
 };
 
 export const Default = (): ReactElement => (
-    <WidgetOrganizationList filteredOrganizations={organizations} organizations={organizations} />
+    <WidgetOrganizationList organizations={organizations} organizationsWhenEmpty={organizations} />
 );
 
 export const WhenEmpty = (): ReactElement => (
-    <WidgetOrganizationList filteredOrganizations={[]} organizations={organizations} />
+    <WidgetOrganizationList organizations={[]} organizationsWhenEmpty={organizations} />
 );
 
 export const WhenNoAlternatives = (): ReactElement => (
-    <WidgetOrganizationList filteredOrganizations={[]} organizations={[]} />
+    <WidgetOrganizationList organizations={[]} organizationsWhenEmpty={[]} />
 );
 
 Default.story = {

@@ -19,6 +19,7 @@ type Props = {
     topics: { name: string }[];
     preselectedTopics: { name: string }[];
     organizations: Organization[];
+    organizationsWhenEmpty: Organization[];
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -63,6 +64,7 @@ const OrganizationList = ({
     topics,
     preselectedTopics,
     organizations,
+    organizationsWhenEmpty,
 }: Props): ReactElement => {
     const classes = useStyles();
     const [showFilters, setShowFilters] = useState(false);
@@ -78,8 +80,6 @@ const OrganizationList = ({
     };
     const [filteredOrganizations, setOrganizations] = useState(filterByPreselectedTopics());
     const [limit, setLimit] = useState(10);
-
-    const alwaysOpenOrganizations = organizations.filter((organization) => organization.alwaysOpen);
 
     const onChange = (changes): void => {
         setSelectedTopics(changes.topics);
@@ -148,8 +148,8 @@ const OrganizationList = ({
                         }.`}
                     </Typography>
                 </Box>
-                {filteredOrganizations.length === 0 && <OrganizationEmpty organizations={alwaysOpenOrganizations} />}
-                {(filteredOrganizations.length > 0 ? filteredOrganizations : alwaysOpenOrganizations)
+                {filteredOrganizations.length === 0 && <OrganizationEmpty organizations={organizationsWhenEmpty} />}
+                {(filteredOrganizations.length > 0 ? filteredOrganizations : organizationsWhenEmpty)
                     .slice(0, limit)
                     .map((organization) => (
                         <Box key={organization.slug} my={2} data-testid="OrganizationCard">

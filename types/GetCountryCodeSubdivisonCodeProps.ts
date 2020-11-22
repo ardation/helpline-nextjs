@@ -64,6 +64,51 @@ export interface GetCountryCodeSubdivisonCodeProps_organizations {
   nodes: (GetCountryCodeSubdivisonCodeProps_organizations_nodes | null)[] | null;
 }
 
+export interface GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty_nodes_humanSupportTypes {
+  name: string;
+}
+
+export interface GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty_nodes_categories {
+  name: string;
+}
+
+export interface GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty_nodes_topics {
+  name: string;
+}
+
+export interface GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty_nodes_openingHours {
+  day: string;
+  open: any;
+  close: any;
+}
+
+export interface GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty_nodes {
+  id: string;
+  slug: string;
+  name: string;
+  alwaysOpen: boolean;
+  smsNumber: string | null;
+  phoneNumber: string | null;
+  url: string | null;
+  chatUrl: string | null;
+  timezone: string;
+  featured: boolean;
+  verified: boolean;
+  rating: number;
+  reviewCount: number;
+  humanSupportTypes: GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty_nodes_humanSupportTypes[];
+  categories: GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty_nodes_categories[];
+  topics: GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty_nodes_topics[];
+  openingHours: GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty_nodes_openingHours[];
+}
+
+export interface GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty {
+  /**
+   * A list of nodes.
+   */
+  nodes: (GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty_nodes | null)[] | null;
+}
+
 export interface GetCountryCodeSubdivisonCodeProps_categories {
   name: string;
 }
@@ -85,6 +130,10 @@ export interface GetCountryCodeSubdivisonCodeProps {
    * Find all organizations
    */
   organizations: GetCountryCodeSubdivisonCodeProps_organizations;
+  /**
+   * Find all organizations
+   */
+  organizationsWhenEmpty: GetCountryCodeSubdivisonCodeProps_organizationsWhenEmpty;
   /**
    * Find all categories
    */

@@ -15,7 +15,14 @@ interface Props extends GetCountryCodeProps {
     key: string | string[];
 }
 
-const CountryCodePage = ({ country, organizations, categories, humanSupportTypes, topics }: Props): ReactElement => {
+const CountryCodePage = ({
+    country,
+    organizations,
+    organizationsWhenEmpty,
+    categories,
+    humanSupportTypes,
+    topics,
+}: Props): ReactElement => {
     const router = useRouter();
     const queryTopics = router.query.topics;
     let preselectedTopics: { name: string }[] = [];
@@ -34,6 +41,7 @@ const CountryCodePage = ({ country, organizations, categories, humanSupportTypes
             <Chrome country={country}>
                 <OrganizationList
                     organizations={organizations.nodes}
+                    organizationsWhenEmpty={organizationsWhenEmpty.nodes}
                     country={country}
                     preselectedTopics={preselectedTopics}
                     categories={categories}
@@ -56,35 +64,10 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                 locality
             }
             organizations(countryCode: $countryCode, subdivisionCodes: []) {
-                nodes {
-                    id
-                    slug
-                    name
-                    alwaysOpen
-                    smsNumber
-                    phoneNumber
-                    url
-                    chatUrl
-                    timezone
-                    featured
-                    verified
-                    rating
-                    reviewCount
-                    humanSupportTypes {
-                        name
-                    }
-                    categories {
-                        name
-                    }
-                    topics {
-                        name
-                    }
-                    openingHours {
-                        day
-                        open
-                        close
-                    }
-                }
+                ...organizationConnectionFields
+            }
+            organizationsWhenEmpty: organizations(countryCode: $countryCode, subdivisionCodes: [], featured: true) {
+                ...organizationConnectionFields
             }
             categories {
                 name
@@ -96,18 +79,48 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
                 name
             }
         }
+        fragment organizationConnectionFields on OrganizationConnection {
+            nodes {
+                id
+                slug
+                name
+                alwaysOpen
+                smsNumber
+                phoneNumber
+                url
+                chatUrl
+                timezone
+                featured
+                verified
+                rating
+                reviewCount
+                humanSupportTypes {
+                    name
+                }
+                categories {
+                    name
+                }
+                topics {
+                    name
+                }
+                openingHours {
+                    day
+                    open
+                    close
+                }
+            }
+        }
     `;
-    const { country, organizations, categories, humanSupportTypes, topics } = await request<GetCountryCodeProps>(
-        'https://api.findahelpline.com',
-        print(query),
-        {
-            countryCode: context.params.countryCode,
-        },
-    );
+    const { country, organizations, organizationsWhenEmpty, categories, humanSupportTypes, topics } = await request<
+        GetCountryCodeProps
+    >('https://api.findahelpline.com', print(query), {
+        countryCode: context.params.countryCode,
+    });
     return {
         props: {
             country,
             organizations,
+            organizationsWhenEmpty,
             categories,
             humanSupportTypes,
             topics,

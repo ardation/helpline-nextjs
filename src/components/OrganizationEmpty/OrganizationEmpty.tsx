@@ -40,7 +40,8 @@ const OrganizationEmpty = ({ variant, organizations }: Props): ReactElement => {
         <Container maxWidth="xs" className={classes.container}>
             <InfoOutlinedIcon className={classes.icon} fontSize="large" />
             <Typography>
-                We&apos;ve searched high and low and can&apos;t find a helpline in your area matching that criteria.
+                We&apos;ve searched high and low and can&apos;t find a specialist helpline matching your search
+                criteria.
             </Typography>
             {organizations.length > 0 ? (
                 <>

@@ -61,6 +61,7 @@ describe('OrganizationList', () => {
             <OrganizationList
                 country={country}
                 organizations={organizations}
+                organizationsWhenEmpty={organizations}
                 topics={topics}
                 categories={[]}
                 humanSupportTypes={[]}
@@ -76,6 +77,7 @@ describe('OrganizationList', () => {
                 country={country}
                 subdivision={subdivision}
                 organizations={organizations}
+                organizationsWhenEmpty={organizations}
                 topics={topics}
                 categories={[]}
                 humanSupportTypes={[]}
@@ -90,6 +92,7 @@ describe('OrganizationList', () => {
             <OrganizationList
                 country={country}
                 organizations={organizations}
+                organizationsWhenEmpty={organizations}
                 topics={topics}
                 categories={[]}
                 humanSupportTypes={[]}
@@ -117,6 +120,7 @@ describe('OrganizationList', () => {
                     { ...organization, slug: 'org-10' },
                     { ...organization, slug: 'org-11' },
                 ]}
+                organizationsWhenEmpty={organizations}
                 topics={topics}
                 categories={[]}
                 humanSupportTypes={[]}
@@ -136,6 +140,7 @@ describe('OrganizationList', () => {
                 <OrganizationList
                     country={country}
                     organizations={organizations}
+                    organizationsWhenEmpty={organizations}
                     topics={[]}
                     categories={[]}
                     humanSupportTypes={[]}
@@ -156,6 +161,7 @@ describe('OrganizationList', () => {
                 <OrganizationList
                     country={country}
                     organizations={organizations}
+                    organizationsWhenEmpty={organizations}
                     topics={[]}
                     categories={[]}
                     humanSupportTypes={[]}
@@ -173,6 +179,7 @@ describe('OrganizationList', () => {
                 <OrganizationList
                     country={country}
                     organizations={organizations}
+                    organizationsWhenEmpty={organizations}
                     topics={[]}
                     categories={[]}
                     humanSupportTypes={[]}
@@ -203,6 +210,7 @@ describe('OrganizationList', () => {
                         { ...organization, slug: 'org-10' },
                         { ...organization, slug: 'org-11' },
                     ]}
+                    organizationsWhenEmpty={organizations}
                     topics={topics}
                     categories={[]}
                     humanSupportTypes={[]}
@@ -232,6 +240,7 @@ describe('OrganizationList', () => {
                 <OrganizationList
                     country={country}
                     organizations={organizations}
+                    organizationsWhenEmpty={organizations}
                     topics={[]}
                     categories={[]}
                     humanSupportTypes={[]}
@@ -246,6 +255,7 @@ describe('OrganizationList', () => {
                 <OrganizationList
                     country={country}
                     organizations={organizations}
+                    organizationsWhenEmpty={organizations}
                     topics={[]}
                     categories={[]}
                     humanSupportTypes={[]}
@@ -261,6 +271,7 @@ describe('OrganizationList', () => {
                 <OrganizationList
                     country={country}
                     organizations={organizations}
+                    organizationsWhenEmpty={organizations}
                     topics={[]}
                     categories={[]}
                     humanSupportTypes={[]}
@@ -281,6 +292,7 @@ describe('OrganizationList', () => {
                 <OrganizationList
                     country={country}
                     organizations={organizations}
+                    organizationsWhenEmpty={organizations}
                     topics={[{ name: 'Racism' }]}
                     categories={[]}
                     humanSupportTypes={[]}
@@ -291,6 +303,7 @@ describe('OrganizationList', () => {
             expect(getByTestId('OrganizationEmptyDefault')).toBeInTheDocument();
             expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
                 '6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzFor youthAll issuesTextCallWeb Chat',
+                '⁠5.0(10)',
             ]);
         });
     });

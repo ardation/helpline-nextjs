@@ -41,7 +41,7 @@ const organizations = [
 
 describe('WidgetOrganizationList', () => {
     it('should hide carousel when no organizations', () => {
-        const { getByTestId } = render(<WidgetOrganizationList filteredOrganizations={[]} organizations={[]} />);
+        const { getByTestId } = render(<WidgetOrganizationList organizations={[]} organizationsWhenEmpty={[]} />);
         expect(() => getByTestId('previousButton')).toThrow();
         expect(() => getByTestId('nextButton')).toThrow();
     });
@@ -61,7 +61,7 @@ describe('WidgetOrganizationList', () => {
 
         it('should toggle buttons disabled state', () => {
             const { getByTestId } = render(
-                <WidgetOrganizationList filteredOrganizations={organizations} organizations={organizations} />,
+                <WidgetOrganizationList organizations={organizations} organizationsWhenEmpty={organizations} />,
             );
             const previousButton = getByTestId('previousButton');
             const nextButton = getByTestId('nextButton');
@@ -76,15 +76,17 @@ describe('WidgetOrganizationList', () => {
 
         it('should show empty state', () => {
             const { getByTestId } = render(
-                <WidgetOrganizationList filteredOrganizations={[]} organizations={organizations} />,
+                <WidgetOrganizationList organizations={[]} organizationsWhenEmpty={organizations} />,
             );
             expect(getByTestId('OrganizationEmptyWidget')).toBeInTheDocument();
             const previousButton = getByTestId('previousButton');
             const nextButton = getByTestId('nextButton');
             expect(previousButton).toBeDisabled();
             fireEvent.click(nextButton);
+            fireEvent.click(nextButton);
             expect(previousButton).not.toBeDisabled();
             expect(nextButton).toBeDisabled();
+            fireEvent.click(previousButton);
             fireEvent.click(previousButton);
             expect(previousButton).toBeDisabled();
             expect(nextButton).not.toBeDisabled();

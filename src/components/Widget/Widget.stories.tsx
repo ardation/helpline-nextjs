@@ -71,6 +71,7 @@ export const widgetPropsMock = {
     humanSupportTypes: [],
     topics: [],
     organizations: organizations,
+    organizationsWhenEmpty: organizations,
 };
 
 export default {
