@@ -123,9 +123,14 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             }
         }
     `;
-    const { country, organizations, organizationsWhenEmpty, categories, humanSupportTypes, topics } = await request<
-        GetCountryCodeSubdivisonCodeProps
-    >('https://api.findahelpline.com', print(query), {
+    const {
+        country,
+        organizations,
+        organizationsWhenEmpty,
+        categories,
+        humanSupportTypes,
+        topics,
+    } = await request<GetCountryCodeSubdivisonCodeProps>('https://api.findahelpline.com', print(query), {
         countryCode: context.params.countryCode,
         subdivisionCode: context.params.subdivisionCode,
     });
