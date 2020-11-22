@@ -79,7 +79,7 @@
         "husky": "^4.3.0",
         "jest": "^25.5.4",
         "jest-raw-loader": "^1.0.1",
-        "jsx-dom": "^6.4.15",
+        "jsx-dom": "^6.4.23",
         "lint-staged": "^10.4.0",
         "prettier": "^2.0.5",
         "raw-loader": "^4.0.1",
