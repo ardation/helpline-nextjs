@@ -30,7 +30,7 @@ type Props = {
     countries: Country[];
     topics: Topic[];
     variant?: 'embed';
-    onChange?: (country?: Country, subdivion?: Subdivision, topics: Topic[]) => void;
+    onChange?: (topics: Topic[], country?: Country, subdivion?: Subdivision) => void;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -90,7 +90,7 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
     const classes = useStyles();
 
     useEffect(() => {
-        onChange && onChange(selectedCountry, selectedSubdivision, selectedTopics);
+        onChange && onChange(selectedTopics, selectedCountry, selectedSubdivision);
     }, [selectedCountry, selectedSubdivision, selectedTopics]);
 
     return (

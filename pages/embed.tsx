@@ -13,7 +13,7 @@ const EmbedPage = ({ countries, topics }: GetEmbedProps): ReactElement => {
             <Head>
                 <title>Find A Helpline</title>
             </Head>
-            <Chrome footer={true}>
+            <Chrome>
                 <Embed countries={countries} topics={topics} />
             </Chrome>
         </>

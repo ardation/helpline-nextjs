@@ -67,4 +67,19 @@ describe('Search', () => {
         fireEvent.click(elements[0]);
         expect(getByTestId('searchButton')).toHaveAttribute('href', '/au?topics=happy');
     });
+
+    describe('variant is embed', () => {
+        it('should hide content', () => {
+            const { queryByText, queryByRole } = render(
+                <Search countries={countries} topics={topics} variant="embed" />,
+            );
+            expect(
+                queryByText(
+                    'Struggling? Get free, confidential support from a real human over phone, text or webchat.',
+                ),
+            ).not.toBeInTheDocument();
+            expect(queryByRole('button', { name: 'A note from our founder' })).not.toBeInTheDocument();
+            expect(queryByRole('button', { name: 'Hear when we launch in your country' })).not.toBeInTheDocument();
+        });
+    });
 });

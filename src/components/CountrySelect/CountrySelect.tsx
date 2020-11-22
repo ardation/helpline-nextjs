@@ -109,6 +109,7 @@ const CountrySelect = ({
     return (
         <Box className={compact([classes.box, inline && classes.inline]).join(' ')}>
             <Autocomplete
+                aria-label="country"
                 value={selectedCountry}
                 style={{ width: 300 }}
                 options={sortBy('name', countries) as Country[]}
@@ -151,6 +152,7 @@ const CountrySelect = ({
             />
             {selectedCountry && selectedCountry.subdivisions.length > 0 && (
                 <Autocomplete
+                    aria-label="subdivision"
                     classes={{
                         root: classes.root,
                         inputRoot: classes.inputRoot,
