@@ -287,7 +287,7 @@ describe('OrganizationList', () => {
     });
 
     describe('empty', () => {
-        it('should display all 24/7 helplines', () => {
+        it('should display all organizationsWhenEmpty helplines', () => {
             const { getByText, getByTestId, getAllByTestId } = render(
                 <OrganizationList
                     country={country}
@@ -302,8 +302,8 @@ describe('OrganizationList', () => {
             expect(getByText('Helplines in New Zealand for racism.')).toBeInTheDocument();
             expect(getByTestId('OrganizationEmptyDefault')).toBeInTheDocument();
             expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
+                '5.0(10)',
                 '6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzFor youthAll issuesTextCallWeb Chat',
-                '⁠5.0(10)',
             ]);
         });
     });

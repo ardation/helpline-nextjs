@@ -4,6 +4,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Box, Fab } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { sortBy } from 'lodash/fp';
 import OrganizationCard, { Organization } from '../OrganizationCard/OrganizationCard';
 import OrganizationEmpty from '../OrganizationEmpty';
 
@@ -108,11 +109,17 @@ const WidgetOrganizationList = ({ organizations, organizationsWhenEmpty }: Props
                                     <OrganizationEmpty organizations={organizationsWhenEmpty} variant="widget" />
                                 </Box>
                             )}
-                            {(organizations.length > 0 ? organizations : organizationsWhenEmpty).map((organization) => (
-                                <Box key={organization.slug} className={classes.slide} data-testid="OrganizationCard">
-                                    <OrganizationCard organization={organization} variant="widget" />
-                                </Box>
-                            ))}
+                            {(organizations.length > 0 ? organizations : sortBy('name', organizationsWhenEmpty)).map(
+                                (organization) => (
+                                    <Box
+                                        key={organization.slug}
+                                        className={classes.slide}
+                                        data-testid="OrganizationCard"
+                                    >
+                                        <OrganizationCard organization={organization} variant="widget" />
+                                    </Box>
+                                ),
+                            )}
                         </Box>
                     </EmblaCarouselReact>
                     <Fab
