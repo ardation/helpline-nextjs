@@ -1,5 +1,5 @@
 import CloseIcon from '@material-ui/icons/Close';
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Box, Button, Backdrop, NoSsr } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -29,8 +29,9 @@ type Country = {
 
 export type WidgetProps = {
     preselectedCountry: Country;
-    countries: Country[];
     preselectedSubdivision?: Subdivision;
+    preselectedTopics: { name: string }[];
+    countries: Country[];
     categories: { name: string }[];
     humanSupportTypes: { name: string }[];
     topics: { name: string }[];
@@ -92,6 +93,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Widget = ({
     preselectedCountry,
     preselectedSubdivision,
+    preselectedTopics,
     countries,
     categories,
     humanSupportTypes,
@@ -100,20 +102,25 @@ const Widget = ({
 }: WidgetProps): ReactElement => {
     const classes = useStyles();
     const [showFilters, setShowFilters] = useState(false);
-    const [filteredOrganizations, setOrganizations] = useState(
-        filterAndSortOrganizations(organizations, {
+    const filterByPreselectedTopics = (): Organization[] => {
+        return filterAndSortOrganizations(organizations, {
             contactMethods: [],
             categories: [],
             humanSupportTypes: [],
-            topics: [],
-            sorts: [{ name: 'Featured' }],
-        }),
-    );
+            topics: preselectedTopics,
+            sorts: [{ name: preselectedTopics.length > 0 ? 'Relevance' : 'Featured' }],
+        });
+    };
+    const [filteredOrganizations, setOrganizations] = useState(filterByPreselectedTopics());
 
     const onChange = (changes): void => {
         setOrganizations(filterAndSortOrganizations(organizations, changes));
         setShowFilters(false);
     };
+
+    useEffect(() => {
+        setOrganizations(filterByPreselectedTopics());
+    }, [preselectedTopics]);
 
     return (
         <>
@@ -175,6 +182,7 @@ const Widget = ({
                         <OrganizationFilter
                             categories={categories}
                             humanSupportTypes={humanSupportTypes}
+                            preselectedTopics={preselectedTopics}
                             topics={topics}
                             onChange={onChange}
                         />

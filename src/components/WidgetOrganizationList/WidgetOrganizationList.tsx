@@ -100,7 +100,7 @@ const WidgetOrganizationList = ({ organizations }: Props): ReactElement => {
                     <EmblaCarouselReact>
                         <Box className={classes.container}>
                             {organizations.map((organization) => (
-                                <Box key={organization.slug} className={classes.slide}>
+                                <Box key={organization.slug} className={classes.slide} data-testid="OrganizationCard">
                                     <OrganizationCard organization={organization} variant="widget" />
                                 </Box>
                             ))}

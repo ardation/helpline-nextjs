@@ -5,6 +5,7 @@ import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { find, flatten } from 'lodash/fp';
+import { useRouter } from 'next/router';
 import {
     GetWidgetSubdivisionCodeProps,
     GetWidgetSubdivisionCodeProps_country_subdivisions as Subdivision,
@@ -26,6 +27,15 @@ const WidgetSubdivisionCodePage = ({
     topics,
     countries,
 }: Props): ReactElement => {
+    const router = useRouter();
+    const queryTopics = router.query.topics;
+    let preselectedTopics: { name: string }[] = [];
+
+    if (queryTopics) {
+        preselectedTopics = [queryTopics].flat().map((topic) => {
+            return { name: topic };
+        });
+    }
     return (
         <>
             <Head>
@@ -38,6 +48,7 @@ const WidgetSubdivisionCodePage = ({
                 countries={countries}
                 preselectedCountry={country}
                 preselectedSubdivision={subdivision}
+                preselectedTopics={preselectedTopics}
                 organizations={organizations.nodes}
                 topics={topics}
                 categories={categories}

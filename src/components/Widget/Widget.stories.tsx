@@ -70,6 +70,7 @@ export const widgetPropsMock = {
     categories: [],
     humanSupportTypes: [],
     topics: [],
+    preselectedTopics: [],
     organizations: organizations,
 };
 

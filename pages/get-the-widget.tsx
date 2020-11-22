@@ -96,6 +96,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<{ props: WidgetP
     return {
         props: {
             preselectedCountry: country,
+            preselectedTopics: [],
             organizations: organizations.nodes,
             categories,
             humanSupportTypes,
