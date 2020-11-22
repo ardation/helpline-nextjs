@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
+import { useRouter } from 'next/router';
 import { GetWidgetCountryCodeProps } from '../../types/GetWidgetCountryCodeProps';
 import Widget from '../../src/components/Widget';
 import { GetWidgetCountryCodePaths } from '../../types/GetWidgetCountryCodePaths';
@@ -21,6 +22,16 @@ const WidgetCountryCodePage = ({
     topics,
     countries,
 }: Props): ReactElement => {
+    const router = useRouter();
+    const queryTopics = router.query.topics;
+    let preselectedTopics: { name: string }[] = [];
+
+    if (queryTopics) {
+        preselectedTopics = [queryTopics].flat().map((topic) => {
+            return { name: topic };
+        });
+    }
+
     return (
         <>
             <Head>
@@ -32,6 +43,7 @@ const WidgetCountryCodePage = ({
                 preselectedCountry={country}
                 organizations={organizations.nodes}
                 organizationsWhenEmpty={organizationsWhenEmpty.nodes}
+                preselectedTopics={preselectedTopics}
                 topics={topics}
                 categories={categories}
                 humanSupportTypes={humanSupportTypes}

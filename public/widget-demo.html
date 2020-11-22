@@ -10,10 +10,16 @@
         </style>
     </head>
     <body>
-        <div id="widget"></div>
         <script src="/widget.min.js"></script>
+        <div id="country-widget"></div>
+        <div id="subdivision-widget"></div>
+        <div id="topics-widget"></div>
         <script>
-            Widget.default({ countryCode: 'us' }).render('#widget');
+            Widget.default({ 
+                countryCode: 'us',
+                subdivisionCode: 'ny',
+                topics: ['Anxiety', 'Work']
+            }).render('#topics-widget');
         </script>
     </body>
 </html>

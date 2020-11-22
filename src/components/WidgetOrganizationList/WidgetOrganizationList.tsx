@@ -109,7 +109,7 @@ const WidgetOrganizationList = ({ organizations, organizationsWhenEmpty }: Props
                                 </Box>
                             )}
                             {(organizations.length > 0 ? organizations : organizationsWhenEmpty).map((organization) => (
-                                <Box key={organization.slug} className={classes.slide}>
+                                <Box key={organization.slug} className={classes.slide} data-testid="OrganizationCard">
                                     <OrganizationCard organization={organization} variant="widget" />
                                 </Box>
                             ))}

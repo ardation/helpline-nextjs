@@ -7,14 +7,14 @@ import Embed from '../src/components/Embed';
 import Chrome from '../src/components/Chrome';
 import { GetEmbedProps } from '../types/GetEmbedProps';
 
-const EmbedPage = ({ countries }: GetEmbedProps): ReactElement => {
+const EmbedPage = ({ countries, topics }: GetEmbedProps): ReactElement => {
     return (
         <>
             <Head>
                 <title>Find A Helpline</title>
             </Head>
-            <Chrome footer={true}>
-                <Embed countries={countries} />
+            <Chrome>
+                <Embed countries={countries} topics={topics} />
             </Chrome>
         </>
     );
@@ -26,13 +26,22 @@ export const getStaticProps = async (): Promise<{ props: GetEmbedProps }> => {
             countries {
                 code
                 name
+                locality
+                subdivisions {
+                    code
+                    name
+                }
+            }
+            topics {
+                name
             }
         }
     `;
-    const { countries } = await request<GetEmbedProps>('https://api.findahelpline.com', print(query));
+    const { countries, topics } = await request<GetEmbedProps>('https://api.findahelpline.com', print(query));
     return {
         props: {
             countries,
+            topics,
         },
     };
 };

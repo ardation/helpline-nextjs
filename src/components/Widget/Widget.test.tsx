@@ -37,7 +37,7 @@ describe('Widget', () => {
             humanSupportTypes: [],
             categories: [],
             timezone: 'Pacific/Auckland',
-            topics: [],
+            topics: [{ name: 'Anxiety' }],
             featured: false,
             verified: false,
             rating: 5,
@@ -68,13 +68,14 @@ describe('Widget', () => {
         locality: LocalityEnum.LOCATION,
     };
     const subdivision = { name: 'Bay of Plenty', code: 'BOP' };
-    const topics = [];
+    const topics = [{ name: 'Anxiety' }];
 
     it('should display country name', () => {
         const { getByTestId } = render(
             <Widget
                 countries={countries}
                 preselectedCountry={country}
+                preselectedTopics={[]}
                 organizations={[]}
                 organizationsWhenEmpty={[]}
                 topics={topics}
@@ -91,6 +92,7 @@ describe('Widget', () => {
                 countries={countries}
                 preselectedCountry={country}
                 preselectedSubdivision={subdivision}
+                preselectedTopics={[]}
                 organizations={[]}
                 organizationsWhenEmpty={[]}
                 topics={topics}
@@ -117,6 +119,7 @@ describe('Widget', () => {
             <Widget
                 countries={countries}
                 preselectedCountry={country}
+                preselectedTopics={[]}
                 organizations={organizations}
                 organizationsWhenEmpty={organizations}
                 topics={[]}
@@ -138,6 +141,7 @@ describe('Widget', () => {
             <Widget
                 countries={countries}
                 preselectedCountry={country}
+                preselectedTopics={[]}
                 organizations={[]}
                 organizationsWhenEmpty={organizations}
                 topics={[]}
@@ -156,6 +160,7 @@ describe('Widget', () => {
             <Widget
                 countries={countries}
                 preselectedCountry={country}
+                preselectedTopics={[]}
                 organizations={[]}
                 organizationsWhenEmpty={[]}
                 topics={[]}
@@ -167,5 +172,35 @@ describe('Widget', () => {
         expect(getByTestId('backdrop')).toHaveStyle({ opacity: 1 });
         fireEvent.click(getByTestId('backdrop'));
         expect(getByTestId('backdrop')).toHaveStyle({ opacity: 0 });
+    });
+
+    it('should allow preselectedTopics to be updated', () => {
+        const { getAllByTestId, rerender } = render(
+            <Widget
+                countries={countries}
+                preselectedCountry={country}
+                organizations={organizations}
+                topics={topics}
+                categories={[]}
+                humanSupportTypes={[]}
+                preselectedTopics={[]}
+            />,
+        );
+        expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
+            'Open 24/7',
+            'Open 24/7Volunteers, Staff2340800 376 633website.co.nzFor youthAll issuesTextCallWeb Chat',
+        ]);
+        rerender(
+            <Widget
+                countries={countries}
+                preselectedCountry={country}
+                organizations={organizations}
+                topics={topics}
+                categories={[]}
+                humanSupportTypes={[]}
+                preselectedTopics={[{ name: 'Anxiety' }]}
+            />,
+        );
+        expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual(['Open 24/7']);
     });
 });
