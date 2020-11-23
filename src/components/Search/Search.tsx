@@ -30,7 +30,7 @@ type Props = {
     countries: Country[];
     topics: Topic[];
     variant?: 'embed';
-    onChange?: (topics: Topic[], country?: Country, subdivion?: Subdivision) => void;
+    onChange?: (topics: Topic[], country?: Country, subdivision?: Subdivision) => void;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
