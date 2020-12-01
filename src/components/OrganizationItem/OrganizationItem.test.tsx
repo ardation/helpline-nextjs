@@ -3,6 +3,8 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import moment from 'moment-timezone';
 import OrganizationItem from '.';
 
+jest.mock('next/link', () => ({ children }) => children);
+
 describe('OrganizationItem', () => {
     let organization;
 
