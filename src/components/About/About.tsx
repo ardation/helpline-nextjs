@@ -245,7 +245,6 @@ const About = (): ReactElement => {
                         <Typography>Immediate emotional support.</Typography>
                     </Box>
                 </Container>
-
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
                         <Typography variant="h6" gutterBottom>
