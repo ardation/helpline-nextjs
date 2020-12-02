@@ -182,7 +182,6 @@ const About = (): ReactElement => {
                         </Box>
                     </Container>
                 </Box>
-
                 <Container className={classes.highlights} maxWidth="sm">
                     <Box className={classes.highlight}>
                         <Box className={classes.highlightIcon}>
