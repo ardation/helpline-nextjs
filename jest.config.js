@@ -3,6 +3,7 @@ process.env.TZ = 'GMT';
 module.exports = {
     roots: ['<rootDir>/src'],
     preset: 'ts-jest',
+    setupFiles: ['<rootDir>/tests/setupTest.js'],
     setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
     transform: {
         '^.+\\.tsx?$': 'ts-jest',

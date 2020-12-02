@@ -50,6 +50,12 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'center',
             height: '100%',
             maxWidth: '444px',
+            [theme.breakpoints.down('md')]: {
+                marginBottom: theme.spacing(11),
+            },
+            '@media (max-width: 330px)': {
+                marginBottom: theme.spacing(23),
+            },
         },
         containerEmbed: {
             padding: 0,

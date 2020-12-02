@@ -125,8 +125,8 @@ const About = (): ReactElement => {
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
                         <Typography variant="h6" gutterBottom>
-                            Helplines exist the world over, but finding the right one for you remains difficult. We’re
-                            set on changing that.
+                            Helplines exist the world over, but finding the right one for you remains difficult.
+                            We&apos;re set on changing that.
                         </Typography>
                         <Typography gutterBottom>
                             Find A Helpline is a free tool that connects people to the most relevant mental health
