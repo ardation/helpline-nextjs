@@ -29,34 +29,34 @@ const Footer = (): ReactElement => {
         <Container maxWidth="xs">
             <Box my={3} className={classes.box}>
                 <Typography className={classes.links}>
-                    <NextLink href="/about" passHref>
+                    <NextLink href="/about" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Link className={classes.link} data-testid="about">
                             About
                         </Link>
                     </NextLink>
-                    <NextLink href="/get-the-widget" passHref>
+                    <NextLink href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Link className={classes.link} data-testid="getTheWidget">
                             Get The Widget
                         </Link>
                     </NextLink>
-                    <NextLink href="/contact" passHref>
+                    <NextLink href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Link className={classes.link} data-testid="contact">
                             Contact
                         </Link>
                     </NextLink>
-                    <NextLink href="/gratitude" passHref>
+                    <NextLink href="/gratitude" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Link className={classes.link} data-testid="gratitude">
                             Gratitude
                         </Link>
                     </NextLink>
                 </Typography>
                 <Typography className={classes.links}>
-                    <NextLink href="/privacy" passHref>
+                    <NextLink href="/privacy" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Link className={classes.link} data-testid="privacy">
                             Privacy Policy
                         </Link>
                     </NextLink>
-                    <NextLink href="/terms" passHref>
+                    <NextLink href="/terms" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Link className={classes.link} data-testid="terms">
                             Terms of Service
                         </Link>

@@ -29,7 +29,7 @@ const SideBar = (): ReactElement => {
             <Drawer anchor="right" open={open} onClose={(): void => setOpen(false)}>
                 <div className={classes.list} onClick={(): void => setOpen(false)}>
                     <List>
-                        <Link href="/" passHref>
+                        <Link href="/" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
                                     <HomeIcon />
@@ -37,7 +37,7 @@ const SideBar = (): ReactElement => {
                                 <ListItemText primary="Home" />
                             </ListItem>
                         </Link>
-                        <Link href="/about" passHref>
+                        <Link href="/about" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
                                     <InfoIcon />
@@ -45,7 +45,7 @@ const SideBar = (): ReactElement => {
                                 <ListItemText primary="About" />
                             </ListItem>
                         </Link>
-                        <Link href="/get-the-widget" passHref>
+                        <Link href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
                                     <ExtensionIcon />
@@ -53,7 +53,7 @@ const SideBar = (): ReactElement => {
                                 <ListItemText primary="Get the Widget" />
                             </ListItem>
                         </Link>
-                        <Link href="/contact" passHref>
+                        <Link href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
                                     <EmailIcon />
@@ -61,7 +61,7 @@ const SideBar = (): ReactElement => {
                                 <ListItemText primary="Contact" />
                             </ListItem>
                         </Link>
-                        <Link href="/gratitude" passHref>
+                        <Link href="/gratitude" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
                                     <FavoriteIcon />
@@ -70,12 +70,12 @@ const SideBar = (): ReactElement => {
                             </ListItem>
                         </Link>
                         <Divider />
-                        <Link href="/privacy" passHref>
+                        <Link href="/privacy" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemText primary="Privacy Policy" primaryTypographyProps={{ variant: 'body2' }} />
                             </ListItem>
                         </Link>
-                        <Link href="/terms" passHref>
+                        <Link href="/terms" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemText
                                     primary="Terms of Service"

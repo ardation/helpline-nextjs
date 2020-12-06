@@ -166,6 +166,7 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                             query: { topics: selectedTopics.map((topic) => topic.name) },
                         }}
                         passHref
+                        prefetch={process.env.NODE_ENV === 'production'}
                     >
                         <Button
                             data-testid="searchButton"

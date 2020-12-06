@@ -110,7 +110,7 @@ const About = (): ReactElement => {
                         </Typography>
                     </Box>
                     <Box>
-                        <NextLink href="/" passHref>
+                        <NextLink href="/" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <Button className={classes.button} color="secondary" variant="contained" size="large">
                                 Find a helpline
                             </Button>
@@ -138,7 +138,7 @@ const About = (): ReactElement => {
                         </Typography>
                         <Typography>
                             Find A Helpline is also available as a{' '}
-                            <NextLink href="/get-the-widget" passHref>
+                            <NextLink href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
                                 <Link className={classes.link}>widget</Link>
                             </NextLink>{' '}
                             to easily embed on your website.
@@ -205,7 +205,7 @@ const About = (): ReactElement => {
                             <Typography variant="h5">Want Find A Helpline on your website?</Typography>
                         </Box>
                         <Box>
-                            <NextLink href="/get-the-widget" passHref>
+                            <NextLink href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
                                 <Button className={classes.button} color="secondary" variant="contained" size="large">
                                     Get the widget
                                 </Button>
@@ -255,7 +255,7 @@ const About = (): ReactElement => {
                                 academics, not-for-profits and helplines.
                             </Typography>
                         </Box>
-                        <NextLink href="/contact" passHref>
+                        <NextLink href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <OutboundLink
                                 eventLabel="mailto:elliot@livefortomorrow.co"
                                 to="mailto:elliot@livefortomorrow.co"
