@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: '4rem',
             paddingBottom: theme.spacing(1),
         },
-        backgroundImage: {
+        backgroundImageContainer: {
             position: 'absolute',
             top: 0,
             left: 0,
@@ -89,6 +89,9 @@ const useStyles = makeStyles((theme: Theme) =>
                 height: '100%',
                 background: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5))',
             },
+        },
+        backgroundImage: {
+            objectFit: 'cover',
         },
         link: {
             textDecoration: 'underline',
@@ -127,8 +130,13 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </NavBar>
             )}
             <Box className={[classes.container].join(' ')}>
-                <Box className={classes.backgroundImage}>
-                    <Image src="/bg0.jpg" layout="fill" alt="Women laying down looking at her phone" />
+                <Box className={classes.backgroundImageContainer}>
+                    <Image
+                        src="/bg0.jpg"
+                        layout="fill"
+                        alt="Women laying down looking at her phone"
+                        className={classes.backgroundImage}
+                    />
                 </Box>
                 <Container className={classes.containerContent} maxWidth="xs">
                     <Box mb={3}>
@@ -270,8 +278,13 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                     </Container>
                 </Box>
                 <Box className={[classes.container].join(' ')}>
-                    <Box className={classes.backgroundImage}>
-                        <Image src="/bg1.jpg" layout="fill" alt="Man holding phone" />
+                    <Box className={classes.backgroundImageContainer}>
+                        <Image
+                            src="/bg1.jpg"
+                            layout="fill"
+                            alt="Man holding phone"
+                            className={classes.backgroundImage}
+                        />
                     </Box>
                     <Container className={classes.containerContent} maxWidth="xs">
                         <Box mb={3}>
