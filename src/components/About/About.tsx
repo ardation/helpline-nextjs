@@ -11,6 +11,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
 import { OutboundLink } from 'react-ga';
 import Flag from 'react-world-flags';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Footer from '../Footer';
 import NavBar from '../NavBar';
 import SideBar from '../SideBar';
@@ -24,15 +25,13 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'left',
         },
         container: {
+            position: 'relative',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             paddingTop: theme.spacing(5),
             paddingBottom: theme.spacing(5),
-            height: 'calc(80vh - 130px)',
-            [theme.breakpoints.down('sm')]: {
-                height: 'calc(55vh - 130px)',
-            },
+            height: 'calc(100vh - 130px)',
             textAlign: 'center',
             color: '#FFFFFF',
         },
@@ -75,31 +74,12 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingBottom: theme.spacing(1),
         },
         backgroundImage: {
-            objectFit: 'cover',
-        },
-        link: {
-            textDecoration: 'underline',
-            color: theme.palette.text.primary,
-        },
-        boxImage: {
-            position: 'relative',
-        },
-        containerContent: {
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            flexGrow: 1,
-        },
-        containerImageContent: {
             position: 'absolute',
-            top: '50%',
-            left: '50%',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-        },
-        containerImage: {
-            paddingLeft: '0',
-            paddingRight: '0',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -1,
             '& > div::after': {
                 content: '" "',
                 position: 'absolute',
@@ -109,6 +89,16 @@ const useStyles = makeStyles((theme: Theme) =>
                 height: '100%',
                 background: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5))',
             },
+        },
+        link: {
+            textDecoration: 'underline',
+            color: theme.palette.text.primary,
+        },
+        containerContent: {
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            flexGrow: 1,
         },
         outboundLink: {
             textDecoration: 'none',
@@ -136,31 +126,26 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                     <SideBar />
                 </NavBar>
             )}
-            <Box className={classes.container}>
-                <Box className={classes.boxImage}>
-                    <Container className={[classes.container, classes.containerImage].join(' ')} maxWidth="xs">
-                        <Image
-                            className={classes.backgroundImage}
-                            src="/bg0.jpg"
-                            layout="fill"
-                            alt="Women laying down looking at her phone"
-                        />
-                    </Container>
-                    <Container
-                        className={[classes.containerContent, classes.containerImageContent].join(' ')}
-                        maxWidth="xs"
-                    >
-                        <Box mb={3}>
-                            <Typography variant="h5">
-                                Whatever you&apos;re
-                                <br />
-                                going through, free
-                                <br />
-                                help is available.
-                            </Typography>
-                        </Box>
-                    </Container>
+            <Box className={[classes.container].join(' ')}>
+                <Box className={classes.backgroundImage}>
+                    <Image src="/bg0.jpg" layout="fill" alt="Women laying down looking at her phone" />
                 </Box>
+                <Container className={classes.containerContent} maxWidth="xs">
+                    <Box mb={3}>
+                        <Typography variant="h5">
+                            Whatever you&apos;re
+                            <br />
+                            going through, free
+                            <br />
+                            help is available.
+                        </Typography>
+                    </Box>
+                </Container>
+                {navBar && (
+                    <Box>
+                        <ArrowDownwardIcon />
+                    </Box>
+                )}
             </Box>
             <Box className={classes.center}>
                 <Box className={[classes.content, classes.left].join(' ')}>
@@ -284,19 +269,11 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                         </Typography>
                     </Container>
                 </Box>
-                <Box className={[classes.container, classes.boxImage].join(' ')}>
-                    <Container className={[classes.container, classes.containerImage].join(' ')} maxWidth="xs">
-                        <Image
-                            className={classes.backgroundImage}
-                            src="/bg1.jpg"
-                            layout="fill"
-                            alt="Man holding phone"
-                        />
-                    </Container>
-                    <Container
-                        className={[classes.containerContent, classes.containerImageContent].join(' ')}
-                        maxWidth="xs"
-                    >
+                <Box className={[classes.container].join(' ')}>
+                    <Box className={classes.backgroundImage}>
+                        <Image src="/bg1.jpg" layout="fill" alt="Man holding phone" />
+                    </Box>
+                    <Container className={classes.containerContent} maxWidth="xs">
                         <Box mb={3}>
                             <Typography variant="h5">Want Find A Helpline on your website?</Typography>
                         </Box>
