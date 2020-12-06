@@ -100,6 +100,15 @@ const useStyles = makeStyles((theme: Theme) =>
         containerImage: {
             paddingLeft: '0',
             paddingRight: '0',
+            '& > div::after': {
+                content: '" "',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                background: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5))',
+            },
         },
         outboundLink: {
             textDecoration: 'none',
@@ -135,7 +144,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                             src="/bg0.jpg"
                             layout="fill"
                             alt="Women laying down looking at her phone"
-                        ></Image>
+                        />
                     </Container>
                     <Container
                         className={[classes.containerContent, classes.containerImageContent].join(' ')}
@@ -282,7 +291,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                             src="/bg1.jpg"
                             layout="fill"
                             alt="Man holding phone"
-                        ></Image>
+                        />
                     </Container>
                     <Container
                         className={[classes.containerContent, classes.containerImageContent].join(' ')}
