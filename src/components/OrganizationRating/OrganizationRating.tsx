@@ -41,7 +41,12 @@ const OrganizationRating = ({ organization, variant }: Props): ReactElement => {
                         {variant !== 'item' && (
                             <>
                                 {'('}
-                                <Link href="/organizations/[slug]" as={`/organizations/${organization.slug}`} passHref>
+                                <Link
+                                    href="/organizations/[slug]"
+                                    as={`/organizations/${organization.slug}`}
+                                    passHref
+                                    prefetch={process.env.NODE_ENV === 'production'}
+                                >
                                     <a
                                         data-testid="reviewsLink"
                                         className={classes.link}

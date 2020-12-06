@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import Document, { Head, Main, NextScript, DocumentInitialProps } from 'next/document';
+import Document, { Head, Main, NextScript, DocumentInitialProps, Html } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import { RenderPageResult } from 'next/dist/next-server/lib/utils';
 import theme from '../src/theme';
@@ -7,7 +7,7 @@ import theme from '../src/theme';
 class MyDocument extends Document {
     render(): ReactElement {
         return (
-            <html lang="en">
+            <Html lang="en">
                 <Head>
                     <meta name="theme-color" content={theme.palette.primary.main} />
                     <link
@@ -25,7 +25,7 @@ class MyDocument extends Document {
                     <Main />
                     <NextScript />
                 </body>
-            </html>
+            </Html>
         );
     }
 }

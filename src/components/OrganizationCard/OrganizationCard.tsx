@@ -178,7 +178,12 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                                 </a>
                             )}
                             {!variant && (
-                                <Link href="/organizations/[slug]" as={`/organizations/${organization.slug}`} passHref>
+                                <Link
+                                    href="/organizations/[slug]"
+                                    as={`/organizations/${organization.slug}`}
+                                    passHref
+                                    prefetch={process.env.NODE_ENV === 'production'}
+                                >
                                     <a data-testid="headingLink">
                                         <TextTruncate line={2} text={organization.name} />
                                     </a>
