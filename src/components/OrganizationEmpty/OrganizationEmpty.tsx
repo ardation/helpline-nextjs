@@ -63,7 +63,7 @@ const OrganizationEmpty = ({ variant, organizations }: Props): ReactElement => {
             ) : (
                 <Typography data-testid="OrganizationEmptyNoAlternatives">
                     Try{' '}
-                    <NextLink href="/" passHref>
+                    <NextLink href="/" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Link className={classes.link}>searching again</Link>
                     </NextLink>{' '}
                     with fewer criteria or for nationwide helplines.

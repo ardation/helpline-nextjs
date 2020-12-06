@@ -13,5 +13,6 @@ jobs:
         - script:
               - npm run test
               - npm run lint:ci
-        - script:
+        - if: (type = push OR head_repo != repo )
+          script:
               - bin/travis_chromatic.sh

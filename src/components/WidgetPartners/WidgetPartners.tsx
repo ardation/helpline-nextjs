@@ -179,7 +179,7 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
                             Find A Helpline into your website or app
                         </Typography>
                     </Box>
-                    <NextLink href="/contact" passHref>
+                    <NextLink href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Button className={classes.button} color="primary" variant="contained" size="large">
                             Get in touch
                         </Button>

@@ -288,7 +288,7 @@ const About = (): ReactElement => {
                             <Typography variant="h5">Want Find A Helpline on your website?</Typography>
                         </Box>
                         <Box>
-                            <NextLink href="/get-the-widget" passHref>
+                            <NextLink href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
                                 <Button className={classes.button} color="secondary" variant="contained" size="large">
                                     Learn more
                                 </Button>
@@ -309,7 +309,7 @@ const About = (): ReactElement => {
                                 technology companies, and social influencers.
                             </Typography>
                         </Box>
-                        <NextLink href="/contact" passHref>
+                        <NextLink href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <OutboundLink
                                 eventLabel="mailto:elliot@livefortomorrow.co"
                                 to="mailto:elliot@livefortomorrow.co"

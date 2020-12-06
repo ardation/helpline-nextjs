@@ -173,7 +173,7 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
                                 <Grid item>
                                     <Typography>
                                         Note: Messages aren’t monitored by a counselor. Find a helpline{' '}
-                                        <NextLink href="/" passHref>
+                                        <NextLink href="/" passHref prefetch={process.env.NODE_ENV === 'production'}>
                                             <Link className={classes.link}>here</Link>
                                         </NextLink>
                                         .
