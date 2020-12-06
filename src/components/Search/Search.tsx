@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.down('md')]: {
                 marginBottom: theme.spacing(11),
             },
-            '@media (max-width: 330px)': {
+            [theme.breakpoints.down('xs')]: {
                 marginBottom: theme.spacing(23),
             },
         },

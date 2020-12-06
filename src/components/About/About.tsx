@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Container, Typography, Button, Box } from '@material-ui/core';
+import { Container, Typography, Button, Box, Grid } from '@material-ui/core';
 import NextLink from 'next/link';
 import Image from 'next/image';
 import AvTimerIcon from '@material-ui/icons/AvTimer';
@@ -10,7 +10,10 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
 import { OutboundLink } from 'react-ga';
+import Flag from 'react-world-flags';
 import Footer from '../Footer';
+import NavBar from '../NavBar';
+import SideBar from '../SideBar';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -33,19 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'center',
             color: '#FFFFFF',
         },
-        boxSupportedCountries: {
-            display: 'flex',
-            flexWrap: 'wrap',
-        },
-        containerSupportedCountries: {
-            paddingTop: theme.spacing(7.5),
-        },
-        supportedCountriesItem: {
-            width: '50%',
-            [theme.breakpoints.down('sm')]: {
-                fontSize: '0.95rem',
-            },
-        },
         button: {
             borderRadius: '1000px',
             fontWeight: 'bold',
@@ -53,8 +43,8 @@ const useStyles = makeStyles((theme: Theme) =>
             textTransform: 'none',
         },
         content: {
-            paddingTop: theme.spacing(10),
-            paddingBottom: theme.spacing(10),
+            marginTop: theme.spacing(10),
+            marginBottom: theme.spacing(10),
         },
         highlights: {
             padding: 0,
@@ -117,11 +107,26 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const About = (): ReactElement => {
+type Country = {
+    code: string;
+    name: string;
+};
+
+interface Props {
+    countries: Country[];
+    navBar?: boolean;
+}
+
+const About = ({ countries, navBar }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
         <>
+            {navBar && (
+                <NavBar>
+                    <SideBar />
+                </NavBar>
+            )}
             <Box className={classes.container}>
                 <Box className={classes.boxImage}>
                     <Container className={[classes.container, classes.containerImage].join(' ')} maxWidth="xs">
@@ -164,22 +169,21 @@ const About = (): ReactElement => {
                             wherever they are in the world.
                         </Typography>
                     </Container>
-                    <Container maxWidth="xs" className={classes.containerSupportedCountries}>
+                </Box>
+                <Box className={[classes.content, classes.left].join(' ')}>
+                    <Container maxWidth="xs">
                         <Typography variant="h6" gutterBottom>
                             Supported countries
                         </Typography>
-                        <Box className={classes.boxSupportedCountries}>
-                            <Typography className={classes.supportedCountriesItem}>🇦🇺 Australia</Typography>
-                            <Typography className={classes.supportedCountriesItem}>🇮🇪 Ireland</Typography>
-                            <Typography className={classes.supportedCountriesItem}>🇨🇰 Cook Islands</Typography>
-                            <Typography className={classes.supportedCountriesItem}>🇳🇿 New Zealand</Typography>
-                            <Typography className={classes.supportedCountriesItem}>🇫🇯 Fiji</Typography>
-                            <Typography className={classes.supportedCountriesItem}>🇵🇬 Papua New Guinea</Typography>
-                            <Typography className={classes.supportedCountriesItem}>🇬🇮 Gibraltar </Typography>
-                            <Typography className={classes.supportedCountriesItem}>🇼🇸 Samoa</Typography>
-                            <Typography className={classes.supportedCountriesItem}>🇬🇺 Guam</Typography>
-                            <Typography className={classes.supportedCountriesItem}>🇬🇧󠁧󠁢 United Kingdom</Typography>
-                        </Box>
+                        <Grid container spacing={2}>
+                            {countries.map((country) => (
+                                <Grid key={country.code} item xs={6}>
+                                    <Typography>
+                                        <Flag code={country.code} width={20} /> {country.name}
+                                    </Typography>
+                                </Grid>
+                            ))}
+                        </Grid>
                     </Container>
                 </Box>
                 <Container className={classes.highlights} maxWidth="sm">
