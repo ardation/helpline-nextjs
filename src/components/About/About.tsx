@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme: Theme) =>
         outboundLink: {
             textDecoration: 'none',
         },
-        title: {
+        heading: {
             fontWeight: 'bold',
         },
     }),
@@ -146,9 +146,9 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                         <Typography variant="h4">
                             Whatever you&apos;re
                             <br />
-                            going through, free
+                            going through, find
                             <br />
-                            help is available.
+                            someone to talk to here.
                         </Typography>
                     </Box>
                 </Container>
@@ -161,7 +161,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
             <Box className={classes.center}>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography className={classes.title} variant="h5" gutterBottom>
+                        <Typography className={classes.heading} variant="h5" gutterBottom>
                             We&apos;re putting every free mental health and crisis helpline in the world at your
                             fingertips.
                         </Typography>
@@ -170,14 +170,14 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                             set on changing that.
                         </Typography>
                         <Typography gutterBottom>
-                            Find A Helpline is a free tool that connects people to the most relevant helpline for them,
-                            wherever they are in the world.
+                            Find A Helpline is a free tool that connects you to the right helpline for you, wherever you
+                            are.
                         </Typography>
                     </Container>
                 </Box>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography className={classes.title} variant="h5" gutterBottom>
+                        <Typography className={classes.heading} variant="h5" gutterBottom>
                             Supported countries
                         </Typography>
                         <Grid container spacing={2}>
@@ -222,7 +222,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Container>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography className={classes.title} variant="h5" gutterBottom>
+                        <Typography className={classes.heading} variant="h5" gutterBottom>
                             The world&apos;s most reliable helpline data
                         </Typography>
                         <Typography gutterBottom>
@@ -256,7 +256,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Container>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography className={classes.title} variant="h5" gutterBottom>
+                        <Typography className={classes.heading} variant="h5" gutterBottom>
                             Built by{' '}
                             <OutboundLink
                                 eventLabel="https://www.livefortomorrow.co"
@@ -267,7 +267,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                             >
                                 Live For Tomorrow
                             </OutboundLink>
-                            , a not-for-profit startup using technology to support mental health.
+                            , a not-for-profit startup connecting people to free mental health and crisis support.
                         </Typography>
                         <Typography gutterBottom>
                             We&apos;re a small team motivated by our own and other&apos;s experiences of mental health,
@@ -291,7 +291,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                     </Box>
                     <Container className={classes.containerContent} maxWidth="xs">
                         <Box mb={3}>
-                            <Typography className={classes.title} variant="h5">
+                            <Typography className={classes.heading} variant="h5">
                                 Want Find A Helpline on your website?
                             </Typography>
                         </Box>
@@ -307,7 +307,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 <Box className={classes.content}>
                     <Container maxWidth="xs">
                         <Box mb={3}>
-                            <Typography className={classes.title} variant="h5" gutterBottom>
+                            <Typography className={classes.heading} variant="h5" gutterBottom>
                                 Want to partner?
                                 <br />
                                 Got a question?

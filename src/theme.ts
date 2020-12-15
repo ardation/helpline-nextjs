@@ -34,7 +34,7 @@ const theme = createMuiTheme({
     overrides: {
         MuiTypography: {
             gutterBottom: {
-                marginBottom: '0.8em',
+                marginBottom: '1rem',
             },
         },
     },
