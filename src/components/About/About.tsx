@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme: Theme) =>
             textDecoration: 'none',
         },
         title: {
-            fontWeight: 600,
+            fontWeight: 'bold',
         },
     }),
 );
