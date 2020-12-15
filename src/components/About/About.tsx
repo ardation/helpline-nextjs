@@ -106,6 +106,9 @@ const useStyles = makeStyles((theme: Theme) =>
         outboundLink: {
             textDecoration: 'none',
         },
+        title: {
+            fontWeight: 600,
+        },
     }),
 );
 
@@ -140,7 +143,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Box>
                 <Container className={classes.containerContent} maxWidth="xs">
                     <Box mb={3}>
-                        <Typography variant="h5">
+                        <Typography variant="h4">
                             Whatever you&apos;re
                             <br />
                             going through, free
@@ -158,7 +161,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
             <Box className={classes.center}>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography variant="h6" gutterBottom>
+                        <Typography className={classes.title} variant="h5" gutterBottom>
                             We&apos;re putting every free mental health and crisis helpline in the world at your
                             fingertips.
                         </Typography>
@@ -174,7 +177,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Box>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography variant="h6" gutterBottom>
+                        <Typography className={classes.title} variant="h5" gutterBottom>
                             Supported countries
                         </Typography>
                         <Grid container spacing={2}>
@@ -219,7 +222,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Container>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography variant="h6" gutterBottom>
+                        <Typography className={classes.title} variant="h5" gutterBottom>
                             The world&apos;s most reliable helpline data
                         </Typography>
                         <Typography gutterBottom>
@@ -253,7 +256,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Container>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography variant="h6" gutterBottom>
+                        <Typography className={classes.title} variant="h5" gutterBottom>
                             Built by{' '}
                             <OutboundLink
                                 eventLabel="https://www.livefortomorrow.co"
@@ -288,7 +291,9 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                     </Box>
                     <Container className={classes.containerContent} maxWidth="xs">
                         <Box mb={3}>
-                            <Typography variant="h5">Want Find A Helpline on your website?</Typography>
+                            <Typography className={classes.title} variant="h5">
+                                Want Find A Helpline on your website?
+                            </Typography>
                         </Box>
                         <Box>
                             <NextLink href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
@@ -302,7 +307,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 <Box className={classes.content}>
                     <Container maxWidth="xs">
                         <Box mb={3}>
-                            <Typography variant="h6" gutterBottom>
+                            <Typography className={classes.title} variant="h5" gutterBottom>
                                 Want to partner?
                                 <br />
                                 Got a question?
