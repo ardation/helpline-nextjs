@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme: Theme) =>
             textDecoration: 'none',
         },
         heading: {
-            fontWeight: 'bold',
+            fontWeight: 600,
         },
     }),
 );
@@ -143,7 +143,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Box>
                 <Container className={classes.containerContent} maxWidth="xs">
                     <Box mb={3}>
-                        <Typography variant="h4">
+                        <Typography className={classes.heading} variant="h4">
                             Whatever you&apos;re
                             <br />
                             going through, find
