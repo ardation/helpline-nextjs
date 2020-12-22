@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         heading: {
             fontWeight: 600,
-            lineHeight: '1.6rem',
+            lineHeight: '1.7rem',
             [theme.breakpoints.up('lg')]: {
                 fontSize: '1.5rem',
                 lineHeight: '1.334',
