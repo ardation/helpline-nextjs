@@ -330,15 +330,9 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                             </Typography>
                         </Box>
                         <NextLink href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
-                            <OutboundLink
-                                eventLabel="mailto:elliot@livefortomorrow.co"
-                                to="mailto:elliot@livefortomorrow.co"
-                                className={classes.outboundLink}
-                            >
-                                <Button className={classes.button} color="primary" variant="contained" size="large">
-                                    Get in touch
-                                </Button>
-                            </OutboundLink>
+                            <Button className={classes.button} color="primary" variant="contained" size="large">
+                                Get in touch
+                            </Button>
                         </NextLink>
                     </Container>
                 </Box>
