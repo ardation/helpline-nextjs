@@ -108,6 +108,15 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         heading: {
             fontWeight: 600,
+            [theme.breakpoints.up('lg')]: {
+                fontSize: '1.5rem',
+            },
+        },
+        title: {
+            fontWeight: 600,
+            [theme.breakpoints.up('lg')]: {
+                fontSize: '2.125rem',
+            },
         },
     }),
 );
@@ -143,7 +152,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Box>
                 <Container className={classes.containerContent} maxWidth="xs">
                     <Box mb={3}>
-                        <Typography className={classes.heading} variant="h4">
+                        <Typography className={classes.title} variant="h5">
                             Whatever you&apos;re
                             <br />
                             going through, find
@@ -161,7 +170,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
             <Box className={classes.center}>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography className={classes.heading} variant="h5" gutterBottom>
+                        <Typography className={classes.heading} variant="h6" gutterBottom>
                             We&apos;re putting every free mental health and crisis helpline in the world at your
                             fingertips.
                         </Typography>
@@ -177,7 +186,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Box>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography className={classes.heading} variant="h5" gutterBottom>
+                        <Typography className={classes.heading} variant="h6" gutterBottom>
                             Supported countries
                         </Typography>
                         <Grid container spacing={2}>
@@ -222,7 +231,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Container>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography className={classes.heading} variant="h5" gutterBottom>
+                        <Typography className={classes.heading} variant="h6" gutterBottom>
                             The world&apos;s most reliable helpline data
                         </Typography>
                         <Typography gutterBottom>
@@ -256,7 +265,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 </Container>
                 <Box className={[classes.content, classes.left].join(' ')}>
                     <Container maxWidth="xs">
-                        <Typography className={classes.heading} variant="h5" gutterBottom>
+                        <Typography className={classes.heading} variant="h6" gutterBottom>
                             Built by{' '}
                             <OutboundLink
                                 eventLabel="https://www.livefortomorrow.co"
@@ -291,7 +300,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                     </Box>
                     <Container className={classes.containerContent} maxWidth="xs">
                         <Box mb={3}>
-                            <Typography className={classes.heading} variant="h5">
+                            <Typography className={classes.heading} variant="h6">
                                 Want Find A Helpline on your website?
                             </Typography>
                         </Box>
@@ -307,7 +316,7 @@ const About = ({ countries, navBar }: Props): ReactElement => {
                 <Box className={classes.content}>
                     <Container maxWidth="xs">
                         <Box mb={3}>
-                            <Typography className={classes.heading} variant="h5" gutterBottom>
+                            <Typography className={classes.heading} variant="h6" gutterBottom>
                                 Want to partner?
                                 <br />
                                 Got a question?
