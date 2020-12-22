@@ -110,12 +110,14 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 600,
             [theme.breakpoints.up('lg')]: {
                 fontSize: '1.5rem',
+                lineHeight: '1.334',
             },
         },
         title: {
             fontWeight: 600,
             [theme.breakpoints.up('lg')]: {
                 fontSize: '2.125rem',
+                lineHeight: '1.235',
             },
         },
     }),
