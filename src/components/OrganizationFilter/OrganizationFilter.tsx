@@ -114,11 +114,6 @@ const OrganizationFilter = ({
     };
 
     const onClick = (): void => {
-        let dimension1:string = '',
-            dimension2:string = '',
-            dimension3:string = '',
-            dimension4:string = '',
-            dimension5:string = '';
 
         if (selectedSorts.length > 0) {
             dimension1 += selectedSorts.map(object => {
