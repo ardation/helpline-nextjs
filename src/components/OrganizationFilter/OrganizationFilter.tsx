@@ -114,9 +114,46 @@ const OrganizationFilter = ({
     };
 
     const onClick = (): void => {
+        let dimension1:string = '',
+            dimension2:string = '',
+            dimension3:string = '',
+            dimension4:string = '',
+            dimension5:string = '';
+
+        if (selectedSorts.length > 0) {
+            dimension1 += selectedSorts.map(object => {
+               return object.name;
+            }).join(', ');
+        }
+        if (selectedTopics.length > 0) {
+            dimension2 += selectedTopics.map(object => {
+               return object.name;
+            }).join(', ');
+        }
+        if (selectedHumanSupportTypes.length > 0) { // Live Support Type
+            dimension3 += selectedHumanSupportTypes.map(object => {
+               return object.name;
+            }).join(', ');
+        }
+        if (selectedCategories.length > 0) { // Specialty
+            dimension4 += selectedCategories.map(object => {
+               return object.name;
+            }).join(', ');
+        }
+        if (selectedContactMethods.length > 0) {
+            dimension5 += selectedContactMethods.map(object => {
+               return object.name;
+            }).join(', ');
+        }
+        
         ReactGA.event({
             category: 'User',
             action: 'Changed Filters',
+            dimension1: dimension1,
+            dimension2: dimension2,
+            dimension3: dimension3,
+            dimension4: dimension4,
+            dimension5: dimension5,
         });
         onChange({
             contactMethods: selectedContactMethods,
