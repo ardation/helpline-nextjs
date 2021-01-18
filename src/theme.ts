@@ -31,6 +31,13 @@ const theme = createMuiTheme({
             default: '#fff',
         },
     },
+    overrides: {
+        MuiTypography: {
+            gutterBottom: {
+                marginBottom: '1rem',
+            },
+        },
+    },
 });
 
 export default theme;
