@@ -162,12 +162,7 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
     };
 
     const onLinkClick = (label, gaEventAction:string = '') => (): void => {
-        let dimension7:string = '';
-        if (organization.categories.length > 0) {
-            dimension7 = organization.categories.map(category => {
-               return category.name;
-            }).join(', ');
-        }
+        let dimension7 = organization.categories.map(({ name }) => name).join(', ');
 
         ReactGA.event({
             category: 'Helpline Card Engagement',
