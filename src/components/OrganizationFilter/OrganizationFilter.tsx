@@ -115,31 +115,11 @@ const OrganizationFilter = ({
 
     const onClick = (): void => {
 
-        if (selectedSorts.length > 0) {
-            dimension1 += selectedSorts.map(object => {
-               return object.name;
-            }).join(', ');
-        }
-        if (selectedTopics.length > 0) {
-            dimension2 += selectedTopics.map(object => {
-               return object.name;
-            }).join(', ');
-        }
-        if (selectedHumanSupportTypes.length > 0) { // Live Support Type
-            dimension3 += selectedHumanSupportTypes.map(object => {
-               return object.name;
-            }).join(', ');
-        }
-        if (selectedCategories.length > 0) { // Specialty
-            dimension4 += selectedCategories.map(object => {
-               return object.name;
-            }).join(', ');
-        }
-        if (selectedContactMethods.length > 0) {
-            dimension5 += selectedContactMethods.map(object => {
-               return object.name;
-            }).join(', ');
-        }
+        let dimension1 = selectedSorts.map(({ name }) => name).join(', ');
+        let dimension2 = selectedTopics.map(({ name }) => name).join(', ');
+        let dimension3 = selectedHumanSupportTypes.map(({ name }) => name).join(', ');
+        let dimension4 = selectedCategories.map(({ name }) => name).join(', ');
+        let dimension5 = selectedContactMethods.map(({ name }) => name).join(', ');
         
         ReactGA.event({
             category: 'User',
