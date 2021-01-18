@@ -161,7 +161,7 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
         setDialogOpen(false);
     };
 
-    const onLinkClick = (label, gaEventAction:string = '') => (): void => {
+    const onLinkClick = (label: string, gaEventAction = '') => (): void => {
         let dimension7 = organization.categories.map(({ name }) => name).join(', ');
 
         ReactGA.event({
