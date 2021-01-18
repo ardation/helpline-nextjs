@@ -114,13 +114,26 @@ const OrganizationFilter = ({
     };
 
     const onClick = (): void => {
-
-        let dimension1 = selectedSorts.map(({ name }) => name).join(', ');
-        let dimension2 = selectedTopics.map(({ name }) => name).join(', ');
-        let dimension3 = selectedHumanSupportTypes.map(({ name }) => name).join(', ');
-        let dimension4 = selectedCategories.map(({ name }) => name).join(', ');
-        let dimension5 = selectedContactMethods.map(({ name }) => name).join(', ');
-        
+        const dimension1 = selectedSorts
+            .map(({ name }) => name)
+            .sort()
+            .join(', ');
+        const dimension2 = selectedTopics
+            .map(({ name }) => name)
+            .sort()
+            .join(', ');
+        const dimension3 = selectedHumanSupportTypes
+            .map(({ name }) => name)
+            .sort()
+            .join(', ');
+        const dimension4 = selectedCategories
+            .map(({ name }) => name)
+            .sort()
+            .join(', ');
+        const dimension5 = selectedContactMethods
+            .map(({ name }) => name)
+            .sort()
+            .join(', ');
         ReactGA.event({
             category: 'User',
             action: 'Changed Filters',

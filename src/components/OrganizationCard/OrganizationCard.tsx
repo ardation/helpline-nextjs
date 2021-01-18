@@ -9,14 +9,13 @@ import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import Link from 'next/link';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import TextTruncate from 'react-text-truncate';
-import { outboundLink } from 'react-ga';
+import ReactGA, { outboundLink } from 'react-ga';
 import { noop } from 'lodash/fp';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import OrganizationOpen from '../OrganizationOpen';
 import Chips from '../Chips';
 import OrganizationRating from '../OrganizationRating';
 import ReviewDialog from '../ReviewDialog';
-import ReactGA from 'react-ga';
 
 type OpeningHour = {
     day: string;
@@ -162,14 +161,14 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
     };
 
     const onLinkClick = (label: string, gaEventAction = '') => (): void => {
-        let dimension7 = organization.categories.map(({ name }) => name).join(', ');
+        const dimension7 = organization.categories.map(({ name }) => name).join(', ');
 
         ReactGA.event({
             category: 'Helpline Card Engagement',
             action: gaEventAction,
-            label: label, 
+            label: label,
             dimension6: organization.name,
-            dimension7: dimension7 
+            dimension7: dimension7,
         });
 
         setDialogOpen(true);
