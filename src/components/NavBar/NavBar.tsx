@@ -12,7 +12,7 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         appBar: {
-            backgroundColor: '#F0F1F5',
+            backgroundColor: theme.palette.background.paper,
             paddingTop: theme.spacing(1),
             paddingBottom: theme.spacing(1),
         },
@@ -58,6 +58,7 @@ const NavBar = ({ children, variant }: Props): ReactElement => {
                 variant === 'minimal' && classes.appBarMinimal,
             )}
             position="static"
+            elevation={0}
         >
             <Container className={classes.container}>
                 <Box className={classes.logo}>

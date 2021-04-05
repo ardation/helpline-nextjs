@@ -3,11 +3,10 @@ import React, { ReactElement, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Autocomplete } from '@material-ui/lab';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
-import { Box, Grid } from '@material-ui/core';
+import { Box, Grid, InputAdornment } from '@material-ui/core';
 import { sortBy, compact } from 'lodash/fp';
-import Flag from 'react-world-flags';
 import { LocalityEnum } from '../../../types/globalTypes';
+import SearchIcon from '../../assets/search-icon.svg';
 
 type Subdivision = {
     code: string;
@@ -47,14 +46,19 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         inputRoot: {
-            borderRadius: '48px',
-            backgroundColor: '#EEEDF4',
-            '&[class*="MuiOutlinedInput-root"]': {
-                paddingTop: '5px',
-                paddingBottom: '5px',
-            },
+            borderRadius: '28px',
+            backgroundColor: '#fff',
+            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.05)',
             '& fieldset': {
                 border: 0,
+            },
+        },
+        focused: {
+            '&[aria-expanded="true"]': {
+                '& .MuiAutocomplete-inputRoot': {
+                    borderBottomRightRadius: 0,
+                    borderBottomLeftRadius: 0,
+                },
             },
         },
         option: {
@@ -62,22 +66,20 @@ const useStyles = makeStyles((theme: Theme) =>
                 marginRight: 10,
             },
         },
-        popupIndicator: {
-            color: '#ffffff',
-            backgroundColor: '#278686',
-            transform: 'rotate(90deg)',
-            marginLeft: theme.spacing(1),
-            '&:hover': {
-                backgroundColor: '#278686',
+        inputAdornment: {
+            paddingLeft: theme.spacing(1.5),
+            '& svg': {
+                fill: theme.palette.primary.main,
+                width: 25,
+                height: 25,
             },
-        },
-        popupIndicatorOpen: {
-            transform: 'rotate(90deg)',
         },
         paper: {
             borderRadius: '20px',
-            backgroundColor: '#EEEDF4',
-            boxShadow: 'none',
+            borderTopRightRadius: 0,
+            borderTopLeftRadius: 0,
+            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.05)',
+            marginTop: -5,
         },
     }),
 );
@@ -108,6 +110,7 @@ const CountrySelect = ({
 
     return (
         <Box className={compact([classes.box, inline && classes.inline]).join(' ')}>
+            <Box className={classes.flagBox}></Box>
             <Autocomplete
                 aria-label="country"
                 value={selectedCountry}
@@ -117,22 +120,27 @@ const CountrySelect = ({
                     root: classes.root,
                     inputRoot: classes.inputRoot,
                     option: classes.option,
-                    popupIndicator: classes.popupIndicator,
-                    popupIndicatorOpen: classes.popupIndicatorOpen,
                     paper: classes.paper,
+                    focused: classes.focused,
                 }}
-                popupIcon={<SearchIcon />}
                 autoHighlight
                 getOptionLabel={(option): string => option.name}
                 getOptionSelected={(option, value): boolean => option.code === value.code}
-                renderOption={(option): ReactElement => (
-                    <Grid container spacing={2}>
-                        <Grid item>
-                            <Flag code={option.code} width={20} data-testid="countryFlag" />
+                renderOption={(option): ReactElement => {
+                    const code = option.code === 'GB-NIR' ? 'gb' : option.code.toLowerCase();
+                    return (
+                        <Grid container spacing={2}>
+                            <Grid item>
+                                <img
+                                    src={`https://hatscripts.github.io/circle-flags/flags/${code}.svg`}
+                                    width={25}
+                                    data-testid="countryFlag"
+                                />
+                            </Grid>
+                            <Grid item>{option.name}</Grid>
                         </Grid>
-                        <Grid item>{option.name}</Grid>
-                    </Grid>
-                )}
+                    );
+                }}
                 blurOnSelect="touch"
                 openOnFocus
                 onChange={(_e, value: Country): void => localOnCountryChange(value)}
@@ -141,6 +149,14 @@ const CountrySelect = ({
                         {...params}
                         placeholder="Start typing your country..."
                         variant="outlined"
+                        InputProps={{
+                            ...params.InputProps,
+                            startAdornment: (
+                                <InputAdornment position="start" className={classes.inputAdornment}>
+                                    <SearchIcon />
+                                </InputAdornment>
+                            ),
+                        }}
                         inputProps={{
                             ...params.inputProps,
                             autoComplete: 'new-password', // disable autocomplete and autofill

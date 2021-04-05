@@ -43,14 +43,11 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         submit: {
-            borderRadius: '1000px',
             fontWeight: 'bold',
             textTransform: 'none',
             width: '100%',
         },
-        button: {
-            borderRadius: '1000px',
-        },
+        button: {},
         recaptcha: {
             fontSize: '12px',
             color: '#AAAAAA',
@@ -189,7 +186,7 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
                             Thanks for your review! It will appear here shortly.
                         </Alert>
                     ) : (
-                        <Button variant="outlined" className={classes.button} onClick={handleOpen}>
+                        <Button variant="contained" className={classes.button} onClick={handleOpen} fullWidth>
                             Leave a Review
                         </Button>
                     )}

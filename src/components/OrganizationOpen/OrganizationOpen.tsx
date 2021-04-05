@@ -29,18 +29,21 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         body: {
             fontSize: 'inherit',
+            fontWeight: 'normal',
         },
         open: {
             color: '#3FA607',
-            fontWeight: 'bold',
+            fontWeight: 600,
         },
         chip: {
             color: '#FFFFFF',
-            fontWeight: 'bold',
+            fontWeight: 600,
             backgroundColor: theme.palette.secondary.main,
+            marginTop: -2,
             marginLeft: theme.spacing(1),
             height: '20px',
             alignItems: 'flex-end',
+            borderRadius: 5,
         },
         button: {
             textTransform: 'none',

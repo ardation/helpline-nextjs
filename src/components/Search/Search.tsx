@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Typography, Box, Button, Container } from '@material-ui/core';
+import { Typography, Box, Button, Container, Grid } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Link from 'next/link';
 import { OutboundLink } from 'react-ga';
@@ -13,6 +13,7 @@ import { LocalityEnum } from '../../../types/globalTypes';
 import NavBar from '../NavBar';
 import SideBar from '../SideBar';
 import About from '../About';
+import ItemSelect from '../ItemSelect';
 
 type Subdivision = {
     code: string;
@@ -72,9 +73,6 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'center',
             margin: theme.spacing(2),
         },
-        button: {
-            borderRadius: '1000px',
-        },
         links: {
             margin: '0 auto',
             display: 'flex',
@@ -85,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) =>
             color: '#000',
             textDecoration: 'underline',
             textTransform: 'none',
-            textAlign: 'left',
+            fontWeight: 'normal',
             '&:hover': {
                 textDecoration: 'underline',
                 color: theme.palette.primary.main,
@@ -93,6 +91,18 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         link: {
             color: '#000',
+        },
+        typography: {
+            fontSize: 20,
+            color: theme.palette.text.secondary,
+        },
+        selectedCountryBox: {
+            backgroundColor: theme.palette.background.paper,
+            padding: theme.spacing(2),
+            margin: theme.spacing(0, -2),
+        },
+        heading: {
+            fontFamily: theme.typography.fontFamily,
         },
     }),
 );
@@ -126,7 +136,7 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                             <Box className={classes.logo}>
                                 <img src="/logo.svg" alt="find a helpline" />
                             </Box>
-                            <Typography>
+                            <Typography className={classes.typography}>
                                 Struggling? Get free, confidential support from a real human over phone, text or
                                 webchat.
                             </Typography>
@@ -139,69 +149,63 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                     />
                     {!selectedCountry && variant !== 'embed' && (
                         <Box className={classes.links}>
-                            <OutboundLink
-                                eventLabel="https://bit.ly/fah-founders-note"
-                                to="https://bit.ly/fah-founders-note"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={classes.link}
-                            >
-                                <Button
-                                    startIcon={<LoyaltyIcon />}
-                                    classes={{ root: classes.buttonRoot, label: classes.link }}
-                                    color="primary"
-                                >
-                                    A note from our founder
+                            <Link href="/faq" passHref prefetch={process.env.NODE_ENV === 'production'}>
+                                <Button classes={{ root: classes.buttonRoot, label: classes.link }} color="primary">
+                                    What can I expect when contacting a helpline?
                                 </Button>
-                            </OutboundLink>
-                            <OutboundLink
-                                eventLabel="https://livefortomorrow.typeform.com/to/ErmyL3tv"
-                                to="https://livefortomorrow.typeform.com/to/ErmyL3tv"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={classes.link}
-                            >
-                                <Button
-                                    startIcon={<MailIcon />}
-                                    classes={{ root: classes.buttonRoot, label: classes.link }}
-                                    color="primary"
-                                >
-                                    Hear when we launch in your country
-                                </Button>
-                            </OutboundLink>
+                            </Link>
                         </Box>
                     )}
-                    {selectedCountry && variant !== 'embed' && (
-                        <Typography variant="h6">
-                            <strong>What would you like help with?</strong>
-                        </Typography>
-                    )}
-                    {selectedCountry && <TopicSelect topics={topics} onChange={setSelectedTopics} />}
-                    {selectedCountry && variant !== 'embed' && (
-                        <Link
-                            href={{
-                                pathname: `/[countryCode]${selectedSubdivision ? `/[subdivisionCode]` : ''}`,
-                                query: { topics: selectedTopics.map((topic) => topic.name) },
-                            }}
-                            as={{
-                                pathname: `/${selectedCountry.code.toLowerCase()}${
-                                    selectedSubdivision ? `/${selectedSubdivision.code.toLowerCase()}` : ''
-                                }`,
-                                query: { topics: selectedTopics.map((topic) => topic.name) },
-                            }}
-                            passHref
-                            prefetch={process.env.NODE_ENV === 'production'}
-                        >
-                            <Button
-                                data-testid="searchButton"
-                                className={classes.button}
-                                variant="contained"
-                                color="primary"
-                                size="large"
-                            >
-                                Search
-                            </Button>
-                        </Link>
+                    {selectedCountry && (
+                        <Box className={classes.selectedCountryBox}>
+                            <Grid container spacing={2}>
+                                {selectedCountry && variant !== 'embed' && (
+                                    <Grid item xs={12}>
+                                        <Typography variant="h6" className={classes.heading}>
+                                            What would you like help with?
+                                        </Typography>
+                                        <Typography color="secondary">Select topic or topics (optional)</Typography>
+                                    </Grid>
+                                )}
+                                {selectedCountry && (
+                                    <Grid item xs={12}>
+                                        <ItemSelect items={topics} onChange={setSelectedTopics} max={10} />
+                                    </Grid>
+                                )}
+                                {selectedCountry && variant !== 'embed' && (
+                                    <Grid item xs={12}>
+                                        <Link
+                                            href={{
+                                                pathname: `/[countryCode]${
+                                                    selectedSubdivision ? `/[subdivisionCode]` : ''
+                                                }`,
+                                                query: { topics: selectedTopics.map((topic) => topic.name) },
+                                            }}
+                                            as={{
+                                                pathname: `/${selectedCountry.code.toLowerCase()}${
+                                                    selectedSubdivision
+                                                        ? `/${selectedSubdivision.code.toLowerCase()}`
+                                                        : ''
+                                                }`,
+                                                query: { topics: selectedTopics.map((topic) => topic.name) },
+                                            }}
+                                            passHref
+                                            prefetch={process.env.NODE_ENV === 'production'}
+                                        >
+                                            <Button
+                                                data-testid="searchButton"
+                                                variant="contained"
+                                                color="primary"
+                                                size="large"
+                                                fullWidth
+                                            >
+                                                Search for helplines
+                                            </Button>
+                                        </Link>
+                                    </Grid>
+                                )}
+                            </Grid>
+                        </Box>
                     )}
                 </Box>
             </Container>

@@ -38,9 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 gridTemplateColumns: '1fr',
             },
         },
-        button: {
-            borderRadius: '1000px',
-        },
+        button: {},
     }),
 );
 

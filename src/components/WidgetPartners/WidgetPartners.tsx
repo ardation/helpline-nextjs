@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
             color: '#FFFFFF',
         },
         button: {
-            borderRadius: '1000px',
             fontWeight: 'bold',
             color: '#FFFFFF',
             textTransform: 'none',

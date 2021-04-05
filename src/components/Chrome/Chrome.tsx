@@ -31,8 +31,11 @@ const Chrome = ({ footer, country, children }: Props): ReactElement => {
     return (
         <Div100vh className={classes.div100vh} as="main">
             <TopBar country={country} />
-            <div className={classes.content}>{children}</div>
-            {footer && <Footer />}
+            <div className={classes.content}>
+                <div id="top"></div>
+                {children}
+                {footer && <Footer />}
+            </div>
         </Div100vh>
     );
 };

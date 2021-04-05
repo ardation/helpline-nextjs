@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { AppBar, Container, Toolbar, Typography, Button, Hidden } from '@material-ui/core';
+import { AppBar, Container, Toolbar, Typography, Button, Hidden, Box } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import CallIcon from '@material-ui/icons/Call';
@@ -24,10 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         appBar: {
-            backgroundColor: '#181719',
+            backgroundColor: '#fff',
+            color: theme.palette.text.primary,
         },
         appBarWidget: {
-            backgroundColor: '#F0F1F5',
+            backgroundColor: '#fff',
             color: theme.palette.text.primary,
         },
         toolbar: {
@@ -52,37 +53,31 @@ const useStyles = makeStyles((theme: Theme) =>
         toolbarWithoutCountry: {
             gridTemplateColumns: '1fr auto',
         },
-        title: {
+        box: {
             minWidth: '80px',
-            [theme.breakpoints.down('xs')]: {
-                fontSize: '0.8rem',
-            },
+        },
+        title: {
+            fontWeight: 600,
+        },
+        subtitle: {
+            color: theme.palette.text.disabled,
         },
         titleWithCountry: {
             [theme.breakpoints.down('xs')]: {
                 gridColumn: '1 / span 2',
                 alignSelf: 'center',
+                fontSize: '0.8rem',
             },
         },
         link: {
             textDecoration: 'none',
         },
         button: {
-            backgroundColor: '#CC001E',
+            backgroundBlendMode: 'overlay, normal',
             textAlign: 'left',
-            borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
-            color: '#FFFFFF',
             width: '100%',
-            [theme.breakpoints.down('xs')]: {
-                fontSize: '0.7rem',
-                paddingRight: theme.spacing(1),
-                paddingLeft: theme.spacing(1),
-            },
-            '&:hover': {
-                backgroundColor: '#CC001E',
-            },
         },
         buttonEndIcon: {
             [theme.breakpoints.down('xs')]: {
@@ -99,6 +94,7 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
         <AppBar
             className={compact([classes.appBar, variant === 'widget' && classes.appBarWidget]).join(' ')}
             position="static"
+            elevation={1}
         >
             <Container className={country && classes.container}>
                 <Toolbar
@@ -109,9 +105,11 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
                 >
                     {country ? (
                         <>
-                            <Typography className={[classes.title, classes.titleWithCountry].join(' ')}>
-                                Are you or someone else in immediate danger?
-                            </Typography>
+                            <Box className={classes.box}>
+                                <Typography className={[classes.title, classes.titleWithCountry].join(' ')}>
+                                    Are you or someone else in immediate danger?
+                                </Typography>
+                            </Box>
                             <OutboundLink
                                 eventLabel={`tel:${country.emergencyNumber}`}
                                 to={`tel:${country.emergencyNumber}`}
@@ -120,7 +118,8 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
                                 className={classes.link}
                             >
                                 <Button
-                                    color="inherit"
+                                    color="secondary"
+                                    variant="contained"
                                     classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
                                     endIcon={<CallIcon />}
                                     data-testid="emergencyServicesButton"
@@ -131,9 +130,10 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
                             </OutboundLink>
                         </>
                     ) : (
-                        <Typography className={classes.title}>
-                            Need to leave quickly? Click to leave this site and open the weather.
-                        </Typography>
+                        <Box className={classes.box}>
+                            <Typography className={classes.title}>Need to leave quickly?</Typography>
+                            <Typography className={classes.subtitle}>Click to immediately exit this site.</Typography>
+                        </Box>
                     )}
                     <OutboundLink
                         eventLabel="https://accuweather.com"
@@ -143,12 +143,13 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
                         className={classes.link}
                     >
                         <Button
-                            color="inherit"
+                            color="secondary"
+                            variant="contained"
                             classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
                             endIcon={<DirectionsRunIcon />}
                             data-testid="leaveQuicklyButton"
                         >
-                            Leave Quickly
+                            Quick Exit
                         </Button>
                     </OutboundLink>
                 </Toolbar>

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Typography, Container, Link } from '@material-ui/core';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import InfoIcon from '@material-ui/icons/Info';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import NextLink from 'next/link';
@@ -11,12 +11,13 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
             display: 'grid',
-            border: '1px solid #000',
             borderRadius: '10px',
             gridGap: theme.spacing(2),
             textAlign: 'left',
             padding: theme.spacing(2),
             height: 'calc(100% - 2px)',
+            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.05)',
+            backgroundColor: theme.palette.background.paper,
         },
         icon: {
             justifySelf: 'center',
@@ -38,7 +39,7 @@ const OrganizationEmpty = ({ variant, organizations }: Props): ReactElement => {
 
     return (
         <Container maxWidth="xs" className={classes.container}>
-            <InfoOutlinedIcon className={classes.icon} fontSize="large" />
+            <InfoIcon className={classes.icon} color="secondary" />
             <Typography>
                 We&apos;ve searched high and low and can&apos;t find a specialist helpline matching your search
                 criteria.
@@ -49,14 +50,14 @@ const OrganizationEmpty = ({ variant, organizations }: Props): ReactElement => {
                     {variant === 'widget' ? (
                         <ArrowForwardIcon
                             className={classes.icon}
-                            fontSize="large"
                             data-testid="OrganizationEmptyWidget"
+                            color="secondary"
                         />
                     ) : (
                         <ArrowDownwardIcon
                             className={classes.icon}
-                            fontSize="large"
                             data-testid="OrganizationEmptyDefault"
+                            color="secondary"
                         />
                     )}
                 </>

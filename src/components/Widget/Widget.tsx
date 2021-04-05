@@ -59,7 +59,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         filterButton: {
             background: '#FFFFFF',
-            borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
             '&:hover': {

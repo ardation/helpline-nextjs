@@ -40,19 +40,18 @@ const useStyles = makeStyles((theme: Theme) =>
             background: '#FFFFFF',
         },
         button: {
-            borderRadius: '1000px',
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
         },
         showMore: {
             display: 'flex',
             justifyContent: 'center',
-            margin: theme.spacing(5, 0),
+            margin: theme.spacing(2, 0),
         },
-        sortText: {
-            '@media (max-width: 320px)': {
-                display: 'none',
-            },
+        heading: {
+            fontFamily: theme.typography.fontFamily,
+            textAlign: 'center',
+            fontWeight: 400,
         },
     }),
 );
@@ -107,9 +106,9 @@ const OrganizationList = ({
                     endIcon={<FilterListIcon />}
                     data-testid="filter"
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                 >
-                    Filter<span className={classes.sortText}>&nbsp;&amp; Sort</span>
+                    Filter
                 </Button>
             </NavBar>
             <Backdrop
@@ -141,7 +140,7 @@ const OrganizationList = ({
             </Backdrop>
             <Container maxWidth="xs">
                 <Box my={2}>
-                    <Typography variant="h6">
+                    <Typography variant="h6" className={classes.heading}>
                         {`Helplines in ${subdivision ? `${subdivision.name}, ` : ''}${country.name}${
                             selectedTopics.length > 0
                                 ? ` for ${formatArrayIntoSentence(selectedTopics.map((t) => t.name)).toLowerCase()}`
@@ -165,6 +164,8 @@ const OrganizationList = ({
                             variant="contained"
                             className={classes.button}
                             color="primary"
+                            fullWidth
+                            size="large"
                         >
                             Show More
                         </Button>

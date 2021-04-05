@@ -19,21 +19,16 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         chips: {
             display: 'flex',
-            justifyContent: 'left',
+            justifyContent: 'center',
             flexWrap: 'wrap',
             '& > *': {
-                marginRight: theme.spacing(0.5),
-                marginBottom: theme.spacing(0.5),
+                marginRight: theme.spacing(1),
+                marginBottom: theme.spacing(1),
             },
         },
         chipRoot: {
+            borderRadius: 6,
             fontWeight: 600,
-        },
-        chipColorPrimary: {
-            backgroundColor: '#000000',
-            '&:hover, &:focus': {
-                backgroundColor: '#000000',
-            },
         },
         text: {
             fontSize: '0.8rem',
@@ -76,15 +71,13 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, max }: Props): 
         <Box className={classes.chips}>
             {(hide ? visibleItems : items).map((item) => (
                 <Chip
-                    color={find(item, selectedItems) ? 'primary' : 'default'}
+                    color={find(item, selectedItems) ? 'secondary' : 'default'}
                     key={item.name}
                     label={item.name}
                     onClick={(): void => onClick(item)}
                     data-testid="itemChip"
                     classes={{
                         root: classes.chipRoot,
-                        colorPrimary: classes.chipColorPrimary,
-                        clickableColorPrimary: classes.chipColorPrimary,
                     }}
                 />
             ))}
@@ -93,6 +86,9 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, max }: Props): 
                     onClick={(): void => setHide(false)}
                     label={`+${differenceBy('name', items, visibleItems).length} more`}
                     data-testid="moreChips"
+                    classes={{
+                        root: classes.chipRoot,
+                    }}
                 />
             )}
         </Box>

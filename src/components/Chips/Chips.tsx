@@ -24,9 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         chip: {
-            color: '#FFFFFF',
-            backgroundColor: theme.palette.text.primary,
-            fontWeight: 600,
+            borderRadius: 5,
         },
     }),
 );

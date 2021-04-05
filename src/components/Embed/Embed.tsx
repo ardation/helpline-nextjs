@@ -45,12 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
         steps: {
             fontWeight: 'bold',
         },
-        button: {
-            borderRadius: '1000px',
-            fontWeight: 'bold',
-            color: '#FFFFFF',
-            textTransform: 'none',
-        },
+        button: {},
     }),
 );
 

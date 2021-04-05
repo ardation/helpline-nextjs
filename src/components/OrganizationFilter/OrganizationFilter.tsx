@@ -57,9 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
         title: {
             marginBottom: theme.spacing(1),
         },
-        button: {
-            borderRadius: '1000px',
-        },
+        button: {},
         tabs: {
             borderTop: '1px solid #000',
         },

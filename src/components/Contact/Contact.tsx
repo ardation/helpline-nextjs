@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         submit: {
-            borderRadius: '1000px',
             width: '100%',
         },
         recaptcha: {

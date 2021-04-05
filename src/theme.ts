@@ -3,38 +3,110 @@ import { createMuiTheme } from '@material-ui/core/styles';
 // Create a theme instance.
 const theme = createMuiTheme({
     typography: {
-        fontFamily: [
-            'Nunito Sans',
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            'Helvetica',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-        ].join(','),
+        fontFamily: ['"Source Sans Pro"', 'sans-serif'].join(','),
+        h1: {
+            fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+            fontWeight: 600,
+        },
+        h2: {
+            fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+            fontWeight: 600,
+        },
+        h3: {
+            fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+            fontWeight: 600,
+        },
+        h4: {
+            fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+            fontWeight: 600,
+        },
+        h5: {
+            fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+            fontWeight: 600,
+        },
+        h6: {
+            fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+            fontWeight: 600,
+        },
+        subtitle1: {
+            fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+            fontWeight: 600,
+        },
+        subtitle2: {
+            fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+            fontWeight: 600,
+        },
     },
     palette: {
         primary: {
-            main: '#07838E',
+            main: '#2B8E94',
         },
         secondary: {
-            main: '#EB1317',
+            main: '#94BCD9',
+            contrastText: '#FFFFFF',
         },
         text: {
             primary: '#202020',
+            secondary: '#94BCD9',
+            disabled: '#ABB2B5',
         },
         background: {
-            default: '#fff',
+            default: 'rgba(148, 188, 217, 0.1)',
         },
     },
     overrides: {
         MuiTypography: {
             gutterBottom: {
                 marginBottom: '1rem',
+            },
+        },
+        MuiChip: {
+            root: {
+                backgroundColor: '#F7F7F7',
+                color: 'rgba(15, 34, 61, 0.5)',
+            },
+        },
+        MuiButton: {
+            root: {
+                borderRadius: '10px',
+                fontWeight: 600,
+                textTransform: 'capitalize',
+            },
+            contained: {
+                boxShadow: 'none',
+            },
+            containedPrimary: {
+                color: '#fff',
+                background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), #2B8E94',
+            },
+            containedSecondary: {
+                color: '#fff',
+                background:
+                    'linear-gradient(180deg, rgba(255, 255, 255, 0.125) 0%, rgba(0, 0, 0, 0.125) 100%), #E8886C',
+            },
+        },
+        MuiFab: {
+            root: {
+                boxShadow: 'none',
+            },
+            primary: {
+                color: '#fff',
+                background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), #2B8E94',
+            },
+            secondary: {
+                color: '#fff',
+                background:
+                    'linear-gradient(180deg, rgba(255, 255, 255, 0.125) 0%, rgba(0, 0, 0, 0.125) 100%), #E8886C',
+            },
+        },
+        MuiTooltip: {
+            tooltip: {
+                fontSize: '0.8rem',
+                backgroundColor: '#0F2027',
+                borderRadius: 8,
+            },
+            arrow: {
+                color: '#0F2027',
             },
         },
     },
