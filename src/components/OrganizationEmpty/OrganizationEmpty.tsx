@@ -4,7 +4,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import NextLink from 'next/link';
-import { Organization } from '../OrganizationFab/OrganizationFab';
+import { Organization } from '../OrganizationCard/OrganizationCard';
 
 const useStyles = makeStyles((theme) =>
     createStyles({

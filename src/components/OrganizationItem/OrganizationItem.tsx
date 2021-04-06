@@ -126,7 +126,12 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
                             {organization.name}
                             {organization.verified && (
                                 <Tooltip title="Verified by Find A Helpline" placement="left" arrow enterTouchDelay={0}>
-                                    <SvgIcon fontSize="inherit" color="secondary" className={classes.verified}>
+                                    <SvgIcon
+                                        fontSize="inherit"
+                                        color="secondary"
+                                        className={classes.verified}
+                                        data-testid="verified"
+                                    >
                                         <VerifyIcon />
                                     </SvgIcon>
                                 </Tooltip>

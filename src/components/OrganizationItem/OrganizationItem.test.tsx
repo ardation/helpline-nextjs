@@ -158,29 +158,6 @@ describe('OrganizationItem', () => {
         });
     });
 
-    it('should contain chatUrl', async () => {
-        const { getByTestId, queryByTestId } = render(<OrganizationItem organization={organization} />);
-        const element = getByTestId('chatUrl');
-        expect(element.parentElement).toHaveAttribute('href', 'https://chatyouthline.co.nz/chat');
-        expect(element).toHaveTextContent('chatyouthline.co.nz');
-        fireEvent.click(element);
-        const closeElement = getByTestId('close');
-        expect(closeElement).toBeInTheDocument();
-        fireEvent.click(closeElement);
-        await waitFor(() => expect(queryByTestId('close')).not.toBeInTheDocument());
-    });
-
-    describe('no chatUrl', () => {
-        beforeEach(() => {
-            organization = { ...organization, chatUrl: undefined };
-        });
-
-        it('should not have chatUrl element', () => {
-            const { getByTestId } = render(<OrganizationItem organization={organization} />);
-            expect(() => getByTestId('chatUrl')).toThrow();
-        });
-    });
-
     it('should contain categories', () => {
         const { getByTestId } = render(<OrganizationItem organization={organization} />);
         expect(getByTestId('categories')).toHaveTextContent('For youthAll issues');
@@ -242,9 +219,9 @@ describe('OrganizationItem', () => {
             organization = { ...organization, featured: true };
         });
 
-        it('should have featured icon', () => {
+        it('should not have verified icon', () => {
             const { getByTestId } = render(<OrganizationItem organization={organization} />);
-            expect(getByTestId('featured')).toBeTruthy();
+            expect(() => getByTestId('verified')).toThrow();
         });
     });
 
@@ -253,10 +230,9 @@ describe('OrganizationItem', () => {
             organization = { ...organization, featured: true, verified: true };
         });
 
-        it('should have verfied icon but not featured icon', () => {
+        it('should have verfied icon', () => {
             const { getByTestId } = render(<OrganizationItem organization={organization} />);
-            expect(() => getByTestId('featured')).toThrow();
-            expect(getByTestId('verified')).toBeTruthy();
+            expect(getByTestId('verified')).toBeInTheDocument();
         });
     });
 });

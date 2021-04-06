@@ -153,7 +153,7 @@ const OrganizationList = ({
                 {(filteredOrganizations.length > 0 ? filteredOrganizations : sortBy('name', organizationsWhenEmpty))
                     .slice(0, limit)
                     .map((organization) => (
-                        <Box key={organization.slug} my={2} data-testid="OrganizationFab">
+                        <Box key={organization.slug} my={2} data-testid="OrganizationCard">
                             <OrganizationCard organization={organization} />
                         </Box>
                     ))}

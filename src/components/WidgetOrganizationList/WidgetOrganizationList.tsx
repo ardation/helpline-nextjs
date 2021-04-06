@@ -113,7 +113,7 @@ const WidgetOrganizationList = ({ organizations, organizationsWhenEmpty }: Props
                                     <Box
                                         key={organization.slug}
                                         className={classes.slide}
-                                        data-testid="OrganizationFab"
+                                        data-testid="OrganizationCard"
                                     >
                                         <OrganizationCard organization={organization} variant="widget" />
                                     </Box>

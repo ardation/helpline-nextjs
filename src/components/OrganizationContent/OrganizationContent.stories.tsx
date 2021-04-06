@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Box } from '@material-ui/core';
-import OrganizationFab from '.';
+import OrganizationContent from '.';
 
 const organization = {
     id: 'abc',
@@ -23,18 +23,18 @@ const organization = {
 };
 
 export default {
-    title: 'OrganizationFab',
+    title: 'OrganizationContent',
 };
 
 export const Default = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab organization={organization} />
+        <OrganizationContent organization={organization} />
     </Box>
 );
 
 export const Basic = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab
+        <OrganizationContent
             organization={{
                 ...organization,
                 smsNumber: undefined,
@@ -51,37 +51,37 @@ export const Basic = (): ReactElement => (
 
 export const NoSmsNumber = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab organization={{ ...organization, smsNumber: undefined }} />
+        <OrganizationContent organization={{ ...organization, smsNumber: undefined }} />
     </Box>
 );
 
 export const NoPhoneNumber = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab organization={{ ...organization, phoneNumber: undefined }} />
+        <OrganizationContent organization={{ ...organization, phoneNumber: undefined }} />
     </Box>
 );
 
 export const NoChatUrl = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab organization={{ ...organization, chatUrl: undefined }} />
+        <OrganizationContent organization={{ ...organization, chatUrl: undefined }} />
     </Box>
 );
 
 export const NoUrl = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab organization={{ ...organization, url: undefined }} />
+        <OrganizationContent organization={{ ...organization, url: undefined }} />
     </Box>
 );
 
 export const NoReviewCount = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab organization={{ ...organization, reviewCount: 0 }} />
+        <OrganizationContent organization={{ ...organization, reviewCount: 0 }} />
     </Box>
 );
 
 export const Open = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab
+        <OrganizationContent
             organization={{
                 ...organization,
                 alwaysOpen: false,
@@ -101,7 +101,7 @@ export const Open = (): ReactElement => (
 
 export const Closed = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab
+        <OrganizationContent
             organization={{
                 ...organization,
                 alwaysOpen: false,
@@ -113,18 +113,18 @@ export const Closed = (): ReactElement => (
 
 export const WhenFeatured = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab organization={{ ...organization, featured: true }} />
+        <OrganizationContent organization={{ ...organization, featured: true }} />
     </Box>
 );
 
 export const WhenVerfied = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab organization={{ ...organization, verified: true, featured: true }} />
+        <OrganizationContent organization={{ ...organization, verified: true, featured: true }} />
     </Box>
 );
 export const WithLongTitle = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab
+        <OrganizationContent
             organization={{
                 ...organization,
                 name: 'The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog',
@@ -136,7 +136,7 @@ export const WithLongTitle = (): ReactElement => (
 
 export const WithManyCategories = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab
+        <OrganizationContent
             organization={{
                 ...organization,
                 categories: [
@@ -153,6 +153,6 @@ export const WithManyCategories = (): ReactElement => (
 
 export const WhenVariant = (): ReactElement => (
     <Box m={2}>
-        <OrganizationFab organization={organization} variant="widget" />
+        <OrganizationContent organization={organization} variant="widget" />
     </Box>
 );
