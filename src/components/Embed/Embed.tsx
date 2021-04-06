@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import { Container, Box, Typography, Button } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Container, Box, Typography, Button } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { isUndefined, omitBy } from 'lodash/fp';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -9,9 +8,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { GetEmbedProps, GetEmbedProps_topics as Topic } from '../../../types/GetEmbedProps';
 import Search from '../Search';
 import { LocalityEnum } from '../../../types/globalTypes';
-import Footer from '../Footer';
-import NavBar from '../NavBar';
-import SideBar from '../SideBar';
 
 type Subdivision = {
     code: string;

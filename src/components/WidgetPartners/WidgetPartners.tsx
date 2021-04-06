@@ -1,15 +1,22 @@
 import React, { ReactElement } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Container, Typography, Button, Box, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import {
+    createStyles,
+    makeStyles,
+    Container,
+    Typography,
+    Button,
+    Box,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+} from '@material-ui/core';
 import NextLink from 'next/link';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import CheckIcon from '@material-ui/icons/Check';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import NavBar from '../NavBar';
-import SideBar from '../SideBar';
-import Footer from '../Footer';
 import { WidgetProps } from '../Widget/Widget';
 import Widget from '../Widget';
 

@@ -1,13 +1,4 @@
-import {
-    Dialog,
-    DialogContent,
-    DialogTitle,
-    Button,
-    makeStyles,
-    createStyles,
-    Theme,
-    Typography,
-} from '@material-ui/core';
+import { Dialog, DialogContent, DialogTitle, Button, makeStyles, createStyles, Typography } from '@material-ui/core';
 import React, { ReactElement, useState } from 'react';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 

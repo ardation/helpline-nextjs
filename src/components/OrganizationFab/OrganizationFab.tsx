@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Typography, Fab, Grid, Divider, SvgIcon } from '@material-ui/core';
 import ReactGA, { outboundLink } from 'react-ga';
 import { noop } from 'lodash/fp';

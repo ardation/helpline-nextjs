@@ -1,8 +1,16 @@
 import React, { ReactElement, useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Button, Box, Container, Tooltip, Paper, SvgIcon } from '@material-ui/core';
+import {
+    createStyles,
+    makeStyles,
+    Typography,
+    Button,
+    Box,
+    Container,
+    Tooltip,
+    Paper,
+    SvgIcon,
+} from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
 import ReviewDialog from '../ReviewDialog';
 import Reviews from '../Reviews';
 import OrganizationContent from '../OrganizationContent';

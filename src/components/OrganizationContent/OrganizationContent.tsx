@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Button, Box, NoSsr, SvgIcon } from '@material-ui/core';
+import { createStyles, makeStyles, Button, Box, NoSsr, SvgIcon } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LanguageIcon from '@material-ui/icons/Language';
 import ReactGA, { outboundLink } from 'react-ga';

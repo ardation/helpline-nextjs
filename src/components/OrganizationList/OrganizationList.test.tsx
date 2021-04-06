@@ -127,9 +127,9 @@ describe('OrganizationList', () => {
                 preselectedTopics={[]}
             />,
         );
-        expect(getAllByTestId('OrganizationCard').length).toEqual(10);
+        expect(getAllByTestId('OrganizationFab').length).toEqual(10);
         fireEvent.click(getByRole('button', { name: 'Show More' }));
-        expect(getAllByTestId('OrganizationCard').length).toEqual(11);
+        expect(getAllByTestId('OrganizationFab').length).toEqual(11);
         expect(queryByRole('button', { name: 'Show More' })).not.toBeInTheDocument();
     });
 
@@ -217,15 +217,15 @@ describe('OrganizationList', () => {
                     preselectedTopics={[]}
                 />,
             );
-            expect(getAllByTestId('OrganizationCard').length).toEqual(10);
+            expect(getAllByTestId('OrganizationFab').length).toEqual(10);
             fireEvent.click(getByRole('button', { name: 'Show More' }));
-            expect(getAllByTestId('OrganizationCard').length).toEqual(11);
+            expect(getAllByTestId('OrganizationFab').length).toEqual(11);
             fireEvent.click(getByTestId('filter'));
             fireEvent.click(getByText('Support Type'));
             fireEvent.click(getByText('Phone'));
             fireEvent.click(getByText('Apply'));
             expect(getByTestId('backdrop')).toHaveStyle({ opacity: 0 });
-            expect(getAllByTestId('OrganizationCard').length).toEqual(10);
+            expect(getAllByTestId('OrganizationFab').length).toEqual(10);
             expect(queryByRole('button', { name: 'Show More' })).toBeInTheDocument();
         });
     });
@@ -263,7 +263,7 @@ describe('OrganizationList', () => {
                 />,
             );
             expect(getByText('Helplines in New Zealand.')).toBeInTheDocument();
-            expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
+            expect(getAllByTestId('OrganizationFab').map((o) => o.textContent)).toEqual([
                 '6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzFor youthAll issuesTextCallWeb Chat',
                 '5.0(10)',
             ]);
@@ -279,7 +279,7 @@ describe('OrganizationList', () => {
                 />,
             );
             expect(getByText('Helplines in New Zealand for anxiety, bullying, and depression.')).toBeInTheDocument();
-            expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
+            expect(getAllByTestId('OrganizationFab').map((o) => o.textContent)).toEqual([
                 '5.0(10)',
                 '6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzFor youthAll issuesTextCallWeb Chat',
             ]);
@@ -301,7 +301,7 @@ describe('OrganizationList', () => {
             );
             expect(getByText('Helplines in New Zealand for racism.')).toBeInTheDocument();
             expect(getByTestId('OrganizationEmptyDefault')).toBeInTheDocument();
-            expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
+            expect(getAllByTestId('OrganizationFab').map((o) => o.textContent)).toEqual([
                 '5.0(10)',
                 '6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzFor youthAll issuesTextCallWeb Chat',
             ]);

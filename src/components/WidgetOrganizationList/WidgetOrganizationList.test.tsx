@@ -46,7 +46,7 @@ describe('WidgetOrganizationList', () => {
         expect(() => getByTestId('nextButton')).toThrow();
     });
 
-    describe('OrganizationCard rendering', () => {
+    describe('OrganizationFab rendering', () => {
         beforeEach(() => {
             const createElement = document.createElement.bind(document);
             // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

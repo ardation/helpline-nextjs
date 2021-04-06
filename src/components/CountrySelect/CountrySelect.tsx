@@ -2,8 +2,7 @@
 import React, { ReactElement, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Autocomplete } from '@material-ui/lab';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, Grid, InputAdornment } from '@material-ui/core';
+import { createStyles, makeStyles, Box, Grid, InputAdornment } from '@material-ui/core';
 import { sortBy, compact } from 'lodash/fp';
 import { LocalityEnum } from '../../../types/globalTypes';
 import SearchIcon from '../../assets/search-icon.svg';

@@ -1,6 +1,15 @@
 import React, { ReactElement, useState, useRef } from 'react';
-import { Button, Typography, Link, TextField, Grid, Container, CircularProgress } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {
+    createStyles,
+    makeStyles,
+    Button,
+    Typography,
+    Link,
+    TextField,
+    Grid,
+    Container,
+    CircularProgress,
+} from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import ReCAPTCHA from 'react-google-recaptcha';
 import gql from 'graphql-tag';

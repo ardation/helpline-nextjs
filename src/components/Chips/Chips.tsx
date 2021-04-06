@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, Chip } from '@material-ui/core';
+import { Box, Chip, createStyles, makeStyles } from '@material-ui/core';
 
 type Item = {
     name: string;

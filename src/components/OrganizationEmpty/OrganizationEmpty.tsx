@@ -1,11 +1,10 @@
 import React, { ReactElement } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Container, Link } from '@material-ui/core';
+import { createStyles, makeStyles, Typography, Container, Link } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import NextLink from 'next/link';
-import { Organization } from '../OrganizationCard/OrganizationCard';
+import { Organization } from '../OrganizationFab/OrganizationFab';
 
 const useStyles = makeStyles((theme) =>
     createStyles({

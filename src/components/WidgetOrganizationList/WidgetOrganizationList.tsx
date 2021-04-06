@@ -1,7 +1,6 @@
 import React, { useState, useEffect, ReactElement } from 'react';
 import { useEmblaCarousel } from 'embla-carousel-react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, Fab } from '@material-ui/core';
+import { createStyles, makeStyles, Box, Fab } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { sortBy } from 'lodash/fp';
@@ -114,7 +113,7 @@ const WidgetOrganizationList = ({ organizations, organizationsWhenEmpty }: Props
                                     <Box
                                         key={organization.slug}
                                         className={classes.slide}
-                                        data-testid="OrganizationCard"
+                                        data-testid="OrganizationFab"
                                     >
                                         <OrganizationCard organization={organization} variant="widget" />
                                     </Box>

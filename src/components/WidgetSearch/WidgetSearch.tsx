@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import { Button, Container, Box } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Button, Container } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import CountrySelect from '../CountrySelect';
 import { LocalityEnum } from '../../../types/globalTypes';

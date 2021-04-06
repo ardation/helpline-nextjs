@@ -1,6 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { AppBar, Box, Container, Hidden, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, AppBar, Box, Container, Hidden, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import clsx from 'clsx';
 

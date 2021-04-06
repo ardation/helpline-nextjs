@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Button, Box, Grid, Divider } from '@material-ui/core';
 import NextLink from 'next/link';
 import FastForwardRoundedIcon from '@material-ui/icons/FastForwardRounded';

@@ -1,6 +1,15 @@
 import React, { ReactElement } from 'react';
-import { AppBar, Box, Container, Toolbar, Typography, Button, Hidden } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {
+    createStyles,
+    makeStyles,
+    AppBar,
+    Box,
+    Container,
+    Toolbar,
+    Typography,
+    Button,
+    Hidden,
+} from '@material-ui/core';
 import { compact } from 'lodash/fp';
 import { OutboundLink } from 'react-ga';
 

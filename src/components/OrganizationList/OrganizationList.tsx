@@ -1,7 +1,6 @@
 import CloseIcon from '@material-ui/icons/Close';
 import React, { ReactElement, useState, useEffect } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Container, Box, Button, Backdrop } from '@material-ui/core';
+import { createStyles, makeStyles, Typography, Container, Box, Button, Backdrop } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import AddIcon from '@material-ui/icons/Add';
 import { sortBy } from 'lodash/fp';
@@ -154,7 +153,7 @@ const OrganizationList = ({
                 {(filteredOrganizations.length > 0 ? filteredOrganizations : sortBy('name', organizationsWhenEmpty))
                     .slice(0, limit)
                     .map((organization) => (
-                        <Box key={organization.slug} my={2} data-testid="OrganizationCard">
+                        <Box key={organization.slug} my={2} data-testid="OrganizationFab">
                             <OrganizationCard organization={organization} />
                         </Box>
                     ))}

@@ -1,13 +1,8 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import { Typography, Box, Button, Container, Grid } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
-import { OutboundLink } from 'react-ga';
-import MailIcon from '@material-ui/icons/Mail';
-import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import clsx from 'clsx';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import TopicSelect from '../TopicSelect';
 import CountrySelect from '../CountrySelect';
 import { LocalityEnum } from '../../../types/globalTypes';
 import NavBar from '../NavBar';

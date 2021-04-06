@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Typography, Link, Container, Box, Divider, Grid } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Typography, Link, Container, Box, Divider, Grid } from '@material-ui/core';
 import NextLink from 'next/link';
 import { OutboundLink } from 'react-ga';
 

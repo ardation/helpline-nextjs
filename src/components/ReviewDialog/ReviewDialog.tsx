@@ -1,6 +1,8 @@
 import CloseIcon from '@material-ui/icons/Close';
 import React, { ReactElement, useState, useRef, useEffect } from 'react';
 import {
+    createStyles,
+    makeStyles,
     Dialog,
     DialogTitle,
     DialogContent,
@@ -13,7 +15,7 @@ import {
     Box,
     CircularProgress,
 } from '@material-ui/core';
-import { withStyles, createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import { Alert, AlertTitle, Rating } from '@material-ui/lab';
 import ReCAPTCHA from 'react-google-recaptcha';

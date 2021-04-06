@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Chip, Button, IconButton, Box, Grid, Collapse } from '@material-ui/core';
+import { createStyles, makeStyles, Typography, Chip, Button, IconButton, Box, Grid, Collapse } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import CloseIcon from '@material-ui/icons/Close';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
