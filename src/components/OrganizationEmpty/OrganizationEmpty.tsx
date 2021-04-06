@@ -7,7 +7,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import NextLink from 'next/link';
 import { Organization } from '../OrganizationCard/OrganizationCard';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         container: {
             display: 'grid',

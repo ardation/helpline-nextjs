@@ -13,8 +13,8 @@ const AboutPage = ({ countries }: GetAboutProps): ReactElement => {
             <Head>
                 <title>Find A Helpline | About</title>
             </Head>
-            <Chrome>
-                <About navBar countries={countries} />
+            <Chrome navBar footer>
+                <About countries={countries} />
             </Chrome>
         </>
     );

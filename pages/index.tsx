@@ -13,7 +13,7 @@ const IndexPage = ({ topics, countries }: GetSearchProps): ReactElement => {
             <Head>
                 <title>Find A Helpline</title>
             </Head>
-            <Chrome>
+            <Chrome footer>
                 <Search countries={countries} topics={topics} />
             </Chrome>
         </>

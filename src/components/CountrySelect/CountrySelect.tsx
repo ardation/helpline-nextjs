@@ -30,7 +30,7 @@ type Props = {
     preselectedSubdivision?: Subdivision;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         root: {
             width: 'auto !important',
@@ -110,7 +110,6 @@ const CountrySelect = ({
 
     return (
         <Box className={compact([classes.box, inline && classes.inline]).join(' ')}>
-            <Box className={classes.flagBox}></Box>
             <Autocomplete
                 aria-label="country"
                 value={selectedCountry}
@@ -174,6 +173,7 @@ const CountrySelect = ({
                         inputRoot: classes.inputRoot,
                         option: classes.option,
                         paper: classes.paper,
+                        focused: classes.focused,
                     }}
                     value={selectedSubdivision}
                     options={sortBy('name', selectedCountry.subdivisions) as Subdivision[]}

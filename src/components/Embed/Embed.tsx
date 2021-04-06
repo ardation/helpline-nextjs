@@ -25,7 +25,7 @@ type Country = {
     locality: LocalityEnum;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         container: {
             display: 'flex',
@@ -82,46 +82,40 @@ const Embed = ({ countries, topics }: GetEmbedProps): ReactElement => {
     const handleCopy = (): void => setCopied(true);
 
     return (
-        <>
-            <NavBar>
-                <SideBar />
-            </NavBar>
-            <Container maxWidth="sm" className={classes.container}>
-                <Box className={classes.box}>
-                    <Typography component="div">
-                        <p>We’re putting every free mental health helpline in the world at your fingertips.</p>
-                        <p>Quick. Easy. Reliable.</p>
-                        <h3>Embed the Find A Helpline widget</h3>
-                        <span className={classes.steps}>Step 1:</span> Select default country, subdivision and topics
-                        for your widget.
-                    </Typography>
-                    <Search countries={countries} topics={topics} variant="embed" onChange={handleChange} />
-                    <Typography component="div" color={snippet === '' ? 'textSecondary' : 'textPrimary'}>
-                        <span className={classes.steps}>Step 2:</span> Simply copy the code snippet and paste it in your
-                        page’s HTML where you want the widget to appear.
-                    </Typography>
-                    {snippet !== '' && (
-                        <>
-                            <SyntaxHighlighter
-                                language="html"
-                                style={monokai}
-                                className={classes.code}
-                                data-testid="EmbedSyntaxHighlighter"
-                            >
-                                {snippet}
-                            </SyntaxHighlighter>
-                            {copied && <Alert severity="success">Copied to clipboard!</Alert>}
-                            <CopyToClipboard text={snippet} onCopy={handleCopy}>
-                                <Button className={classes.button} color="primary" variant="contained" size="large">
-                                    Copy to clipboard
-                                </Button>
-                            </CopyToClipboard>
-                        </>
-                    )}
-                </Box>
-            </Container>
-            <Footer />
-        </>
+        <Container maxWidth="sm" className={classes.container}>
+            <Box className={classes.box}>
+                <Typography component="div">
+                    <p>We’re putting every free mental health helpline in the world at your fingertips.</p>
+                    <p>Quick. Easy. Reliable.</p>
+                    <h3>Embed the Find A Helpline widget</h3>
+                    <span className={classes.steps}>Step 1:</span> Select default country, subdivision and topics for
+                    your widget.
+                </Typography>
+                <Search countries={countries} topics={topics} variant="embed" onChange={handleChange} />
+                <Typography component="div" color={snippet === '' ? 'textSecondary' : 'textPrimary'}>
+                    <span className={classes.steps}>Step 2:</span> Simply copy the code snippet and paste it in your
+                    page’s HTML where you want the widget to appear.
+                </Typography>
+                {snippet !== '' && (
+                    <>
+                        <SyntaxHighlighter
+                            language="html"
+                            style={monokai}
+                            className={classes.code}
+                            data-testid="EmbedSyntaxHighlighter"
+                        >
+                            {snippet}
+                        </SyntaxHighlighter>
+                        {copied && <Alert severity="success">Copied to clipboard!</Alert>}
+                        <CopyToClipboard text={snippet} onCopy={handleCopy}>
+                            <Button className={classes.button} color="primary" variant="contained" size="large">
+                                Copy to clipboard
+                            </Button>
+                        </CopyToClipboard>
+                    </>
+                )}
+            </Box>
+        </Container>
     );
 };
 

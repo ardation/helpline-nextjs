@@ -13,7 +13,7 @@ import Footer from '../Footer';
 import { WidgetProps } from '../Widget/Widget';
 import Widget from '../Widget';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         container: {
             display: 'flex',
@@ -84,9 +84,6 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
 
     return (
         <>
-            <NavBar>
-                <SideBar />
-            </NavBar>
             <Box className={[classes.container, classes.background0].join(' ')}>
                 <Container className={classes.containerContent} maxWidth="xs">
                     <Box mb={3}>
@@ -185,7 +182,6 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
                     </NextLink>
                 </Container>
             </Box>
-            <Footer />
         </>
     );
 };

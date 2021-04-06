@@ -13,7 +13,7 @@ type Props = {
     organizationsWhenEmpty: Organization[];
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         box: {
             position: 'relative',

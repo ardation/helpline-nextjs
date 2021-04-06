@@ -9,7 +9,7 @@ const ContactPage = (): ReactElement => {
             <Head>
                 <title>Find A Helpline | Contact</title>
             </Head>
-            <Chrome>
+            <Chrome footer navBar>
                 <Contact />
             </Chrome>
         </>

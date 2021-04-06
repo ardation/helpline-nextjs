@@ -9,7 +9,7 @@ const PrivacyPage = (): ReactElement => {
             <Head>
                 <title>Find A Helpline | Privacy Policy</title>
             </Head>
-            <Chrome>
+            <Chrome navBar footer>
                 <Legal tab="privacy" />
             </Chrome>
         </>

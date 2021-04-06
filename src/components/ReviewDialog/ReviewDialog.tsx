@@ -35,25 +35,19 @@ type Props = {
     button?: boolean;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         '@global': {
             '.grecaptcha-badge': {
                 visibility: 'hidden',
             },
         },
-        submit: {
-            fontWeight: 'bold',
-            textTransform: 'none',
-            width: '100%',
-        },
-        button: {},
         recaptcha: {
             fontSize: '12px',
-            color: '#AAAAAA',
+            color: theme.palette.text.secondary,
             textAlign: 'center',
             '& > a': {
-                color: '#AAAAAA',
+                color: theme.palette.text.secondary,
             },
         },
         alert: {
@@ -64,10 +58,10 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: '3rem',
         },
         title: {
-            fontWeight: 'bold',
+            fontFamily: theme.typography.fontFamily,
         },
         subtitle: {
-            fontWeight: 'bold',
+            fontWeight: 600,
         },
         dialogScrollPaper: {
             [theme.breakpoints.down('xs')]: {
@@ -80,7 +74,10 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         dialogPaper: {
+            borderRadius: 12,
             [theme.breakpoints.down('xs')]: {
+                borderTopRightRadius: 0,
+                borderTopLeftRadius: 0,
                 margin: 0,
             },
         },
@@ -89,14 +86,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MySlider = withStyles({
     root: {
-        color: '#ED2125',
+        color: '#2B8E94',
         height: 8,
     },
     thumb: {
         height: 24,
         width: 24,
-        backgroundColor: '#000',
-        border: '2px solid #000',
+        backgroundColor: '#2B8E94',
+        border: '2px solid #2B8E94',
         marginTop: -8,
         marginLeft: -12,
         '&:focus, &:hover, &$active': {
@@ -110,7 +107,7 @@ const MySlider = withStyles({
     track: {
         height: 8,
         borderRadius: 4,
-        background: 'linear-gradient(173.19deg, #ED2125 0%, #96CDD2 124.61%)',
+        background: '#2B8E94',
     },
     rail: {
         color: '#F0F1F5',
@@ -186,7 +183,7 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
                             Thanks for your review! It will appear here shortly.
                         </Alert>
                     ) : (
-                        <Button variant="contained" className={classes.button} onClick={handleOpen} fullWidth>
+                        <Button variant="contained" onClick={handleOpen} fullWidth>
                             Leave a Review
                         </Button>
                     )}
@@ -265,7 +262,6 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
                                             rows={4}
                                             variant="outlined"
                                             fullWidth
-                                            color="primary"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             disabled={isSubmitting}
@@ -298,11 +294,11 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
                                     <Grid item>
                                         <Button
                                             type="submit"
-                                            className={classes.submit}
                                             variant="contained"
                                             color="primary"
                                             size="large"
                                             disabled={isSubmitting}
+                                            fullWidth
                                         >
                                             {isSubmitting ? (
                                                 <>

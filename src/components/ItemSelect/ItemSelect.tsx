@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Chip, Box } from '@material-ui/core';
-import { differenceBy, find, xorBy } from 'lodash/fp';
+import { compact, differenceBy, find, xorBy } from 'lodash/fp';
 
 type Item = {
     name: string;
@@ -13,18 +13,21 @@ type Props = {
     preselectedItems?: Item[];
     single?: boolean;
     max?: number;
+    center?: boolean;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         chips: {
             display: 'flex',
-            justifyContent: 'center',
             flexWrap: 'wrap',
             '& > *': {
                 marginRight: theme.spacing(1),
                 marginBottom: theme.spacing(1),
             },
+        },
+        chipsCenter: {
+            justifyContent: 'center',
         },
         chipRoot: {
             borderRadius: 6,
@@ -32,12 +35,12 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         text: {
             fontSize: '0.8rem',
-            fontWeight: 'bold',
+            fontWeight: 600,
         },
     }),
 );
 
-const ItemSelect = ({ items, preselectedItems, onChange, single, max }: Props): ReactElement => {
+const ItemSelect = ({ items, preselectedItems, onChange, single, max, center }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedItems, setSelectedItems] = useState(preselectedItems || []);
     const [hide, setHide] = useState(max && true);
@@ -68,7 +71,7 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, max }: Props): 
     }, [preselectedItems]);
 
     return (
-        <Box className={classes.chips}>
+        <Box className={compact([classes.chips, center && classes.chipsCenter]).join(' ')}>
             {(hide ? visibleItems : items).map((item) => (
                 <Chip
                     color={find(item, selectedItems) ? 'secondary' : 'default'}

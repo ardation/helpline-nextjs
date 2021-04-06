@@ -23,7 +23,7 @@ type Props = {
     organizationsWhenEmpty: Organization[];
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         backdrop: {
             display: 'block',
@@ -123,6 +123,8 @@ const OrganizationList = ({
                             className={classes.button}
                             onClick={(): void => setShowFilters(false)}
                             endIcon={<CloseIcon />}
+                            variant="contained"
+                            color="default"
                         >
                             Close
                         </Button>

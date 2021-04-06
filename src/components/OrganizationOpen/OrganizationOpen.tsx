@@ -25,7 +25,7 @@ type Props = {
     expandable?: boolean;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         body: {
             fontSize: 'inherit',

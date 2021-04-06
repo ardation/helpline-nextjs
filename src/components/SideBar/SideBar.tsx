@@ -11,6 +11,10 @@ import Link from 'next/link';
 
 const useStyles = makeStyles(() =>
     createStyles({
+        paper: {
+            borderTopLeftRadius: 12,
+            borderBottomLeftRadius: 12,
+        },
         list: {
             width: 250,
         },
@@ -26,13 +30,13 @@ const SideBar = (): ReactElement => {
             <IconButton onClick={(): void => setOpen(true)} size="small" data-testid="menuButton">
                 <MenuIcon />
             </IconButton>
-            <Drawer anchor="right" open={open} onClose={(): void => setOpen(false)}>
+            <Drawer classes={{ paper: classes.paper }} anchor="right" open={open} onClose={(): void => setOpen(false)}>
                 <div className={classes.list} onClick={(): void => setOpen(false)}>
                     <List>
                         <Link href="/" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <HomeIcon />
+                                    <HomeIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Home" />
                             </ListItem>
@@ -40,7 +44,7 @@ const SideBar = (): ReactElement => {
                         <Link href="/about" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <InfoIcon />
+                                    <InfoIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="About" />
                             </ListItem>
@@ -48,7 +52,7 @@ const SideBar = (): ReactElement => {
                         <Link href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <ExtensionIcon />
+                                    <ExtensionIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Get the Widget" />
                             </ListItem>
@@ -56,7 +60,7 @@ const SideBar = (): ReactElement => {
                         <Link href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <EmailIcon />
+                                    <EmailIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Contact" />
                             </ListItem>
@@ -64,7 +68,7 @@ const SideBar = (): ReactElement => {
                         <Link href="/gratitude" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <FavoriteIcon />
+                                    <FavoriteIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Gratitude" />
                             </ListItem>
@@ -72,14 +76,17 @@ const SideBar = (): ReactElement => {
                         <Divider />
                         <Link href="/privacy" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
-                                <ListItemText primary="Privacy Policy" primaryTypographyProps={{ variant: 'body2' }} />
+                                <ListItemText
+                                    primary="Privacy Policy"
+                                    primaryTypographyProps={{ variant: 'body2', color: 'textSecondary' }}
+                                />
                             </ListItem>
                         </Link>
                         <Link href="/terms" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemText
                                     primary="Terms of Service"
-                                    primaryTypographyProps={{ variant: 'body2' }}
+                                    primaryTypographyProps={{ variant: 'body2', color: 'textSecondary' }}
                                 />
                             </ListItem>
                         </Link>

@@ -1,4 +1,11 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import { RatingClassKey } from '@material-ui/lab/Rating';
+
+declare module '@material-ui/core/styles/overrides' {
+    export interface ComponentNameToClassKey {
+        MuiRating: RatingClassKey;
+    }
+}
 
 // Create a theme instance.
 const theme = createMuiTheme({
@@ -47,8 +54,7 @@ const theme = createMuiTheme({
         },
         text: {
             primary: '#202020',
-            secondary: '#94BCD9',
-            disabled: '#ABB2B5',
+            secondary: '#ABB2B5',
         },
         background: {
             default: 'rgba(148, 188, 217, 0.1)',
@@ -74,6 +80,7 @@ const theme = createMuiTheme({
             },
             contained: {
                 boxShadow: 'none',
+                backgroundColor: '#F7F7F7',
             },
             containedPrimary: {
                 color: '#fff',
@@ -107,6 +114,53 @@ const theme = createMuiTheme({
             },
             arrow: {
                 color: '#0F2027',
+            },
+        },
+        MuiRating: {
+            root: {
+                color: '#ECE686',
+            },
+        },
+        MuiTabs: {
+            indicator: {
+                backgroundColor: 'rgba(15,35,45,0.5)',
+            },
+        },
+        MuiTab: {
+            root: {
+                borderBottom: '0.603865px solid #ABB2B5',
+                textTransform: 'capitalize',
+            },
+        },
+        MuiCssBaseline: {
+            '@global': {
+                html: {
+                    WebkitFontSmoothing: 'auto',
+                },
+                h1: {
+                    fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+                    fontWeight: 600,
+                },
+                h2: {
+                    fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+                    fontWeight: 600,
+                },
+                h3: {
+                    fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+                    fontWeight: 600,
+                },
+                h4: {
+                    fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+                    fontWeight: 600,
+                },
+                h5: {
+                    fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+                    fontWeight: 600,
+                },
+                h6: {
+                    fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
+                    fontWeight: 600,
+                },
             },
         },
     },

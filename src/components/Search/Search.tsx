@@ -38,7 +38,7 @@ type Props = {
     onChange?: (topics: Topic[], country?: Country, subdivision?: Subdivision) => void;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         logo: {
             textAlign: 'center',
@@ -53,14 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingTop: theme.spacing(5),
             paddingBottom: theme.spacing(5),
             textAlign: 'center',
-            height: 'calc(100vh - 245px)',
             maxWidth: '444px',
-            [theme.breakpoints.down('md')]: {
-                marginBottom: theme.spacing(11),
-            },
-            [theme.breakpoints.down('xs')]: {
-                marginBottom: theme.spacing(23),
-            },
         },
         containerEmbed: {
             padding: 0,
@@ -68,10 +61,6 @@ const useStyles = makeStyles((theme: Theme) =>
         box: {
             display: 'grid',
             gridGap: theme.spacing(2),
-        },
-        boxScrollArrow: {
-            textAlign: 'center',
-            margin: theme.spacing(2),
         },
         links: {
             margin: '0 auto',
@@ -169,7 +158,7 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                                 )}
                                 {selectedCountry && (
                                     <Grid item xs={12}>
-                                        <ItemSelect items={topics} onChange={setSelectedTopics} max={10} />
+                                        <ItemSelect items={topics} onChange={setSelectedTopics} max={10} center />
                                     </Grid>
                                 )}
                                 {selectedCountry && variant !== 'embed' && (
@@ -209,14 +198,7 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                     )}
                 </Box>
             </Container>
-            {!selectedCountry && variant !== 'embed' && (
-                <>
-                    <Box className={classes.boxScrollArrow}>
-                        <ArrowDownwardIcon />
-                    </Box>
-                    <About countries={countries} />
-                </>
-            )}
+            {!selectedCountry && variant !== 'embed' && <About countries={countries} />}
         </>
     );
 };

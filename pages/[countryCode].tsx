@@ -8,7 +8,6 @@ import { print } from 'graphql';
 import Chrome from '../src/components/Chrome';
 import { GetCountryCodeProps } from '../types/GetCountryCodeProps';
 import OrganizationList from '../src/components/OrganizationList';
-import Footer from '../src/components/Footer';
 import { GetCountryCodePaths } from '../types/GetCountryCodePaths';
 
 interface Props extends GetCountryCodeProps {
@@ -38,7 +37,7 @@ const CountryCodePage = ({
             <Head>
                 <title>Find A Helpline | {country.name}</title>
             </Head>
-            <Chrome country={country}>
+            <Chrome country={country} footer>
                 <OrganizationList
                     organizations={organizations.nodes}
                     organizationsWhenEmpty={organizationsWhenEmpty.nodes}
@@ -48,7 +47,6 @@ const CountryCodePage = ({
                     humanSupportTypes={humanSupportTypes}
                     topics={topics}
                 />
-                <Footer />
             </Chrome>
         </>
     );

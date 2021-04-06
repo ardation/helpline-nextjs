@@ -14,7 +14,7 @@ interface Props {
     reviews: Review[];
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         box: {
             backgroundColor: '#F0F1F5',

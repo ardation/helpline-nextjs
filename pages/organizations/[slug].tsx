@@ -7,7 +7,6 @@ import { print } from 'graphql';
 import Chrome from '../../src/components/Chrome';
 import { GetOrganizationsSlugProps } from '../../types/GetOrganizationsSlugProps';
 import OrganizationItem from '../../src/components/OrganizationItem';
-import Footer from '../../src/components/Footer';
 import { GetOrganizationsSlugPaths } from '../../types/GetOrganizationsSlugPaths';
 
 interface Props extends GetOrganizationsSlugProps {
@@ -20,9 +19,8 @@ const OrganizationPage = ({ organization }: Props): ReactElement => {
             <Head>
                 <title>Find A Helpline | {organization.name}</title>
             </Head>
-            <Chrome country={organization.country}>
+            <Chrome country={organization.country} navBar footer>
                 <OrganizationItem organization={organization} />
-                <Footer />
             </Chrome>
         </>
     );

@@ -20,7 +20,7 @@ interface Props {
     influencer: Influencer;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         button: {
             margin: theme.spacing(2, 0),

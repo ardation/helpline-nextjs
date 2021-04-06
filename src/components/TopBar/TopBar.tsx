@@ -1,8 +1,6 @@
 import React, { ReactElement } from 'react';
-import { AppBar, Container, Toolbar, Typography, Button, Hidden, Box } from '@material-ui/core';
+import { AppBar, Box, Container, Toolbar, Typography, Button, Hidden } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
-import CallIcon from '@material-ui/icons/Call';
 import { compact } from 'lodash/fp';
 import { OutboundLink } from 'react-ga';
 
@@ -15,7 +13,7 @@ type Props = {
     variant?: 'widget';
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         container: {
             [theme.breakpoints.down('xs')]: {
@@ -24,11 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         appBar: {
-            backgroundColor: '#fff',
-            color: theme.palette.text.primary,
+            backgroundColor: theme.palette.background.paper,
         },
         appBarWidget: {
-            backgroundColor: '#fff',
+            backgroundColor: theme.palette.background.paper,
             color: theme.palette.text.primary,
         },
         toolbar: {
@@ -42,6 +39,14 @@ const useStyles = makeStyles((theme: Theme) =>
                 height: '80px',
             },
         },
+        toolbarWidgetWithCountry: {
+            justifyContent: 'center',
+            gridTemplateColumns: 'auto auto',
+            [theme.breakpoints.down('xs')]: {
+                textAlign: 'center',
+                gridTemplateColumns: '1fr',
+            },
+        },
         toolbarWithCountry: {
             gridTemplateColumns: '1fr auto auto',
             [theme.breakpoints.down('xs')]: {
@@ -53,31 +58,45 @@ const useStyles = makeStyles((theme: Theme) =>
         toolbarWithoutCountry: {
             gridTemplateColumns: '1fr auto',
         },
-        box: {
-            minWidth: '80px',
-        },
         title: {
             fontWeight: 600,
-        },
-        subtitle: {
-            color: theme.palette.text.disabled,
+            color: theme.palette.text.primary,
+            minWidth: '80px',
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.8rem',
+            },
         },
         titleWithCountry: {
+            fontWeight: 400,
+        },
+        subtitle: {
+            color: theme.palette.text.secondary,
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.8rem',
+            },
+        },
+        box: {
             [theme.breakpoints.down('xs')]: {
                 gridColumn: '1 / span 2',
                 alignSelf: 'center',
-                fontSize: '0.8rem',
             },
         },
         link: {
             textDecoration: 'none',
         },
         button: {
+            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.125) 0%, rgba(0, 0, 0, 0.125) 100%), #E8886C',
             backgroundBlendMode: 'overlay, normal',
-            textAlign: 'left',
-            paddingLeft: theme.spacing(2),
-            paddingRight: theme.spacing(2),
-            width: '100%',
+            color: '#FFFFFF',
+            '&:hover': {
+                background:
+                    'linear-gradient(180deg, rgba(255, 255, 255, 0.125) 0%, rgba(0, 0, 0, 0.125) 100%), #E8886C',
+            },
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.7rem',
+                paddingRight: theme.spacing(1),
+                paddingLeft: theme.spacing(1),
+            },
         },
         buttonEndIcon: {
             [theme.breakpoints.down('xs')]: {
@@ -94,13 +113,17 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
         <AppBar
             className={compact([classes.appBar, variant === 'widget' && classes.appBarWidget]).join(' ')}
             position="static"
-            elevation={1}
+            elevation={0}
         >
             <Container className={country && classes.container}>
                 <Toolbar
                     className={[
                         classes.toolbar,
-                        country ? classes.toolbarWithCountry : classes.toolbarWithoutCountry,
+                        country
+                            ? variant === 'widget'
+                                ? classes.toolbarWidgetWithCountry
+                                : classes.toolbarWithCountry
+                            : classes.toolbarWithoutCountry,
                     ].join(' ')}
                 >
                     {country ? (
@@ -118,10 +141,8 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
                                 className={classes.link}
                             >
                                 <Button
-                                    color="secondary"
                                     variant="contained"
-                                    classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
-                                    endIcon={<CallIcon />}
+                                    className={classes.button}
                                     data-testid="emergencyServicesButton"
                                 >
                                     <Hidden smUp>Call {country.emergencyNumber}</Hidden>
@@ -130,28 +151,24 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
                             </OutboundLink>
                         </>
                     ) : (
-                        <Box className={classes.box}>
+                        <Box>
                             <Typography className={classes.title}>Need to leave quickly?</Typography>
                             <Typography className={classes.subtitle}>Click to immediately exit this site.</Typography>
                         </Box>
                     )}
-                    <OutboundLink
-                        eventLabel="https://accuweather.com"
-                        to="https://accuweather.com"
-                        target="_parent"
-                        rel="noopener noreferrer"
-                        className={classes.link}
-                    >
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            classes={{ root: classes.button, endIcon: classes.buttonEndIcon }}
-                            endIcon={<DirectionsRunIcon />}
-                            data-testid="leaveQuicklyButton"
+                    {variant !== 'widget' && (
+                        <OutboundLink
+                            eventLabel="https://accuweather.com"
+                            to="https://accuweather.com"
+                            target="_parent"
+                            rel="noopener noreferrer"
+                            className={classes.link}
                         >
-                            Quick Exit
-                        </Button>
-                    </OutboundLink>
+                            <Button variant="contained" className={classes.button} data-testid="leaveQuicklyButton">
+                                Quick Exit
+                            </Button>
+                        </OutboundLink>
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>

@@ -8,10 +8,8 @@ import SecurityRoundedIcon from '@material-ui/icons/SecurityRounded';
 import { OutboundLink } from 'react-ga';
 import Flag from 'react-world-flags';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
-import NavBar from '../NavBar';
-import SideBar from '../SideBar';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         content: {
             padding: theme.spacing(5, 0),
@@ -65,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '80%',
         },
         partnerHeading: {
-            color: theme.palette.text.disabled,
+            color: theme.palette.text.secondary,
             textAlign: 'center',
             marginBottom: theme.spacing(2),
         },
@@ -80,19 +78,13 @@ type Country = {
 
 interface Props {
     countries: Country[];
-    navBar?: boolean;
 }
 
-const About = ({ countries, navBar }: Props): ReactElement => {
+const About = ({ countries }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
         <>
-            {navBar && (
-                <NavBar>
-                    <SideBar />
-                </NavBar>
-            )}
             <Box className={[classes.content, classes.contentAlt].join(' ')}>
                 <Container maxWidth="xs">
                     <Box mb={5}>

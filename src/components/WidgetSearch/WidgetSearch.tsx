@@ -23,11 +23,8 @@ type Props = {
     countries: Country[];
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
-        box: {
-            backgroundColor: '#181719',
-        },
         container: {
             paddingTop: theme.spacing(1),
             paddingBottom: theme.spacing(2),
@@ -71,23 +68,21 @@ const WidgetSearch = ({ preselectedCountry, preselectedSubdivision, countries }:
     };
 
     return (
-        <Box className={classes.box}>
-            <Container className={classes.container}>
-                <CountrySelect
-                    countries={countries}
-                    onCountryChange={onCountryChange}
-                    onSubdivisionChange={onSubdivisionChange}
-                    preselectedCountry={preselectedCountry}
-                    preselectedSubdivision={preselectedSubdivision}
-                    inline
-                />
-                {selectedCountry && (
-                    <Button className={classes.button} variant="contained" color="primary" size="large">
-                        Search
-                    </Button>
-                )}
-            </Container>
-        </Box>
+        <Container className={classes.container}>
+            <CountrySelect
+                countries={countries}
+                onCountryChange={onCountryChange}
+                onSubdivisionChange={onSubdivisionChange}
+                preselectedCountry={preselectedCountry}
+                preselectedSubdivision={preselectedSubdivision}
+                inline
+            />
+            {selectedCountry && (
+                <Button className={classes.button} variant="contained" color="primary" size="large">
+                    Search
+                </Button>
+            )}
+        </Container>
     );
 };
 

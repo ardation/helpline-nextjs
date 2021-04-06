@@ -1,21 +1,13 @@
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Chip, Button, Box, Container, NoSsr, Tooltip, Paper } from '@material-ui/core';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
-import PhoneIcon from '@material-ui/icons/Phone';
-import PublicIcon from '@material-ui/icons/Public';
+import { Typography, Button, Box, Container, Tooltip, Paper, SvgIcon } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
-import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
-import { OutboundLink } from 'react-ga';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import OrganizationOpen from '../OrganizationOpen';
-import NavBar from '../NavBar';
-import SideBar from '../SideBar';
 import ReviewDialog from '../ReviewDialog';
-import OrganizationRating from '../OrganizationRating';
 import Reviews from '../Reviews';
+import OrganizationContent from '../OrganizationContent';
+import OrganizationFab from '../OrganizationFab';
+import VerifyIcon from '../../assets/verify-icon.svg';
 
 type OpeningHour = {
     day: string;
@@ -72,7 +64,7 @@ type Props = {
     organization: Organization;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         paper: {
             padding: theme.spacing(2, 0),
@@ -87,53 +79,24 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 600,
             fontFamily: theme.typography.fontFamily,
         },
-        chipAlwaysOpen: {
-            color: '#FFFFFF',
-            fontWeight: 'bold',
-            backgroundColor: theme.palette.secondary.main,
-            textDecoration: 'none',
-            marginLeft: theme.spacing(2),
-        },
         button: {
             textTransform: 'none',
             lineHeight: '1.5',
         },
-        buttonDisabled: {
-            color: `${theme.palette.text.primary} !important`,
-        },
         buttonLink: {
             textDecoration: 'underline',
+            color: theme.palette.text.secondary,
             '&:hover': {
                 textDecoration: 'underline',
             },
         },
-        buttonHighlight: {
-            marginRight: theme.spacing(1),
-            marginTop: theme.spacing(1),
-            marginBottom: theme.spacing(1),
-        },
-        chips: {
-            display: 'flex',
-            justifyContent: 'left',
-            flexWrap: 'wrap',
-            marginTop: theme.spacing(1),
-            '& > *': {
-                marginRight: theme.spacing(0.5),
-                marginBottom: theme.spacing(0.5),
-            },
-        },
-        featured: {
-            marginLeft: '5px',
-            marginBottom: '-2px',
-            color: '#FFD300',
-        },
         verified: {
-            marginLeft: '5px',
-            marginBottom: '-2px',
-            color: '#999',
+            marginLeft: '10px',
+            marginBottom: '-5px',
+            fontSize: 24,
         },
-        outboundLink: {
-            textDecoration: 'none',
+        notes: {
+            color: theme.palette.text.secondary,
         },
     }),
 );
@@ -146,211 +109,66 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
         setDialogOpen(false);
     };
 
-    const onLinkClick = (): void => {
-        setDialogOpen(true);
-    };
-
     return (
-        <>
-            <NavBar>
-                <SideBar />
-            </NavBar>
-            <Paper elevation={0} className={classes.paper}>
-                <Container maxWidth="sm">
-                    <Box className={classes.grid}>
-                        <Box ml={1} mb={1}>
-                            <Typography variant="h6" className={classes.heading}>
-                                {organization.name}
-                                {organization.featured && !organization.verified && (
-                                    <Tooltip
-                                        title="Featured by Find A Helpline"
-                                        placement="left"
-                                        arrow
-                                        enterTouchDelay={0}
-                                    >
-                                        <WhatshotIcon className={classes.featured} data-testid="featured" />
-                                    </Tooltip>
-                                )}
-                                {organization.verified && (
-                                    <Tooltip
-                                        title="Verified by Find A Helpline"
-                                        placement="left"
-                                        arrow
-                                        enterTouchDelay={0}
-                                    >
-                                        <CheckCircleIcon className={classes.verified} data-testid="verified" />
-                                    </Tooltip>
-                                )}
-                            </Typography>
-                            <Typography>
-                                {organization.subdivisions.length > 0 && (
-                                    <>{organization.subdivisions.map(({ name }) => name).join(', ')},</>
-                                )}{' '}
-                                {organization.country.name}
-                            </Typography>
-                        </Box>
-                        <Box ml={1}>
-                            <OrganizationRating organization={organization} variant="item" />
-                        </Box>
-                        {organization.categories.length > 0 && (
-                            <Box ml={1} className={classes.chips} data-testid="categories">
-                                {organization.categories.map((category, index) => (
-                                    <Chip key={index} label={category.name} />
-                                ))}
-                            </Box>
-                        )}
-                        {(organization.alwaysOpen || organization.openingHours.length > 0) && (
-                            <Box data-testid="open">
-                                <NoSsr>
-                                    <OrganizationOpen organization={organization} expandable={true} />
-                                </NoSsr>
-                            </Box>
-                        )}
-                        {organization.humanSupportTypes.length > 0 && (
-                            <Box>
-                                <Button
-                                    size="large"
-                                    classes={{ root: classes.button, disabled: classes.buttonDisabled }}
-                                    startIcon={<AccountCircleIcon />}
-                                    disabled
-                                    data-testid="humanSupportTypes"
-                                >
-                                    {organization.humanSupportTypes
-                                        .map((humanSupportType) => humanSupportType.name)
-                                        .join(', ')}
-                                </Button>
-                            </Box>
-                        )}
-                        {organization.url && (
-                            <Box>
-                                <OutboundLink
-                                    eventLabel={organization.url}
-                                    to={organization.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <Button
-                                        size="large"
-                                        className={[classes.button, classes.buttonLink].join(' ')}
-                                        startIcon={<PublicIcon />}
-                                        data-testid="url"
-                                        onClick={onLinkClick}
-                                    >
-                                        {
-                                            organization.url
-                                                .replace('http://', '')
-                                                .replace('https://', '')
-                                                .replace('www.', '')
-                                                .split(/[/?#]/)[0]
-                                        }
-                                    </Button>
-                                </OutboundLink>
-                            </Box>
-                        )}
-                        {(organization.smsNumber || organization.phoneNumber || organization.chatUrl) && (
-                            <Box ml={1}>
-                                {organization.smsNumber && (
-                                    <OutboundLink
-                                        eventLabel={`sms:${organization.smsNumber}`}
-                                        to={`sms:${organization.smsNumber}`}
-                                        target="_parent"
-                                        rel="noopener noreferrer"
-                                        className={classes.outboundLink}
-                                    >
-                                        <Button
-                                            variant="contained"
-                                            size="large"
-                                            color="primary"
-                                            className={[classes.button, classes.buttonHighlight].join(' ')}
-                                            startIcon={<SmsOutlinedIcon />}
-                                            data-testid="smsNumber"
-                                            onClick={onLinkClick}
-                                        >
-                                            {organization.smsNumber}
-                                        </Button>
-                                    </OutboundLink>
-                                )}
-                                {organization.phoneNumber && (
-                                    <OutboundLink
-                                        eventLabel={`tel:${organization.phoneNumber}`}
-                                        to={`tel:${organization.phoneNumber}`}
-                                        target="_parent"
-                                        rel="noopener noreferrer"
-                                        className={classes.outboundLink}
-                                    >
-                                        <Button
-                                            variant="contained"
-                                            size="large"
-                                            color="primary"
-                                            className={[classes.button, classes.buttonHighlight].join(' ')}
-                                            startIcon={<PhoneIcon />}
-                                            data-testid="phoneNumber"
-                                            onClick={onLinkClick}
-                                        >
-                                            {organization.phoneNumber}
-                                        </Button>
-                                    </OutboundLink>
-                                )}
-                                {organization.chatUrl && (
-                                    <OutboundLink
-                                        eventLabel={organization.chatUrl}
-                                        to={organization.chatUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={classes.outboundLink}
-                                    >
-                                        <Button
-                                            variant="contained"
-                                            size="large"
-                                            color="primary"
-                                            className={[classes.button, classes.buttonHighlight].join(' ')}
-                                            startIcon={<MessageOutlinedIcon />}
-                                            data-testid="chatUrl"
-                                            onClick={onLinkClick}
-                                        >
-                                            {
-                                                organization.chatUrl
-                                                    .replace('http://', '')
-                                                    .replace('https://', '')
-                                                    .replace('www.', '')
-                                                    .split(/[/?#]/)[0]
-                                            }
-                                        </Button>
-                                    </OutboundLink>
-                                )}
-                            </Box>
-                        )}
-                        {organization.notes && (
-                            <Box ml={1} mb={1} mt={2}>
-                                <Typography className={classes.heading}>Accessibility Notes</Typography>
-                                <Typography>{organization.notes}</Typography>
-                            </Box>
-                        )}
-                        <Box my={1} ml={1}>
-                            <Button
-                                size="small"
-                                className={[classes.button, classes.buttonLink].join(' ')}
-                                startIcon={<CreateIcon />}
-                                href={`https://livefortomorrow.typeform.com/to/oc0aZHWI?remote_id=${organization.slug}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Suggest an edit
-                            </Button>
-                        </Box>
-                        <Box ml={1} my={1}>
-                            <ReviewDialog
-                                organization={organization}
-                                open={dialogOpen}
-                                onClose={onDialogClose}
-                                button={true}
-                            />
-                        </Box>
+        <Paper elevation={0} className={classes.paper}>
+            <Container maxWidth="sm">
+                <Box className={classes.grid}>
+                    <Box ml={1} mb={1}>
+                        <Typography variant="h6" className={classes.heading}>
+                            {organization.name}
+                            {organization.verified && (
+                                <Tooltip title="Verified by Find A Helpline" placement="left" arrow enterTouchDelay={0}>
+                                    <SvgIcon fontSize="inherit" color="secondary" className={classes.verified}>
+                                        <VerifyIcon />
+                                    </SvgIcon>
+                                </Tooltip>
+                            )}
+                        </Typography>
+                        <Typography>
+                            {organization.subdivisions.length > 0 && (
+                                <>{organization.subdivisions.map(({ name }) => name).join(', ')},</>
+                            )}{' '}
+                            {organization.country.name}
+                        </Typography>
                     </Box>
-                </Container>
-                {organization.reviews.length > 0 && <Reviews reviews={organization.reviews} />}
-            </Paper>
-        </>
+                    <OrganizationContent
+                        organization={organization}
+                        onLink={(): void => setDialogOpen(true)}
+                        expandable
+                    />
+                    {organization.notes && (
+                        <Box ml={1} mb={1} mt={2}>
+                            <Typography className={classes.heading}>Accessibility notes</Typography>
+                            <Typography className={classes.notes}>{organization.notes}</Typography>
+                        </Box>
+                    )}
+                    <Box my={1} ml={1}>
+                        <Button
+                            size="small"
+                            className={[classes.button, classes.buttonLink].join(' ')}
+                            startIcon={<CreateIcon />}
+                            href={`https://livefortomorrow.typeform.com/to/oc0aZHWI?remote_id=${organization.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Suggest an edit
+                        </Button>
+                    </Box>
+                    <Box ml={1} my={1}>
+                        <ReviewDialog
+                            organization={organization}
+                            open={dialogOpen}
+                            onClose={onDialogClose}
+                            button={true}
+                        />
+                    </Box>
+                    <Box ml={1} my={1}>
+                        <OrganizationFab organization={organization} onLink={(): void => setDialogOpen(true)} />
+                    </Box>
+                </Box>
+            </Container>
+            {organization.reviews.length > 0 && <Reviews reviews={organization.reviews} />}
+        </Paper>
     );
 };
 

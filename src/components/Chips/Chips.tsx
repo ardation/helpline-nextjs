@@ -11,7 +11,7 @@ type Props = {
     max?: number;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         chips: {
             display: 'flex',

@@ -15,7 +15,7 @@ type Props = {
     variant?: 'widget' | 'item';
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         link: {
             color: theme.palette.text.primary,

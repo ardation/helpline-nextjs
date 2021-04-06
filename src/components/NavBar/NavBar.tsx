@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { AppBar, Box, Container, Typography } from '@material-ui/core';
+import { AppBar, Box, Container, Hidden, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -9,7 +9,7 @@ type Props = {
     variant?: 'widget' | 'minimal';
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         appBar: {
             backgroundColor: theme.palette.background.paper,
@@ -17,12 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingBottom: theme.spacing(1),
         },
         appBarWidget: {
-            boxShadow: 'none',
-            backgroundColor: '#181719',
-            color: '#FFFFFF',
+            backgroundColor: 'transparent',
         },
         appBarMinimal: {
-            boxShadow: 'none',
             backgroundColor: 'transparent',
         },
         container: {
@@ -33,7 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         logo: {
             display: 'grid',
-            gridColumnGap: theme.spacing(1),
+            gridColumnGap: theme.spacing(4),
+            alignItems: 'center',
             gridTemplateColumns: 'auto 1fr',
             flexGrow: 1,
             paddingTop: theme.spacing(1),
@@ -74,7 +72,11 @@ const NavBar = ({ children, variant }: Props): ReactElement => {
                                 </Link>
                             )}
                             {variant === 'widget' && (
-                                <Typography>Struggling? Talk to a real person, for free.</Typography>
+                                <Hidden xsDown>
+                                    <Typography variant="body2" color="secondary">
+                                        Struggling? Get free, confidential support from a real person.
+                                    </Typography>
+                                </Hidden>
                             )}
                         </>
                     )}
