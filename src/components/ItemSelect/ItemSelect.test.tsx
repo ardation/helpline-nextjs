@@ -32,7 +32,7 @@ describe('ItemSelect', () => {
         const { getByText } = render(
             <ItemSelect items={items} preselectedItems={[{ name: 'happy' }]} onChange={jest.fn()} />,
         );
-        expect(getByText('happy').parentElement.className).toContain('MuiChip-colorPrimary');
+        expect(getByText('happy').parentElement.className).toContain('MuiChip-colorSecondary');
     });
 
     it('should allow preselectedItems to be updated', () => {
@@ -40,7 +40,7 @@ describe('ItemSelect', () => {
             <ItemSelect items={items} preselectedItems={[{ name: 'happy' }]} onChange={jest.fn()} />,
         );
         rerender(<ItemSelect items={items} preselectedItems={[{ name: 'angry' }]} onChange={jest.fn()} />);
-        expect(getByText('angry').parentElement.className).toContain('MuiChip-colorPrimary');
+        expect(getByText('angry').parentElement.className).toContain('MuiChip-colorSecondary');
     });
 
     describe('single', () => {

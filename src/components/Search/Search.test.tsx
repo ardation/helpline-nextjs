@@ -23,9 +23,10 @@ describe('Search', () => {
         expect(
             getByText('Struggling? Get free, confidential support from a real human over phone, text or webchat.'),
         ).toBeTruthy();
-        expect(
-            getByRole('button', { name: 'What can I expect when contacting a helpline?' }).parentElement,
-        ).toHaveAttribute('href', 'https://bit.ly/fah-founders-note');
+        expect(getByRole('link', { name: 'What can I expect when contacting a helpline?' })).toHaveAttribute(
+            'href',
+            '/faq',
+        );
         const element = getByRole('textbox');
         fireEvent.click(element);
         fireEvent.click(getByRole('listbox').children[0]);

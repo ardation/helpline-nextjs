@@ -254,7 +254,7 @@ const About = ({ countries }: Props): ReactElement => {
                     </Box>
                     <NextLink href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Button variant="contained" fullWidth size="large">
-                            Learn More
+                            Learn more
                             <ArrowRightAltRoundedIcon />
                         </Button>
                     </NextLink>

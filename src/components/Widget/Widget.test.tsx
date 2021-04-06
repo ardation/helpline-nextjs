@@ -189,7 +189,7 @@ describe('Widget', () => {
         );
         expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
             'Open 24/7',
-            'Open 24/7Volunteers, Staff2340800 376 633website.co.nzFor youthAll issuesTextCallWeb Chat',
+            'For youthAll issuesOpen 24/7Volunteers, Staff2340800 376 633website.co.nzTextCallWeb Chat',
         ]);
         rerender(
             <Widget

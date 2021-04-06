@@ -62,20 +62,20 @@ const NavBar = ({ children, variant }: Props): ReactElement => {
                     {variant !== 'minimal' && (
                         <>
                             {variant === 'widget' ? (
-                                <img src="/logo.svg" alt="find a helpline" />
+                                <>
+                                    <img src="/logo.svg" alt="find a helpline" />
+                                    <Hidden xsDown>
+                                        <Typography variant="body2" color="secondary">
+                                            Struggling? Get free, confidential support from a real person.
+                                        </Typography>
+                                    </Hidden>
+                                </>
                             ) : (
                                 <Link href="/" prefetch={process.env.NODE_ENV === 'production'} passHref>
                                     <a>
                                         <img src="/logo.svg" alt="find a helpline" />
                                     </a>
                                 </Link>
-                            )}
-                            {variant === 'widget' && (
-                                <Hidden xsDown>
-                                    <Typography variant="body2" color="secondary">
-                                        Struggling? Get free, confidential support from a real person.
-                                    </Typography>
-                                </Hidden>
                             )}
                         </>
                     )}
