@@ -104,6 +104,9 @@ const useStyles = makeStyles((theme) =>
                 fill: theme.palette.text.primary,
             },
         },
+        svgIcon: {
+            width: '0.9em',
+        },
     }),
 );
 
@@ -163,7 +166,7 @@ const OrganizationContent = ({ organization, variant, expandable, onLink }: Prop
                             size="large"
                             className={[classes.button, classes.buttonLink].join(' ')}
                             startIcon={
-                                <SvgIcon>
+                                <SvgIcon className={classes.svgIcon}>
                                     <TextIcon />
                                 </SvgIcon>
                             }
@@ -181,7 +184,7 @@ const OrganizationContent = ({ organization, variant, expandable, onLink }: Prop
                             size="large"
                             className={[classes.button, classes.buttonLink].join(' ')}
                             startIcon={
-                                <SvgIcon>
+                                <SvgIcon className={classes.svgIcon}>
                                     <CallIcon />
                                 </SvgIcon>
                             }

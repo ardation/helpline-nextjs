@@ -98,7 +98,7 @@ const OrganizationList = ({
 
     return (
         <>
-            <NavBar>
+            <NavBar variant="white">
                 <Button
                     className={classes.button}
                     onClick={(): void => setShowFilters(true)}
@@ -117,7 +117,7 @@ const OrganizationList = ({
                 data-testid="backdrop"
             >
                 <Box onClick={(e): void => e.stopPropagation()}>
-                    <NavBar>
+                    <NavBar variant="white">
                         <Button
                             className={classes.button}
                             onClick={(): void => setShowFilters(false)}

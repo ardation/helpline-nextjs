@@ -14,7 +14,7 @@ const AboutPage = ({ countries }: GetAboutProps): ReactElement => {
                 <title>Find A Helpline | About</title>
             </Head>
             <Chrome navBar footer>
-                <About countries={countries} />
+                <About countries={countries} isPage />
             </Chrome>
         </>
     );

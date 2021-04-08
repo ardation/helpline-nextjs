@@ -11,8 +11,8 @@ import {
     Collapse,
     SvgIcon,
 } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CloseIcon from '@material-ui/icons/CloseRounded';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMoreRounded';
 import moment from 'moment-timezone';
 import { compact } from 'lodash/fp';
 import isOpen from '../../util/isOpen';
@@ -51,8 +51,6 @@ const useStyles = makeStyles((theme) =>
             backgroundColor: theme.palette.secondary.main,
             marginTop: -2,
             marginLeft: theme.spacing(1),
-            height: '20px',
-            alignItems: 'flex-end',
             borderRadius: 5,
         },
         button: {
@@ -76,6 +74,9 @@ const useStyles = makeStyles((theme) =>
         active: {
             fontWeight: 'bold',
         },
+        svgIcon: {
+            width: '0.9em',
+        },
     }),
 );
 
@@ -98,7 +99,7 @@ const OrganizationOpen = ({ organization, expandable }: Props): ReactElement => 
                 size="large"
                 classes={{ root: classes.button, disabled: classes.buttonDisabled }}
                 startIcon={
-                    <SvgIcon>
+                    <SvgIcon className={classes.svgIcon}>
                         <TimeIcon />
                     </SvgIcon>
                 }

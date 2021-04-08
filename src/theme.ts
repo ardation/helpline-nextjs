@@ -161,6 +161,9 @@ const theme = createMuiTheme({
                     fontFamily: ['"Source Serif Pro"', 'serif'].join(','),
                     fontWeight: 600,
                 },
+                'a:link, a:visited': {
+                    color: '#0F2027',
+                },
             },
         },
     },

@@ -78,36 +78,39 @@ type Country = {
 
 interface Props {
     countries: Country[];
+    isPage?: boolean;
 }
 
-const About = ({ countries }: Props): ReactElement => {
+const About = ({ countries, isPage }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
         <>
             <Box className={[classes.content, classes.contentAlt].join(' ')}>
                 <Container maxWidth="xs">
-                    <Box mb={5}>
-                        <Typography className={classes.partnerHeading}>Key Partners</Typography>
-                        <Divider />
-                        <Box mx={2} my={2}>
-                            <Grid container spacing={2} alignItems="center">
-                                <Grid item xs={6}>
-                                    <img src="/partners/Polyform.png" className={classes.partnerImg} />
+                    {!isPage && (
+                        <Box mb={5}>
+                            <Typography className={classes.partnerHeading}>Key Partners</Typography>
+                            <Divider />
+                            <Box mx={2} my={2}>
+                                <Grid container spacing={2} alignItems="center">
+                                    <Grid item xs={6}>
+                                        <img src="/partners/Polyform.png" className={classes.partnerImg} />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <img src="/partners/SearchRepublic.png" className={classes.partnerImg} />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <img src="/partners/DataStory.png" className={classes.partnerImg} />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <img src="/partners/GravityLab.png" className={classes.partnerImg} />
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={6}>
-                                    <img src="/partners/SearchRepublic.png" className={classes.partnerImg} />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <img src="/partners/DataStory.png" className={classes.partnerImg} />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <img src="/partners/GravityLab.png" className={classes.partnerImg} />
-                                </Grid>
-                            </Grid>
+                            </Box>
+                            <Divider />
                         </Box>
-                        <Divider />
-                    </Box>
+                    )}
                     <Typography variant="h5" align="center">
                         Free emotional support, wherever you are
                     </Typography>
@@ -161,9 +164,17 @@ const About = ({ countries }: Props): ReactElement => {
                         </Typography>
                     </Box>
                     <Box my={4}>
-                        <Button variant="contained" color="primary" fullWidth size="large" href="#top">
-                            Find a helpline <ArrowRightAltRoundedIcon />
-                        </Button>
+                        {isPage ? (
+                            <NextLink href="/" passHref prefetch={process.env.NODE_ENV === 'production'}>
+                                <Button color="primary" variant="contained" fullWidth size="large">
+                                    Find a helpline <ArrowRightAltRoundedIcon />
+                                </Button>
+                            </NextLink>
+                        ) : (
+                            <Button variant="contained" color="primary" fullWidth size="large" href="#top">
+                                Find a helpline <ArrowRightAltRoundedIcon />
+                            </Button>
+                        )}
                     </Box>
                 </Container>
             </Box>

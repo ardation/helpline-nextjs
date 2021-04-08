@@ -5,21 +5,18 @@ import clsx from 'clsx';
 
 type Props = {
     children?: ReactNode;
-    variant?: 'widget' | 'minimal';
+    variant?: 'widget' | 'minimal' | 'white';
 };
 
 const useStyles = makeStyles((theme) =>
     createStyles({
         appBar: {
-            backgroundColor: theme.palette.background.paper,
+            backgroundColor: 'transparent',
             paddingTop: theme.spacing(1),
             paddingBottom: theme.spacing(1),
         },
-        appBarWidget: {
-            backgroundColor: 'transparent',
-        },
-        appBarMinimal: {
-            backgroundColor: 'transparent',
+        appBarWhite: {
+            backgroundColor: theme.palette.background.paper,
         },
         container: {
             display: 'grid',
@@ -49,11 +46,7 @@ const NavBar = ({ children, variant }: Props): ReactElement => {
 
     return (
         <AppBar
-            className={clsx(
-                classes.appBar,
-                variant === 'widget' && classes.appBarWidget,
-                variant === 'minimal' && classes.appBarMinimal,
-            )}
+            className={clsx(classes.appBar, variant === 'white' && classes.appBarWhite)}
             position="static"
             elevation={0}
         >

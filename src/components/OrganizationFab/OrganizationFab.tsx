@@ -36,6 +36,12 @@ const useStyles = makeStyles((theme) =>
             lineHeight: '1rem',
             paddingTop: theme.spacing(1),
         },
+        fabMedium: {
+            fontSize: 30,
+        },
+        fabLarge: {
+            fontSize: 35,
+        },
         divider: {
             margin: theme.spacing(1, 0, 2),
         },
@@ -77,7 +83,7 @@ const OrganizationFab = ({ organization, onLink }: Props): ReactElement => {
                                     target="_parent"
                                     rel="noopener noreferrer"
                                 >
-                                    <SvgIcon>
+                                    <SvgIcon className={classes.fabLarge}>
                                         <TextIcon />
                                     </SvgIcon>
                                 </Fab>
@@ -95,7 +101,7 @@ const OrganizationFab = ({ organization, onLink }: Props): ReactElement => {
                                     target="_parent"
                                     rel="noopener noreferrer"
                                 >
-                                    <SvgIcon>
+                                    <SvgIcon className={classes.fabMedium}>
                                         <CallIcon />
                                     </SvgIcon>
                                 </Fab>
@@ -113,7 +119,7 @@ const OrganizationFab = ({ organization, onLink }: Props): ReactElement => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <SvgIcon>
+                                    <SvgIcon className={classes.fabLarge}>
                                         <WebchatIcon />
                                     </SvgIcon>
                                 </Fab>

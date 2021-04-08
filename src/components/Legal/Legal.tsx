@@ -1,5 +1,5 @@
 import React, { ChangeEvent, ReactElement, useState } from 'react';
-import { Container, Tab, Typography } from '@material-ui/core';
+import { Box, Container, Tab, Typography } from '@material-ui/core';
 import { TabContext, TabList, TabPanel } from '@material-ui/lab';
 import ReactMarkdown from 'react-markdown';
 import { useRouter } from 'next/router';
@@ -22,24 +22,26 @@ const Legal = ({ tab }: Props): ReactElement => {
     };
 
     return (
-        <Container>
-            <TabContext value={value}>
-                <TabList onChange={handleChange} variant="fullWidth">
-                    <Tab label="Privacy Policy" value="privacy" />
-                    <Tab label="Terms of Service" value="terms" />
-                </TabList>
-                <TabPanel value="privacy">
-                    <Typography component="div">
-                        <ReactMarkdown source={privacy} escapeHtml={false} />
-                    </Typography>
-                </TabPanel>
-                <TabPanel value="terms">
-                    <Typography component="div">
-                        <ReactMarkdown source={terms} escapeHtml={false} />
-                    </Typography>
-                </TabPanel>
-            </TabContext>
-        </Container>
+        <Box bgcolor="background.paper" py={2}>
+            <Container>
+                <TabContext value={value}>
+                    <TabList onChange={handleChange} variant="fullWidth">
+                        <Tab label="Privacy Policy" value="privacy" />
+                        <Tab label="Terms of Service" value="terms" />
+                    </TabList>
+                    <TabPanel value="privacy">
+                        <Typography component="div">
+                            <ReactMarkdown source={privacy} escapeHtml={false} />
+                        </Typography>
+                    </TabPanel>
+                    <TabPanel value="terms">
+                        <Typography component="div">
+                            <ReactMarkdown source={terms} escapeHtml={false} />
+                        </Typography>
+                    </TabPanel>
+                </TabContext>
+            </Container>
+        </Box>
     );
 };
 
