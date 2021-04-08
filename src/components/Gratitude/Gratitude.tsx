@@ -1,14 +1,14 @@
 import React, { ReactElement } from 'react';
 import { Container, Typography, Box } from '@material-ui/core';
-import ReactMarkdown from 'react-markdown';
 import gratitude from '../../../docs/gratitude.md';
+import Markdown from '../Markdown';
 
 const Gratitude = (): ReactElement => {
     return (
         <Box bgcolor="background.paper" py={2}>
             <Container>
                 <Typography component="div">
-                    <ReactMarkdown source={gratitude} escapeHtml={false} />
+                    <Markdown source={gratitude} />
                 </Typography>
             </Container>
         </Box>
