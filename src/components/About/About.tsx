@@ -67,7 +67,6 @@ const useStyles = makeStyles((theme) =>
             textAlign: 'center',
             marginBottom: theme.spacing(2),
         },
-        partnerGrid: {},
     }),
 );
 
