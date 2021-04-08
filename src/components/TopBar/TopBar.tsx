@@ -63,15 +63,11 @@ const useStyles = makeStyles((theme) =>
             gridTemplateColumns: '1fr auto',
         },
         title: {
-            fontWeight: 600,
             color: theme.palette.text.primary,
             minWidth: '80px',
             [theme.breakpoints.down('xs')]: {
                 fontSize: '0.9rem',
             },
-        },
-        titleWithCountry: {
-            fontWeight: 400,
         },
         subtitle: {
             color: theme.palette.text.secondary,
@@ -128,7 +124,7 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
                     {country ? (
                         <>
                             <Box className={classes.box}>
-                                <Typography className={[classes.title, classes.titleWithCountry].join(' ')}>
+                                <Typography className={classes.title}>
                                     Are you or someone else in immediate danger?
                                 </Typography>
                             </Box>
