@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) =>
             alignItems: 'flex-start',
         },
         buttonRoot: {
-            color: '#000',
+            color: theme.palette.text.primary,
             textDecoration: 'underline',
             textTransform: 'none',
             fontWeight: 'normal',
@@ -74,16 +74,19 @@ const useStyles = makeStyles((theme) =>
             },
         },
         link: {
-            color: '#000',
+            color: theme.palette.text.primary,
         },
         typography: {
             fontSize: 20,
-            color: theme.palette.text.secondary,
         },
         selectedCountryBox: {
             backgroundColor: theme.palette.background.paper,
             padding: theme.spacing(2),
             margin: theme.spacing(0, -2),
+            [theme.breakpoints.up('md')]: {
+                borderRadius: 10,
+                margin: 0,
+            },
         },
         heading: {
             fontFamily: theme.typography.fontFamily,
@@ -120,7 +123,7 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                             <Box className={classes.logo}>
                                 <img src="/logo.svg" alt="find a helpline" />
                             </Box>
-                            <Typography className={classes.typography}>
+                            <Typography className={classes.typography} color="secondary">
                                 Struggling? Get free, confidential support from a real human over phone, text or
                                 webchat.
                             </Typography>

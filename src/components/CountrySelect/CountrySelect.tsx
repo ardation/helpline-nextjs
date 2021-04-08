@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { Autocomplete } from '@material-ui/lab';
 import { createStyles, makeStyles, Box, Grid, InputAdornment } from '@material-ui/core';
 import { sortBy, compact } from 'lodash/fp';
+import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 import { LocalityEnum } from '../../../types/globalTypes';
 import SearchIcon from '../../assets/search-icon.svg';
 
@@ -80,6 +81,9 @@ const useStyles = makeStyles((theme) =>
             boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.05)',
             marginTop: -5,
         },
+        popupIcon: {
+            color: theme.palette.text.secondary,
+        },
     }),
 );
 
@@ -110,6 +114,7 @@ const CountrySelect = ({
     return (
         <Box className={compact([classes.box, inline && classes.inline]).join(' ')}>
             <Autocomplete
+                popupIcon={<ExpandMoreRoundedIcon className={classes.popupIcon} />}
                 aria-label="country"
                 value={selectedCountry}
                 style={{ width: 300 }}
@@ -166,6 +171,7 @@ const CountrySelect = ({
             />
             {selectedCountry && selectedCountry.subdivisions.length > 0 && (
                 <Autocomplete
+                    popupIcon={<ExpandMoreRoundedIcon className={classes.popupIcon} />}
                     aria-label="subdivision"
                     classes={{
                         root: classes.root,

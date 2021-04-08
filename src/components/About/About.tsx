@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) =>
             padding: theme.spacing(2),
             textAlign: 'center',
             '& img': {
-                width: '80%',
+                width: '90%',
             },
         },
         partnerImg: {
@@ -88,7 +88,7 @@ const About = ({ countries }: Props): ReactElement => {
             <Box className={[classes.content, classes.contentAlt].join(' ')}>
                 <Container maxWidth="xs">
                     <Box mb={5}>
-                        <Typography className={classes.partnerHeading}>Our Partners</Typography>
+                        <Typography className={classes.partnerHeading}>Key Partners</Typography>
                         <Divider />
                         <Box mx={2} my={2}>
                             <Grid container spacing={2} alignItems="center">

@@ -138,13 +138,6 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                                 </Link>
                             )}
                         </Typography>
-                        {organization.featured && !organization.verified && (
-                            <Box className={classes.featured} data-testid="featured">
-                                <Tooltip title="Featured by Find A Helpline" placement="left" arrow enterTouchDelay={0}>
-                                    <WhatshotIcon />
-                                </Tooltip>
-                            </Box>
-                        )}
                         {organization.verified && (
                             <Box className={classes.verified} data-testid="verified">
                                 <Tooltip title="Verified by Find A Helpline" placement="left" arrow enterTouchDelay={0}>

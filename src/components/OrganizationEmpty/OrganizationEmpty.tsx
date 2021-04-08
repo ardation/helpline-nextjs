@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) =>
             justifySelf: 'center',
         },
         link: {
-            color: '#000',
+            color: theme.palette.text.primary,
             textDecoration: 'underline',
         },
     }),

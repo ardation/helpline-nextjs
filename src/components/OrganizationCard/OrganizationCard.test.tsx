@@ -220,17 +220,6 @@ describe('OrganizationCard', () => {
         });
     });
 
-    describe('featured', () => {
-        beforeEach(() => {
-            organization = { ...organization, featured: true };
-        });
-
-        it('should have featured icon', () => {
-            const { getByTestId } = render(<OrganizationCard organization={organization} />);
-            expect(getByTestId('featured')).toBeTruthy();
-        });
-    });
-
     describe('verified', () => {
         beforeEach(() => {
             organization = { ...organization, featured: true, verified: true };

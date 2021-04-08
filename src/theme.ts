@@ -53,7 +53,7 @@ const theme = createMuiTheme({
             contrastText: '#FFFFFF',
         },
         text: {
-            primary: '#202020',
+            primary: '#0F2027',
             secondary: '#ABB2B5',
         },
         background: {
@@ -109,7 +109,7 @@ const theme = createMuiTheme({
         MuiTooltip: {
             tooltip: {
                 fontSize: '0.8rem',
-                backgroundColor: '#0F2027',
+                backgroundColor: 'rgba(15,32,39,0.8)',
                 borderRadius: 8,
             },
             arrow: {

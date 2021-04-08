@@ -31,11 +31,11 @@ const useStyles = makeStyles((theme) =>
         },
         chipRoot: {
             borderRadius: 6,
-            fontWeight: 600,
+            fontWeight: 400,
         },
         text: {
             fontSize: '0.8rem',
-            fontWeight: 600,
+            fontWeight: 400,
         },
     }),
 );

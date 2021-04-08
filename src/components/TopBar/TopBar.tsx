@@ -24,14 +24,9 @@ type Props = {
 
 const useStyles = makeStyles((theme) =>
     createStyles({
-        container: {
-            [theme.breakpoints.down('xs')]: {
-                paddingRight: theme.spacing(1),
-                paddingLeft: theme.spacing(1),
-            },
-        },
         appBar: {
             backgroundColor: theme.palette.background.paper,
+            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.05)',
         },
         appBarWidget: {
             backgroundColor: theme.palette.background.paper,
@@ -72,7 +67,7 @@ const useStyles = makeStyles((theme) =>
             color: theme.palette.text.primary,
             minWidth: '80px',
             [theme.breakpoints.down('xs')]: {
-                fontSize: '0.8rem',
+                fontSize: '0.9rem',
             },
         },
         titleWithCountry: {
@@ -101,11 +96,6 @@ const useStyles = makeStyles((theme) =>
                 background:
                     'linear-gradient(180deg, rgba(255, 255, 255, 0.125) 0%, rgba(0, 0, 0, 0.125) 100%), #E8886C',
             },
-            [theme.breakpoints.down('xs')]: {
-                fontSize: '0.7rem',
-                paddingRight: theme.spacing(1),
-                paddingLeft: theme.spacing(1),
-            },
         },
         buttonEndIcon: {
             [theme.breakpoints.down('xs')]: {
@@ -124,7 +114,7 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
             position="static"
             elevation={0}
         >
-            <Container className={country && classes.container}>
+            <Container>
                 <Toolbar
                     className={[
                         classes.toolbar,
@@ -153,6 +143,7 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
                                     variant="contained"
                                     className={classes.button}
                                     data-testid="emergencyServicesButton"
+                                    fullWidth
                                 >
                                     <Hidden smUp>Call {country.emergencyNumber}</Hidden>
                                     <Hidden only="xs">Emergency Services</Hidden>
@@ -173,7 +164,12 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
                             rel="noopener noreferrer"
                             className={classes.link}
                         >
-                            <Button variant="contained" className={classes.button} data-testid="leaveQuicklyButton">
+                            <Button
+                                variant="contained"
+                                className={classes.button}
+                                data-testid="leaveQuicklyButton"
+                                fullWidth
+                            >
                                 Quick Exit
                             </Button>
                         </OutboundLink>

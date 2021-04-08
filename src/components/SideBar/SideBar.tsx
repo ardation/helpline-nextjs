@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import { Drawer, List, ListItem, ListItemText, IconButton, Divider, ListItemIcon } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import EmailIcon from '@material-ui/icons/Email';
@@ -27,8 +27,8 @@ const SideBar = (): ReactElement => {
 
     return (
         <>
-            <IconButton onClick={(): void => setOpen(true)} size="small" data-testid="menuButton">
-                <MenuIcon />
+            <IconButton onClick={(): void => setOpen(true)} size="small" data-testid="menuButton" color="secondary">
+                <MenuRoundedIcon />
             </IconButton>
             <Drawer classes={{ paper: classes.paper }} anchor="right" open={open} onClose={(): void => setOpen(false)}>
                 <div className={classes.list} onClick={(): void => setOpen(false)}>

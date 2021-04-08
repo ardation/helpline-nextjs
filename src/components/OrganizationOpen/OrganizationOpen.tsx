@@ -1,11 +1,22 @@
 import React, { ReactElement, useState } from 'react';
-import { createStyles, makeStyles, Typography, Chip, Button, IconButton, Box, Grid, Collapse } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import {
+    createStyles,
+    makeStyles,
+    Typography,
+    Chip,
+    Button,
+    IconButton,
+    Box,
+    Grid,
+    Collapse,
+    SvgIcon,
+} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import moment from 'moment-timezone';
 import { compact } from 'lodash/fp';
 import isOpen from '../../util/isOpen';
+import TimeIcon from '../../assets/time-icon.svg';
 
 type OpeningHour = {
     day: string;
@@ -86,7 +97,11 @@ const OrganizationOpen = ({ organization, expandable }: Props): ReactElement => 
             <Button
                 size="large"
                 classes={{ root: classes.button, disabled: classes.buttonDisabled }}
-                startIcon={<AccessTimeIcon />}
+                startIcon={
+                    <SvgIcon>
+                        <TimeIcon />
+                    </SvgIcon>
+                }
                 disabled
             >
                 <Typography className={classes.body} component="div">
