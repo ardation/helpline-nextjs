@@ -6,78 +6,59 @@ import {
     Typography,
     Button,
     Box,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
+    Table,
+    TableHead,
+    TableBody,
+    TableRow,
+    TableCell,
 } from '@material-ui/core';
 import NextLink from 'next/link';
-import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ImportContactsIcon from '@material-ui/icons/ImportContacts';
-import CheckIcon from '@material-ui/icons/Check';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import { WidgetProps } from '../Widget/Widget';
-import Widget from '../Widget';
+import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
+import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
+import LocalLibraryRoundedIcon from '@material-ui/icons/LocalLibraryRounded';
+import LanguageRoundedIcon from '@material-ui/icons/LanguageRounded';
+import { OutboundLink } from 'react-ga';
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
+import Highlight from '../Highlight';
+import Widget, { WidgetProps } from '../Widget/Widget';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
-        container: {
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            paddingTop: theme.spacing(5),
-            paddingBottom: theme.spacing(5),
-            height: 'calc(100vh - 130px)',
-            textAlign: 'center',
-            color: '#FFFFFF',
-        },
-        button: {
-            fontWeight: 'bold',
-            color: '#FFFFFF',
-            textTransform: 'none',
-        },
         content: {
-            paddingTop: theme.spacing(10),
-            paddingBottom: theme.spacing(10),
+            padding: theme.spacing(5, 0),
         },
-        highlights: {
-            padding: 0,
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gridGap: theme.spacing(1),
-            [theme.breakpoints.down('xs')]: {
-                gridTemplateColumns: '1fr',
+        contentAlt: {
+            backgroundColor: theme.palette.background.paper,
+        },
+        contentPrimary: {
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastText,
+        },
+        link: {
+            textDecoration: 'underline',
+            color: theme.palette.text.primary,
+        },
+        outboundLink: {
+            textDecoration: 'none',
+        },
+        illustration: {
+            padding: theme.spacing(2),
+            textAlign: 'center',
+            '& img': {
+                width: '90%',
             },
         },
-        highlight: {
-            backgroundColor: theme.palette.primary.main,
-            color: '#FFFFFF',
-            paddingTop: theme.spacing(3),
-            paddingRight: theme.spacing(1),
-            paddingBottom: theme.spacing(3),
-            paddingLeft: theme.spacing(1),
-            textAlign: 'center',
+        partnerImg: {
+            width: '80%',
         },
-        highlightTitle: {
-            fontWeight: 'bold',
-            paddingBottom: theme.spacing(1),
+        heading: {
+            fontFamily: theme.typography.fontFamily,
+            marginBottom: theme.spacing(1),
+            fontSize: '1.1rem',
         },
-        highlightIcon: {
-            fontSize: '4rem',
-            paddingBottom: theme.spacing(1),
-        },
-        background0: {
-            background: 'linear-gradient(0deg, rgba(51, 51, 51, 0.5), rgba(51, 51, 51, 0.5)), url(/bg3.jpg) top center',
-            backgroundSize: 'cover',
-        },
-        cta: {
-            textAlign: 'center',
-        },
-        containerContent: {
-            display: 'flex',
-            alignItems: 'center',
-            flexGrow: 1,
+        tableCell: {
+            border: 0,
         },
     }),
 );
@@ -91,100 +72,245 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
 
     return (
         <>
-            <Box className={[classes.container, classes.background0].join(' ')}>
-                <Container className={classes.containerContent} maxWidth="xs">
-                    <Box mb={3}>
-                        <Typography variant="h5">Connect your users to free mental health help, in seconds.</Typography>
+            <Box className={[classes.content, classes.contentAlt].join(' ')}>
+                <Container maxWidth="xs">
+                    <Typography variant="h6" align="center" className={classes.heading}>
+                        Find A Helpline widget &amp; API
+                    </Typography>
+                    <Typography variant="h5" align="center">
+                        Free emotional support, on your website or app
+                    </Typography>
+                    <Box className={classes.illustration}>
+                        <img src="/illustrations/widget.png" />
                     </Box>
+                    <Box my={4}>
+                        <Typography variant="h6" gutterBottom>
+                            A global suicide prevention solution for the digital era
+                        </Typography>
+                        <Typography gutterBottom>
+                            Bridge users experiencing distress or a mental health crisis to immediate help, wherever
+                            they are in the world.
+                        </Typography>
+                    </Box>
+                    <Highlight
+                        title="Social networks"
+                        description="Ensure users in crisis are safe and supported"
+                        Icon={FaceRoundedIcon}
+                    />
+                    <Highlight
+                        title="News media"
+                        description="Safely report on suicide and mental health"
+                        Icon={LocalLibraryRoundedIcon}
+                    />
+                    <Highlight
+                        title="Wellbeing websites"
+                        description="Connect visitors to free, immediate support"
+                        Icon={LanguageRoundedIcon}
+                    />
+                    <Typography variant="h6" color="secondary">
+                        Why use helpline referrals?
+                    </Typography>
+                    <Typography gutterBottom>
+                        Helplines, also known as hotlines or crisis call centres, provide immediate, emotional support
+                        by text (sms), web chat (instant message) or voice call. They are a free and accessible way for
+                        people to get help with distressing feelings, thoughts of suicide, abusive situations,
+                        depression or grief. They are commonly staffed by people who are trained to help in moments of
+                        crisis, and can reduce feelings of being a burden and increase hope, which can{' '}
+                        <OutboundLink
+                            eventLabel="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3130348/"
+                            to="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3130348/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={classes.link}
+                        >
+                            lower the risk of suicide.
+                        </OutboundLink>
+                    </Typography>
+                    <Typography gutterBottom>
+                        Helplines are a key strategy for suicide prevention online and are used by major social
+                        networks, news media and wellbeing websites, all over the world.
+                    </Typography>
+                    <Typography variant="h6" color="secondary">
+                        What is the Find A Helpline widget?
+                    </Typography>
+                    <Typography gutterBottom>
+                        A plugin that places a small Find A Helpline user interface on your website or app.
+                    </Typography>
+                    <Typography variant="h6" color="secondary">
+                        What is the Find A Helpline API?
+                    </Typography>
+                    <Typography gutterBottom>
+                        A white-labelled data integration that enables you to recommend the most relevant helplines to
+                        people in your user interface.
+                    </Typography>
+                    <Typography variant="h6" color="secondary">
+                        What’s under the hood?
+                    </Typography>
+                    <Typography gutterBottom>
+                        We’ve built the largest and most reliable helpline dataset in the world – so you don’t have to.
+                        We provide over 1,300 services in 12 countries, and are continually expanding our coverage.
+                    </Typography>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell padding="none" colSpan={2} className={classes.tableCell}>
+                                    <Typography variant="h6" color="error">
+                                        Standard helpline lists
+                                    </Typography>
+                                </TableCell>
+                                <TableCell padding="none" colSpan={2} className={classes.tableCell}>
+                                    <Typography variant="h6" color="secondary">
+                                        Find A Helpline Widget
+                                    </Typography>
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell padding="none" align="center">
+                                    <CloseRoundedIcon color="error" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Minimal coverage</Typography>
+                                </TableCell>
+                                <TableCell padding="none" align="center">
+                                    <CheckRoundedIcon color="secondary" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Global coverage</Typography>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell padding="none" align="center">
+                                    <CloseRoundedIcon color="error" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Manual upkeep</Typography>
+                                </TableCell>
+                                <TableCell padding="none" align="center">
+                                    <CheckRoundedIcon color="secondary" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Set and forget</Typography>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell padding="none" align="center">
+                                    <CloseRoundedIcon color="error" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Random list of helplines</Typography>
+                                </TableCell>
+                                <TableCell padding="none" align="center">
+                                    <CheckRoundedIcon color="secondary" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Filtering to find the right support</Typography>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell padding="none" align="center">
+                                    <CloseRoundedIcon color="error" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Not actionable, a barrier to help</Typography>
+                                </TableCell>
+                                <TableCell padding="none" align="center">
+                                    <CheckRoundedIcon color="secondary" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Clear contact button</Typography>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell padding="none" align="center">
+                                    <CloseRoundedIcon color="error" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Information overload</Typography>
+                                </TableCell>
+                                <TableCell padding="none" align="center">
+                                    <CheckRoundedIcon color="secondary" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Concise and informative</Typography>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell padding="none" align="center">
+                                    <CloseRoundedIcon color="error" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>No impact measurement</Typography>
+                                </TableCell>
+                                <TableCell padding="none" align="center">
+                                    <CheckRoundedIcon color="secondary" />
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>Measurable impact</Typography>
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
                 </Container>
-                <Box>
-                    <ArrowDownwardIcon />
-                </Box>
+            </Box>
+            <Box className={[classes.content, classes.contentPrimary].join(' ')}>
+                <Container maxWidth="xs">
+                    <Box mb={3} textAlign="center">
+                        <Typography variant="h6" gutterBottom>
+                            Want to refer users to helplines in your UI?
+                        </Typography>
+                        <Typography gutterBottom>Yes, there’s an API for that.</Typography>
+                    </Box>
+                    <NextLink href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
+                        <Button variant="contained" fullWidth size="large">
+                            Talk to us about the API
+                            <ArrowRightAltRoundedIcon />
+                        </Button>
+                    </NextLink>
+                </Container>
+            </Box>
+            <Box className={[classes.content, classes.contentAlt].join(' ')}>
+                <Container maxWidth="xs">
+                    <Typography variant="h6" gutterBottom align="center">
+                        Try out the widget yourself below
+                    </Typography>
+                </Container>
+                <Widget {...widgetProps} />
             </Box>
             <Box className={classes.content}>
                 <Container maxWidth="xs">
-                    <Typography gutterBottom>
-                        With the Find A Helpline embeddable widget & API, you can bridge users experiencing distress or
-                        a mental health crisis to the most relevant help for them – wherever they are in the world.
-                    </Typography>
-                    <Typography>
-                        It’s an all-in-one solution for news agencies, social media, wellbeing apps and mental health
-                        organizations.
-                    </Typography>
-                    <List dense={true}>
-                        <ListItem>
-                            <ListItemIcon>
-                                <CheckIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={<Typography>Automatically up-to-date</Typography>} />
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon>
-                                <CheckIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={<Typography>Verified helplines, no broken links</Typography>} />
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon>
-                                <CheckIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={<Typography>Helpline matching, one-click contact</Typography>} />
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon>
-                                <CheckIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={<Typography>Quick &amp; easy to set up</Typography>} />
-                        </ListItem>
-                    </List>
-                </Container>
-            </Box>
-            <Container className={classes.highlights} maxWidth="sm">
-                <Box className={classes.highlight}>
-                    <Box className={classes.highlightIcon}>
-                        <ImportContactsIcon fontSize="inherit" />
+                    <Box className={classes.illustration}>
+                        <img src="/illustrations/tech.png" />
                     </Box>
-                    <Typography className={classes.highlightTitle} variant="h6">
-                        News Media
-                    </Typography>
-                    <Typography>Easily fulfil your responsibilities on best practice suicide reporting.</Typography>
-                </Box>
-                <Box className={classes.highlight}>
-                    <Box className={classes.highlightIcon}>
-                        <SupervisedUserCircleIcon fontSize="inherit" />
-                    </Box>
-                    <Typography className={classes.highlightTitle} variant="h6">
-                        Social &amp; Wellbeing Apps
-                    </Typography>
-                    <Typography>Ensure users in crisis are safe and supported.</Typography>
-                </Box>
-                <Box className={classes.highlight}>
-                    <Box className={classes.highlightIcon}>
-                        <FavoriteIcon fontSize="inherit" />
-                    </Box>
-                    <Typography className={classes.highlightTitle} variant="h6">
-                        Mental health organizations
-                    </Typography>
-                    <Typography>Quickly connect visitors to help, right from your website.</Typography>
-                </Box>
-            </Container>
-            <Box m={2} mt={10}>
-                <Typography variant="h6" gutterBottom>
-                    Test the Find a Helpline widget below:
-                </Typography>
-                <Widget {...widgetProps} />
-            </Box>
-            <Box className={[classes.content, classes.cta].join(' ')}>
-                <Container maxWidth="xs">
-                    <Box mb={3}>
-                        <Typography variant="h6">
-                            Talk with us about integrating <br />
-                            Find A Helpline into your website or app
+                    <Box my={4}>
+                        <Typography variant="h6" gutterBottom align="center">
+                            Deploy a global suicide prevention solution, in minutes
+                        </Typography>
+                        <Typography gutterBottom align="center">
+                            Simply paste one tiny code snippet into your page or app, and the widget appears.
+                        </Typography>
+                        <Typography gutterBottom align="center">
+                            Users can start accessing help immediately.
                         </Typography>
                     </Box>
+                </Container>
+            </Box>
+            <Box className={[classes.content, classes.contentAlt].join(' ')}>
+                <Container maxWidth="xs">
+                    <Box className={classes.illustration}>
+                        <img src="/illustrations/connect.png" />
+                    </Box>
+                    <Typography variant="h6" gutterBottom align="center">
+                        Let&apos;s connect the dots and save lives.
+                    </Typography>
+                    <Typography gutterBottom align="center">
+                        Talk with us about integrating the Find A Helpline widget or API into your website or app.
+                    </Typography>
                     <NextLink href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
-                        <Button className={classes.button} color="primary" variant="contained" size="large">
+                        <Button color="primary" variant="contained" fullWidth size="large">
                             Get in touch
+                            <ArrowRightAltRoundedIcon />
                         </Button>
                     </NextLink>
                 </Container>

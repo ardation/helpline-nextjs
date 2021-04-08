@@ -11,7 +11,7 @@ type Props = {
 const useStyles = makeStyles((theme) =>
     createStyles({
         appBar: {
-            backgroundColor: 'transparent',
+            backgroundColor: theme.palette.background.default,
             paddingTop: theme.spacing(1),
             paddingBottom: theme.spacing(1),
         },

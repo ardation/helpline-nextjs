@@ -8,6 +8,7 @@ import SecurityRoundedIcon from '@material-ui/icons/SecurityRounded';
 import { OutboundLink } from 'react-ga';
 import Flag from 'react-world-flags';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
+import Highlight from '../Highlight';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -20,30 +21,6 @@ const useStyles = makeStyles((theme) =>
         contentPrimary: {
             backgroundColor: theme.palette.primary.main,
             color: theme.palette.primary.contrastText,
-        },
-        highlight: {
-            display: 'grid',
-            gridTemplateColumns: '80px 1fr',
-            margin: theme.spacing(2, 0),
-            padding: theme.spacing(2),
-            borderRadius: 10,
-            backgroundColor: theme.palette.background.default,
-            color: theme.palette.secondary.main,
-        },
-        highlightTitle: {
-            gridColumn: '2',
-            gridRow: '1',
-        },
-        highlightDescription: {
-            gridColumn: '2',
-            gridRow: '2',
-        },
-        highlightIcon: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gridRow: '1 / span 2',
-            fontSize: '4rem',
         },
         link: {
             textDecoration: 'underline',
@@ -116,39 +93,21 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                     <Box className={classes.illustration}>
                         <img src="/illustrations/woman-sitting.png" />
                     </Box>
-                    <Box className={classes.highlight}>
-                        <Box className={classes.highlightIcon}>
-                            <FastForwardRoundedIcon fontSize="inherit" />
-                        </Box>
-                        <Typography className={classes.highlightTitle} variant="h6">
-                            Quick
-                        </Typography>
-                        <Typography className={classes.highlightDescription}>
-                            Match with a helpline, ready to support you today
-                        </Typography>
-                    </Box>
-                    <Box className={classes.highlight}>
-                        <Box className={classes.highlightIcon}>
-                            <AccountCircleIcon fontSize="inherit" />
-                        </Box>
-                        <Typography className={classes.highlightTitle} variant="h6">
-                            Personal
-                        </Typography>
-                        <Typography className={classes.highlightDescription}>
-                            Talk with a volunteer, counselor, or peer
-                        </Typography>
-                    </Box>
-                    <Box className={classes.highlight}>
-                        <Box className={classes.highlightIcon}>
-                            <SecurityRoundedIcon fontSize="inherit" />
-                        </Box>
-                        <Typography className={classes.highlightTitle} variant="h6">
-                            Private
-                        </Typography>
-                        <Typography className={classes.highlightDescription}>
-                            No sign up or personal info required
-                        </Typography>
-                    </Box>
+                    <Highlight
+                        title="Quick"
+                        description="Match with a helpline, ready to support you today"
+                        Icon={FastForwardRoundedIcon}
+                    />
+                    <Highlight
+                        title="Personal"
+                        description="Talk with a volunteer, counselor, or peer"
+                        Icon={AccountCircleIcon}
+                    />
+                    <Highlight
+                        title="Private"
+                        description="No sign up or personal info required"
+                        Icon={SecurityRoundedIcon}
+                    />
                     <Box my={4}>
                         <Typography variant="h6" gutterBottom>
                             In these strange and stressful times, you’re not alone.

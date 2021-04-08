@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) =>
         box: {
             borderBottomLeftRadius: '5px',
             borderBottomRightRadius: '5px',
+            backgroundColor: theme.palette.background.default,
         },
         backdrop: {
             display: 'block',

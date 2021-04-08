@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) =>
     createStyles({
         box: {
             position: 'relative',
-            marginTop: theme.spacing(2),
-            marginBottom: theme.spacing(2),
+            paddingTop: theme.spacing(2),
+            paddingBottom: theme.spacing(2),
         },
         container: {
             marginLeft: '-1rem',
