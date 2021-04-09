@@ -118,7 +118,7 @@ describe('ReviewDialog', () => {
         it('should pop up modal', () => {
             const { queryByText } = render(<ReviewDialog organization={organization} open={true} />);
             expect(queryByText('Give a rating out of five.')).toBeInTheDocument();
-            expect(queryByText('It looks like you contacted a helpline! Leave a review.')).toBeInTheDocument();
+            expect(queryByText('It looks like you contacted a helpline!')).toBeInTheDocument();
         });
 
         it('should open modal if prop changes', () => {

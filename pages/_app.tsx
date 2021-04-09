@@ -29,12 +29,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     return (
         <>
             <DefaultSeo
-                title="Struggling? Get free, confidential support from a real human."
-                description="Whatever you’re going through, help is available. Talk to someone today."
+                title="Struggling? Get free emotional support, wherever you are."
+                description="Talk to someone today. Phone, text or web chat available."
                 openGraph={{
                     type: 'website',
                     locale: 'en',
-                    images: [{ url: 'https://findahelpline.com/og.jpg' }],
+                    images: [{ url: 'https://findahelpline.com/og.png' }],
                 }}
                 twitter={{
                     handle: '@livefortmw',
