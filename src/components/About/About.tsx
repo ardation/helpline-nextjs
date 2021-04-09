@@ -6,7 +6,6 @@ import FastForwardRoundedIcon from '@material-ui/icons/FastForwardRounded';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SecurityRoundedIcon from '@material-ui/icons/SecurityRounded';
 import { OutboundLink } from 'react-ga';
-import Flag from 'react-world-flags';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 import Highlight from '../Highlight';
 

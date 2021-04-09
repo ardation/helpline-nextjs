@@ -14,15 +14,16 @@ import {
     IconButton,
     Box,
     CircularProgress,
+    SvgIcon,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import ScheduleIcon from '@material-ui/icons/Schedule';
 import { Alert, AlertTitle, Rating } from '@material-ui/lab';
 import ReCAPTCHA from 'react-google-recaptcha';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { request } from 'graphql-request';
 import { Formik } from 'formik';
+import TimeIcon from '../../assets/time-icon.svg';
 
 type Organization = {
     id: string;
@@ -82,6 +83,9 @@ const useStyles = makeStyles((theme) =>
                 borderTopLeftRadius: 0,
                 margin: 0,
             },
+        },
+        svgIcon: {
+            fontSize: 20,
         },
     }),
 );
@@ -237,10 +241,8 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
                                     {open && (
                                         <Grid item>
                                             <Alert severity="info">
-                                                <AlertTitle>
-                                                    It looks like you contacted a helpline! Leave a review.
-                                                </AlertTitle>
-                                                Your feedback can encourage others to access help.
+                                                <AlertTitle>It looks like you contacted a helpline!</AlertTitle>
+                                                Leave a review – your feedback can encourage others to access help.
                                             </Alert>
                                         </Grid>
                                     )}
@@ -276,7 +278,9 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
                                         </Typography>
                                         <Grid container spacing={2} alignItems="center">
                                             <Grid item>
-                                                <ScheduleIcon />
+                                                <SvgIcon className={classes.svgIcon}>
+                                                    <TimeIcon />
+                                                </SvgIcon>
                                             </Grid>
                                             <Grid item xs>
                                                 <MySlider

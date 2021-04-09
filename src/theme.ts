@@ -1,9 +1,11 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import { AlertClassKey } from '@material-ui/lab/Alert';
 import { RatingClassKey } from '@material-ui/lab/Rating';
 
 declare module '@material-ui/core/styles/overrides' {
     export interface ComponentNameToClassKey {
         MuiRating: RatingClassKey;
+        MuiAlert: AlertClassKey;
     }
 }
 
@@ -136,6 +138,23 @@ const theme = createMuiTheme({
             root: {
                 borderBottom: '0.603865px solid #ABB2B5',
                 textTransform: 'capitalize',
+            },
+        },
+        MuiOutlinedInput: {
+            root: {
+                borderRadius: 8,
+            },
+        },
+        MuiAlert: {
+            root: {
+                borderRadius: 8,
+            },
+            standardInfo: {
+                color: '#0F2027',
+                backgroundColor: '#F5F9FC',
+                '& $icon': {
+                    color: '#94BCD9',
+                },
             },
         },
         MuiCssBaseline: {
