@@ -157,6 +157,11 @@ const theme = createMuiTheme({
                 },
             },
         },
+        MuiSvgIcon: {
+            fontSizeSmall: {
+                fontSize: 12,
+            },
+        },
         MuiCssBaseline: {
             '@global': {
                 html: {

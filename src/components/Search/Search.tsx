@@ -3,6 +3,7 @@ import { Typography, Box, Button, Container, Grid } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
 import clsx from 'clsx';
+import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 import CountrySelect from '../CountrySelect';
 import { LocalityEnum } from '../../../types/globalTypes';
 import NavBar from '../NavBar';
@@ -148,10 +149,44 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                             <Grid container spacing={2}>
                                 {selectedCountry && variant !== 'embed' && (
                                     <Grid item xs={12}>
-                                        <Typography variant="h6" className={classes.heading}>
+                                        <Typography variant="h6" className={classes.heading} gutterBottom>
                                             What would you like help with?
                                         </Typography>
-                                        <Typography color="secondary">Select topic or topics (optional)</Typography>
+                                        <Typography variant="body2" color="secondary">
+                                            Quick link
+                                        </Typography>
+                                        <Box pt={1} pb={3}>
+                                            <Link
+                                                href={{
+                                                    pathname: `/[countryCode]${
+                                                        selectedSubdivision ? `/[subdivisionCode]` : ''
+                                                    }`,
+                                                    query: { topics: ['Suicidal thoughts'] },
+                                                }}
+                                                as={{
+                                                    pathname: `/${selectedCountry.code.toLowerCase()}${
+                                                        selectedSubdivision
+                                                            ? `/${selectedSubdivision.code.toLowerCase()}`
+                                                            : ''
+                                                    }`,
+                                                    query: { topics: ['Suicidal thoughts'] },
+                                                }}
+                                                passHref
+                                                prefetch={process.env.NODE_ENV === 'production'}
+                                            >
+                                                <Button
+                                                    color="secondary"
+                                                    variant="contained"
+                                                    size="large"
+                                                    endIcon={<ArrowRightAltRoundedIcon />}
+                                                >
+                                                    Suicidal Thoughts
+                                                </Button>
+                                            </Link>
+                                        </Box>
+                                        <Typography variant="body2" color="secondary">
+                                            Select topic or topics (optional)
+                                        </Typography>
                                     </Grid>
                                 )}
                                 {selectedCountry && (

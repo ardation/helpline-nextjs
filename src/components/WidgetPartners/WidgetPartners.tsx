@@ -263,9 +263,8 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
                         <Typography gutterBottom>Yes, there’s an API for that.</Typography>
                     </Box>
                     <NextLink href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
-                        <Button variant="contained" fullWidth size="large">
+                        <Button variant="contained" fullWidth size="large" endIcon={<ArrowRightAltRoundedIcon />}>
                             Talk to us about the API
-                            <ArrowRightAltRoundedIcon />
                         </Button>
                     </NextLink>
                 </Container>
@@ -310,9 +309,14 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
                         Talk with us about integrating the Find A Helpline widget or API into your website or app.
                     </Typography>
                     <NextLink href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
-                        <Button color="primary" variant="contained" fullWidth size="large">
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            fullWidth
+                            size="large"
+                            endIcon={<ArrowRightAltRoundedIcon />}
+                        >
                             Get in touch
-                            <ArrowRightAltRoundedIcon />
                         </Button>
                     </NextLink>
                 </Container>

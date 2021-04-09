@@ -163,8 +163,14 @@ const Faq = (): ReactElement => {
                 </Box>
                 <Box mt={3} mb={1}>
                     <NextLink href="/" passHref prefetch={process.env.NODE_ENV === 'production'}>
-                        <Button color="primary" variant="contained" fullWidth size="large">
-                            Find a helpline <ArrowRightAltRoundedIcon />
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            fullWidth
+                            size="large"
+                            endIcon={<ArrowRightAltRoundedIcon />}
+                        >
+                            Find a helpline
                         </Button>
                     </NextLink>
                 </Box>

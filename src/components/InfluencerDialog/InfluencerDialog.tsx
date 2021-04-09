@@ -67,9 +67,9 @@ const InfluencerDialog = ({ influencer }: Props): ReactElement => {
                     variant="contained"
                     fullWidth
                     size="large"
+                    endIcon={<ArrowRightAltRoundedIcon />}
                 >
                     Continue
-                    <ArrowRightAltRoundedIcon />
                 </Button>
             </DialogContent>
         </Dialog>
