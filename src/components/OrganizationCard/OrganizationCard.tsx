@@ -1,7 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Typography, Box, Tooltip, SvgIcon } from '@material-ui/core';
 import Link from 'next/link';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
 import TextTruncate from 'react-text-truncate';
 import ReviewDialog from '../ReviewDialog';
 import VerifyIcon from '../../assets/verify-icon.svg';

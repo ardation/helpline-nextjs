@@ -1,5 +1,5 @@
 import React, { ChangeEvent, ReactElement, useState } from 'react';
-import { Box, Container, Tab, Typography } from '@material-ui/core';
+import { Box, Container, Tab } from '@material-ui/core';
 import { TabContext, TabList, TabPanel } from '@material-ui/lab';
 import { useRouter } from 'next/router';
 import privacy from '../../../docs/privacy.md';
@@ -22,26 +22,22 @@ const Legal = ({ tab }: Props): ReactElement => {
     };
 
     return (
-        <Box bgcolor="background.paper" py={2}>
-            <Container>
-                <TabContext value={value}>
+        <TabContext value={value}>
+            <Box bgcolor="background.paper" py={2}>
+                <Container maxWidth="sm">
                     <TabList onChange={handleChange} variant="fullWidth">
                         <Tab label="Privacy Policy" value="privacy" />
                         <Tab label="Terms of Service" value="terms" />
                     </TabList>
-                    <TabPanel value="privacy">
-                        <Typography component="div">
-                            <Markdown source={privacy} />
-                        </Typography>
-                    </TabPanel>
-                    <TabPanel value="terms">
-                        <Typography component="div">
-                            <Markdown source={terms} />
-                        </Typography>
-                    </TabPanel>
-                </TabContext>
-            </Container>
-        </Box>
+                </Container>
+                <TabPanel value="privacy">
+                    <Markdown source={privacy} />
+                </TabPanel>
+                <TabPanel value="terms">
+                    <Markdown source={terms} />
+                </TabPanel>
+            </Box>
+        </TabContext>
     );
 };
 
