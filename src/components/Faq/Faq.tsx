@@ -108,7 +108,9 @@ const Faq = (): ReactElement => {
                 </Typography>
                 <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon color="secondary" />}>
-                        <Typography className={classes.heading}>Who will I talk to?</Typography>
+                        <Typography variant="h6" className={classes.heading}>
+                            Who will I talk to?
+                        </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
@@ -119,7 +121,9 @@ const Faq = (): ReactElement => {
                 </Accordion>
                 <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon color="secondary" />}>
-                        <Typography className={classes.heading}>What do I say?</Typography>
+                        <Typography variant="h6" className={classes.heading}>
+                            What do I say?
+                        </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
@@ -130,7 +134,9 @@ const Faq = (): ReactElement => {
                 </Accordion>
                 <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon color="secondary" />}>
-                        <Typography className={classes.heading}>How will they help me?</Typography>
+                        <Typography variant="h6" className={classes.heading}>
+                            How will they help me?
+                        </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
@@ -141,7 +147,9 @@ const Faq = (): ReactElement => {
                 </Accordion>
                 <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon color="secondary" />}>
-                        <Typography className={classes.heading}>I’m still not sure :-/</Typography>
+                        <Typography variant="h6" className={classes.heading}>
+                            I’m still not sure :-/
+                        </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>

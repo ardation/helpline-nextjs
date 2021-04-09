@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) =>
             boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.05)',
         },
         appBarWidget: {
-            backgroundColor: theme.palette.background.paper,
             color: theme.palette.text.primary,
         },
         toolbar: {
@@ -104,6 +103,10 @@ const useStyles = makeStyles((theme) =>
 const TopBar = ({ country, variant }: Props): ReactElement => {
     const classes = useStyles();
 
+    if (variant === 'widget' && country && !country.emergencyNumber) {
+        return <></>;
+    }
+
     return (
         <AppBar
             className={compact([classes.appBar, variant === 'widget' && classes.appBarWidget]).join(' ')}
@@ -114,14 +117,14 @@ const TopBar = ({ country, variant }: Props): ReactElement => {
                 <Toolbar
                     className={[
                         classes.toolbar,
-                        country
+                        country && country.emergencyNumber
                             ? variant === 'widget'
                                 ? classes.toolbarWidgetWithCountry
                                 : classes.toolbarWithCountry
                             : classes.toolbarWithoutCountry,
                     ].join(' ')}
                 >
-                    {country ? (
+                    {country && country.emergencyNumber ? (
                         <>
                             <Box className={classes.box}>
                                 <Typography className={classes.title}>

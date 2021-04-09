@@ -148,7 +148,7 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
                     </Typography>
                     <Typography gutterBottom>
                         We’ve built the largest and most reliable helpline dataset in the world – so you don’t have to.
-                        We provide over 1,300 services in 12 countries, and are continually expanding our coverage.
+                        We provide over 1,400 services in 52 countries, and are continually expanding our coverage.
                     </Typography>
                     <Table>
                         <TableHead>
@@ -276,7 +276,9 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
                         Try out the widget yourself below
                     </Typography>
                 </Container>
-                <Widget {...widgetProps} />
+                <Container>
+                    <Widget {...widgetProps} />
+                </Container>
             </Box>
             <Box className={classes.content}>
                 <Container maxWidth="xs">

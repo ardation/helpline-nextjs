@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Typography, Container, Link } from '@material-ui/core';
-import InfoIcon from '@material-ui/icons/Info';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import InfoIcon from '@material-ui/icons/InfoRounded';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownwardRounded';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForwardRounded';
 import NextLink from 'next/link';
 import { Organization } from '../OrganizationCard/OrganizationCard';
 

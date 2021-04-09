@@ -9,6 +9,7 @@ import {
     Grid,
     Container,
     CircularProgress,
+    Box,
 } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -28,12 +29,6 @@ const useStyles = makeStyles((theme) =>
         '@global': {
             '.grecaptcha-badge': {
                 visibility: 'hidden',
-            },
-        },
-        container: {
-            padding: theme.spacing(6, 2),
-            [theme.breakpoints.down('sm')]: {
-                padding: theme.spacing(2),
             },
         },
         submit: {
@@ -90,147 +85,149 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
     };
 
     return (
-        <Container maxWidth="xs" className={classes.container}>
-            <Formik
-                initialValues={{ email: '', subject: '', message: '' }}
-                onSubmit={onSubmit}
-                validationSchema={ContactSchema}
-            >
-                {({
-                    values: { email, subject, message },
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isSubmitting,
-                    isValid,
-                    errors,
-                    touched,
-                }): ReactElement => (
-                    <form onSubmit={handleSubmit}>
-                        <Grid container wrap="nowrap" direction="column" spacing={2}>
-                            <Grid item>
-                                <Typography variant="h6" className={classes.title}>
-                                    Have a question? Let us know.
-                                </Typography>
-                            </Grid>
-                            {contactReceived && (
+        <Box bgcolor="background.paper" py={2}>
+            <Container maxWidth="xs">
+                <Formik
+                    initialValues={{ email: '', subject: '', message: '' }}
+                    onSubmit={onSubmit}
+                    validationSchema={ContactSchema}
+                >
+                    {({
+                        values: { email, subject, message },
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                        isValid,
+                        errors,
+                        touched,
+                    }): ReactElement => (
+                        <form onSubmit={handleSubmit}>
+                            <Grid container wrap="nowrap" direction="column" spacing={2}>
                                 <Grid item>
-                                    <Alert severity="success">
-                                        <AlertTitle>Thanks for your message!</AlertTitle>
-                                        We&apos;ll be in touch shortly.
-                                    </Alert>
+                                    <Typography variant="h6" className={classes.title}>
+                                        Have a question? Let us know.
+                                    </Typography>
                                 </Grid>
-                            )}
-                            <Grid item>
-                                <TextField
-                                    name="email"
-                                    value={email}
-                                    label="Your Email Address"
-                                    variant="outlined"
-                                    fullWidth
-                                    color="primary"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    disabled={isSubmitting}
-                                    inputProps={{ 'data-testid': 'email', readOnly: contactReceived }}
-                                    error={errors.email && touched.email && true}
-                                    helperText={touched.email && errors.email}
-                                />
-                            </Grid>
-                            <Grid item>
-                                <TextField
-                                    name="subject"
-                                    value={subject}
-                                    label="Subject"
-                                    variant="outlined"
-                                    fullWidth
-                                    color="primary"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    disabled={isSubmitting}
-                                    inputProps={{ 'data-testid': 'subject', readOnly: contactReceived }}
-                                    error={errors.subject && touched.subject && true}
-                                    helperText={touched.subject && errors.subject}
-                                />
-                            </Grid>
-                            <Grid item>
-                                <TextField
-                                    name="message"
-                                    value={message}
-                                    label="Your Message"
-                                    multiline
-                                    rows={4}
-                                    variant="outlined"
-                                    fullWidth
-                                    color="primary"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    disabled={isSubmitting}
-                                    inputProps={{ 'data-testid': 'message', readOnly: contactReceived }}
-                                    error={errors.message && touched.message && true}
-                                    helperText={touched.message && errors.message}
-                                />
-                            </Grid>
-                            <Grid item>
-                                <Typography>
-                                    Note: Messages aren’t monitored by a counselor. Find a helpline{' '}
-                                    <NextLink href="/" passHref prefetch={process.env.NODE_ENV === 'production'}>
-                                        <Link className={classes.link}>here</Link>
-                                    </NextLink>
-                                    .
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Button
-                                    type="submit"
-                                    className={classes.submit}
-                                    variant="contained"
-                                    color="primary"
-                                    size="large"
-                                    disabled={isSubmitting || !isValid || contactReceived}
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <CircularProgress size={20} />
-                                            &nbsp; Submitting
-                                        </>
-                                    ) : (
-                                        'Send Message'
-                                    )}
-                                </Button>
-                            </Grid>
-                            <Grid item>
-                                <ReCAPTCHA
-                                    ref={recaptchaRef}
-                                    size="invisible"
-                                    sitekey={process.env.RECAPTCHA_KEY}
-                                    grecaptcha={grecaptcha}
-                                />
-                                <Typography className={classes.recaptcha}>
-                                    This site is protected by reCAPTCHA and the Google{' '}
-                                    <a
-                                        href="https://policies.google.com/privacy"
-                                        target="_blank"
-                                        rel="noreferrer noopener"
+                                {contactReceived && (
+                                    <Grid item>
+                                        <Alert severity="success">
+                                            <AlertTitle>Thanks for your message!</AlertTitle>
+                                            We&apos;ll be in touch shortly.
+                                        </Alert>
+                                    </Grid>
+                                )}
+                                <Grid item>
+                                    <TextField
+                                        name="email"
+                                        value={email}
+                                        label="Your Email Address"
+                                        variant="outlined"
+                                        fullWidth
+                                        color="primary"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        disabled={isSubmitting}
+                                        inputProps={{ 'data-testid': 'email', readOnly: contactReceived }}
+                                        error={errors.email && touched.email && true}
+                                        helperText={touched.email && errors.email}
+                                    />
+                                </Grid>
+                                <Grid item>
+                                    <TextField
+                                        name="subject"
+                                        value={subject}
+                                        label="Subject"
+                                        variant="outlined"
+                                        fullWidth
+                                        color="primary"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        disabled={isSubmitting}
+                                        inputProps={{ 'data-testid': 'subject', readOnly: contactReceived }}
+                                        error={errors.subject && touched.subject && true}
+                                        helperText={touched.subject && errors.subject}
+                                    />
+                                </Grid>
+                                <Grid item>
+                                    <TextField
+                                        name="message"
+                                        value={message}
+                                        label="Your Message"
+                                        multiline
+                                        rows={4}
+                                        variant="outlined"
+                                        fullWidth
+                                        color="primary"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        disabled={isSubmitting}
+                                        inputProps={{ 'data-testid': 'message', readOnly: contactReceived }}
+                                        error={errors.message && touched.message && true}
+                                        helperText={touched.message && errors.message}
+                                    />
+                                </Grid>
+                                <Grid item>
+                                    <Typography>
+                                        Note: Messages aren’t monitored by a counselor. Find a helpline{' '}
+                                        <NextLink href="/" passHref prefetch={process.env.NODE_ENV === 'production'}>
+                                            <Link className={classes.link}>here</Link>
+                                        </NextLink>
+                                        .
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Button
+                                        type="submit"
+                                        className={classes.submit}
+                                        variant="contained"
+                                        color="primary"
+                                        size="large"
+                                        disabled={isSubmitting || !isValid || contactReceived}
                                     >
-                                        Privacy Policy
-                                    </a>{' '}
-                                    and{' '}
-                                    <a
-                                        href="https://policies.google.com/terms"
-                                        target="_blank"
-                                        rel="noreferrer noopener"
-                                    >
-                                        Terms of Service
-                                    </a>{' '}
-                                    apply.
-                                </Typography>
+                                        {isSubmitting ? (
+                                            <>
+                                                <CircularProgress size={20} />
+                                                &nbsp; Submitting
+                                            </>
+                                        ) : (
+                                            'Send Message'
+                                        )}
+                                    </Button>
+                                </Grid>
+                                <Grid item>
+                                    <ReCAPTCHA
+                                        ref={recaptchaRef}
+                                        size="invisible"
+                                        sitekey={process.env.RECAPTCHA_KEY}
+                                        grecaptcha={grecaptcha}
+                                    />
+                                    <Typography className={classes.recaptcha}>
+                                        This site is protected by reCAPTCHA and the Google{' '}
+                                        <a
+                                            href="https://policies.google.com/privacy"
+                                            target="_blank"
+                                            rel="noreferrer noopener"
+                                        >
+                                            Privacy Policy
+                                        </a>{' '}
+                                        and{' '}
+                                        <a
+                                            href="https://policies.google.com/terms"
+                                            target="_blank"
+                                            rel="noreferrer noopener"
+                                        >
+                                            Terms of Service
+                                        </a>{' '}
+                                        apply.
+                                    </Typography>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </form>
-                )}
-            </Formik>
-        </Container>
+                        </form>
+                    )}
+                </Formik>
+            </Container>
+        </Box>
     );
 };
 

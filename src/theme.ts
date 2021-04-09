@@ -120,8 +120,11 @@ const theme = createMuiTheme({
             },
         },
         MuiRating: {
-            root: {
+            iconFilled: {
                 color: '#ECE686',
+            },
+            iconEmpty: {
+                color: '#F7F7F7',
             },
         },
         MuiTabs: {

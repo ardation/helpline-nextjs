@@ -2,11 +2,11 @@ import { createStyles, makeStyles, Box } from '@material-ui/core';
 import React, { ReactElement } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         box: {
             '& a:link, & a:visited': {
-                color: '#0F2027',
+                color: theme.palette.text.primary,
             },
         },
     }),

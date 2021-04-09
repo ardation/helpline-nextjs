@@ -146,7 +146,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                             The world’s largest resource of helplines, at your fingertips.
                         </Typography>
                         <Typography gutterBottom>
-                            We’ve collated over 1,300 services across the world that offer immediate emotional support,
+                            We’ve collated over 1,400 services across the world that offer immediate emotional support,
                             and made them easily available to you.
                         </Typography>
                         <Typography gutterBottom>
@@ -158,13 +158,26 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                             Supported countries
                         </Typography>
                         <Grid container spacing={2}>
-                            {countries.map((country) => (
-                                <Grid key={country.code} item xs={6}>
-                                    <Typography>
-                                        <Flag code={country.code} width={20} /> {country.name}
-                                    </Typography>
-                                </Grid>
-                            ))}
+                            {countries.map((country) => {
+                                const code = country.code === 'GB-NIR' ? 'gb' : country.code.toLowerCase();
+
+                                return (
+                                    <Grid key={country.code} item xs={6}>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={2}>
+                                                <img
+                                                    src={`https://hatscripts.github.io/circle-flags/flags/${code}.svg`}
+                                                    width={25}
+                                                    alt={`flag-${code}`}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={10}>
+                                                <Typography>{country.name}</Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                );
+                            })}
                         </Grid>
                     </Box>
                     <Box my={4}>

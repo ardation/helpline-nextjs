@@ -106,6 +106,7 @@ const useStyles = makeStyles((theme) =>
         },
         svgIcon: {
             width: '0.9em',
+            height: '0.9em',
         },
     }),
 );
