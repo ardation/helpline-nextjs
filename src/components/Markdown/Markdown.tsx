@@ -10,6 +10,12 @@ const useStyles = makeStyles((theme) =>
             '& a:link, & a:visited': {
                 color: theme.palette.text.primary,
             },
+            '& h1, & h2, & h3': {
+                marginBottom: 0,
+            },
+            '& h1 + p, & h2 + p, & h3 + p': {
+                marginTop: 0,
+            },
             '& table': {
                 width: '100%',
                 '& td': {

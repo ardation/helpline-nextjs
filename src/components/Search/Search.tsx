@@ -185,7 +185,7 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                                             </Link>
                                         </Box>
                                         <Typography variant="body2" color="secondary">
-                                            Select topic or topics (optional)
+                                            Or select topic or topics (optional)
                                         </Typography>
                                     </Grid>
                                 )}

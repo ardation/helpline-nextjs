@@ -154,7 +154,7 @@ const Faq = (): ReactElement => {
                             difficult to know where to begin.
                         </Typography>
                         <Typography variant="h6">Starting the conversation</Typography>
-                        <Typography>
+                        <Typography gutterBottom>
                             It might feel helpful to practice what you want to say, or write down a few key points you
                             want to talk about.
                         </Typography>
@@ -288,8 +288,8 @@ const Faq = (): ReactElement => {
                         <Typography gutterBottom>
                             Most helplines are staffed by volunteers, who give their time to help people because they
                             care about others. Some helplines are staffed by peers, who are people that share a similar
-                            experience. There are also peer-support lines called "warmlines" run entirely by people with
-                            lived experience of mental health struggles.
+                            experience. There are also peer-support lines called &quot;warmlines&quot; run entirely by
+                            people with lived experience of mental health struggles.
                         </Typography>
                         <Typography gutterBottom>
                             Find A Helpline allows you to filter your search to display only helplines offering

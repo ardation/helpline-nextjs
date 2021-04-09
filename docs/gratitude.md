@@ -1,13 +1,10 @@
 ﻿# Gratitude
 
-​
-Find A Helpline has only been made possible due to the contribution of our valued partners and contributors, who span the globe.
-​
+​Find A Helpline has only been made possible due to the contribution of our valued partners and contributors, who span the globe.
 
 ## Helplines
 
 Our heartfelt thanks to the 1,400 helpline partners that provide free emotional support to people, all over the world.
-​
 
 ## Partners
 
@@ -17,8 +14,7 @@ Our heartfelt thanks to the 1,400 helpline partners that provide free emotional 
 [Search Republic (NZ)](https://www.searchrepublic.co.nz)  
 [DataStory (NZ)](https://www.datastory.nz)  
 [Headstream (US)](https://www.headstreaminnovation.com)  
-[The Molly Rose Foundation (UK)](https://mollyrosefoundation.org/)  
-​
+[The Molly Rose Foundation (UK)](https://mollyrosefoundation.org/)
 
 ## Special Thanks
 
@@ -27,9 +23,6 @@ Our heartfelt thanks to the 1,400 helpline partners that provide free emotional 
 | AND Digital (UK) | Astra Labs (US)      |
 | Impact PR (NZ)   | Simpson Western (NZ) |
 | Vinci Law (NZ)   |
-
-​
-​
 
 ## Advisors & Contributors
 
@@ -44,8 +37,6 @@ Our heartfelt thanks to the 1,400 helpline partners that provide free emotional 
 | Daniel Howell    | Tommy Tayler    |
 | David Smith      | Travis Atkinson |
 | Erica Lossie     | Zemirah Koiki   |
-
-​
 
 ## Influencer Partners and Agencies
 
@@ -66,8 +57,6 @@ Our heartfelt thanks to the 1,400 helpline partners that provide free emotional 
 | Lucy O'Connor      | Outspoken (Liz and Olivia) |
 | Maria Foy          | We Are Tenzing (Amanda)    |
 
-​
-
 ### Australia
 
 |                    |                       |
@@ -81,12 +70,11 @@ Our heartfelt thanks to the 1,400 helpline partners that provide free emotional 
 | Izzy Sharman-Firth | Terry Cornick         |
 | Katie Clitherow    | TRIBE                 |
 
-​
-
 ### Cook Islands
 
-Terito Story
-​
+|              |     |
+| ------------ | --- |
+| Terito Story |
 
 ### Ireland
 
@@ -95,8 +83,6 @@ Terito Story
 | Amy O’Riordan | James Walsh |
 | Anna Lou      | Liam Bee    |
 | Dave James    |             |
-
-​
 
 ### UK
 
@@ -108,8 +94,6 @@ Terito Story
 | Debbie (Wanderlust Calls) | Paul Danan          |
 | Holly Matthews            | Sharp Talent Agency |
 | Jonny Stephens            |                     |
-
-​
 
 ## Volunteer Crowdworkers
 
@@ -129,8 +113,6 @@ Terito Story
 | Kate Scott       | Rowan Cant           |
 | Kristin Kornegay | Senuri Panditharatne |
 | Kristina Labayen |                      |
-
-​
 
 ## Live For Tomorrow team
 

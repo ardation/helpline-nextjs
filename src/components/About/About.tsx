@@ -7,6 +7,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SecurityRoundedIcon from '@material-ui/icons/SecurityRounded';
 import { OutboundLink } from 'react-ga';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
+import { CircleFlag } from 'react-circle-flags';
 import Highlight from '../Highlight';
 
 const useStyles = makeStyles((theme) =>
@@ -180,11 +181,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                                     <Grid key={country.code} item xs={6}>
                                         <Grid container spacing={2}>
                                             <Grid item xs={2}>
-                                                <img
-                                                    src={`https://hatscripts.github.io/circle-flags/flags/${code}.svg`}
-                                                    width={25}
-                                                    alt={`flag-${code}`}
-                                                />
+                                                <CircleFlag countryCode={code} height={25} />
                                             </Grid>
                                             <Grid item xs={10}>
                                                 <Typography>{country.name}</Typography>

@@ -5,6 +5,7 @@ import { Autocomplete } from '@material-ui/lab';
 import { createStyles, makeStyles, Box, Grid, InputAdornment } from '@material-ui/core';
 import { sortBy, compact } from 'lodash/fp';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
+import { CircleFlag } from 'react-circle-flags';
 import { LocalityEnum } from '../../../types/globalTypes';
 import SearchIcon from '../../assets/search-icon.svg';
 
@@ -134,11 +135,7 @@ const CountrySelect = ({
                     return (
                         <Grid container spacing={2}>
                             <Grid item>
-                                <img
-                                    src={`https://hatscripts.github.io/circle-flags/flags/${code}.svg`}
-                                    width={25}
-                                    data-testid="countryFlag"
-                                />
+                                <CircleFlag countryCode={code} height={25} data-testid="countryFlag" />
                             </Grid>
                             <Grid item>{option.name}</Grid>
                         </Grid>
