@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Container, Box, Grid, NoSsr } from '@material-ui/core';
+import { createStyles, makeStyles, Typography, Container, Box, Grid, NoSsr } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import Moment from 'react-moment';
 
@@ -14,7 +13,7 @@ interface Props {
     reviews: Review[];
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         box: {
             backgroundColor: '#F0F1F5',

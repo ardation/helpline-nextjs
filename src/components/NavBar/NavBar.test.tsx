@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import matchMediaMock from '../../../__tests__/util/matchMediaMock';
 import NavBar from '.';
 
 describe('NavBar', () => {
@@ -14,14 +15,20 @@ describe('NavBar', () => {
         expect(getByRole('link', { name: 'find a helpline' })).toHaveAttribute('href', '/');
     });
 
-    it('should render widget variant', () => {
-        const { getByTestId, getByText, queryByRole } = render(
-            <NavBar variant="widget">
-                <div data-testid="childElement"></div>
-            </NavBar>,
-        );
-        expect(getByTestId('childElement')).toBeInTheDocument();
-        expect(getByText('Struggling? Talk to a real person, for free.')).toBeInTheDocument();
-        expect(queryByRole('link', { name: 'find a helpline' })).not.toBeInTheDocument();
+    describe('widget', () => {
+        beforeEach(() => {
+            matchMediaMock({ width: '1024px' });
+        });
+
+        it('should render widget variant', () => {
+            const { getByTestId, getByText, queryByRole } = render(
+                <NavBar variant="widget">
+                    <div data-testid="childElement"></div>
+                </NavBar>,
+            );
+            expect(getByTestId('childElement')).toBeInTheDocument();
+            expect(getByText('Struggling? Get free, confidential support from a real person.')).toBeInTheDocument();
+            expect(queryByRole('link', { name: 'find a helpline' })).not.toBeInTheDocument();
+        });
     });
 });

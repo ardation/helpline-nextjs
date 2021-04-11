@@ -11,6 +11,5 @@ export const Default = (): ReactElement => (
             { code: 'AU', name: 'Australia' },
             { code: 'NZ', name: 'New Zealand' },
         ]}
-        navBar
     />
 );

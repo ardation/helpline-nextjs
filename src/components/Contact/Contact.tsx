@@ -1,6 +1,16 @@
 import React, { ReactElement, useState, useRef } from 'react';
-import { Button, Typography, Link, TextField, Grid, Container, CircularProgress } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {
+    createStyles,
+    makeStyles,
+    Button,
+    Typography,
+    Link,
+    TextField,
+    Grid,
+    Container,
+    CircularProgress,
+    Box,
+} from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import ReCAPTCHA from 'react-google-recaptcha';
 import gql from 'graphql-tag';
@@ -9,29 +19,19 @@ import { request } from 'graphql-request';
 import { Formik } from 'formik';
 import NextLink from 'next/link';
 import * as Yup from 'yup';
-import NavBar from '../NavBar';
-import SideBar from '../SideBar';
-import Footer from '../Footer';
 
 type Props = {
     grecaptcha?: object;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         '@global': {
             '.grecaptcha-badge': {
                 visibility: 'hidden',
             },
         },
-        container: {
-            padding: theme.spacing(6, 2),
-            [theme.breakpoints.down('sm')]: {
-                padding: theme.spacing(2),
-            },
-        },
         submit: {
-            borderRadius: '1000px',
             width: '100%',
         },
         recaptcha: {
@@ -85,11 +85,8 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
     };
 
     return (
-        <>
-            <NavBar>
-                <SideBar />
-            </NavBar>
-            <Container maxWidth="xs" className={classes.container}>
+        <Box bgcolor="background.paper" py={2}>
+            <Container maxWidth="xs">
                 <Formik
                     initialValues={{ email: '', subject: '', message: '' }}
                     onSubmit={onSubmit}
@@ -230,8 +227,7 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
                     )}
                 </Formik>
             </Container>
-            <Footer />
-        </>
+        </Box>
     );
 };
 

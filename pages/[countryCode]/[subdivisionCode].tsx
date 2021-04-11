@@ -8,7 +8,6 @@ import { print } from 'graphql';
 import { find, flatten } from 'lodash/fp';
 import Chrome from '../../src/components/Chrome';
 import OrganizationList from '../../src/components/OrganizationList';
-import Footer from '../../src/components/Footer';
 import {
     GetCountryCodeSubdivisonCodeProps,
     GetCountryCodeSubdivisonCodeProps_country_subdivisions as Subdivision,
@@ -46,7 +45,7 @@ const SubdivisionCodePage = ({
                     Find A Helpline | {subdivision.name}, {country.name}
                 </title>
             </Head>
-            <Chrome country={country}>
+            <Chrome country={country} footer>
                 <OrganizationList
                     organizations={organizations.nodes}
                     organizationsWhenEmpty={organizationsWhenEmpty.nodes}
@@ -57,7 +56,6 @@ const SubdivisionCodePage = ({
                     humanSupportTypes={humanSupportTypes}
                     topics={topics}
                 />
-                <Footer />
             </Chrome>
         </>
     );

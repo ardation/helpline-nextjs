@@ -55,6 +55,17 @@ module.exports = {
                     },
                 },
             },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: '@svgr/webpack',
+                        options: {
+                            babel: false,
+                        },
+                    },
+                ],
+            },
         ],
     },
     plugins: [

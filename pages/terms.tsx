@@ -9,7 +9,7 @@ const TermsPage = (): ReactElement => {
             <Head>
                 <title>Find A Helpline | Terms of Service</title>
             </Head>
-            <Chrome>
+            <Chrome navBar footer>
                 <Legal tab="terms" />
             </Chrome>
         </>

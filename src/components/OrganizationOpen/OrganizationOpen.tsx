@@ -1,12 +1,22 @@
 import React, { ReactElement, useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography, Chip, Button, IconButton, Box, Grid, Collapse } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import CloseIcon from '@material-ui/icons/Close';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {
+    createStyles,
+    makeStyles,
+    Typography,
+    Chip,
+    Button,
+    IconButton,
+    Box,
+    Grid,
+    Collapse,
+    SvgIcon,
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/CloseRounded';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMoreRounded';
 import moment from 'moment-timezone';
 import { compact } from 'lodash/fp';
 import isOpen from '../../util/isOpen';
+import TimeIcon from '../../assets/time-icon.svg';
 
 type OpeningHour = {
     day: string;
@@ -25,22 +35,23 @@ type Props = {
     expandable?: boolean;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         body: {
             fontSize: 'inherit',
+            fontWeight: 'normal',
         },
         open: {
             color: '#3FA607',
-            fontWeight: 'bold',
+            fontWeight: 600,
         },
         chip: {
             color: '#FFFFFF',
-            fontWeight: 'bold',
+            fontWeight: 600,
             backgroundColor: theme.palette.secondary.main,
+            marginTop: -2,
             marginLeft: theme.spacing(1),
-            height: '20px',
-            alignItems: 'flex-end',
+            borderRadius: 5,
         },
         button: {
             textTransform: 'none',
@@ -63,6 +74,10 @@ const useStyles = makeStyles((theme: Theme) =>
         active: {
             fontWeight: 'bold',
         },
+        svgIcon: {
+            width: '0.9em',
+            height: '0.9em',
+        },
     }),
 );
 
@@ -84,7 +99,11 @@ const OrganizationOpen = ({ organization, expandable }: Props): ReactElement => 
             <Button
                 size="large"
                 classes={{ root: classes.button, disabled: classes.buttonDisabled }}
-                startIcon={<AccessTimeIcon />}
+                startIcon={
+                    <SvgIcon className={classes.svgIcon}>
+                        <TimeIcon />
+                    </SvgIcon>
+                }
                 disabled
             >
                 <Typography className={classes.body} component="div">

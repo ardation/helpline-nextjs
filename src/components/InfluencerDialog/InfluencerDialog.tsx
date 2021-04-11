@@ -1,14 +1,6 @@
-import {
-    Dialog,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    Button,
-    makeStyles,
-    createStyles,
-    Theme,
-} from '@material-ui/core';
+import { Dialog, DialogContent, DialogTitle, Button, makeStyles, createStyles, Typography } from '@material-ui/core';
 import React, { ReactElement, useState } from 'react';
+import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 
 interface Influencer {
     name: string;
@@ -19,20 +11,25 @@ interface Props {
     influencer: Influencer;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         button: {
-            borderRadius: '1000px',
-            fontWeight: 'bold',
-            textTransform: 'none',
-            width: '100%',
-            margin: theme.spacing(1, 0, 2, 0),
+            margin: theme.spacing(2, 0),
         },
         dialogPaper: {
             maxWidth: '300px',
+            borderRadius: 12,
         },
         dialogTitle: {
-            fontWeight: 'bold',
+            paddingBottom: 0,
+        },
+        dialogText: {
+            '& p:first-child': {
+                marginTop: 0,
+            },
+            '& p:last-child': {
+                marginBottom: 0,
+            },
         },
     }),
 );
@@ -58,8 +55,20 @@ const InfluencerDialog = ({ influencer }: Props): ReactElement => {
                 A Message from {influencer.name}
             </DialogTitle>
             <DialogContent>
-                <DialogContentText id="influencer-dialog-description">{influencer.message}</DialogContentText>
-                <Button className={classes.button} onClick={handleClose} color="primary" variant="contained">
+                <Typography id="influencer-dialog-description" component="div" className={classes.dialogText}>
+                    {influencer.message.split('\n').map((str, index) => (
+                        <p key={index}>{str}</p>
+                    ))}
+                </Typography>
+                <Button
+                    className={classes.button}
+                    onClick={handleClose}
+                    color="primary"
+                    variant="contained"
+                    fullWidth
+                    size="large"
+                    endIcon={<ArrowRightAltRoundedIcon />}
+                >
                     Continue
                 </Button>
             </DialogContent>

@@ -1,9 +1,8 @@
 import React, { useState, useEffect, ReactElement } from 'react';
 import { useEmblaCarousel } from 'embla-carousel-react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, Fab } from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { createStyles, makeStyles, Box, Fab } from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeftRounded';
+import ChevronRightIcon from '@material-ui/icons/ChevronRightRounded';
 import { sortBy } from 'lodash/fp';
 import OrganizationCard, { Organization } from '../OrganizationCard/OrganizationCard';
 import OrganizationEmpty from '../OrganizationEmpty';
@@ -13,12 +12,12 @@ type Props = {
     organizationsWhenEmpty: Organization[];
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         box: {
             position: 'relative',
-            marginTop: theme.spacing(2),
-            marginBottom: theme.spacing(2),
+            paddingTop: theme.spacing(2),
+            paddingBottom: theme.spacing(2),
         },
         container: {
             marginLeft: '-1rem',
@@ -44,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) =>
             top: '50%',
             transform: 'translateY(-50%)',
             fontSize: '3rem',
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+            color: theme.palette.text.primary,
+            backgroundColor: theme.palette.background.paper,
             [theme.breakpoints.down('xs')]: {
                 width: 36,
                 height: 36,

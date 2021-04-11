@@ -92,7 +92,7 @@ describe('OrganizationItem', () => {
     it('should contain url', async () => {
         const { getByTestId, queryByTestId } = render(<OrganizationItem organization={organization} />);
         const element = getByTestId('url');
-        expect(element.parentElement).toHaveAttribute('href', 'https://youthline.co.nz/website');
+        expect(element).toHaveAttribute('href', 'https://youthline.co.nz/website');
         expect(element).toHaveTextContent('youthline.co.nz');
         fireEvent.click(element);
         const closeElement = getByTestId('close');
@@ -115,7 +115,7 @@ describe('OrganizationItem', () => {
     it('should contain smsNumber', async () => {
         const { getByTestId, queryByTestId } = render(<OrganizationItem organization={organization} />);
         const element = getByTestId('smsNumber');
-        expect(element.parentElement).toHaveAttribute('href', 'sms:234');
+        expect(element).toHaveAttribute('href', 'sms:234');
         expect(element).toHaveTextContent('234');
         fireEvent.click(element);
         const closeElement = getByTestId('close');
@@ -138,7 +138,7 @@ describe('OrganizationItem', () => {
     it('should contain phoneNumber', async () => {
         const { getByTestId, queryByTestId } = render(<OrganizationItem organization={organization} />);
         const element = getByTestId('phoneNumber');
-        expect(element.parentElement).toHaveAttribute('href', 'tel:0800 376 633');
+        expect(element).toHaveAttribute('href', 'tel:0800 376 633');
         expect(element).toHaveTextContent('0800 376 633');
         fireEvent.click(element);
         const closeElement = getByTestId('close');
@@ -155,29 +155,6 @@ describe('OrganizationItem', () => {
         it('should not have phoneNumber element', () => {
             const { getByTestId } = render(<OrganizationItem organization={organization} />);
             expect(() => getByTestId('phoneNumber')).toThrow();
-        });
-    });
-
-    it('should contain chatUrl', async () => {
-        const { getByTestId, queryByTestId } = render(<OrganizationItem organization={organization} />);
-        const element = getByTestId('chatUrl');
-        expect(element.parentElement).toHaveAttribute('href', 'https://chatyouthline.co.nz/chat');
-        expect(element).toHaveTextContent('chatyouthline.co.nz');
-        fireEvent.click(element);
-        const closeElement = getByTestId('close');
-        expect(closeElement).toBeInTheDocument();
-        fireEvent.click(closeElement);
-        await waitFor(() => expect(queryByTestId('close')).not.toBeInTheDocument());
-    });
-
-    describe('no chatUrl', () => {
-        beforeEach(() => {
-            organization = { ...organization, chatUrl: undefined };
-        });
-
-        it('should not have chatUrl element', () => {
-            const { getByTestId } = render(<OrganizationItem organization={organization} />);
-            expect(() => getByTestId('chatUrl')).toThrow();
         });
     });
 
@@ -242,9 +219,9 @@ describe('OrganizationItem', () => {
             organization = { ...organization, featured: true };
         });
 
-        it('should have featured icon', () => {
+        it('should not have verified icon', () => {
             const { getByTestId } = render(<OrganizationItem organization={organization} />);
-            expect(getByTestId('featured')).toBeTruthy();
+            expect(() => getByTestId('verified')).toThrow();
         });
     });
 
@@ -253,10 +230,9 @@ describe('OrganizationItem', () => {
             organization = { ...organization, featured: true, verified: true };
         });
 
-        it('should have verfied icon but not featured icon', () => {
+        it('should have verfied icon', () => {
             const { getByTestId } = render(<OrganizationItem organization={organization} />);
-            expect(() => getByTestId('featured')).toThrow();
-            expect(getByTestId('verified')).toBeTruthy();
+            expect(getByTestId('verified')).toBeInTheDocument();
         });
     });
 });

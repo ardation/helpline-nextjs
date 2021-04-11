@@ -23,13 +23,9 @@ describe('Search', () => {
         expect(
             getByText('Struggling? Get free, confidential support from a real human over phone, text or webchat.'),
         ).toBeTruthy();
-        expect(getByRole('button', { name: 'A note from our founder' }).parentElement).toHaveAttribute(
+        expect(getByRole('link', { name: 'What can I expect when contacting a helpline?' })).toHaveAttribute(
             'href',
-            'https://bit.ly/fah-founders-note',
-        );
-        expect(getByRole('button', { name: 'Hear when we launch in your country' }).parentElement).toHaveAttribute(
-            'href',
-            'https://livefortomorrow.typeform.com/to/ErmyL3tv',
+            '/faq',
         );
         const element = getByRole('textbox');
         fireEvent.click(element);

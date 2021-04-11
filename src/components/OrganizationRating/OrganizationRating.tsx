@@ -1,8 +1,7 @@
 import React, { ReactElement } from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Grid, Typography } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import Link from 'next/link';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 type Organization = {
     slug: string;
@@ -15,7 +14,7 @@ type Props = {
     variant?: 'widget' | 'item';
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         link: {
             color: theme.palette.text.primary,

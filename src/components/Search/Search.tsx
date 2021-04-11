@@ -1,18 +1,15 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Typography, Box, Button, Container } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Typography, Box, Button, Container, Grid } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
-import { OutboundLink } from 'react-ga';
-import MailIcon from '@material-ui/icons/Mail';
-import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import clsx from 'clsx';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import TopicSelect from '../TopicSelect';
+import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 import CountrySelect from '../CountrySelect';
 import { LocalityEnum } from '../../../types/globalTypes';
 import NavBar from '../NavBar';
 import SideBar from '../SideBar';
 import About from '../About';
+import ItemSelect from '../ItemSelect';
 
 type Subdivision = {
     code: string;
@@ -37,7 +34,7 @@ type Props = {
     onChange?: (topics: Topic[], country?: Country, subdivision?: Subdivision) => void;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         logo: {
             textAlign: 'center',
@@ -52,14 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingTop: theme.spacing(5),
             paddingBottom: theme.spacing(5),
             textAlign: 'center',
-            height: 'calc(100vh - 245px)',
             maxWidth: '444px',
-            [theme.breakpoints.down('md')]: {
-                marginBottom: theme.spacing(11),
-            },
-            [theme.breakpoints.down('xs')]: {
-                marginBottom: theme.spacing(23),
-            },
         },
         containerEmbed: {
             padding: 0,
@@ -68,13 +58,6 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'grid',
             gridGap: theme.spacing(2),
         },
-        boxScrollArrow: {
-            textAlign: 'center',
-            margin: theme.spacing(2),
-        },
-        button: {
-            borderRadius: '1000px',
-        },
         links: {
             margin: '0 auto',
             display: 'flex',
@@ -82,17 +65,32 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'flex-start',
         },
         buttonRoot: {
-            color: '#000',
+            color: theme.palette.text.primary,
             textDecoration: 'underline',
             textTransform: 'none',
-            textAlign: 'left',
+            fontWeight: 'normal',
             '&:hover': {
                 textDecoration: 'underline',
                 color: theme.palette.primary.main,
             },
         },
         link: {
-            color: '#000',
+            color: theme.palette.text.primary,
+        },
+        typography: {
+            fontSize: 20,
+        },
+        selectedCountryBox: {
+            backgroundColor: theme.palette.background.paper,
+            padding: theme.spacing(2),
+            margin: theme.spacing(0, -2),
+            [theme.breakpoints.up('md')]: {
+                borderRadius: 10,
+                margin: 0,
+            },
+        },
+        heading: {
+            fontFamily: theme.typography.fontFamily,
         },
     }),
 );
@@ -126,7 +124,7 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                             <Box className={classes.logo}>
                                 <img src="/logo.svg" alt="find a helpline" />
                             </Box>
-                            <Typography>
+                            <Typography className={classes.typography} color="secondary">
                                 Struggling? Get free, confidential support from a real human over phone, text or
                                 webchat.
                             </Typography>
@@ -139,80 +137,101 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                     />
                     {!selectedCountry && variant !== 'embed' && (
                         <Box className={classes.links}>
-                            <OutboundLink
-                                eventLabel="https://bit.ly/fah-founders-note"
-                                to="https://bit.ly/fah-founders-note"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={classes.link}
-                            >
-                                <Button
-                                    startIcon={<LoyaltyIcon />}
-                                    classes={{ root: classes.buttonRoot, label: classes.link }}
-                                    color="primary"
-                                >
-                                    A note from our founder
+                            <Link href="/faq" passHref prefetch={process.env.NODE_ENV === 'production'}>
+                                <Button classes={{ root: classes.buttonRoot, label: classes.link }} color="primary">
+                                    What can I expect when contacting a helpline?
                                 </Button>
-                            </OutboundLink>
-                            <OutboundLink
-                                eventLabel="https://livefortomorrow.typeform.com/to/ErmyL3tv"
-                                to="https://livefortomorrow.typeform.com/to/ErmyL3tv"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={classes.link}
-                            >
-                                <Button
-                                    startIcon={<MailIcon />}
-                                    classes={{ root: classes.buttonRoot, label: classes.link }}
-                                    color="primary"
-                                >
-                                    Hear when we launch in your country
-                                </Button>
-                            </OutboundLink>
+                            </Link>
                         </Box>
                     )}
-                    {selectedCountry && variant !== 'embed' && (
-                        <Typography variant="h6">
-                            <strong>What would you like help with?</strong>
-                        </Typography>
-                    )}
-                    {selectedCountry && <TopicSelect topics={topics} onChange={setSelectedTopics} />}
-                    {selectedCountry && variant !== 'embed' && (
-                        <Link
-                            href={{
-                                pathname: `/[countryCode]${selectedSubdivision ? `/[subdivisionCode]` : ''}`,
-                                query: { topics: selectedTopics.map((topic) => topic.name) },
-                            }}
-                            as={{
-                                pathname: `/${selectedCountry.code.toLowerCase()}${
-                                    selectedSubdivision ? `/${selectedSubdivision.code.toLowerCase()}` : ''
-                                }`,
-                                query: { topics: selectedTopics.map((topic) => topic.name) },
-                            }}
-                            passHref
-                            prefetch={process.env.NODE_ENV === 'production'}
-                        >
-                            <Button
-                                data-testid="searchButton"
-                                className={classes.button}
-                                variant="contained"
-                                color="primary"
-                                size="large"
-                            >
-                                Search
-                            </Button>
-                        </Link>
+                    {selectedCountry && (
+                        <Box className={classes.selectedCountryBox}>
+                            <Grid container spacing={2}>
+                                {selectedCountry && variant !== 'embed' && (
+                                    <Grid item xs={12}>
+                                        <Typography variant="h6" className={classes.heading} gutterBottom>
+                                            What would you like help with?
+                                        </Typography>
+                                        <Typography variant="body2" color="secondary">
+                                            Quick link
+                                        </Typography>
+                                        <Box pt={1} pb={3}>
+                                            <Link
+                                                href={{
+                                                    pathname: `/[countryCode]${
+                                                        selectedSubdivision ? `/[subdivisionCode]` : ''
+                                                    }`,
+                                                    query: { topics: ['Suicidal thoughts'] },
+                                                }}
+                                                as={{
+                                                    pathname: `/${selectedCountry.code.toLowerCase()}${
+                                                        selectedSubdivision
+                                                            ? `/${selectedSubdivision.code.toLowerCase()}`
+                                                            : ''
+                                                    }`,
+                                                    query: { topics: ['Suicidal thoughts'] },
+                                                }}
+                                                passHref
+                                                prefetch={process.env.NODE_ENV === 'production'}
+                                            >
+                                                <Button
+                                                    color="secondary"
+                                                    variant="contained"
+                                                    size="large"
+                                                    endIcon={<ArrowRightAltRoundedIcon />}
+                                                >
+                                                    Suicidal Thoughts
+                                                </Button>
+                                            </Link>
+                                        </Box>
+                                        <Typography variant="body2" color="secondary">
+                                            Or select topic or topics (optional)
+                                        </Typography>
+                                    </Grid>
+                                )}
+                                {selectedCountry && (
+                                    <Grid item xs={12}>
+                                        <ItemSelect items={topics} onChange={setSelectedTopics} max={10} center />
+                                    </Grid>
+                                )}
+                                {selectedCountry && variant !== 'embed' && (
+                                    <Grid item xs={12}>
+                                        <Link
+                                            href={{
+                                                pathname: `/[countryCode]${
+                                                    selectedSubdivision ? `/[subdivisionCode]` : ''
+                                                }`,
+                                                query: { topics: selectedTopics.map((topic) => topic.name) },
+                                            }}
+                                            as={{
+                                                pathname: `/${selectedCountry.code.toLowerCase()}${
+                                                    selectedSubdivision
+                                                        ? `/${selectedSubdivision.code.toLowerCase()}`
+                                                        : ''
+                                                }`,
+                                                query: { topics: selectedTopics.map((topic) => topic.name) },
+                                            }}
+                                            passHref
+                                            prefetch={process.env.NODE_ENV === 'production'}
+                                        >
+                                            <Button
+                                                data-testid="searchButton"
+                                                variant="contained"
+                                                color="primary"
+                                                size="large"
+                                                fullWidth
+                                            >
+                                                Search for helplines
+                                            </Button>
+                                        </Link>
+                                    </Grid>
+                                )}
+                            </Grid>
+                        </Box>
                     )}
                 </Box>
             </Container>
-            {!selectedCountry && variant !== 'embed' && (
-                <>
-                    <Box className={classes.boxScrollArrow}>
-                        <ArrowDownwardIcon />
-                    </Box>
-                    <About countries={countries} />
-                </>
-            )}
+            {!selectedCountry && variant !== 'embed' && <About countries={countries} />}
         </>
     );
 };

@@ -1,7 +1,6 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import SwipeableViews from 'react-swipeable-views';
-import { Box, Typography, Button, Tab, Tabs, Container } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Box, Typography, Button, Tab, Tabs, Container, createStyles, makeStyles } from '@material-ui/core';
 import ReactGA from 'react-ga';
 import ItemSelect from '../ItemSelect/ItemSelect';
 
@@ -41,7 +40,7 @@ type Props = {
     onChange: (changes: Changes) => void;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         container: {
             padding: 0,
@@ -52,23 +51,10 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
         },
         heading: {
-            fontWeight: 'bold',
+            fontFamily: theme.typography.fontFamily,
         },
         title: {
             marginBottom: theme.spacing(1),
-        },
-        button: {
-            borderRadius: '1000px',
-        },
-        tabs: {
-            borderTop: '1px solid #000',
-        },
-        tab: {
-            padding: theme.spacing(1, 0),
-            textTransform: 'capitalize',
-            '&.Mui-selected': {
-                fontWeight: 'bold',
-            },
         },
         tabPanel: {
             padding: theme.spacing(0, 2, 2, 2),
@@ -165,33 +151,14 @@ const OrganizationFilter = ({
                     <Typography className={classes.heading} variant="h6">
                         Filter &amp; Sort
                     </Typography>
-                    <Button
-                        className={classes.button}
-                        variant="contained"
-                        color="primary"
-                        onClick={onClick}
-                        size="large"
-                    >
+                    <Button variant="contained" color="primary" onClick={onClick} size="large">
                         Apply
                     </Button>
                 </Box>
-                <Tabs
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    variant="fullWidth"
-                    className={classes.tabs}
-                    value={value}
-                >
-                    <Tab
-                        className={classes.tab}
-                        label={`Topics${selectedTopics.length > 0 ? ` (${selectedTopics.length})` : ''}`}
-                    />
-                    <Tab
-                        className={classes.tab}
-                        label={`Specialty${selectedCategories.length > 0 ? ` (${selectedCategories.length})` : ''}`}
-                    />
-                    <Tab className={classes.tab} label="Support Type" />
+                <Tabs onChange={handleChange} variant="fullWidth" value={value}>
+                    <Tab label={`Topics${selectedTopics.length > 0 ? ` (${selectedTopics.length})` : ''}`} />
+                    <Tab label={`Specialty${selectedCategories.length > 0 ? ` (${selectedCategories.length})` : ''}`} />
+                    <Tab label="Support Type" />
                 </Tabs>
             </Box>
             <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>

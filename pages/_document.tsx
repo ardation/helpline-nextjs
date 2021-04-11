@@ -10,8 +10,9 @@ class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     <meta name="theme-color" content={theme.palette.primary.main} />
+                    <link rel="preconnect" href="https://fonts.gstatic.com" />
                     <link
-                        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
+                        href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&amp;family=Source+Serif+Pro:wght@600&amp;display=swap"
                         rel="stylesheet"
                     />
                     <link rel="icon" href="/favicon.svg"></link>

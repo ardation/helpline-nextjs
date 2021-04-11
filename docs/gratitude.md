@@ -1,28 +1,42 @@
 ﻿# Gratitude
 
-Find A Helpline has only been made possible due to the contribution of our valued partners and contributors, who span the globe.
+​Find A Helpline has only been made possible due to the contribution of our valued partners and contributors, who span the globe.
+
+## Helplines
+
+Our heartfelt thanks to the 1,400 helpline partners that provide free emotional support to people, all over the world.
 
 ## Partners
 
-|                       |                      |
-| --------------------- | -------------------- |
-| Tataihono Nikora (NZ) | Headstream (US)      |
-| AND Digital (UK)      | Impact PR (NZ)       |
-| GravityLab (NZ)       | Simpson Western (NZ) |
-| Astra Labs (US)       | Vinci Law (NZ)       |
+[International Association for Suicide Prevention](https:///www.iasp.info)  
+[GravityLab (NZ)](https://www.gravitylab.nz)  
+[Polyform (Canada)](https://www.polyform.co)  
+[Search Republic (NZ)](https://www.searchrepublic.co.nz)  
+[DataStory (NZ)](https://www.datastory.nz)  
+[Headstream (US)](https://www.headstreaminnovation.com)  
+[The Molly Rose Foundation (UK)](https://mollyrosefoundation.org/)
 
-## Advisors and Contributors
+## Special Thanks
 
-|                  |               |
-| ---------------- | ------------- |
-| Adam Kyle Wilson | Liv Hagglund  |
-| Arielle Geismar  | Matt Soeth    |
-| Breanna Taylor   | Natalie Peart |
-| Briony Gray      | Ryan McAra    |
-| Daniel Howell    | Tillie Lima   |
-| David Smith      | Tommy Tayler  |
-| Erica Lossie     | Zemirah Koiki |
-| Hannah Stott     |               |
+|                  |                      |
+| ---------------- | -------------------- |
+| AND Digital (UK) | Astra Labs (US)      |
+| Impact PR (NZ)   | Simpson Western (NZ) |
+| Vinci Law (NZ)   |
+
+## Advisors & Contributors
+
+|                  |                 |
+| ---------------- | --------------- |
+| Adam Kyle Wilson | Hannah Stott    |
+| Andy Hamilton    | Liv Hagglund    |
+| Arielle Geismar  | Matt Soeth      |
+| Breanna Taylor   | Natalie Peart   |
+| Briony Gray      | Ryan McAra      |
+| Dani Bicknell    | Tillie Lima     |
+| Daniel Howell    | Tommy Tayler    |
+| David Smith      | Travis Atkinson |
+| Erica Lossie     | Zemirah Koiki   |
 
 ## Influencer Partners and Agencies
 
@@ -30,15 +44,56 @@ Find A Helpline has only been made possible due to the contribution of our value
 
 |                    |                            |
 | ------------------ | -------------------------- |
-| Ashley McInroe     | Melissa Maritz             |
-| Ash Owens          | Natasha Bonniface          |
+| Aroha              | Melissa Maritz             |
+| Ashley McInroe     | Natasha Bonniface          |
+| Ash Owens          | Nikita Rindell             |
 | Brittany McKrystal | Richie Hardcore            |
 | Cate Graumans      | Shirley McLeod             |
 | Claudia Rose       | Simone Anderson            |
-| Genevieve Mora     | Sophia Piearcey            |
-| Iyia Liu           | Zakk d’Larté               |
+| Danica Lillebostad | Sophia Piearcey            |
+| Genevieve Mora     | Suzie Cooper               |
+| Iyia Liu           | Tāne Williams              |
+| Lara Fox           | Zakk d’Larté               |
 | Lucy O'Connor      | Outspoken (Liz and Olivia) |
 | Maria Foy          | We Are Tenzing (Amanda)    |
+
+### Australia
+
+|                    |                       |
+| ------------------ | --------------------- |
+| Adele (love_ave)   | Kayla Pickering       |
+| Alexa Towersey     | Leilani Vakaahi       |
+| Bella Colwell      | Lynley (Topknot Yoga) |
+| Charley Bond       | Matt Grant            |
+| Gemma White        | McKenzie Collins      |
+| Hannah             | Michelle Wright       |
+| Izzy Sharman-Firth | Terry Cornick         |
+| Katie Clitherow    | TRIBE                 |
+
+### Cook Islands
+
+|              |     |
+| ------------ | --- |
+| Terito Story |
+
+### Ireland
+
+|               |             |
+| ------------- | ----------- |
+| Amy O’Riordan | James Walsh |
+| Anna Lou      | Liam Bee    |
+| Dave James    |             |
+
+### UK
+
+|                           |                     |
+| ------------------------- | ------------------- |
+| Alice Thorpe              | Lou Brown           |
+| Amy Whitbread             | Marie Senechal      |
+| Bee Anderson              | Mentally_attentive  |
+| Debbie (Wanderlust Calls) | Paul Danan          |
+| Holly Matthews            | Sharp Talent Agency |
+| Jonny Stephens            |                     |
 
 ## Volunteer Crowdworkers
 
@@ -61,14 +116,15 @@ Find A Helpline has only been made possible due to the contribution of our value
 
 ## Live For Tomorrow team
 
-Find A Helpline is brought to you by [Live For Tomorrow](https://www.livefortomorrow.co), a not-for-profit using technology to support mental health. Our mission is to take meaningful mental health help to people experiencing distress.
+Find A Helpline is brought to you by [Live For Tomorrow](https://www.livefortomorrow.co), a not-for-profit startup building better crisis support for the digital era.
 
-We are a registered charity in New Zealand with the registration number CC58291, and work globally.
-
-**Elliot Taylor**, Founder & Executive Director
-
-**Lauren Purse**, Director of People & Operations
-
-**Anna Woodd**, Engagement Lead
-
-**Andrew Sutherland**, Clinical Advisor
+|                                 |                                              |
+| ------------------------------- | -------------------------------------------- |
+| **Elliot Taylor**               | **Lauren Purse**                             |
+| Co-Founder & Executive Director | Co-Founder & Director of People & Operations |
+|                                 |                                              |
+| **Anna Woodd**                  | **Andrew Sutherland**                        |
+| Engagement Lead                 | Clinical Advisor                             |
+|                                 |                                              |
+| **Tataihono Nikora**            |                                              |
+| Developer                       |                                              |

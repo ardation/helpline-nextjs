@@ -1,29 +1,22 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { AppBar, Box, Container, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, AppBar, Box, Container, Hidden, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import clsx from 'clsx';
 
 type Props = {
     children?: ReactNode;
-    variant?: 'widget' | 'minimal';
+    variant?: 'widget' | 'minimal' | 'white';
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         appBar: {
-            backgroundColor: '#F0F1F5',
+            backgroundColor: 'transparent',
             paddingTop: theme.spacing(1),
             paddingBottom: theme.spacing(1),
         },
-        appBarWidget: {
-            boxShadow: 'none',
-            backgroundColor: '#181719',
-            color: '#FFFFFF',
-        },
-        appBarMinimal: {
-            boxShadow: 'none',
-            backgroundColor: 'transparent',
+        appBarWhite: {
+            backgroundColor: theme.palette.background.paper,
         },
         container: {
             display: 'grid',
@@ -33,7 +26,8 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         logo: {
             display: 'grid',
-            gridColumnGap: theme.spacing(1),
+            gridColumnGap: theme.spacing(4),
+            alignItems: 'center',
             gridTemplateColumns: 'auto 1fr',
             flexGrow: 1,
             paddingTop: theme.spacing(1),
@@ -52,28 +46,29 @@ const NavBar = ({ children, variant }: Props): ReactElement => {
 
     return (
         <AppBar
-            className={clsx(
-                classes.appBar,
-                variant === 'widget' && classes.appBarWidget,
-                variant === 'minimal' && classes.appBarMinimal,
-            )}
+            className={clsx(classes.appBar, variant === 'white' && classes.appBarWhite)}
             position="static"
+            elevation={0}
         >
             <Container className={classes.container}>
                 <Box className={classes.logo}>
                     {variant !== 'minimal' && (
                         <>
                             {variant === 'widget' ? (
-                                <img src="/logo.svg" alt="find a helpline" />
+                                <>
+                                    <img src="/logo.svg" alt="find a helpline" />
+                                    <Hidden xsDown>
+                                        <Typography variant="body2" color="secondary">
+                                            Struggling? Get free, confidential support from a real person.
+                                        </Typography>
+                                    </Hidden>
+                                </>
                             ) : (
                                 <Link href="/" prefetch={process.env.NODE_ENV === 'production'} passHref>
                                     <a>
                                         <img src="/logo.svg" alt="find a helpline" />
                                     </a>
                                 </Link>
-                            )}
-                            {variant === 'widget' && (
-                                <Typography>Struggling? Talk to a real person, for free.</Typography>
                             )}
                         </>
                     )}

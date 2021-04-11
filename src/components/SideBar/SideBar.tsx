@@ -1,9 +1,10 @@
 import React, { ReactElement, useState } from 'react';
 import { Drawer, List, ListItem, ListItemText, IconButton, Divider, ListItemIcon } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
+import HelpIcon from '@material-ui/icons/Help';
 import EmailIcon from '@material-ui/icons/Email';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -11,6 +12,10 @@ import Link from 'next/link';
 
 const useStyles = makeStyles(() =>
     createStyles({
+        paper: {
+            borderTopLeftRadius: 12,
+            borderBottomLeftRadius: 12,
+        },
         list: {
             width: 250,
         },
@@ -23,16 +28,16 @@ const SideBar = (): ReactElement => {
 
     return (
         <>
-            <IconButton onClick={(): void => setOpen(true)} size="small" data-testid="menuButton">
-                <MenuIcon />
+            <IconButton onClick={(): void => setOpen(true)} size="small" data-testid="menuButton" color="secondary">
+                <MenuRoundedIcon />
             </IconButton>
-            <Drawer anchor="right" open={open} onClose={(): void => setOpen(false)}>
+            <Drawer classes={{ paper: classes.paper }} anchor="right" open={open} onClose={(): void => setOpen(false)}>
                 <div className={classes.list} onClick={(): void => setOpen(false)}>
                     <List>
                         <Link href="/" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <HomeIcon />
+                                    <HomeIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Home" />
                             </ListItem>
@@ -40,15 +45,23 @@ const SideBar = (): ReactElement => {
                         <Link href="/about" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <InfoIcon />
+                                    <InfoIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="About" />
+                            </ListItem>
+                        </Link>
+                        <Link href="/faq" passHref prefetch={process.env.NODE_ENV === 'production'}>
+                            <ListItem button component="a">
+                                <ListItemIcon>
+                                    <HelpIcon color="secondary" />
+                                </ListItemIcon>
+                                <ListItemText primary="FAQs" />
                             </ListItem>
                         </Link>
                         <Link href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <ExtensionIcon />
+                                    <ExtensionIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Get the Widget" />
                             </ListItem>
@@ -56,7 +69,7 @@ const SideBar = (): ReactElement => {
                         <Link href="/contact" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <EmailIcon />
+                                    <EmailIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Contact" />
                             </ListItem>
@@ -64,7 +77,7 @@ const SideBar = (): ReactElement => {
                         <Link href="/gratitude" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemIcon>
-                                    <FavoriteIcon />
+                                    <FavoriteIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Gratitude" />
                             </ListItem>
@@ -72,14 +85,17 @@ const SideBar = (): ReactElement => {
                         <Divider />
                         <Link href="/privacy" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
-                                <ListItemText primary="Privacy Policy" primaryTypographyProps={{ variant: 'body2' }} />
+                                <ListItemText
+                                    primary="Privacy Policy"
+                                    primaryTypographyProps={{ variant: 'body2', color: 'textSecondary' }}
+                                />
                             </ListItem>
                         </Link>
                         <Link href="/terms" passHref prefetch={process.env.NODE_ENV === 'production'}>
                             <ListItem button component="a">
                                 <ListItemText
                                     primary="Terms of Service"
-                                    primaryTypographyProps={{ variant: 'body2' }}
+                                    primaryTypographyProps={{ variant: 'body2', color: 'textSecondary' }}
                                 />
                             </ListItem>
                         </Link>

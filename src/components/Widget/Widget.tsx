@@ -1,9 +1,8 @@
 import CloseIcon from '@material-ui/icons/Close';
 import React, { ReactElement, useEffect, useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, Button, Backdrop, NoSsr } from '@material-ui/core';
+import { Box, Button, Backdrop, NoSsr, Hidden, Typography, createStyles, makeStyles } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import CodeIcon from '@material-ui/icons/Code';
+import CodeIcon from '@material-ui/icons/CodeRounded';
 import { OutboundLink } from 'react-ga';
 import NavBar from '../NavBar';
 import filterAndSortOrganizations from '../../util/filterAndSortOrganizations';
@@ -39,10 +38,9 @@ export type WidgetProps = {
     organizationsWhenEmpty: Organization[];
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         box: {
-            border: '1px solid #181719',
             borderBottomLeftRadius: '5px',
             borderBottomRightRadius: '5px',
         },
@@ -57,26 +55,11 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingBottom: theme.spacing(2),
             background: '#FFFFFF',
         },
-        filterButton: {
-            background: '#FFFFFF',
-            borderRadius: '1000px',
-            paddingLeft: theme.spacing(2),
-            paddingRight: theme.spacing(2),
-            '&:hover': {
-                backgroundColor: '#CCCCCC',
-            },
-        },
-        sortText: {
-            [theme.breakpoints.down('xs')]: {
-                display: 'none',
-            },
-        },
         embed: {
             textAlign: 'center',
             padding: theme.spacing(1),
         },
         embedButton: {
-            color: '#000',
             textDecoration: 'underline',
             textTransform: 'none',
             textAlign: 'left',
@@ -86,7 +69,13 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         link: {
-            color: '#000',
+            color: theme.palette.text.secondary,
+            fontWeight: 400,
+        },
+        outerBox: {
+            borderRadius: 5,
+            backgroundColor: theme.palette.background.default,
+            border: `1px ${theme.palette.text.secondary} solid`,
         },
     }),
 );
@@ -126,29 +115,39 @@ const Widget = ({
 
     return (
         <>
-            <NavBar variant="widget">
-                <Button
-                    className={classes.filterButton}
-                    onClick={(): void => setShowFilters(true)}
-                    endIcon={<FilterListIcon />}
-                    data-testid="filter"
-                >
-                    Filter<span className={classes.sortText}>&nbsp;&amp; Sort</span>
-                </Button>
-            </NavBar>
-            <WidgetSearch
-                preselectedCountry={preselectedCountry}
-                countries={countries}
-                preselectedSubdivision={preselectedSubdivision}
-            />
-            <Box className={classes.box}>
-                <TopBar variant="widget" country={preselectedCountry} />
-                <NoSsr>
-                    <WidgetOrganizationList
-                        organizations={filteredOrganizations}
-                        organizationsWhenEmpty={organizationsWhenEmpty}
-                    />
-                </NoSsr>
+            <Box className={classes.outerBox}>
+                <NavBar variant="widget">
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={(): void => setShowFilters(true)}
+                        endIcon={<FilterListIcon />}
+                        data-testid="filter"
+                    >
+                        Filter
+                    </Button>
+                </NavBar>
+                <Hidden smUp>
+                    <Box my={1}>
+                        <Typography color="secondary" align="center">
+                            Struggling? Talk with a real person, for free.
+                        </Typography>
+                    </Box>
+                </Hidden>
+                <WidgetSearch
+                    preselectedCountry={preselectedCountry}
+                    countries={countries}
+                    preselectedSubdivision={preselectedSubdivision}
+                />
+                <Box className={classes.box}>
+                    <TopBar variant="widget" country={preselectedCountry} />
+                    <NoSsr>
+                        <WidgetOrganizationList
+                            organizations={filteredOrganizations}
+                            organizationsWhenEmpty={organizationsWhenEmpty}
+                        />
+                    </NoSsr>
+                </Box>
             </Box>
             <Box className={classes.embed}>
                 <OutboundLink
@@ -175,11 +174,7 @@ const Widget = ({
             >
                 <Box onClick={(e): void => e.stopPropagation()}>
                     <NavBar variant="widget">
-                        <Button
-                            className={classes.filterButton}
-                            onClick={(): void => setShowFilters(false)}
-                            endIcon={<CloseIcon />}
-                        >
+                        <Button variant="contained" onClick={(): void => setShowFilters(false)} endIcon={<CloseIcon />}>
                             Close
                         </Button>
                     </NavBar>

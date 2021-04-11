@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Chip, Box } from '@material-ui/core';
-import { differenceBy, find, xorBy } from 'lodash/fp';
+import { compact, differenceBy, find, xorBy } from 'lodash/fp';
 
 type Item = {
     name: string;
@@ -13,36 +13,34 @@ type Props = {
     preselectedItems?: Item[];
     single?: boolean;
     max?: number;
+    center?: boolean;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         chips: {
             display: 'flex',
-            justifyContent: 'left',
             flexWrap: 'wrap',
             '& > *': {
-                marginRight: theme.spacing(0.5),
-                marginBottom: theme.spacing(0.5),
+                marginRight: theme.spacing(1),
+                marginBottom: theme.spacing(1),
             },
+        },
+        chipsCenter: {
+            justifyContent: 'center',
         },
         chipRoot: {
-            fontWeight: 600,
-        },
-        chipColorPrimary: {
-            backgroundColor: '#000000',
-            '&:hover, &:focus': {
-                backgroundColor: '#000000',
-            },
+            borderRadius: 6,
+            fontWeight: 400,
         },
         text: {
             fontSize: '0.8rem',
-            fontWeight: 'bold',
+            fontWeight: 400,
         },
     }),
 );
 
-const ItemSelect = ({ items, preselectedItems, onChange, single, max }: Props): ReactElement => {
+const ItemSelect = ({ items, preselectedItems, onChange, single, max, center }: Props): ReactElement => {
     const classes = useStyles();
     const [selectedItems, setSelectedItems] = useState(preselectedItems || []);
     const [hide, setHide] = useState(max && true);
@@ -73,18 +71,16 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, max }: Props): 
     }, [preselectedItems]);
 
     return (
-        <Box className={classes.chips}>
+        <Box className={compact([classes.chips, center && classes.chipsCenter]).join(' ')}>
             {(hide ? visibleItems : items).map((item) => (
                 <Chip
-                    color={find(item, selectedItems) ? 'primary' : 'default'}
+                    color={find(item, selectedItems) ? 'secondary' : 'default'}
                     key={item.name}
                     label={item.name}
                     onClick={(): void => onClick(item)}
                     data-testid="itemChip"
                     classes={{
                         root: classes.chipRoot,
-                        colorPrimary: classes.chipColorPrimary,
-                        clickableColorPrimary: classes.chipColorPrimary,
                     }}
                 />
             ))}
@@ -93,6 +89,9 @@ const ItemSelect = ({ items, preselectedItems, onChange, single, max }: Props): 
                     onClick={(): void => setHide(false)}
                     label={`+${differenceBy('name', items, visibleItems).length} more`}
                     data-testid="moreChips"
+                    classes={{
+                        root: classes.chipRoot,
+                    }}
                 />
             )}
         </Box>
