@@ -31,6 +31,6 @@ describe('OrganizationEmpty', () => {
             },
         ];
         const { getByText } = render(<OrganizationEmpty organizations={organizations} />);
-        expect(getByText('However, we found these helplines that can support you 24/7.')).toBeInTheDocument();
+        expect(getByText('However, we found these helplines that can support you.')).toBeInTheDocument();
     });
 });
