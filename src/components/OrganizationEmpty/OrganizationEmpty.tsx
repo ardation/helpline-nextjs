@@ -45,7 +45,7 @@ const OrganizationEmpty = ({ variant, organizations }: Props): ReactElement => {
             </Typography>
             {organizations.length > 0 ? (
                 <>
-                    <Typography>However, we found these helplines that can support you 24/7.</Typography>
+                    <Typography>However, we found these helplines that can support you.</Typography>
                     {variant === 'widget' ? (
                         <ArrowForwardIcon
                             className={classes.icon}
