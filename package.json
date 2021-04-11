@@ -34,7 +34,7 @@
         "react-circle-flags": "^0.0.14",
         "react-copy-to-clipboard": "^5.0.2",
         "react-div-100vh": "^0.3.8",
-        "react-dom": "16.13.1",
+        "react-dom": "16.14.0",
         "react-ga": "^3.3.0",
         "react-google-recaptcha": "^2.1.0",
         "react-hotjar": "^2.2.1",
