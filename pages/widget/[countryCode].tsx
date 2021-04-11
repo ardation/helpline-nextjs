@@ -34,6 +34,11 @@ const WidgetCountryCodePage = ({
 
     return (
         <>
+            <style global jsx>{`
+                body {
+                    background-color: transparent !important;
+                }
+            `}</style>
             <Head>
                 <title>Find A Helpline | {country.name}</title>
                 <script src="/widget.min.js"></script>

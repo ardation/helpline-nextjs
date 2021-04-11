@@ -39,6 +39,11 @@ const WidgetSubdivisionCodePage = ({
     }
     return (
         <>
+            <style global jsx>{`
+                body {
+                    background-color: transparent !important;
+                }
+            `}</style>
             <Head>
                 <title>
                     Find A Helpline | {subdivision.name}, {country.name}

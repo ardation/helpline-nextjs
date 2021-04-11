@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) =>
         appBarWhite: {
             backgroundColor: theme.palette.background.paper,
         },
+        appBarWidget: {
+            backgroundColor: theme.palette.background.default,
+        },
         container: {
             display: 'grid',
             alignItems: 'center',
@@ -46,7 +49,11 @@ const NavBar = ({ children, variant }: Props): ReactElement => {
 
     return (
         <AppBar
-            className={clsx(classes.appBar, variant === 'white' && classes.appBarWhite)}
+            className={clsx(
+                classes.appBar,
+                variant === 'white' && classes.appBarWhite,
+                variant === 'widget' && classes.appBarWidget,
+            )}
             position="static"
             elevation={0}
         >
