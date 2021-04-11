@@ -4,6 +4,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
+import HelpIcon from '@material-ui/icons/Help';
 import EmailIcon from '@material-ui/icons/Email';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -47,6 +48,14 @@ const SideBar = (): ReactElement => {
                                     <InfoIcon color="secondary" />
                                 </ListItemIcon>
                                 <ListItemText primary="About" />
+                            </ListItem>
+                        </Link>
+                        <Link href="/faq" passHref prefetch={process.env.NODE_ENV === 'production'}>
+                            <ListItem button component="a">
+                                <ListItemIcon>
+                                    <HelpIcon color="secondary" />
+                                </ListItemIcon>
+                                <ListItemText primary="FAQs" />
                             </ListItem>
                         </Link>
                         <Link href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>

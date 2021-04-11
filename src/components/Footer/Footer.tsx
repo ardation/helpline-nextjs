@@ -63,6 +63,13 @@ const Footer = (): ReactElement => {
                     </NextLink>
                 </Grid>
                 <Grid item xs={6}>
+                    <NextLink href="/faq" passHref prefetch={process.env.NODE_ENV === 'production'}>
+                        <Link className={classes.link} data-testid="faq">
+                            FAQs
+                        </Link>
+                    </NextLink>
+                </Grid>
+                <Grid item xs={6}>
                     <NextLink href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Link className={classes.link} data-testid="getTheWidget">
                             Get The Widget
