@@ -162,7 +162,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                             The world’s largest resource of helplines, at your fingertips.
                         </Typography>
                         <Typography gutterBottom>
-                            We’ve collated over 1,400 services across the world that offer immediate emotional support,
+                            We’ve collated over 1,600 services across the world that offer immediate emotional support,
                             and made them easily available to you.
                         </Typography>
                         <Typography gutterBottom>
