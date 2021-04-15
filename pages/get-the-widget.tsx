@@ -102,7 +102,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<{ props: WidgetP
         topics,
         countries,
     } = await request<GetTheWidgetProps>('https://api.findahelpline.com', print(query), {
-        countryCode: 'nz',
+        countryCode: 'us',
     });
 
     return {
