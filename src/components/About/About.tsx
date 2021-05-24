@@ -15,7 +15,7 @@ import Donate from '../Donate';
 const useStyles = makeStyles((theme) =>
     createStyles({
         content: {
-            padding: theme.spacing(2, 0, 5),
+            padding: theme.spacing(5, 0),
         },
         contentAlt: {
             backgroundColor: theme.palette.background.paper,
