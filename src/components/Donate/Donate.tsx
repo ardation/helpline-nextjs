@@ -1,4 +1,4 @@
-import { Button, createStyles, makeStyles, SvgIcon } from '@material-ui/core';
+import { Button, ButtonProps, createStyles, makeStyles, SvgIcon } from '@material-ui/core';
 import { loadStripe } from '@stripe/stripe-js';
 import React, { ReactElement } from 'react';
 import CallIcon from '../../assets/volunteer-activism-icon.svg';
@@ -15,7 +15,7 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const Donate = (): ReactElement => {
+const Donate = (props: Partial<ButtonProps>): ReactElement => {
     const classes = useStyles();
 
     const handleClick = async (): Promise<void> => {
@@ -43,8 +43,9 @@ const Donate = (): ReactElement => {
                 </SvgIcon>
             }
             className={classes.button}
+            {...props}
         >
-            Donate $1 to save lives
+            {props.children || 'Donate $1 to save lives'}
         </Button>
     );
 };

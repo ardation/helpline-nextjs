@@ -5,6 +5,6 @@ import DonateCancelled from '.';
 describe('DonateCancelled', () => {
     it('should render message', () => {
         const { getByRole } = render(<DonateCancelled />);
-        expect(getByRole('title', { name: 'Donation Received' })).toBeInTheDocument();
+        expect(getByRole('button', { name: 'Try Again' })).toBeInTheDocument();
     });
 });

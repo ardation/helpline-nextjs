@@ -2,11 +2,12 @@ module.exports = {
     stories: ['../src/components/**/*.stories.tsx'],
     addons: ['@storybook/addon-actions/register', '@storybook/addon-viewport/register'],
     webpackFinal: async (config) => {
-        config.module.rules.push({
-            test: /\.svg$/,
-            use: ['@svgr/webpack', 'url-loader']
+        const fileLoaderRule = config.module.rules.find(rule => rule.test.test('.svg'));
+        fileLoaderRule.exclude = /\.svg$/;
+        config.module.rules.unshift({
+          test: /\.svg$/,
+          use: '@svgr/webpack',
         });
-
         return config;
     },
 };

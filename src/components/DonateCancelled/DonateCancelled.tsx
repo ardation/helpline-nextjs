@@ -2,6 +2,7 @@ import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import React, { ReactElement } from 'react';
 import { OutboundLink } from 'react-ga';
+import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 import Donate from '../Donate';
 
 const useStyles = makeStyles((theme) =>
@@ -13,6 +14,21 @@ const useStyles = makeStyles((theme) =>
             color: theme.palette.text.primary,
             textDecoration: 'underline',
         },
+        alert: {
+            marginBottom: theme.spacing(2),
+            '& .MuiAlert-icon': {
+                alignItems: 'center',
+            },
+            '& .MuiAlert-message': {
+                display: 'flex',
+                alignItems: 'center',
+            },
+        },
+        alertTitle: {
+            fontWeight: 'bold',
+            paddingTop: '4px',
+            marginBottom: 0,
+        },
     }),
 );
 
@@ -20,9 +36,18 @@ const DonateCancelled = (): ReactElement => {
     const classes = useStyles();
     return (
         <>
-            <Alert severity="info">
-                <AlertTitle>Donation cancelled.</AlertTitle>
-                <Donate />
+            <Alert severity="info" className={classes.alert}>
+                <AlertTitle color="secondary" className={classes.alertTitle}>
+                    Donation Cancelled
+                </AlertTitle>
+                <Donate
+                    startIcon={undefined}
+                    fullWidth={false}
+                    endIcon={<ArrowRightAltRoundedIcon />}
+                    color="secondary"
+                >
+                    Try Again
+                </Donate>
             </Alert>
             <Typography variant="h6" className={classes.title} gutterBottom>
                 Here are some reasons you may have cancelled your donation:
@@ -37,7 +62,7 @@ const DonateCancelled = (): ReactElement => {
             <Typography className={classes.title}>Who am I donating to?</Typography>
             <Typography gutterBottom>
                 Find A Helpline is operated by Live For Tomorrow Charitable Trust, a nonprofit and registered charity
-                based in New Zealand and working globally. You can view our organization’s website at
+                based in New Zealand and working globally. You can view our organization’s website at{' '}
                 <OutboundLink
                     eventLabel="https://www.livefortomorrow.co"
                     to="https://www.livefortomorrow.co"
@@ -46,8 +71,18 @@ const DonateCancelled = (): ReactElement => {
                     className={classes.link}
                 >
                     livefortomorrow.co
+                </OutboundLink>{' '}
+                and our charity registration{' '}
+                <OutboundLink
+                    eventLabel="https://www.register.charities.govt.nz/CharitiesRegister/ViewCharity?accountId=78f720b6-29fd-ea11-b43a-00155d6b7730&searchId=5204f74a-1dc4-4531-b48a-cd504012e317"
+                    to="https://www.register.charities.govt.nz/CharitiesRegister/ViewCharity?accountId=78f720b6-29fd-ea11-b43a-00155d6b7730&searchId=5204f74a-1dc4-4531-b48a-cd504012e317"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={classes.link}
+                >
+                    here
                 </OutboundLink>
-                and our charity registration here.
+                .
             </Typography>
 
             <Typography className={classes.title}>Is it safe to enter my credit card details?</Typography>
