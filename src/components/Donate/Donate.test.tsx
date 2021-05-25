@@ -35,7 +35,7 @@ describe('Donate', () => {
         expect(loadStripe).toHaveBeenCalledWith('publishable_key');
         await waitFor(() =>
             expect(redirectToCheckout).toHaveBeenCalledWith({
-                cancelUrl: 'http://localhost/cancel',
+                cancelUrl: 'http://localhost/donate/cancel',
                 lineItems: [
                     {
                         price: 'price_id',
@@ -43,7 +43,7 @@ describe('Donate', () => {
                     },
                 ],
                 mode: 'payment',
-                successUrl: 'http://localhost/success',
+                successUrl: 'http://localhost/donate/success',
             }),
         );
     });

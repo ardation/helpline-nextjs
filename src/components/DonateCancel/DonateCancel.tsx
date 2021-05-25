@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) =>
     }),
 );
 
-const DonateCancelled = (): ReactElement => {
+const DonateCancel = (): ReactElement => {
     const classes = useStyles();
     return (
         <>
@@ -98,4 +98,4 @@ const DonateCancelled = (): ReactElement => {
     );
 };
 
-export default DonateCancelled;
+export default DonateCancel;

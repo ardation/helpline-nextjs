@@ -29,8 +29,8 @@ const Donate = (props: Partial<ButtonProps>): ReactElement => {
                 },
             ],
             mode: 'payment',
-            successUrl: `${window.location.protocol}//${window.location.host}/success`,
-            cancelUrl: `${window.location.protocol}//${window.location.host}/cancel`,
+            successUrl: `${window.location.protocol}//${window.location.host}/donate/success`,
+            cancelUrl: `${window.location.protocol}//${window.location.host}/donate/cancel`,
         });
     };
     return (

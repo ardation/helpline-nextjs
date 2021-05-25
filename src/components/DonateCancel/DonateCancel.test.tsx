@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import DonateCancelled from '.';
+import DonateCancel from '.';
 
-describe('DonateCancelled', () => {
+describe('DonateCancel', () => {
     it('should render message', () => {
-        const { getByRole } = render(<DonateCancelled />);
+        const { getByRole } = render(<DonateCancel />);
         expect(getByRole('button', { name: 'Try Again' })).toBeInTheDocument();
     });
 });
