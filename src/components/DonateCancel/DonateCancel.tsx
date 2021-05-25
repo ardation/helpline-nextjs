@@ -1,9 +1,8 @@
-import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+import { Box, createStyles, makeStyles, Typography, Container } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import React, { ReactElement } from 'react';
 import { OutboundLink } from 'react-ga';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
-import { Container } from 'next/app';
 import Donate from '../Donate';
 
 const useStyles = makeStyles((theme) =>
