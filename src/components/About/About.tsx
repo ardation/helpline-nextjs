@@ -206,7 +206,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                             })}
                         </Grid>
                     </Box>
-                    <Box my={4}>
+                    <Box mt={4}>
                         <OutboundLink
                             eventLabel="https://livefortomorrow.typeform.com/to/ErmyL3tv"
                             to="https://livefortomorrow.typeform.com/to/ErmyL3tv"
@@ -253,6 +253,25 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                         We want to make it easier for everyone to receive emotional support, when and where they need
                         it.
                     </Typography>
+                    <Box mt={4}>
+                        <OutboundLink
+                            eventLabel="https://www.livefortomorrow.co/find-a-helpline-volunteer"
+                            to="https://www.livefortomorrow.co/find-a-helpline-volunteer"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={classes.link}
+                        >
+                            <Button
+                                classes={{ label: classes.link }}
+                                color="primary"
+                                fullWidth
+                                size="large"
+                                endIcon={<ArrowRightAltRoundedIcon />}
+                            >
+                                📣 We&apos;re recruiting volunteers!
+                            </Button>
+                        </OutboundLink>
+                    </Box>
                 </Container>
             </Box>
             <Box className={[classes.content, classes.contentPrimary].join(' ')}>
