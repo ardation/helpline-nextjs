@@ -7,9 +7,9 @@ updates:
     time: "17:00"
   open-pull-requests-limit: 10
   reviewers:
-  - ardation
+  - tataihono
   assignees:
-  - ardation
+  - tataihono
   ignore:
   - dependency-name: "@types/node"
     versions:
