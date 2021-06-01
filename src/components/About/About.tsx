@@ -8,7 +8,9 @@ import SecurityRoundedIcon from '@material-ui/icons/SecurityRounded';
 import { OutboundLink } from 'react-ga';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 import { CircleFlag } from 'react-circle-flags';
+import { compact } from 'lodash/fp';
 import Highlight from '../Highlight';
+import Donate from '../Donate';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -17,6 +19,9 @@ const useStyles = makeStyles((theme) =>
         },
         contentAlt: {
             backgroundColor: theme.palette.background.paper,
+        },
+        contentFirstNotPage: {
+            padding: theme.spacing(2, 0, 5),
         },
         contentPrimary: {
             backgroundColor: theme.palette.primary.main,
@@ -62,33 +67,42 @@ const About = ({ countries, isPage }: Props): ReactElement => {
 
     return (
         <>
-            <Box className={[classes.content, classes.contentAlt].join(' ')}>
+            <Box
+                className={compact([classes.content, classes.contentAlt, !isPage && classes.contentFirstNotPage]).join(
+                    ' ',
+                )}
+            >
                 <Container maxWidth="xs">
                     {!isPage && (
-                        <Box mb={5}>
-                            <Typography className={classes.partnerHeading}>Key Partners</Typography>
-                            <Divider />
-                            <Box mx={2} my={2}>
-                                <Grid container spacing={2} alignItems="center">
-                                    <Grid item xs={7}>
-                                        <img src="/partners/IASP.png" className={classes.partnerImg} />
-                                    </Grid>
-                                    <Grid item xs={5}>
-                                        <img src="/partners/GravityLab.png" className={classes.partnerImg} />
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                        <img src="/partners/Polyform.png" className={classes.partnerImg} />
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                        <img src="/partners/SearchRepublic.png" className={classes.partnerImg} />
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                        <img src="/partners/DataStory.png" className={classes.partnerImg} />
-                                    </Grid>
-                                </Grid>
+                        <>
+                            <Box mb={2}>
+                                <Donate />
                             </Box>
-                            <Divider />
-                        </Box>
+                            <Box mb={5}>
+                                <Typography className={classes.partnerHeading}>Key Partners</Typography>
+                                <Divider />
+                                <Box mx={2} my={2}>
+                                    <Grid container spacing={2} alignItems="center">
+                                        <Grid item xs={7}>
+                                            <img src="/partners/IASP.png" className={classes.partnerImg} />
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <img src="/partners/GravityLab.png" className={classes.partnerImg} />
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <img src="/partners/Polyform.png" className={classes.partnerImg} />
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <img src="/partners/SearchRepublic.png" className={classes.partnerImg} />
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <img src="/partners/DataStory.png" className={classes.partnerImg} />
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                                <Divider />
+                            </Box>
+                        </>
                     )}
                     <Typography variant="h5" align="center">
                         Free emotional support, wherever you are
