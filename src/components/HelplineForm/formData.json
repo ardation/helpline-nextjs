@@ -1,0 +1,212 @@
+{
+    "id": "6089fc880304f100014f83ef",
+    "customerId": "6089fc5c0304f100014f83e9",
+    "projectId": "6089fc5c0304f100014f83ea",
+    "name": "Website visit feedback",
+    "previewMode": "HOSTED",
+    "schema": {
+        "pageIds": ["3LxVtjqCm"],
+        "fields": {
+            "3LxVtjqCm": {
+                "id": "3LxVtjqCm",
+                "title": "Help us improve our site",
+                "slug": "helpUsImproveOurSite",
+                "type": "PAGE",
+                "hidden": false,
+                "dynamic": false,
+                "orderLast": false,
+                "items": ["xnug8CZPl9", "YnTuItWKe", "b4dHyIsMV", "JYHTQ5zH4"],
+                "actions": []
+            },
+            "xnug8CZPl9": {
+                "id": "xnug8CZPl9",
+                "title": "You visited a helpline website. What information were you trying to find?",
+                "slug": "info-wanted",
+                "type": "RADIO",
+                "hidden": false,
+                "dynamic": false,
+                "description": "",
+                "orderLast": false,
+                "items": ["_Z4xN5h2v", "ojmbdjBiR", "cJvfIExkO", "0OqCDF4Im", "MblmjMYk7"],
+                "actions": [
+                    {
+                        "action": "SHOW",
+                        "details": { "to": { "type": "FIELD", "value": "YnTuItWKe" } },
+                        "condition": {
+                            "op": "and",
+                            "vars": [
+                                {
+                                    "op": "eq",
+                                    "vars": [
+                                        { "op": "field", "value": "xnug8CZPl9" },
+                                        { "op": "choice", "value": "MblmjMYk7" }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "action": "HIDE",
+                        "details": { "to": { "type": "FIELD", "value": "YnTuItWKe" } },
+                        "condition": {
+                            "op": "and",
+                            "vars": [
+                                {
+                                    "op": "ne",
+                                    "vars": [
+                                        { "op": "field", "value": "xnug8CZPl9" },
+                                        { "op": "choice", "value": "MblmjMYk7" }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "action": "SHOW",
+                        "details": { "to": { "type": "FIELD", "value": "b4dHyIsMV" } },
+                        "condition": {
+                            "op": "and",
+                            "vars": [
+                                {
+                                    "op": "eq",
+                                    "vars": [
+                                        { "op": "field", "value": "xnug8CZPl9" },
+                                        { "op": "choice", "value": "ojmbdjBiR" }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "_Z4xN5h2v": {
+                "id": "_Z4xN5h2v",
+                "title": "Who they support",
+                "slug": "_Z4xN5h2v",
+                "type": "CHOICE",
+                "hidden": false,
+                "dynamic": false,
+                "orderLast": false,
+                "items": [],
+                "actions": []
+            },
+            "ojmbdjBiR": {
+                "id": "ojmbdjBiR",
+                "title": "About page",
+                "slug": "ojmbdjBiR",
+                "type": "CHOICE",
+                "hidden": false,
+                "dynamic": false,
+                "orderLast": false,
+                "items": [],
+                "actions": []
+            },
+            "cJvfIExkO": {
+                "id": "cJvfIExkO",
+                "title": "Web chat option",
+                "slug": "cJvfIExkO",
+                "type": "CHOICE",
+                "hidden": false,
+                "dynamic": false,
+                "orderLast": false,
+                "items": [],
+                "actions": []
+            },
+            "0OqCDF4Im": {
+                "id": "0OqCDF4Im",
+                "title": "Information in my language",
+                "slug": "0OqCDF4Im",
+                "type": "CHOICE",
+                "hidden": false,
+                "dynamic": false,
+                "orderLast": false,
+                "items": [],
+                "actions": []
+            },
+            "MblmjMYk7": {
+                "id": "MblmjMYk7",
+                "title": "Something else",
+                "slug": "MblmjMYk7",
+                "type": "CHOICE",
+                "hidden": false,
+                "dynamic": false,
+                "orderLast": false,
+                "items": [],
+                "actions": []
+            },
+            "YnTuItWKe": {
+                "id": "YnTuItWKe",
+                "title": "Tell us more...",
+                "slug": "other-info-wanted",
+                "type": "SHORT_TEXT",
+                "hidden": false,
+                "dynamic": false,
+                "orderLast": false,
+                "items": [],
+                "actions": []
+            },
+            "b4dHyIsMV": {
+                "id": "b4dHyIsMV",
+                "title": "What information might help you decide if you want to contact this helpline?",
+                "slug": "about-info-wanted",
+                "type": "SHORT_TEXT",
+                "hidden": false,
+                "dynamic": false,
+                "orderLast": false,
+                "items": [],
+                "actions": []
+            },
+            "JYHTQ5zH4": {
+                "id": "JYHTQ5zH4",
+                "title": "Did you contact this helpline after visiting their website?",
+                "slug": "contacted",
+                "type": "RADIO",
+                "hidden": false,
+                "dynamic": false,
+                "description": "Your response is anonymous",
+                "orderLast": false,
+                "items": ["VRYNOU0ee", "X50sVgrfy"],
+                "actions": []
+            },
+            "VRYNOU0ee": {
+                "id": "VRYNOU0ee",
+                "title": "Yes",
+                "slug": "VRYNOU0ee",
+                "type": "CHOICE",
+                "hidden": false,
+                "dynamic": false,
+                "orderLast": false,
+                "items": [],
+                "actions": []
+            },
+            "X50sVgrfy": {
+                "id": "X50sVgrfy",
+                "title": "No",
+                "slug": "X50sVgrfy",
+                "type": "CHOICE",
+                "hidden": false,
+                "dynamic": false,
+                "orderLast": false,
+                "items": [],
+                "actions": []
+            }
+        }
+    },
+    "slug": "website-visit-feedback",
+    "keys": [
+        { "name": "info-wanted", "visibility": "SHOWN" },
+        { "name": "other-info-wanted", "visibility": "SHOWN" },
+        { "name": "about-info-wanted", "visibility": "SHOWN" },
+        { "name": "contacted", "visibility": "SHOWN" }
+    ],
+    "submitLayout": "LIST",
+    "status": "ACTIVE",
+    "validate": "ANY",
+    "actionIds": [],
+    "submitCount": 6,
+    "version": 13,
+    "createAt": "2021-04-29T00:23:36.197Z",
+    "createId": "6089fc3e0304f100014f83e7",
+    "updateAt": "2021-05-31T08:42:27.121Z",
+    "updateId": "60b443b80304f100014fae87"
+}
