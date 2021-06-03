@@ -28,4 +28,10 @@ describe('HelplineForm', () => {
         );
         expect(getByText('Thank you! Your response has been recorded.')).toBeInTheDocument();
     });
+    it('should call onSuccess', async () => {
+        const handleSuccess = jest.fn();
+        const { getByRole } = render(<HelplineForm form={(formData as unknown) as Form} onSuccess={handleSuccess} />);
+        fireEvent.click(getByRole('button', { name: 'Submit' }));
+        await waitFor(() => expect(handleSuccess).toHaveBeenCalled());
+    });
 });

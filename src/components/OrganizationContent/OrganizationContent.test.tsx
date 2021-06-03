@@ -1,6 +1,16 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import formData from '../HelplineForm/formData.json';
 import OrganizationContent from '.';
+
+let submitForm;
+jest.mock('../../util/formium', () => {
+    submitForm = jest.fn();
+    return {
+        __esModule: true,
+        default: { submitForm },
+    };
+});
 
 describe('OrganizationContent', () => {
     let organization = {
@@ -98,14 +108,24 @@ describe('OrganizationContent', () => {
         });
     });
 
-    it('should contain url', async () => {
-        const onLink = jest.fn();
-        const { getByTestId } = render(<OrganizationContent organization={organization} onLink={onLink} />);
-        const element = getByTestId('url');
-        expect(element).toHaveAttribute('href', 'https://youthline.co.nz/website');
-        expect(element).toHaveTextContent('youthline.co.nz');
-        fireEvent.click(element);
-        await waitFor(() => expect(onLink).toHaveBeenCalled());
+    describe('url', () => {
+        beforeEach(() => {
+            fetchMock.mockIf('/api/forms/website-visit-feedback', async () => JSON.stringify(formData));
+        });
+
+        it('should contain url', async () => {
+            const onLink = jest.fn();
+            const { getByTestId, getByRole } = render(
+                <OrganizationContent organization={organization} onLink={onLink} />,
+            );
+            const element = getByTestId('url');
+            expect(element).toHaveAttribute('href', 'https://youthline.co.nz/website');
+            expect(element).toHaveTextContent('youthline.co.nz');
+            fireEvent.click(element);
+            await waitFor(() => expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument());
+            fireEvent.click(getByRole('button', { name: 'Submit' }));
+            await waitFor(() => expect(submitForm).toHaveBeenCalled());
+        });
     });
 
     describe('no url', () => {

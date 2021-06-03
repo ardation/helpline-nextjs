@@ -10,6 +10,7 @@ import {
     Input as MuiInput,
     Button as MuiButton,
     ButtonProps,
+    Typography,
 } from '@material-ui/core';
 import { FormControlProps } from '@formium/react';
 import { CheckboxProps, RadioProps, TextareaProps } from '@formium/react/dist/inputs';
@@ -42,9 +43,13 @@ export const FormControl = ({
     description,
 }: FormControlProps): ReactElement => {
     return (
-        <Box my={6}>
+        <Box my={2}>
             <MuiFormControl error={Boolean(error)} disabled={disabled} required={required} fullWidth={true}>
-                <MuiFormLabel htmlFor={labelFor}>{label}</MuiFormLabel>
+                <MuiFormLabel htmlFor={labelFor}>
+                    <Typography gutterBottom color="textPrimary">
+                        {label}
+                    </Typography>
+                </MuiFormLabel>
                 {children}
                 {error && (
                     <MuiFormHelperText id={labelFor} disabled={disabled} error={true}>

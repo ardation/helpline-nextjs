@@ -1,3 +1,5 @@
+require('jest-fetch-mock').enableMocks();
+
 process.env = {
     ...process.env,
     __NEXT_IMAGE_OPTS: {

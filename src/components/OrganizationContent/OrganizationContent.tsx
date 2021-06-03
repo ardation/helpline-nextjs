@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Button, Box, NoSsr, SvgIcon } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LanguageIcon from '@material-ui/icons/Language';
@@ -9,6 +9,7 @@ import Chips from '../Chips';
 import OrganizationRating from '../OrganizationRating';
 import CallIcon from '../../assets/call-icon.svg';
 import TextIcon from '../../assets/text-icon.svg';
+import HelplineFormDialog from '../HelplineFormDialog';
 
 type OpeningHour = {
     day: string;
@@ -113,10 +114,10 @@ const useStyles = makeStyles((theme) =>
 
 const OrganizationContent = ({ organization, variant, expandable, onLink }: Props): ReactElement => {
     const classes = useStyles();
+    const [feedbackOpen, setFeedbackOpen] = useState(false);
 
     const onLinkClick = (label: string, gaEventAction = '') => (): void => {
         const dimension7 = organization.categories.map(({ name }) => name).join(', ');
-
         ReactGA.event({
             category: 'Helpline Card Engagement',
             action: gaEventAction,
@@ -124,12 +125,21 @@ const OrganizationContent = ({ organization, variant, expandable, onLink }: Prop
             dimension6: organization.name,
             dimension7: dimension7,
         });
-        onLink?.();
+        if (gaEventAction === 'Website URL') {
+            setFeedbackOpen(true);
+        } else {
+            onLink?.();
+        }
         outboundLink({ label }, noop);
     };
 
     return (
         <>
+            <HelplineFormDialog
+                open={feedbackOpen}
+                slug="website-visit-feedback"
+                onClose={(): void => setFeedbackOpen(false)}
+            />
             {organization.categories.length > 0 && (
                 <Box ml={1} data-testid="categories">
                     <Chips items={organization.categories} max={3} />
