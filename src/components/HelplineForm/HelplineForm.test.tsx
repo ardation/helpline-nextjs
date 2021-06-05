@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { Form } from '@formium/types';
 import formData from './formData.json';
@@ -28,10 +28,17 @@ describe('HelplineForm', () => {
         );
         expect(getByText('Thank you! Your response has been recorded.')).toBeInTheDocument();
     });
+
     it('should call onSuccess', async () => {
         const handleSuccess = jest.fn();
         const { getByRole } = render(<HelplineForm form={(formData as unknown) as Form} onSuccess={handleSuccess} />);
         fireEvent.click(getByRole('button', { name: 'Submit' }));
         await waitFor(() => expect(handleSuccess).toHaveBeenCalled());
+    });
+
+    it('should set components', () => {
+        const Header = (): ReactElement => <div data-testid="header" />;
+        const { getByTestId } = render(<HelplineForm form={(formData as unknown) as Form} components={{ Header }} />);
+        expect(getByTestId('header')).toBeInTheDocument();
     });
 });

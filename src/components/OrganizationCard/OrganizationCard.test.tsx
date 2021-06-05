@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import formData from '../HelplineForm/formData.json';
 import OrganizationCard from '.';
 
 describe('OrganizationCard', () => {
@@ -136,16 +137,21 @@ describe('OrganizationCard', () => {
         });
     });
 
-    it('should contain url', async () => {
-        const { getByTestId, queryByTestId } = render(<OrganizationCard organization={organization} />);
-        const element = getByTestId('url');
-        expect(element).toHaveAttribute('href', 'https://youthline.co.nz/website');
-        expect(element).toHaveTextContent('youthline.co.nz');
-        fireEvent.click(element);
-        const closeElement = getByTestId('close');
-        expect(closeElement).toBeInTheDocument();
-        fireEvent.click(closeElement);
-        await waitFor(() => expect(queryByTestId('close')).not.toBeInTheDocument());
+    describe('url', () => {
+        beforeEach(() => {
+            fetchMock.mockIf('/api/forms/website-visit-feedback', async () => JSON.stringify(formData));
+        });
+
+        it('should contain url', async () => {
+            const { getByTestId, queryByTestId } = render(<OrganizationCard organization={organization} />);
+            const element = getByTestId('url');
+            expect(element).toHaveAttribute('href', 'https://youthline.co.nz/website');
+            expect(element).toHaveTextContent('youthline.co.nz');
+            fireEvent.click(element);
+            await waitFor(() => expect(getByTestId('close')).toBeInTheDocument());
+            fireEvent.click(getByTestId('close'));
+            await waitFor(() => expect(queryByTestId('close')).not.toBeInTheDocument());
+        });
     });
 
     describe('no url', () => {
