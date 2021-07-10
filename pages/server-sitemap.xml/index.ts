@@ -34,9 +34,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                             const param = encodeURIComponent(topic.name).replace(/%20/g, '+');
                             return {
                                 loc: `${baseUrl}/${countryCode}/${subdivisionCode}?topics=${param}`,
-                                lastmod: new Date().toISOString(),
-                                changeFreq: 'daily',
+                                changefreq: 'daily',
                                 priority: '0.7',
+                                lastmod: new Date().toISOString(),
                             };
                         }),
                     ];
@@ -45,9 +45,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                     const param = encodeURIComponent(topic.name).replace(/%20/g, '+');
                     return {
                         loc: `${baseUrl}/${countryCode}?topics=${param}`,
-                        lastmod: new Date().toISOString(),
-                        changeFreq: 'daily',
+                        changefreq: 'daily',
                         priority: '0.7',
+                        lastmod: new Date().toISOString(),
                     };
                 }),
             ];
