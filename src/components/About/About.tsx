@@ -192,15 +192,19 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                                 const code = country.code === 'GB-NIR' ? 'gb' : country.code.toLowerCase();
 
                                 return (
-                                    <Grid key={country.code} item xs={6}>
-                                        <Grid container spacing={2}>
-                                            <Grid item xs={2}>
-                                                <CircleFlag countryCode={code} height={25} />
-                                            </Grid>
-                                            <Grid item xs={10}>
-                                                <Typography>{country.name}</Typography>
-                                            </Grid>
-                                        </Grid>
+                                    <Grid item xs={6} key={country.code}>
+                                        <NextLink
+                                            href={`/${country.code.toLowerCase()}`}
+                                            prefetch={process.env.NODE_ENV === 'production'}
+                                            passHref
+                                        >
+                                            <Button
+                                                variant="contained"
+                                                startIcon={<CircleFlag countryCode={code} height={25} />}
+                                            >
+                                                {country.name}
+                                            </Button>
+                                        </NextLink>
                                     </Grid>
                                 );
                             })}
