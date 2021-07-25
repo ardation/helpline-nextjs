@@ -79,7 +79,7 @@
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
         "babel-loader": "^8.2.1",
-        "babel-preset-react-app": "^9.1.2",
+        "babel-preset-react-app": "^10.0.0",
         "chromatic": "^4.0.3",
         "css-mediaquery": "^0.1.2",
         "eslint": "^6.8.0",
