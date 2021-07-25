@@ -24,16 +24,6 @@ describe('CountrySelect', () => {
         expect(getByTestId('countryInput')).toHaveAttribute('placeholder', 'Start typing your country...');
     });
 
-    it('should show flag', () => {
-        const { getByRole, getByTestId } = render(
-            <CountrySelect countries={countries} onCountryChange={jest.fn()} onSubdivisionChange={jest.fn()} />,
-        );
-        const element = getByRole('textbox');
-        fireEvent.click(element);
-        fireEvent.change(element, { target: { value: 'Aus' } });
-        expect(getByTestId('countryFlag').attributes['src']).not.toBeUndefined();
-    });
-
     it('should call onCountryChange', () => {
         const onCountryChange = (country): void => {
             expect(country).toEqual({

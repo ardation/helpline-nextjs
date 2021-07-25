@@ -7,7 +7,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SecurityRoundedIcon from '@material-ui/icons/SecurityRounded';
 import { OutboundLink } from 'react-ga';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
-import { CircleFlag } from 'react-circle-flags';
 import { compact } from 'lodash/fp';
 import Highlight from '../Highlight';
 
@@ -188,8 +187,6 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                         </Typography>
                         <Grid container spacing={2}>
                             {countries.map((country) => {
-                                const code = country.code === 'GB-NIR' ? 'gb' : country.code.toLowerCase();
-
                                 return (
                                     <Grid item xs={6} key={country.code}>
                                         <NextLink
@@ -197,12 +194,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                                             prefetch={process.env.NODE_ENV === 'production'}
                                             passHref
                                         >
-                                            <Button
-                                                variant="contained"
-                                                startIcon={<CircleFlag countryCode={code} height={25} />}
-                                            >
-                                                {country.name}
-                                            </Button>
+                                            <Button variant="contained">{country.name}</Button>
                                         </NextLink>
                                     </Grid>
                                 );

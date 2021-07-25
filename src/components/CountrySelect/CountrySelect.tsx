@@ -5,7 +5,6 @@ import { Autocomplete } from '@material-ui/lab';
 import { createStyles, makeStyles, Box, Grid, InputAdornment } from '@material-ui/core';
 import { sortBy, compact } from 'lodash/fp';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
-import { CircleFlag } from 'react-circle-flags';
 import { LocalityEnum } from '../../../types/globalTypes';
 import SearchIcon from '../../assets/search-icon.svg';
 
@@ -131,12 +130,8 @@ const CountrySelect = ({
                 getOptionLabel={(option): string => option.name}
                 getOptionSelected={(option, value): boolean => option.code === value.code}
                 renderOption={(option): ReactElement => {
-                    const code = option.code === 'GB-NIR' ? 'gb' : option.code.toLowerCase();
                     return (
                         <Grid container spacing={2}>
-                            <Grid item>
-                                <CircleFlag countryCode={code} height={25} data-testid="countryFlag" />
-                            </Grid>
                             <Grid item>{option.name}</Grid>
                         </Grid>
                     );

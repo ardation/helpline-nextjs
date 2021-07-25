@@ -38,7 +38,6 @@
         "next": "^10.0.3",
         "next-seo": "^4.17.0",
         "react": "16.14.0",
-        "react-circle-flags": "^0.0.14",
         "react-copy-to-clipboard": "^5.0.2",
         "react-div-100vh": "^0.3.8",
         "react-dom": "16.13.1",
