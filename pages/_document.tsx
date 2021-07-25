@@ -11,11 +11,6 @@ class MyDocument extends Document {
                 <Head>
                     <meta name="theme-color" content={theme.palette.primary.main} />
                     <link rel="icon" href="/favicon.svg"></link>
-                    <script
-                        id="cookieyes"
-                        type="text/javascript"
-                        src="https://cdn-cookieyes.com/client_data/ad8a7e22fba0c740fadb63f9.js"
-                    ></script>
                 </Head>
                 <body>
                     <Main />
