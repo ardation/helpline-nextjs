@@ -10,7 +10,6 @@ import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 import { CircleFlag } from 'react-circle-flags';
 import { compact } from 'lodash/fp';
 import Highlight from '../Highlight';
-import Donate from '../Donate';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -75,9 +74,9 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                 <Container maxWidth="xs">
                     {!isPage && (
                         <>
-                            <Box mb={2}>
+                            {/* <Box mb={2}>
                                 <Donate />
-                            </Box>
+                            </Box> */}
                             <Box mb={5}>
                                 <Typography className={classes.partnerHeading}>Key Partners</Typography>
                                 <Divider />
