@@ -2,7 +2,6 @@ import React, { ReactElement } from 'react';
 import Document, { Head, Main, NextScript, DocumentInitialProps, Html } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import { RenderPageResult } from 'next/dist/next-server/lib/utils';
-
 import theme from '../src/theme';
 
 class MyDocument extends Document {
