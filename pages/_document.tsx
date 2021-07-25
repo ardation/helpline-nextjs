@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import Document, { Head, Main, NextScript, DocumentInitialProps, Html } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import { RenderPageResult } from 'next/dist/next-server/lib/utils';
+
 import theme from '../src/theme';
 
 class MyDocument extends Document {
@@ -10,11 +11,6 @@ class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     <meta name="theme-color" content={theme.palette.primary.main} />
-                    <link rel="preconnect" href="https://fonts.gstatic.com" />
-                    <link
-                        href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&amp;family=Source+Serif+Pro:wght@600&amp;display=swap"
-                        rel="stylesheet"
-                    />
                     <link rel="icon" href="/favicon.svg"></link>
                     <script
                         id="cookieyes"

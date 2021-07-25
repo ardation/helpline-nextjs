@@ -8,6 +8,10 @@ import ReactGA from 'react-ga';
 import { hotjar } from 'react-hotjar';
 import { DefaultSeo } from 'next-seo';
 import theme from '../src/theme';
+import '@fontsource/source-sans-pro/400.css';
+import '@fontsource/source-sans-pro/600.css';
+import '@fontsource/source-sans-pro/700.css';
+import '@fontsource/source-serif-pro/600.css';
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
     useEffect(() => {
