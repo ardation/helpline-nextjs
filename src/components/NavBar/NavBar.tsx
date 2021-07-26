@@ -2,6 +2,7 @@ import React, { ReactElement, ReactNode } from 'react';
 import { createStyles, makeStyles, AppBar, Box, Container, Hidden, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import clsx from 'clsx';
+import Image from 'next/image';
 
 type Props = {
     children?: ReactNode;
@@ -37,9 +38,6 @@ const useStyles = makeStyles((theme) =>
             [theme.breakpoints.down('xs')]: {
                 gridTemplateColumns: '1fr',
             },
-            '& img': {
-                height: '25px',
-            },
         },
     }),
 );
@@ -63,7 +61,13 @@ const NavBar = ({ children, variant }: Props): ReactElement => {
                         <>
                             {variant === 'widget' ? (
                                 <>
-                                    <img src="/logo.svg" alt="find a helpline" />
+                                    <Image
+                                        layout="fixed"
+                                        src="/logo.svg"
+                                        alt="find a helpline"
+                                        width={148}
+                                        height={25}
+                                    />
                                     <Hidden xsDown>
                                         <Typography variant="body2" color="secondary">
                                             Struggling? Get free, confidential support from a real person.
@@ -72,8 +76,14 @@ const NavBar = ({ children, variant }: Props): ReactElement => {
                                 </>
                             ) : (
                                 <Link href="/" prefetch={process.env.NODE_ENV === 'production'} passHref>
-                                    <a>
-                                        <img src="/logo.svg" alt="find a helpline" />
+                                    <a aria-label="find a helpline">
+                                        <Image
+                                            layout="fixed"
+                                            src="/logo.svg"
+                                            alt="find a helpline"
+                                            width={148}
+                                            height={25}
+                                        />
                                     </a>
                                 </Link>
                             )}

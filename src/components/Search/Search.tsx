@@ -4,6 +4,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
 import clsx from 'clsx';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
+import Image from 'next/image';
 import CountrySelect from '../CountrySelect';
 import { LocalityEnum } from '../../../types/globalTypes';
 import NavBar from '../NavBar';
@@ -122,7 +123,13 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                     {!selectedCountry && variant !== 'embed' && (
                         <>
                             <Box className={classes.logo}>
-                                <img src="/logo.svg" alt="find a helpline" />
+                                <Image
+                                    layout="intrinsic"
+                                    src="/logo.svg"
+                                    alt="find a helpline"
+                                    width={250}
+                                    height={42}
+                                />
                             </Box>
                             <Typography className={classes.typography} color="secondary">
                                 Struggling? Get free, confidential support from a real human over phone, text or

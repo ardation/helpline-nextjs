@@ -15,6 +15,7 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMoreRounded';
 import NextLink from 'next/link';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
+import Image from 'next/image';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -88,7 +89,7 @@ const Faq = (): ReactElement => {
                 <Typography variant="h5">What can I expect when contacting a helpline?</Typography>
 
                 <Box className={classes.illustration}>
-                    <img src="/illustrations/guy.png" />
+                    <Image layout="responsive" src="/illustrations/guy.png" width={420} height={536} />
                 </Box>
                 <Typography variant="h6" gutterBottom>
                     Reaching out for help is one of the bravest – and most difficult – things to do when you&apos;re

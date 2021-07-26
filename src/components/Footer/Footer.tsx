@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import { createStyles, makeStyles, Typography, Link, Container, Box, Divider, Grid } from '@material-ui/core';
 import NextLink from 'next/link';
 import { OutboundLink } from 'react-ga';
+import Image from 'next/image';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -36,7 +37,7 @@ const Footer = (): ReactElement => {
         <Container maxWidth="xs">
             <Box className={classes.box}>
                 <Box className={classes.illustration}>
-                    <img src="/illustrations/hi5.png" />
+                    <Image layout="responsive" src="/illustrations/hi5.png" width={1042} height={616} />
                 </Box>
                 <Typography className={classes.typography}>
                     Made with ♡ in Aotearoa, New Zealand, <br />

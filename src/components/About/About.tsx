@@ -8,6 +8,7 @@ import SecurityRoundedIcon from '@material-ui/icons/SecurityRounded';
 import { OutboundLink } from 'react-ga';
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 import { compact } from 'lodash/fp';
+import Image from 'next/image';
 import Highlight from '../Highlight';
 
 const useStyles = makeStyles((theme) =>
@@ -82,19 +83,49 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                                 <Box mx={2} my={2}>
                                     <Grid container spacing={2} alignItems="center">
                                         <Grid item xs={7}>
-                                            <img src="/partners/IASP.png" className={classes.partnerImg} />
+                                            <Image
+                                                layout="responsive"
+                                                src="/partners/IASP.png"
+                                                className={classes.partnerImg}
+                                                width={364}
+                                                height={62}
+                                            />
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <img src="/partners/GravityLab.png" className={classes.partnerImg} />
+                                            <Image
+                                                layout="responsive"
+                                                src="/partners/GravityLab.png"
+                                                className={classes.partnerImg}
+                                                width={233}
+                                                height={50}
+                                            />
                                         </Grid>
                                         <Grid item xs={4}>
-                                            <img src="/partners/Polyform.png" className={classes.partnerImg} />
+                                            <Image
+                                                layout="responsive"
+                                                src="/partners/Polyform.png"
+                                                className={classes.partnerImg}
+                                                width={194}
+                                                height={60}
+                                            />
                                         </Grid>
                                         <Grid item xs={4}>
-                                            <img src="/partners/SearchRepublic.png" className={classes.partnerImg} />
+                                            <Image
+                                                layout="responsive"
+                                                src="/partners/SearchRepublic.png"
+                                                className={classes.partnerImg}
+                                                width={213}
+                                                height={70}
+                                            />
                                         </Grid>
                                         <Grid item xs={4}>
-                                            <img src="/partners/DataStory.png" className={classes.partnerImg} />
+                                            <Image
+                                                layout="responsive"
+                                                src="/partners/DataStory.png"
+                                                className={classes.partnerImg}
+                                                width={239}
+                                                height={30}
+                                            />
                                         </Grid>
                                     </Grid>
                                 </Box>
@@ -106,7 +137,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                         Free emotional support, wherever you are
                     </Typography>
                     <Box className={classes.illustration}>
-                        <img src="/illustrations/woman-sitting.png" />
+                        <Image layout="responsive" src="/illustrations/woman-sitting.png" width={540} height={540} />
                     </Box>
                     <Highlight
                         title="Quick"
@@ -167,7 +198,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
             <Box className={classes.content}>
                 <Container maxWidth="xs">
                     <Box className={classes.illustration}>
-                        <img src="/illustrations/phone.png" />
+                        <Image layout="responsive" src="/illustrations/phone.png" width={458} height={460} />
                     </Box>
                     <Box my={4}>
                         <Typography variant="h6" gutterBottom>
@@ -225,7 +256,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
             <Box className={[classes.content, classes.contentAlt].join(' ')}>
                 <Container maxWidth="xs">
                     <Box className={classes.illustration}>
-                        <img src="/illustrations/craft.png" />
+                        <Image layout="responsive" src="/illustrations/craft.png" width={500} height={496} />
                     </Box>
                     <Typography variant="h6" gutterBottom>
                         Built by{' '}
@@ -272,7 +303,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
             <Box className={[classes.content, classes.contentPrimary].join(' ')}>
                 <Container maxWidth="xs">
                     <Box className={classes.illustration}>
-                        <img src="/illustrations/widget.png" />
+                        <Image layout="responsive" src="/illustrations/widget.png" width={732} height={732} />
                     </Box>
                     <Box mb={3} textAlign="center">
                         <Typography variant="h6" gutterBottom>

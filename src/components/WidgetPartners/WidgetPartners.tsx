@@ -20,6 +20,7 @@ import LanguageRoundedIcon from '@material-ui/icons/LanguageRounded';
 import { OutboundLink } from 'react-ga';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
+import Image from 'next/image';
 import Highlight from '../Highlight';
 import Widget, { WidgetProps } from '../Widget/Widget';
 
@@ -81,7 +82,7 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
                         Free emotional support, on your website or app
                     </Typography>
                     <Box className={classes.illustration}>
-                        <img src="/illustrations/widget.png" />
+                        <Image layout="responsive" src="/illustrations/widget.png" width={732} height={732} />
                     </Box>
                     <Box my={4}>
                         <Typography variant="h6" gutterBottom>
@@ -282,7 +283,7 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
             <Box className={classes.content}>
                 <Container maxWidth="xs">
                     <Box className={classes.illustration}>
-                        <img src="/illustrations/tech.png" />
+                        <Image layout="responsive" src="/illustrations/tech.png" width={504} height={380} />
                     </Box>
                     <Box my={4}>
                         <Typography variant="h6" gutterBottom align="center">
@@ -300,7 +301,7 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
             <Box className={[classes.content, classes.contentAlt].join(' ')}>
                 <Container maxWidth="xs">
                     <Box className={classes.illustration}>
-                        <img src="/illustrations/connect.png" />
+                        <Image layout="responsive" src="/illustrations/connect.png" width={530} height={518} />
                     </Box>
                     <Typography variant="h6" gutterBottom align="center">
                         Let&apos;s connect the dots and save lives.
