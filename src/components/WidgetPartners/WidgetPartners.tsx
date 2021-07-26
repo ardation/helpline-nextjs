@@ -82,7 +82,13 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
                         Free emotional support, on your website or app
                     </Typography>
                     <Box className={classes.illustration}>
-                        <Image layout="responsive" src="/illustrations/widget.png" width={732} height={732} />
+                        <Image
+                            layout="responsive"
+                            src="/illustrations/widget.png"
+                            width={732}
+                            height={732}
+                            alt="Widget"
+                        />
                     </Box>
                     <Box my={4}>
                         <Typography variant="h6" gutterBottom>
@@ -283,7 +289,7 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
             <Box className={classes.content}>
                 <Container maxWidth="xs">
                     <Box className={classes.illustration}>
-                        <Image layout="responsive" src="/illustrations/tech.png" width={504} height={380} />
+                        <Image layout="responsive" src="/illustrations/tech.png" width={504} height={380} alt="Tech" />
                     </Box>
                     <Box my={4}>
                         <Typography variant="h6" gutterBottom align="center">
@@ -301,7 +307,13 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
             <Box className={[classes.content, classes.contentAlt].join(' ')}>
                 <Container maxWidth="xs">
                     <Box className={classes.illustration}>
-                        <Image layout="responsive" src="/illustrations/connect.png" width={530} height={518} />
+                        <Image
+                            layout="responsive"
+                            src="/illustrations/connect.png"
+                            width={530}
+                            height={518}
+                            alt="Connect"
+                        />
                     </Box>
                     <Typography variant="h6" gutterBottom align="center">
                         Let&apos;s connect the dots and save lives.

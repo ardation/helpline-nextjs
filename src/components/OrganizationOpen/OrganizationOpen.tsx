@@ -132,7 +132,12 @@ const OrganizationOpen = ({ organization, expandable }: Props): ReactElement => 
             </Button>
             {!organization.alwaysOpen && expandable && (
                 <>
-                    <IconButton size="small" data-testid="expandable" onClick={(): void => setExpanded(!expanded)}>
+                    <IconButton
+                        size="small"
+                        data-testid="expandable"
+                        onClick={(): void => setExpanded(!expanded)}
+                        name="Expand"
+                    >
                         {expanded && <CloseIcon />}
                         {!expanded && <ExpandMoreIcon />}
                     </IconButton>

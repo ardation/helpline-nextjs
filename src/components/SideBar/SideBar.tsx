@@ -28,7 +28,13 @@ const SideBar = (): ReactElement => {
 
     return (
         <>
-            <IconButton onClick={(): void => setOpen(true)} size="small" data-testid="menuButton" color="secondary">
+            <IconButton
+                onClick={(): void => setOpen(true)}
+                size="small"
+                data-testid="menuButton"
+                color="secondary"
+                name="Menu"
+            >
                 <MenuRoundedIcon />
             </IconButton>
             <Drawer classes={{ paper: classes.paper }} anchor="right" open={open} onClose={(): void => setOpen(false)}>

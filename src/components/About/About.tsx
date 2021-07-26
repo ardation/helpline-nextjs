@@ -89,6 +89,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                                                 className={classes.partnerImg}
                                                 width={364}
                                                 height={62}
+                                                alt="International Association for Suicide Prevention"
                                             />
                                         </Grid>
                                         <Grid item xs={5}>
@@ -98,6 +99,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                                                 className={classes.partnerImg}
                                                 width={233}
                                                 height={50}
+                                                alt="Gravity Lab"
                                             />
                                         </Grid>
                                         <Grid item xs={4}>
@@ -107,6 +109,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                                                 className={classes.partnerImg}
                                                 width={194}
                                                 height={60}
+                                                alt="Polyform"
                                             />
                                         </Grid>
                                         <Grid item xs={4}>
@@ -116,6 +119,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                                                 className={classes.partnerImg}
                                                 width={213}
                                                 height={70}
+                                                alt="Search Republic"
                                             />
                                         </Grid>
                                         <Grid item xs={4}>
@@ -125,6 +129,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                                                 className={classes.partnerImg}
                                                 width={239}
                                                 height={30}
+                                                alt="Data Story"
                                             />
                                         </Grid>
                                     </Grid>
@@ -137,7 +142,13 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                         Free emotional support, wherever you are
                     </Typography>
                     <Box className={classes.illustration}>
-                        <Image layout="responsive" src="/illustrations/woman-sitting.png" width={540} height={540} />
+                        <Image
+                            layout="responsive"
+                            src="/illustrations/woman-sitting.png"
+                            width={540}
+                            height={540}
+                            alt="Woman Sitting"
+                        />
                     </Box>
                     <Highlight
                         title="Quick"
@@ -198,7 +209,13 @@ const About = ({ countries, isPage }: Props): ReactElement => {
             <Box className={classes.content}>
                 <Container maxWidth="xs">
                     <Box className={classes.illustration}>
-                        <Image layout="responsive" src="/illustrations/phone.png" width={458} height={460} />
+                        <Image
+                            layout="responsive"
+                            src="/illustrations/phone.png"
+                            width={458}
+                            height={460}
+                            alt="Phone"
+                        />
                     </Box>
                     <Box my={4}>
                         <Typography variant="h6" gutterBottom>
@@ -256,7 +273,13 @@ const About = ({ countries, isPage }: Props): ReactElement => {
             <Box className={[classes.content, classes.contentAlt].join(' ')}>
                 <Container maxWidth="xs">
                     <Box className={classes.illustration}>
-                        <Image layout="responsive" src="/illustrations/craft.png" width={500} height={496} />
+                        <Image
+                            layout="responsive"
+                            src="/illustrations/craft.png"
+                            width={500}
+                            height={496}
+                            alt="Craft"
+                        />
                     </Box>
                     <Typography variant="h6" gutterBottom>
                         Built by{' '}
@@ -303,7 +326,13 @@ const About = ({ countries, isPage }: Props): ReactElement => {
             <Box className={[classes.content, classes.contentPrimary].join(' ')}>
                 <Container maxWidth="xs">
                     <Box className={classes.illustration}>
-                        <Image layout="responsive" src="/illustrations/widget.png" width={732} height={732} />
+                        <Image
+                            layout="responsive"
+                            src="/illustrations/widget.png"
+                            width={732}
+                            height={732}
+                            alt="Widget"
+                        />
                     </Box>
                     <Box mb={3} textAlign="center">
                         <Typography variant="h6" gutterBottom>
@@ -312,7 +341,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                     </Box>
                     <NextLink href="/get-the-widget" passHref prefetch={process.env.NODE_ENV === 'production'}>
                         <Button variant="contained" fullWidth size="large" endIcon={<ArrowRightAltRoundedIcon />}>
-                            Learn more
+                            Learn about the widget
                         </Button>
                     </NextLink>
                 </Container>

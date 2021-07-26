@@ -214,7 +214,7 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
                             <Typography className={classes.subtitle}>Rate &amp; Review</Typography>
                         </Grid>
                         <Grid item>
-                            <IconButton onClick={handleClose} data-testid="close">
+                            <IconButton onClick={handleClose} data-testid="close" name="Close">
                                 <CloseIcon />
                             </IconButton>
                         </Grid>

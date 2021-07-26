@@ -48,10 +48,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
             />
             <Head>
                 <title>Find A Helpline</title>
-                <meta
-                    name="viewport"
-                    content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
-                />
+                <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
             </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline />

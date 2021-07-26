@@ -37,7 +37,7 @@ const Footer = (): ReactElement => {
         <Container maxWidth="xs">
             <Box className={classes.box}>
                 <Box className={classes.illustration}>
-                    <Image layout="responsive" src="/illustrations/hi5.png" width={1042} height={616} />
+                    <Image layout="responsive" src="/illustrations/hi5.png" width={1042} height={616} alt="Hi-5" />
                 </Box>
                 <Typography className={classes.typography}>
                     Made with ♡ in Aotearoa, New Zealand, <br />

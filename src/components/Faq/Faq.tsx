@@ -89,7 +89,7 @@ const Faq = (): ReactElement => {
                 <Typography variant="h5">What can I expect when contacting a helpline?</Typography>
 
                 <Box className={classes.illustration}>
-                    <Image layout="responsive" src="/illustrations/guy.png" width={420} height={536} />
+                    <Image layout="responsive" src="/illustrations/guy.png" width={420} height={536} alt="Guy" />
                 </Box>
                 <Typography variant="h6" gutterBottom>
                     Reaching out for help is one of the bravest – and most difficult – things to do when you&apos;re
