@@ -1,6 +1,13 @@
 import React, { ReactElement } from 'react';
 import { Box } from '@material-ui/core';
+import fetchMock from 'fetch-mock';
+import formData from '../HelplineForm/formData.json';
 import InfluencerDialog from '.';
+
+const stubFormDataDecorator = (storyFn): ReactElement => {
+    fetchMock.get('/api/forms/find-a-helpline-landing-page', formData);
+    return <>{storyFn()}</>;
+};
 
 const influencer = {
     name: 'Richie',
@@ -9,6 +16,7 @@ const influencer = {
 
 export default {
     title: 'InfluencerDialog',
+    decorators: [stubFormDataDecorator],
 };
 
 export const Default = (): ReactElement => (
