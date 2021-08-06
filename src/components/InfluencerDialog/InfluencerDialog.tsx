@@ -99,7 +99,7 @@ const InfluencerDialog = ({ influencer }: Props): ReactElement => {
                         }}
                         fullWidth
                     >
-                        Get your own personalized link
+                        Get a landing page like this
                     </Button>
                 </DialogContent>
             </Dialog>

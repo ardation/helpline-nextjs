@@ -30,7 +30,7 @@ describe('InfluencerDialog', () => {
 
     it('should show form when user wants to get their own link', async () => {
         const { queryByRole, getByRole } = render(<InfluencerDialog influencer={influencer} />);
-        fireEvent.click(getByRole('button', { name: 'Get your own personalized link' }));
+        fireEvent.click(getByRole('button', { name: 'Get a landing page like this' }));
         await waitFor(() => expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument());
         fireEvent.click(getByRole('button', { name: 'Submit' }));
         await waitFor(() => expect(queryByRole('button', { name: 'Submit' })).not.toBeInTheDocument());
