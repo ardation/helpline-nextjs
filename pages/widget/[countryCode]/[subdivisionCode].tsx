@@ -46,7 +46,7 @@ const WidgetSubdivisionCodePage = ({
             `}</style>
             <Head>
                 <title>
-                    Find A Helpline | {subdivision.name}, {country.name}
+                    {subdivision.name}, {country.name} | Find A Helpline
                 </title>
                 <script src="/widget.min.js"></script>
             </Head>

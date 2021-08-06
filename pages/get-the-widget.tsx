@@ -13,7 +13,7 @@ const GetTheWidgetPage = (widgetProps: WidgetProps): ReactElement => {
     return (
         <>
             <Head>
-                <title>Find A Helpline | Get the Widget</title>
+                <title>Get the Widget | Find A Helpline</title>
             </Head>
             <Chrome navBar footer>
                 <WidgetPartners widgetProps={widgetProps} />

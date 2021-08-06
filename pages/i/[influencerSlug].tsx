@@ -18,7 +18,7 @@ const InfluencerSlugPage = ({ influencer, topics, countries }: Props): ReactElem
     return (
         <>
             <Head>
-                <title>Find A Helpline | {influencer.name}</title>
+                <title>{influencer.name} | Find A Helpline</title>
             </Head>
             <Chrome footer={true}>
                 <Search countries={countries} topics={topics} />

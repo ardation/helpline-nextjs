@@ -40,7 +40,7 @@ const WidgetCountryCodePage = ({
                 }
             `}</style>
             <Head>
-                <title>Find A Helpline | {country.name}</title>
+                <title>{country.name} | Find A Helpline</title>
                 <script src="/widget.min.js"></script>
             </Head>
             <Widget

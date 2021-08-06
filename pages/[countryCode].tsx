@@ -35,7 +35,7 @@ const CountryCodePage = ({
     return (
         <>
             <Head>
-                <title>Find A Helpline | {country.name}</title>
+                <title>{country.name} | Find A Helpline</title>
             </Head>
             <Chrome country={country} footer>
                 <OrganizationList

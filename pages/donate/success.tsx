@@ -7,7 +7,7 @@ const DonateSuccessPage = (): ReactElement => {
     return (
         <>
             <Head>
-                <title>Find A Helpline | Donation Success</title>
+                <title>Donation Success | Find A Helpline</title>
             </Head>
             <Chrome navBar footer>
                 <DonateSuccess />

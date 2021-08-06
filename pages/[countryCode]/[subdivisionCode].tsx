@@ -42,7 +42,7 @@ const SubdivisionCodePage = ({
         <>
             <Head>
                 <title>
-                    Find A Helpline | {subdivision.name}, {country.name}
+                    {subdivision.name}, {country.name} | Find A Helpline
                 </title>
             </Head>
             <Chrome country={country} footer>

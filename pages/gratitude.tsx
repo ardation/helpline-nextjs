@@ -7,7 +7,7 @@ const GratitudePage = (): ReactElement => {
     return (
         <>
             <Head>
-                <title>Find A Helpline | Gratitude</title>
+                <title>Gratitude | Find A Helpline</title>
             </Head>
             <Chrome navBar footer>
                 <Gratitude />

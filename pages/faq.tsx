@@ -7,7 +7,7 @@ const FaqPage = (): ReactElement => {
     return (
         <>
             <Head>
-                <title>Find A Helpline | What Can I expect?</title>
+                <title>What Can I expect? | Find A Helpline</title>
             </Head>
             <Chrome navBar footer>
                 <Faq />

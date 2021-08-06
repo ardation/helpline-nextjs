@@ -17,7 +17,9 @@ const OrganizationPage = ({ organization }: Props): ReactElement => {
     return (
         <>
             <Head>
-                <title>Find A Helpline | {organization.name}</title>
+                <title>
+                    {organization.name} in {organization.country.name} | Find A Helpline
+                </title>
             </Head>
             <Chrome country={organization.country} navBar footer>
                 <OrganizationItem organization={organization} />

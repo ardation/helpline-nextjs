@@ -7,7 +7,7 @@ const TermsPage = (): ReactElement => {
     return (
         <>
             <Head>
-                <title>Find A Helpline | Terms of Service</title>
+                <title>Terms of Service | Find A Helpline</title>
             </Head>
             <Chrome navBar footer>
                 <Legal tab="terms" />
