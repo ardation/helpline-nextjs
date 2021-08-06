@@ -78,7 +78,7 @@ const WidgetPartners = ({ widgetProps }: Props): ReactElement => {
                     <Typography variant="h6" align="center" className={classes.heading}>
                         Find A Helpline widget &amp; API
                     </Typography>
-                    <Typography variant="h5" align="center">
+                    <Typography variant="h5" component="h1" align="center">
                         Free emotional support, on your website or app
                     </Typography>
                     <Box className={classes.illustration}>

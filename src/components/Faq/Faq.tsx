@@ -86,7 +86,9 @@ const Faq = (): ReactElement => {
     return (
         <Box bgcolor="background.paper" py={2}>
             <Container maxWidth="xs">
-                <Typography variant="h5">What can I expect when contacting a helpline?</Typography>
+                <Typography variant="h5" component="h1">
+                    What can I expect when contacting a helpline?
+                </Typography>
 
                 <Box className={classes.illustration}>
                     <Image layout="responsive" src="/illustrations/guy.png" width={420} height={536} alt="Guy" />

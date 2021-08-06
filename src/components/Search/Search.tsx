@@ -131,7 +131,7 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                                     height={42}
                                 />
                             </Box>
-                            <Typography className={classes.typography} color="secondary">
+                            <Typography className={classes.typography} color="secondary" component="h1">
                                 Struggling? Get free, confidential support from a real human over phone, text or
                                 webchat.
                             </Typography>
