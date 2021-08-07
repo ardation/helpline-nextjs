@@ -1,14 +1,12 @@
-import Head from 'next/head';
 import React, { ReactElement } from 'react';
+import { NextSeo } from 'next-seo';
 import Chrome from '../src/components/Chrome';
 import Faq from '../src/components/Faq';
 
 const FaqPage = (): ReactElement => {
     return (
         <>
-            <Head>
-                <title>Find A Helpline | What Can I expect?</title>
-            </Head>
+            <NextSeo title="What Can I expect when contacting a helpline?" />
             <Chrome navBar footer>
                 <Faq />
             </Chrome>

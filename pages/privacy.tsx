@@ -1,14 +1,12 @@
-import Head from 'next/head';
 import React, { ReactElement } from 'react';
+import { NextSeo } from 'next-seo';
 import Legal from '../src/components/Legal';
 import Chrome from '../src/components/Chrome';
 
 const PrivacyPage = (): ReactElement => {
     return (
         <>
-            <Head>
-                <title>Find A Helpline | Privacy Policy</title>
-            </Head>
+            <NextSeo title="Privacy Policy" />
             <Chrome navBar footer>
                 <Legal tab="privacy" />
             </Chrome>

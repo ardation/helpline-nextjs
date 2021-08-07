@@ -33,8 +33,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     return (
         <>
             <DefaultSeo
-                title="Struggling? Get free emotional support, wherever you are."
-                description="Talk to someone today. Phone, text or web chat available."
+                defaultTitle="Find A Helpline | Free, confidential support. 24/7. Chat, text or phone."
+                titleTemplate="%s | Find A Helpline"
+                description="Global list of helplines, hotlines &amp; crisis lines. Get emotional support with suicidal thoughts, gender &amp; sexual identity, depression, loneliness, abuse &amp; domestic violence and more. No sign up or personal info required."
                 openGraph={{
                     type: 'website',
                     locale: 'en',
@@ -47,7 +48,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                 }}
             />
             <Head>
-                <title>Find A Helpline</title>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
             </Head>
             <ThemeProvider theme={theme}>

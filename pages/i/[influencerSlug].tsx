@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
+import { NextSeo } from 'next-seo';
 import Chrome from '../../src/components/Chrome';
 import Search from '../../src/components/Search';
 import { GetInfluencerSlugProps } from '../../types/GetInfluencerSlugProps';
@@ -17,9 +17,7 @@ interface Props extends GetInfluencerSlugProps {
 const InfluencerSlugPage = ({ influencer, topics, countries }: Props): ReactElement => {
     return (
         <>
-            <Head>
-                <title>Find A Helpline | {influencer.name}</title>
-            </Head>
+            <NextSeo description={`A message from ${influencer.name}: ${influencer.message}`} />
             <Chrome footer={true}>
                 <Search countries={countries} topics={topics} />
                 <InfluencerDialog influencer={influencer} />

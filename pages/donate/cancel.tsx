@@ -1,14 +1,12 @@
-import Head from 'next/head';
 import React, { ReactElement } from 'react';
+import { NextSeo } from 'next-seo';
 import Chrome from '../../src/components/Chrome';
 import DonateCancel from '../../src/components/DonateCancel';
 
 const DonateCancelPage = (): ReactElement => {
     return (
         <>
-            <Head>
-                <title>Find A Helpline | Donation Cancelled</title>
-            </Head>
+            <NextSeo title="Donation Cancelled" />
             <Chrome navBar footer>
                 <DonateCancel />
             </Chrome>

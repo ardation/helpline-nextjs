@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { find, flatten } from 'lodash/fp';
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 import {
     GetWidgetSubdivisionCodeProps,
     GetWidgetSubdivisionCodeProps_country_subdivisions as Subdivision,
@@ -44,10 +45,8 @@ const WidgetSubdivisionCodePage = ({
                     background-color: transparent !important;
                 }
             `}</style>
+            <NextSeo title={`${subdivision.name}, ${country.name}`} />
             <Head>
-                <title>
-                    Find A Helpline | {subdivision.name}, {country.name}
-                </title>
                 <script src="/widget.min.js"></script>
             </Head>
             <Widget
