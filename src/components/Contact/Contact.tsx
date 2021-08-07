@@ -105,7 +105,7 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
                         <form onSubmit={handleSubmit}>
                             <Grid container wrap="nowrap" direction="column" spacing={2}>
                                 <Grid item>
-                                    <Typography variant="h6" className={classes.title}>
+                                    <Typography component="h1" variant="h6" className={classes.title}>
                                         Have a question? Let us know.
                                     </Typography>
                                 </Grid>

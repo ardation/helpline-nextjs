@@ -141,7 +141,7 @@ const OrganizationList = ({
             </Backdrop>
             <Container maxWidth="xs">
                 <Box my={2}>
-                    <Typography variant="h6" className={classes.heading}>
+                    <Typography variant="h6" component="h1" className={classes.heading}>
                         {`Helplines in ${subdivision ? `${subdivision.name}, ` : ''}${country.name}${
                             selectedTopics.length > 0
                                 ? ` for ${formatArrayIntoSentence(selectedTopics.map((t) => t.name)).toLowerCase()}`
