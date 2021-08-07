@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { flatten } from 'lodash/fp';
+import { NextSeo } from 'next-seo';
 import Chrome from '../../../src/components/Chrome';
 import { GetCountryCodeTopicSlugProps } from '../../../types/GetCountryCodeTopicSlugProps';
 import OrganizationList from '../../../src/components/OrganizationList';
@@ -25,9 +25,7 @@ const CountryCodeTopicSlugPage = ({
 }: Props): ReactElement => {
     return (
         <>
-            <Head>
-                <title>Find A Helpline | {country.name}</title>
-            </Head>
+            <NextSeo title={`Free helplines for ${topic.name} in ${country.name}`} />
             <Chrome country={country} footer>
                 <OrganizationList
                     organizations={organizations.nodes}

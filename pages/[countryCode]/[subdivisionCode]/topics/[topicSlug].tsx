@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { find } from 'lodash/fp';
+import { NextSeo } from 'next-seo';
 import Chrome from '../../../../src/components/Chrome';
 import OrganizationList from '../../../../src/components/OrganizationList';
 import {
@@ -30,11 +30,7 @@ const SubdivisionCodeTopicSlugPage = ({
 }: Props): ReactElement => {
     return (
         <>
-            <Head>
-                <title>
-                    Find A Helpline | {subdivision.name}, {country.name}
-                </title>
-            </Head>
+            <NextSeo title={`Free helplines for ${topic.name} in ${subdivision.name}, ${country.name}`} />
             <Chrome country={country} footer>
                 <OrganizationList
                     organizations={organizations.nodes}
