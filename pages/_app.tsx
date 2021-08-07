@@ -33,7 +33,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     return (
         <>
             <DefaultSeo
-                title="Find A Helpline | Free, confidential support. 24/7. Chat, text or phone."
+                defaultTitle="Find A Helpline | Free, confidential support. 24/7. Chat, text or phone."
                 titleTemplate="%s | Find A Helpline"
                 description="Global list of helplines, hotlines &amp; crisis lines. Get emotional support with suicidal thoughts, gender &amp; sexual identity, depression, loneliness, abuse &amp; domestic violence and more. No sign up or personal info required."
                 openGraph={{
