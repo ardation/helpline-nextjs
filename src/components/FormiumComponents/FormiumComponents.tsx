@@ -46,7 +46,7 @@ export const FormControl = ({
         <Box my={2}>
             <MuiFormControl error={Boolean(error)} disabled={disabled} required={required} fullWidth={true}>
                 <MuiFormLabel htmlFor={labelFor}>
-                    <Typography gutterBottom color="textPrimary">
+                    <Typography color="textPrimary" component="span">
                         {label}
                     </Typography>
                 </MuiFormLabel>
