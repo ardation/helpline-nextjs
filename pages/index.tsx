@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
@@ -9,14 +8,9 @@ import { GetSearchProps } from '../types/GetSearchProps';
 
 const IndexPage = ({ topics, countries }: GetSearchProps): ReactElement => {
     return (
-        <>
-            <Head>
-                <title>Find A Helpline | Free, confidential support. 24/7. Chat, text or phone.</title>
-            </Head>
-            <Chrome footer>
-                <Search countries={countries} topics={topics} />
-            </Chrome>
-        </>
+        <Chrome footer>
+            <Search countries={countries} topics={topics} />
+        </Chrome>
     );
 };
 

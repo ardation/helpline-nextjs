@@ -5,6 +5,7 @@ import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 import { GetWidgetCountryCodeProps } from '../../types/GetWidgetCountryCodeProps';
 import Widget from '../../src/components/Widget';
 import { GetWidgetCountryCodePaths } from '../../types/GetWidgetCountryCodePaths';
@@ -39,8 +40,8 @@ const WidgetCountryCodePage = ({
                     background-color: transparent !important;
                 }
             `}</style>
+            <NextSeo title={country.name} />
             <Head>
-                <title>{country.name} | Find A Helpline</title>
                 <script src="/widget.min.js"></script>
             </Head>
             <Widget

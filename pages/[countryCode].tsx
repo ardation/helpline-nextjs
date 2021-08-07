@@ -2,9 +2,9 @@ import React, { ReactElement } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
+import { NextSeo } from 'next-seo';
 import Chrome from '../src/components/Chrome';
 import { GetCountryCodeProps } from '../types/GetCountryCodeProps';
 import OrganizationList from '../src/components/OrganizationList';
@@ -34,9 +34,7 @@ const CountryCodePage = ({
 
     return (
         <>
-            <Head>
-                <title>{country.name} | Find A Helpline</title>
-            </Head>
+            <NextSeo title={country.name} />
             <Chrome country={country} footer>
                 <OrganizationList
                     organizations={organizations.nodes}

@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
+import { NextSeo } from 'next-seo';
 import Chrome from '../../src/components/Chrome';
 import { GetOrganizationsSlugProps } from '../../types/GetOrganizationsSlugProps';
 import OrganizationItem from '../../src/components/OrganizationItem';
@@ -16,11 +16,7 @@ interface Props extends GetOrganizationsSlugProps {
 const OrganizationPage = ({ organization }: Props): ReactElement => {
     return (
         <>
-            <Head>
-                <title>
-                    {organization.name} in {organization.country.name} | Find A Helpline
-                </title>
-            </Head>
+            <NextSeo title={`${organization.name} in ${organization.country.name}`} />
             <Chrome country={organization.country} navBar footer>
                 <OrganizationItem organization={organization} />
             </Chrome>
