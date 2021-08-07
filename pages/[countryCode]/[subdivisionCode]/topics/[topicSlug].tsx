@@ -1,0 +1,193 @@
+import React, { ReactElement } from 'react';
+import { request } from 'graphql-request';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
+import gql from 'graphql-tag';
+import { print } from 'graphql';
+import { find } from 'lodash/fp';
+import Chrome from '../../../../src/components/Chrome';
+import OrganizationList from '../../../../src/components/OrganizationList';
+import {
+    GetCountryCodeSubdivisonCodeTopicSlugProps,
+    GetCountryCodeSubdivisonCodeTopicSlugProps_country_subdivisions as Subdivision,
+} from '../../../../types/GetCountryCodeSubdivisonCodeTopicSlugProps';
+import { GetCountryCodeSubdivisionCodeTopicSlugPaths } from '../../../../types/GetCountryCodeSubdivisionCodeTopicSlugPaths';
+
+interface Props extends GetCountryCodeSubdivisonCodeTopicSlugProps {
+    subdivision: Subdivision;
+    key: string | string[];
+}
+
+const SubdivisionCodeTopicSlugPage = ({
+    country,
+    subdivision,
+    topic,
+    organizations,
+    organizationsWhenEmpty,
+    categories,
+    humanSupportTypes,
+    topics,
+}: Props): ReactElement => {
+    return (
+        <>
+            <Head>
+                <title>
+                    Find A Helpline | {subdivision.name}, {country.name}
+                </title>
+            </Head>
+            <Chrome country={country} footer>
+                <OrganizationList
+                    organizations={organizations.nodes}
+                    organizationsWhenEmpty={organizationsWhenEmpty.nodes}
+                    country={country}
+                    subdivision={subdivision}
+                    preselectedTopics={[topic]}
+                    categories={categories}
+                    humanSupportTypes={humanSupportTypes}
+                    topics={topics}
+                />
+            </Chrome>
+        </>
+    );
+};
+
+export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+    const query = gql`
+        query GetCountryCodeSubdivisonCodeTopicSlugProps(
+            $countryCode: String!
+            $subdivisionCode: String!
+            $topicSlug: String!
+        ) {
+            country(code: $countryCode) {
+                code
+                name
+                emergencyNumber
+                subdivisions {
+                    code
+                    name
+                }
+            }
+            topic(slug: $topicSlug) {
+                name
+                slug
+            }
+            organizations(countryCode: $countryCode, subdivisionCodes: [$subdivisionCode]) {
+                ...organizationConnectionFields
+            }
+            organizationsWhenEmpty: organizations(countryCode: $countryCode, subdivisionCodes: [], featured: true) {
+                ...organizationConnectionFields
+            }
+            categories {
+                name
+            }
+            humanSupportTypes {
+                name
+            }
+            topics {
+                name
+            }
+        }
+        fragment organizationConnectionFields on OrganizationConnection {
+            nodes {
+                id
+                slug
+                name
+                alwaysOpen
+                smsNumber
+                phoneNumber
+                url
+                chatUrl
+                timezone
+                featured
+                verified
+                rating
+                reviewCount
+                humanSupportTypes {
+                    name
+                }
+                categories {
+                    name
+                }
+                topics {
+                    name
+                }
+                openingHours {
+                    day
+                    open
+                    close
+                }
+            }
+        }
+    `;
+    const {
+        country,
+        topic,
+        organizations,
+        organizationsWhenEmpty,
+        categories,
+        humanSupportTypes,
+        topics,
+    } = await request<GetCountryCodeSubdivisonCodeTopicSlugProps>('https://api.findahelpline.com', print(query), {
+        countryCode: context.params.countryCode,
+        subdivisionCode: context.params.subdivisionCode,
+        topicSlug: context.params.topicSlug,
+    });
+    const subdivision = find({ code: context.params.subdivisionCode.toString().toUpperCase() }, country.subdivisions);
+    return {
+        props: {
+            country,
+            topic,
+            subdivision,
+            organizations,
+            organizationsWhenEmpty,
+            categories,
+            humanSupportTypes,
+            topics,
+            key: `${context.params.countryCode}-${context.params.subdivisionCode}-${context.params.topicSlug}`,
+            // https://github.com/zeit/next.js/issues/9992
+        },
+    };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    const query = gql`
+        query GetCountryCodeSubdivisionCodeTopicSlugPaths {
+            countries {
+                code
+                locality
+                subdivisions {
+                    code
+                }
+            }
+            topics {
+                slug
+            }
+        }
+    `;
+    const { countries, topics } = await request<GetCountryCodeSubdivisionCodeTopicSlugPaths>(
+        'https://api.findahelpline.com',
+        print(query),
+    );
+    const paths: { params: { countryCode: string; subdivisionCode: string; topicSlug: string } }[] = [];
+
+    countries.forEach((country) => {
+        return country.subdivisions.forEach((subdivision) => {
+            return topics.forEach(({ slug }) => {
+                paths.push({
+                    params: {
+                        countryCode: country.code.toLowerCase(),
+                        subdivisionCode: subdivision.code.toLowerCase(),
+                        topicSlug: slug,
+                    },
+                });
+            });
+        });
+    });
+
+    return {
+        paths,
+        fallback: false,
+    };
+};
+
+export default SubdivisionCodeTopicSlugPage;
