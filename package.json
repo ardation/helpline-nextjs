@@ -38,7 +38,7 @@
         "lodash": "^4.17.21",
         "moment-timezone": "^0.5.32",
         "next": "^10.0.3",
-        "next-seo": "^4.17.0",
+        "next-seo": "^4.26.0",
         "react": "16.14.0",
         "react-copy-to-clipboard": "^5.0.2",
         "react-div-100vh": "^0.3.8",
@@ -101,7 +101,7 @@
         "raw-loader": "^4.0.2",
         "ts-jest": "^25.5.1",
         "typescript": "^3.9.7",
-        "webpack-cli": "^3.3.12",
+        "webpack-cli": "^4.7.2",
         "zoid": "^9.0.62"
     },
     "husky": {
