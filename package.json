@@ -102,7 +102,7 @@
         "ts-jest": "^25.5.1",
         "typescript": "^3.9.7",
         "webpack-cli": "^3.3.12",
-        "zoid": "^9.0.62"
+        "zoid": "^9.0.73"
     },
     "husky": {
         "hooks": {
