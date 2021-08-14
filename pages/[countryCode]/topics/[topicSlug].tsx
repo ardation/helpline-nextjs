@@ -41,7 +41,7 @@ const CountryCodeTopicSlugPage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetCountryCodeTopicSlugProps($countryCode: String!, $topicSlug: String!) {
             country(code: $countryCode) {
@@ -126,6 +126,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             key: `${context.params.countryCode}-${context.params.topicSlug}`,
             // https://github.com/zeit/next.js/issues/9992
         },
+        revalidate: 60,
     };
 };
 

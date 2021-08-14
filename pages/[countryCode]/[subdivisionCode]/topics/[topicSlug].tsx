@@ -47,7 +47,7 @@ const SubdivisionCodeTopicSlugPage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetCountryCodeSubdivisonCodeTopicSlugProps(
             $countryCode: String!
@@ -142,6 +142,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             key: `${context.params.countryCode}-${context.params.subdivisionCode}-${context.params.topicSlug}`,
             // https://github.com/zeit/next.js/issues/9992
         },
+        revalidate: 60,
     };
 };
 
@@ -182,7 +183,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths,
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 
