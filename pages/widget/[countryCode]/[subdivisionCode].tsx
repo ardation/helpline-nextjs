@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
@@ -13,6 +13,7 @@ import {
 } from '../../../types/GetWidgetSubdivisionCodeProps';
 import Widget from '../../../src/components/Widget';
 import { GetWidgetCountryCodeSubdivisionCodePaths } from '../../../types/GetWidgetCountryCodeSubdivisionCodePaths';
+import { WidgetSubdivisionCodePageView } from '../../../types/WidgetSubdivisionCodePageView';
 
 interface Props extends GetWidgetSubdivisionCodeProps {
     subdivision: Subdivision;
@@ -38,6 +39,25 @@ const WidgetSubdivisionCodePage = ({
             return { name: topic };
         });
     }
+
+    useEffect(() => {
+        const mutation = gql`
+            mutation WidgetSubdivisionCodePageView($input: CountrySubdivisionIncrementCountMutationInput!) {
+                countrySubdivisionIncrementCount(input: $input) {
+                    subdivision {
+                        id
+                    }
+                }
+            }
+        `;
+        request<WidgetSubdivisionCodePageView>('https://api.findahelpline.com', print(mutation), {
+            input: {
+                countryCode: country.code,
+                code: subdivision.code,
+            },
+        });
+    }, []);
+
     return (
         <>
             <style global jsx>{`

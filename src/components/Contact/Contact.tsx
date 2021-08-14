@@ -19,6 +19,7 @@ import { request } from 'graphql-request';
 import { Formik } from 'formik';
 import NextLink from 'next/link';
 import * as Yup from 'yup';
+import { ContactCreate } from '../../../types/ContactCreate';
 
 type Props = {
     grecaptcha?: object;
@@ -73,14 +74,12 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
                 }
             }
         `;
-
-        await request('https://api.findahelpline.com', print(query), {
+        await request<ContactCreate>('https://api.findahelpline.com', print(query), {
             subject,
             email,
             message,
             recaptchaToken,
         });
-
         setContactReceived(true);
     };
 

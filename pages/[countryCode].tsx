@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
@@ -9,6 +9,7 @@ import Chrome from '../src/components/Chrome';
 import { GetCountryCodeProps } from '../types/GetCountryCodeProps';
 import OrganizationList from '../src/components/OrganizationList';
 import { GetCountryCodePaths } from '../types/GetCountryCodePaths';
+import { CountryCodePageView } from '../types/CountryCodePageView';
 
 interface Props extends GetCountryCodeProps {
     key: string | string[];
@@ -31,6 +32,23 @@ const CountryCodePage = ({
             return { name: topic };
         });
     }
+
+    useEffect(() => {
+        const mutation = gql`
+            mutation CountryCodePageView($input: CountryIncrementCountMutationInput!) {
+                countryIncrementCount(input: $input) {
+                    country {
+                        id
+                    }
+                }
+            }
+        `;
+        request<CountryCodePageView>('https://api.findahelpline.com', print(mutation), {
+            input: {
+                code: country.code,
+            },
+        });
+    }, []);
 
     return (
         <>

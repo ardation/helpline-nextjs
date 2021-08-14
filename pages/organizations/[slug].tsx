@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import gql from 'graphql-tag';
@@ -8,12 +8,31 @@ import Chrome from '../../src/components/Chrome';
 import { GetOrganizationsSlugProps } from '../../types/GetOrganizationsSlugProps';
 import OrganizationItem from '../../src/components/OrganizationItem';
 import { GetOrganizationsSlugPaths } from '../../types/GetOrganizationsSlugPaths';
+import { CountEnum } from '../../types/globalTypes';
+import { OrganizationPageView } from '../../types/OrganizationPageView';
 
 interface Props extends GetOrganizationsSlugProps {
     key: string | string[];
 }
 
 const OrganizationPage = ({ organization }: Props): ReactElement => {
+    useEffect(() => {
+        const mutation = gql`
+            mutation OrganizationPageView($input: OrganizationIncrementCountMutationInput!) {
+                organizationIncrementCount(input: $input) {
+                    organization {
+                        id
+                    }
+                }
+            }
+        `;
+        request<OrganizationPageView>('https://api.findahelpline.com', print(mutation), {
+            input: {
+                slug: organization.slug,
+                count: CountEnum.VIEW,
+            },
+        });
+    }, []);
     return (
         <>
             <NextSeo title={`${organization.name} in ${organization.country.name}`} />
@@ -72,7 +91,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
             }
         }
     `;
-    const { organization } = await request('https://api.findahelpline.com', print(query), {
+    const { organization } = await request<GetOrganizationsSlugProps>('https://api.findahelpline.com', print(query), {
         slug: context.params.slug,
     });
     return {

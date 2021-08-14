@@ -24,6 +24,7 @@ import { print } from 'graphql';
 import { request } from 'graphql-request';
 import { Formik } from 'formik';
 import TimeIcon from '../../assets/time-icon.svg';
+import { OrganizationReviewCreate } from '../../../types/OrganizationReviewCreate';
 
 type Organization = {
     id: string;
@@ -161,7 +162,7 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
             }
         `;
 
-        await request('https://api.findahelpline.com', print(query), {
+        await request<OrganizationReviewCreate>('https://api.findahelpline.com', print(query), {
             organizationId: organization.id,
             rating: parseInt(rating),
             responseTime: parseInt(responseTime),
