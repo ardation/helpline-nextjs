@@ -50,7 +50,7 @@ const CountryCodePage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps = async (context) => {
     const query = gql`
         query GetCountryCodeProps($countryCode: String!) {
             country(code: $countryCode) {
@@ -127,6 +127,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             topics,
             key: context.params.countryCode, // https://github.com/zeit/next.js/issues/9992
         },
+        revalidate: 60,
     };
 };
 
@@ -141,14 +142,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const { countries } = await request<GetCountryCodePaths>('https://api.findahelpline.com', print(query));
 
     return {
-        paths: countries.map((country) => {
+        paths: countries.slice(0, 20).map((country) => {
             return {
                 params: {
                     countryCode: country.code.toLowerCase(),
                 },
             };
         }),
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 
