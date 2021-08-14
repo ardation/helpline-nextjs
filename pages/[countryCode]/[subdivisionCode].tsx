@@ -57,7 +57,7 @@ const SubdivisionCodePage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetCountryCodeSubdivisonCodeProps($countryCode: String!, $subdivisionCode: String!) {
             country(code: $countryCode) {

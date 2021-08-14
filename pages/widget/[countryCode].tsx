@@ -58,7 +58,7 @@ const WidgetCountryCodePage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetWidgetCountryCodeProps($countryCode: String!) {
             country(code: $countryCode) {

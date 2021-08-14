@@ -64,7 +64,7 @@ const WidgetSubdivisionCodePage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetWidgetSubdivisionCodeProps($countryCode: String!, $subdivisionCode: String!) {
             country(code: $countryCode) {

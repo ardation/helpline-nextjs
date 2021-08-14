@@ -20,7 +20,7 @@ const GetTheWidgetPage = (widgetProps: WidgetProps): ReactElement => {
     );
 };
 
-export const getStaticProps: GetStaticProps = async (): Promise<{ props: WidgetProps }> => {
+export const getStaticProps: GetStaticProps<WidgetProps> = async () => {
     const query = gql`
         query GetTheWidgetProps($countryCode: String!) {
             country(code: $countryCode) {
