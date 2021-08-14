@@ -30,7 +30,10 @@ const SubdivisionCodeTopicSlugPage = ({
 }: Props): ReactElement => {
     return (
         <>
-            <NextSeo title={`Free helplines for ${topic.name} in ${subdivision.name}, ${country.name}`} />
+            <NextSeo
+                title={`${topic.name} in ${subdivision.name}, ${country.name}`}
+                description={`Need to talk? Get free, confidential support with ${topic.name} from a real human. Web chat, text and phone helplines. No sign up or personal info required.`}
+            />
             <Chrome country={country} footer>
                 <OrganizationList
                     organizations={organizations.nodes}

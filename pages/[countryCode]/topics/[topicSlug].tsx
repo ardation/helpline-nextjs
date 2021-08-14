@@ -25,7 +25,10 @@ const CountryCodeTopicSlugPage = ({
 }: Props): ReactElement => {
     return (
         <>
-            <NextSeo title={`Free helplines for ${topic.name} in ${country.name}`} />
+            <NextSeo
+                title={`${topic.name} helplines in ${country.name}`}
+                description={`Need to talk? Get free, confidential support with ${topic.name} from a real human. Web chat, text and phone helplines. No sign up or personal info required.`}
+            />
             <Chrome country={country} footer>
                 <OrganizationList
                     organizations={organizations.nodes}
