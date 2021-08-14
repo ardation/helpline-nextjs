@@ -1,24 +1,41 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
+import { NextSeo } from 'next-seo';
 import Chrome from '../../src/components/Chrome';
 import { GetOrganizationsSlugProps } from '../../types/GetOrganizationsSlugProps';
 import OrganizationItem from '../../src/components/OrganizationItem';
 import { GetOrganizationsSlugPaths } from '../../types/GetOrganizationsSlugPaths';
+import { CountEnum } from '../../types/globalTypes';
+import { OrganizationPageView } from '../../types/OrganizationPageView';
 
 interface Props extends GetOrganizationsSlugProps {
     key: string | string[];
 }
 
 const OrganizationPage = ({ organization }: Props): ReactElement => {
+    useEffect(() => {
+        const mutation = gql`
+            mutation OrganizationPageView($input: OrganizationIncrementCountMutationInput!) {
+                organizationIncrementCount(input: $input) {
+                    organization {
+                        id
+                    }
+                }
+            }
+        `;
+        request<OrganizationPageView>('https://api.findahelpline.com', print(mutation), {
+            input: {
+                slug: organization.slug,
+                count: CountEnum.VIEW,
+            },
+        });
+    }, []);
     return (
         <>
-            <Head>
-                <title>Find A Helpline | {organization.name}</title>
-            </Head>
+            <NextSeo title={`${organization.name} in ${organization.country.name}`} />
             <Chrome country={organization.country} navBar footer>
                 <OrganizationItem organization={organization} />
             </Chrome>
@@ -26,7 +43,7 @@ const OrganizationPage = ({ organization }: Props): ReactElement => {
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetOrganizationsSlugProps($slug: String!) {
             organization(slug: $slug) {
@@ -74,13 +91,14 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             }
         }
     `;
-    const { organization } = await request('https://api.findahelpline.com', print(query), {
+    const { organization } = await request<GetOrganizationsSlugProps>('https://api.findahelpline.com', print(query), {
         slug: context.params.slug,
     });
     return {
         props: {
             organization,
             key: context.params.slug, // https://github.com/zeit/next.js/issues/9992
+            revalidate: 60,
         },
     };
 };
@@ -88,7 +106,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
 export const getStaticPaths: GetStaticPaths = async () => {
     const query = gql`
         query GetOrganizationsSlugPaths {
-            organizations {
+            organizations(first: 100) {
                 nodes {
                     slug
                 }
@@ -105,7 +123,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 },
             };
         }),
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 

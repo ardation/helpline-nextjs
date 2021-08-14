@@ -4,12 +4,17 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LanguageIcon from '@material-ui/icons/Language';
 import ReactGA, { outboundLink } from 'react-ga';
 import { noop } from 'lodash/fp';
+import gql from 'graphql-tag';
+import { print } from 'graphql';
+import { request } from 'graphql-request';
 import OrganizationOpen from '../OrganizationOpen';
 import Chips from '../Chips';
 import OrganizationRating from '../OrganizationRating';
 import CallIcon from '../../assets/call-icon.svg';
 import TextIcon from '../../assets/text-icon.svg';
 import HelplineFormDialog from '../HelplineFormDialog';
+import { CountEnum } from '../../../types/globalTypes';
+import { OrganizationContentLinkClick } from '../../../types/OrganizationContentLinkClick';
 
 type OpeningHour = {
     day: string;
@@ -116,7 +121,7 @@ const OrganizationContent = ({ organization, variant, expandable, onLink }: Prop
     const classes = useStyles();
     const [feedbackOpen, setFeedbackOpen] = useState(false);
 
-    const onLinkClick = (label: string, gaEventAction = '') => (): void => {
+    const onLinkClick = (label: string, gaEventAction: string, count: CountEnum) => (): void => {
         const dimension7 = organization.categories.map(({ name }) => name).join(', ');
         ReactGA.event({
             category: 'Helpline Card Engagement',
@@ -124,6 +129,21 @@ const OrganizationContent = ({ organization, variant, expandable, onLink }: Prop
             label: label,
             dimension6: organization.name,
             dimension7: dimension7,
+        });
+        const mutation = gql`
+            mutation OrganizationContentLinkClick($input: OrganizationIncrementCountMutationInput!) {
+                organizationIncrementCount(input: $input) {
+                    organization {
+                        id
+                    }
+                }
+            }
+        `;
+        request<OrganizationContentLinkClick>('https://api.findahelpline.com', print(mutation), {
+            input: {
+                slug: organization.slug,
+                count,
+            },
         });
         if (gaEventAction === 'Website URL') {
             setFeedbackOpen(true);
@@ -182,7 +202,7 @@ const OrganizationContent = ({ organization, variant, expandable, onLink }: Prop
                                 </SvgIcon>
                             }
                             data-testid="smsNumber"
-                            onClick={onLinkClick(`sms:${organization.smsNumber}`, 'SMS Number')}
+                            onClick={onLinkClick(`sms:${organization.smsNumber}`, 'SMS Number', CountEnum.SMS_NUMBER)}
                             href={`sms:${organization.smsNumber}`}
                             target="_parent"
                             rel="noopener noreferrer"
@@ -200,7 +220,11 @@ const OrganizationContent = ({ organization, variant, expandable, onLink }: Prop
                                 </SvgIcon>
                             }
                             data-testid="phoneNumber"
-                            onClick={onLinkClick(`tel:${organization.phoneNumber}`, 'Phone Number')}
+                            onClick={onLinkClick(
+                                `tel:${organization.phoneNumber}`,
+                                'Phone Number',
+                                CountEnum.PHONE_NUMBER,
+                            )}
                             href={`tel:${organization.phoneNumber}`}
                             target="_parent"
                             rel="noopener noreferrer"
@@ -217,7 +241,7 @@ const OrganizationContent = ({ organization, variant, expandable, onLink }: Prop
                         className={[classes.button, classes.buttonLink].join(' ')}
                         startIcon={<LanguageIcon />}
                         data-testid="url"
-                        onClick={onLinkClick(organization.url, 'Website URL')}
+                        onClick={onLinkClick(organization.url, 'Website URL', CountEnum.URL)}
                         href={organization.url}
                         target="_blank"
                         rel="noopener noreferrer"

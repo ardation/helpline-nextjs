@@ -122,7 +122,7 @@ const OrganizationItem = ({ organization }: Props): ReactElement => {
             <Container maxWidth="sm">
                 <Box className={classes.grid}>
                     <Box ml={1} mb={1}>
-                        <Typography variant="h6" className={classes.heading}>
+                        <Typography variant="h6" component="h1" className={classes.heading}>
                             {organization.name}
                             {organization.verified && (
                                 <Tooltip title="Verified by Find A Helpline" placement="left" arrow enterTouchDelay={0}>

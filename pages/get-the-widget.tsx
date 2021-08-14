@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
+import { NextSeo } from 'next-seo';
 import WidgetPartners from '../src/components/WidgetPartners';
 import { WidgetProps } from '../src/components/Widget/Widget';
 import { GetTheWidgetProps } from '../types/GetTheWidgetProps';
@@ -12,9 +12,7 @@ import Chrome from '../src/components/Chrome';
 const GetTheWidgetPage = (widgetProps: WidgetProps): ReactElement => {
     return (
         <>
-            <Head>
-                <title>Find A Helpline | Get the Widget</title>
-            </Head>
+            <NextSeo title="Get the Widget" />
             <Chrome navBar footer>
                 <WidgetPartners widgetProps={widgetProps} />
             </Chrome>
@@ -22,7 +20,7 @@ const GetTheWidgetPage = (widgetProps: WidgetProps): ReactElement => {
     );
 };
 
-export const getStaticProps: GetStaticProps = async (): Promise<{ props: WidgetProps }> => {
+export const getStaticProps: GetStaticProps<WidgetProps> = async () => {
     const query = gql`
         query GetTheWidgetProps($countryCode: String!) {
             country(code: $countryCode) {

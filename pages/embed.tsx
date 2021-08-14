@@ -2,21 +2,15 @@ import React, { ReactElement } from 'react';
 import { request } from 'graphql-request';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
-import Head from 'next/head';
 import Embed from '../src/components/Embed';
 import Chrome from '../src/components/Chrome';
 import { GetEmbedProps } from '../types/GetEmbedProps';
 
 const EmbedPage = ({ countries, topics }: GetEmbedProps): ReactElement => {
     return (
-        <>
-            <Head>
-                <title>Find A Helpline</title>
-            </Head>
-            <Chrome footer>
-                <Embed countries={countries} topics={topics} />
-            </Chrome>
-        </>
+        <Chrome footer>
+            <Embed countries={countries} topics={topics} />
+        </Chrome>
     );
 };
 

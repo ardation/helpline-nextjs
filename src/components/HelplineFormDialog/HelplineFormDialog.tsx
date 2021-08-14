@@ -59,9 +59,7 @@ const HelplineFormDialog = ({ slug, open, onClose: handleClose }: Props): ReactE
         <DialogTitle>
             <Grid container wrap="nowrap" alignItems="center">
                 <Grid item xs zeroMinWidth>
-                    <Typography noWrap variant="h5">
-                        {page.title}
-                    </Typography>
+                    <Typography variant="h5">{page.title}</Typography>
                 </Grid>
                 <Grid item>
                     <IconButton onClick={handleClose} data-testid="close" name="Close">

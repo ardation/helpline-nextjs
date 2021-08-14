@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
@@ -6,12 +6,14 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { find, flatten } from 'lodash/fp';
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 import {
     GetWidgetSubdivisionCodeProps,
     GetWidgetSubdivisionCodeProps_country_subdivisions as Subdivision,
 } from '../../../types/GetWidgetSubdivisionCodeProps';
 import Widget from '../../../src/components/Widget';
 import { GetWidgetCountryCodeSubdivisionCodePaths } from '../../../types/GetWidgetCountryCodeSubdivisionCodePaths';
+import { WidgetSubdivisionCodePageView } from '../../../types/WidgetSubdivisionCodePageView';
 
 interface Props extends GetWidgetSubdivisionCodeProps {
     subdivision: Subdivision;
@@ -37,6 +39,25 @@ const WidgetSubdivisionCodePage = ({
             return { name: topic };
         });
     }
+
+    useEffect(() => {
+        const mutation = gql`
+            mutation WidgetSubdivisionCodePageView($input: CountrySubdivisionIncrementCountMutationInput!) {
+                countrySubdivisionIncrementCount(input: $input) {
+                    subdivision {
+                        id
+                    }
+                }
+            }
+        `;
+        request<WidgetSubdivisionCodePageView>('https://api.findahelpline.com', print(mutation), {
+            input: {
+                countryCode: country.code,
+                code: subdivision.code,
+            },
+        });
+    }, []);
+
     return (
         <>
             <style global jsx>{`
@@ -44,10 +65,8 @@ const WidgetSubdivisionCodePage = ({
                     background-color: transparent !important;
                 }
             `}</style>
+            <NextSeo title={`${subdivision.name}, ${country.name}`} />
             <Head>
-                <title>
-                    Find A Helpline | {subdivision.name}, {country.name}
-                </title>
                 <script src="/widget.min.js"></script>
             </Head>
             <Widget
@@ -65,7 +84,7 @@ const WidgetSubdivisionCodePage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetWidgetSubdivisionCodeProps($countryCode: String!, $subdivisionCode: String!) {
             country(code: $countryCode) {
@@ -161,6 +180,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             countries,
             key: context.params.subdivisionCode, // https://github.com/zeit/next.js/issues/9992
         },
+        revalidate: 60,
     };
 };
 
@@ -182,8 +202,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths: flatten(
-            countries.map((country) => {
-                return country.subdivisions.map((subdivision) => {
+            countries.slice(0, 20).map((country) => {
+                return country.subdivisions.slice(0, 20).map((subdivision) => {
                     return {
                         params: {
                             countryCode: country.code.toLowerCase(),
@@ -193,7 +213,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 });
             }),
         ),
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 

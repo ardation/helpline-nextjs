@@ -1,11 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { find, flatten } from 'lodash/fp';
+import { NextSeo } from 'next-seo';
 import Chrome from '../../src/components/Chrome';
 import OrganizationList from '../../src/components/OrganizationList';
 import {
@@ -13,6 +13,7 @@ import {
     GetCountryCodeSubdivisonCodeProps_country_subdivisions as Subdivision,
 } from '../../types/GetCountryCodeSubdivisonCodeProps';
 import { GetCountryCodeSubdivisionCodePaths } from '../../types/GetCountryCodeSubdivisionCodePaths';
+import { SubdivisionCodePageView } from '../../types/SubdivisionCodePageView';
 
 interface Props extends GetCountryCodeSubdivisonCodeProps {
     subdivision: Subdivision;
@@ -38,13 +39,27 @@ const SubdivisionCodePage = ({
         });
     }
 
+    useEffect(() => {
+        const mutation = gql`
+            mutation SubdivisionCodePageView($input: CountrySubdivisionIncrementCountMutationInput!) {
+                countrySubdivisionIncrementCount(input: $input) {
+                    subdivision {
+                        id
+                    }
+                }
+            }
+        `;
+        request<SubdivisionCodePageView>('https://api.findahelpline.com', print(mutation), {
+            input: {
+                countryCode: country.code,
+                code: subdivision.code,
+            },
+        });
+    }, []);
+
     return (
         <>
-            <Head>
-                <title>
-                    Find A Helpline | {subdivision.name}, {country.name}
-                </title>
-            </Head>
+            <NextSeo title={`${subdivision.name}, ${country.name}`} />
             <Chrome country={country} footer>
                 <OrganizationList
                     organizations={organizations.nodes}
@@ -61,7 +76,7 @@ const SubdivisionCodePage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetCountryCodeSubdivisonCodeProps($countryCode: String!, $subdivisionCode: String!) {
             country(code: $countryCode) {
@@ -144,6 +159,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             topics,
             key: context.params.subdivisionCode, // https://github.com/zeit/next.js/issues/9992
         },
+        revalidate: 60,
     };
 };
 
@@ -166,7 +182,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths: flatten(
-            countries.map((country) => {
+            countries.slice(0, 20).map((country) => {
                 return country.subdivisions.map((subdivision) => {
                     return {
                         params: {
@@ -177,7 +193,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 });
             }),
         ),
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 

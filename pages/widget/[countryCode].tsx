@@ -1,13 +1,15 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { request } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 import { GetWidgetCountryCodeProps } from '../../types/GetWidgetCountryCodeProps';
 import Widget from '../../src/components/Widget';
 import { GetWidgetCountryCodePaths } from '../../types/GetWidgetCountryCodePaths';
+import { WidgetCountryCodePageView } from '../../types/WidgetCountryCodePageView';
 
 interface Props extends GetWidgetCountryCodeProps {
     key: string | string[];
@@ -32,6 +34,23 @@ const WidgetCountryCodePage = ({
         });
     }
 
+    useEffect(() => {
+        const mutation = gql`
+            mutation WidgetCountryCodePageView($input: CountryIncrementCountMutationInput!) {
+                countryIncrementCount(input: $input) {
+                    country {
+                        id
+                    }
+                }
+            }
+        `;
+        request<WidgetCountryCodePageView>('https://api.findahelpline.com', print(mutation), {
+            input: {
+                code: country.code,
+            },
+        });
+    }, []);
+
     return (
         <>
             <style global jsx>{`
@@ -39,8 +58,8 @@ const WidgetCountryCodePage = ({
                     background-color: transparent !important;
                 }
             `}</style>
+            <NextSeo title={country.name} />
             <Head>
-                <title>Find A Helpline | {country.name}</title>
                 <script src="/widget.min.js"></script>
             </Head>
             <Widget
@@ -57,7 +76,7 @@ const WidgetCountryCodePage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetWidgetCountryCodeProps($countryCode: String!) {
             country(code: $countryCode) {
@@ -151,6 +170,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             countries,
             key: context.params.countryCode, // https://github.com/zeit/next.js/issues/9992
         },
+        revalidate: 60,
     };
 };
 
@@ -165,14 +185,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const { countries } = await request<GetWidgetCountryCodePaths>('https://api.findahelpline.com', print(query));
 
     return {
-        paths: countries.map((country) => {
+        paths: countries.slice(0, 20).map((country) => {
             return {
                 params: {
                     countryCode: country.code.toLowerCase(),
                 },
             };
         }),
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 
