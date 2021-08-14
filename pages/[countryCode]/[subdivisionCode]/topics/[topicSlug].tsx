@@ -166,8 +166,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     );
     const paths: { params: { countryCode: string; subdivisionCode: string; topicSlug: string } }[] = [];
 
-    countries.forEach((country) => {
-        return country.subdivisions.forEach((subdivision) => {
+    countries.slice(0, 20).forEach((country) => {
+        return country.subdivisions.slice(0, 50).forEach((subdivision) => {
             return topics.forEach(({ slug }) => {
                 paths.push({
                     params: {

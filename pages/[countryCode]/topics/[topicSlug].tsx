@@ -147,7 +147,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths: flatten(
-            countries.map(({ code }) => {
+            countries.slice(0, 20).map(({ code }) => {
                 return topics.map(({ slug }) => {
                     return {
                         params: {
@@ -158,7 +158,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 });
             }),
         ),
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 
