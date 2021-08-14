@@ -57,7 +57,7 @@ const SubdivisionCodePage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetCountryCodeSubdivisonCodeProps($countryCode: String!, $subdivisionCode: String!) {
             country(code: $countryCode) {
@@ -140,6 +140,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             topics,
             key: context.params.subdivisionCode, // https://github.com/zeit/next.js/issues/9992
         },
+        revalidate: 60,
     };
 };
 
@@ -162,7 +163,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths: flatten(
-            countries.map((country) => {
+            countries.slice(0, 20).map((country) => {
                 return country.subdivisions.map((subdivision) => {
                     return {
                         params: {
@@ -173,7 +174,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 });
             }),
         ),
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 

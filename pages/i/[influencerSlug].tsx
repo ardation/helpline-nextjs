@@ -26,7 +26,7 @@ const InfluencerSlugPage = ({ influencer, topics, countries }: Props): ReactElem
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetInfluencerSlugProps($influencerSlug: String!) {
             influencer(slug: $influencerSlug) {

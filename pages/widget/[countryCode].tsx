@@ -58,7 +58,7 @@ const WidgetCountryCodePage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetWidgetCountryCodeProps($countryCode: String!) {
             country(code: $countryCode) {
@@ -152,6 +152,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
             countries,
             key: context.params.countryCode, // https://github.com/zeit/next.js/issues/9992
         },
+        revalidate: 60,
     };
 };
 
@@ -166,14 +167,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const { countries } = await request<GetWidgetCountryCodePaths>('https://api.findahelpline.com', print(query));
 
     return {
-        paths: countries.map((country) => {
+        paths: countries.slice(0, 20).map((country) => {
             return {
                 params: {
                     countryCode: country.code.toLowerCase(),
                 },
             };
         }),
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 

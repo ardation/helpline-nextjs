@@ -24,7 +24,7 @@ const OrganizationPage = ({ organization }: Props): ReactElement => {
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context): Promise<{ props: Props }> => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const query = gql`
         query GetOrganizationsSlugProps($slug: String!) {
             organization(slug: $slug) {
@@ -79,6 +79,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
         props: {
             organization,
             key: context.params.slug, // https://github.com/zeit/next.js/issues/9992
+            revalidate: 60,
         },
     };
 };
@@ -86,7 +87,7 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
 export const getStaticPaths: GetStaticPaths = async () => {
     const query = gql`
         query GetOrganizationsSlugPaths {
-            organizations {
+            organizations(first: 100) {
                 nodes {
                     slug
                 }
@@ -103,7 +104,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 },
             };
         }),
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 
