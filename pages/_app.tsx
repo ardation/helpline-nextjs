@@ -3,10 +3,9 @@ import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { AppProps } from 'next/app';
-import { Router } from 'next/router';
-import ReactGA from 'react-ga';
 import { hotjar } from 'react-hotjar';
 import { DefaultSeo } from 'next-seo';
+import TagManager from 'react-gtm-module';
 import theme from '../src/theme';
 import '@fontsource/source-sans-pro/400.css';
 import '@fontsource/source-sans-pro/600.css';
@@ -19,11 +18,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         if (jssStyles) {
             jssStyles.parentElement.removeChild(jssStyles);
         }
-        ReactGA.initialize(process.env.GA_ID);
-        ReactGA.pageview(window.location.pathname + window.location.search);
-        Router.events.on('routeChangeComplete', (url) => {
-            ReactGA.pageview(url);
-        });
+
+        TagManager.initialize({ gtmId: 'GTM-TWF6HD4' });
 
         if (process.env.NODE_ENV === 'production') {
             hotjar.initialize(parseInt(process.env.HOTJAR_ID), 6);
