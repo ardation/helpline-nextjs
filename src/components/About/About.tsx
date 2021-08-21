@@ -10,6 +10,7 @@ import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 import { compact } from 'lodash/fp';
 import Image from 'next/image';
 import Highlight from '../Highlight';
+import CountryAccordian from '../CountryAccordian';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme) =>
 type Country = {
     code: string;
     name: string;
+    region: string;
 };
 
 interface Props {
@@ -73,70 +75,65 @@ const About = ({ countries, isPage }: Props): ReactElement => {
             >
                 <Container maxWidth="xs">
                     {!isPage && (
-                        <>
-                            {/* <Box mb={2}>
-                                <Donate />
-                            </Box> */}
-                            <Box mb={5}>
-                                <Typography className={classes.partnerHeading}>Key Partners</Typography>
-                                <Divider />
-                                <Box mx={2} my={2}>
-                                    <Grid container spacing={2} alignItems="center">
-                                        <Grid item xs={7}>
-                                            <Image
-                                                layout="responsive"
-                                                src="/partners/IASP.png"
-                                                className={classes.partnerImg}
-                                                width={364}
-                                                height={62}
-                                                alt="International Association for Suicide Prevention"
-                                            />
-                                        </Grid>
-                                        <Grid item xs={5}>
-                                            <Image
-                                                layout="responsive"
-                                                src="/partners/GravityLab.png"
-                                                className={classes.partnerImg}
-                                                width={233}
-                                                height={50}
-                                                alt="Gravity Lab"
-                                            />
-                                        </Grid>
-                                        <Grid item xs={4}>
-                                            <Image
-                                                layout="responsive"
-                                                src="/partners/Polyform.png"
-                                                className={classes.partnerImg}
-                                                width={194}
-                                                height={60}
-                                                alt="Polyform"
-                                            />
-                                        </Grid>
-                                        <Grid item xs={4}>
-                                            <Image
-                                                layout="responsive"
-                                                src="/partners/SearchRepublic.png"
-                                                className={classes.partnerImg}
-                                                width={213}
-                                                height={70}
-                                                alt="Search Republic"
-                                            />
-                                        </Grid>
-                                        <Grid item xs={4}>
-                                            <Image
-                                                layout="responsive"
-                                                src="/partners/DataStory.png"
-                                                className={classes.partnerImg}
-                                                width={239}
-                                                height={30}
-                                                alt="Data Story"
-                                            />
-                                        </Grid>
+                        <Box mb={5}>
+                            <Typography className={classes.partnerHeading}>Key Partners</Typography>
+                            <Divider />
+                            <Box mx={2} my={2}>
+                                <Grid container spacing={2} alignItems="center">
+                                    <Grid item xs={7}>
+                                        <Image
+                                            layout="responsive"
+                                            src="/partners/IASP.png"
+                                            className={classes.partnerImg}
+                                            width={364}
+                                            height={62}
+                                            alt="International Association for Suicide Prevention"
+                                        />
                                     </Grid>
-                                </Box>
-                                <Divider />
+                                    <Grid item xs={5}>
+                                        <Image
+                                            layout="responsive"
+                                            src="/partners/GravityLab.png"
+                                            className={classes.partnerImg}
+                                            width={233}
+                                            height={50}
+                                            alt="Gravity Lab"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <Image
+                                            layout="responsive"
+                                            src="/partners/Polyform.png"
+                                            className={classes.partnerImg}
+                                            width={194}
+                                            height={60}
+                                            alt="Polyform"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <Image
+                                            layout="responsive"
+                                            src="/partners/SearchRepublic.png"
+                                            className={classes.partnerImg}
+                                            width={213}
+                                            height={70}
+                                            alt="Search Republic"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <Image
+                                            layout="responsive"
+                                            src="/partners/DataStory.png"
+                                            className={classes.partnerImg}
+                                            width={239}
+                                            height={30}
+                                            alt="Data Story"
+                                        />
+                                    </Grid>
+                                </Grid>
                             </Box>
-                        </>
+                            <Divider />
+                        </Box>
                     )}
                     <Typography variant="h5" align="center">
                         Free emotional support, wherever you are
@@ -233,21 +230,7 @@ const About = ({ countries, isPage }: Props): ReactElement => {
                         <Typography variant="h6" gutterBottom>
                             Supported countries
                         </Typography>
-                        <Grid container spacing={2}>
-                            {countries.map((country) => {
-                                return (
-                                    <Grid item xs={6} key={country.code}>
-                                        <NextLink
-                                            href={`/${country.code.toLowerCase()}`}
-                                            prefetch={process.env.NODE_ENV === 'production'}
-                                            passHref
-                                        >
-                                            <Button variant="contained">{country.name}</Button>
-                                        </NextLink>
-                                    </Grid>
-                                );
-                            })}
-                        </Grid>
+                        <CountryAccordian countries={countries} />
                     </Box>
                     <Box mt={4}>
                         <OutboundLink

@@ -26,6 +26,7 @@ export const getStaticProps: GetStaticProps<WidgetProps> = async () => {
                 name
                 emergencyNumber
                 locality
+                region
                 subdivisions {
                     code
                     name
@@ -51,6 +52,7 @@ export const getStaticProps: GetStaticProps<WidgetProps> = async () => {
                 name
                 emergencyNumber
                 locality
+                region
                 subdivisions {
                     code
                     name

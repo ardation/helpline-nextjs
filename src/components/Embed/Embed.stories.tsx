@@ -9,7 +9,14 @@ export default {
 export const Default = (): ReactElement => (
     <Embed
         countries={[
-            { code: 'AU', name: 'Australia', subdivisions: [], locality: LocalityEnum.LOCATION },
+            {
+                code: 'AU',
+                name: 'Australia',
+                subdivisions: [],
+                locality: LocalityEnum.LOCATION,
+
+                region: 'Australia and New Zealand',
+            },
             {
                 code: 'NZ',
                 name: 'New Zealand',
@@ -18,6 +25,7 @@ export const Default = (): ReactElement => (
                     { name: 'Auckland', code: 'AUK' },
                 ],
                 locality: LocalityEnum.LOCATION,
+                region: 'Australia and New Zealand',
             },
         ]}
         topics={[{ name: 'Anxiety' }]}

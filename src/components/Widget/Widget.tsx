@@ -22,6 +22,7 @@ type Country = {
     name: string;
     code: string;
     emergencyNumber: string;
+    region: string;
     subdivisions: Subdivision[];
     locality: LocalityEnum;
 };

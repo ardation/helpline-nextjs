@@ -48,10 +48,18 @@ const country = {
         { name: 'Auckland', code: 'AUK' },
     ],
     locality: LocalityEnum.LOCATION,
+    region: 'Australia and New Zealand',
 };
 
 const countries = [
-    { code: 'AU', name: 'Australia', emergencyNumber: '111', subdivisions: [], locality: LocalityEnum.LOCATION },
+    {
+        code: 'AU',
+        name: 'Australia',
+        emergencyNumber: '111',
+        subdivisions: [],
+        locality: LocalityEnum.LOCATION,
+        region: 'Australia and New Zealand',
+    },
     {
         code: 'NZ',
         name: 'New Zealand',
@@ -61,6 +69,7 @@ const countries = [
             { name: 'Auckland', code: 'AUK' },
         ],
         locality: LocalityEnum.LOCATION,
+        region: 'Australia and New Zealand',
     },
 ];
 

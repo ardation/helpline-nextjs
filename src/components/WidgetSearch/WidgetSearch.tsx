@@ -12,6 +12,7 @@ type Subdivision = {
 type Country = {
     code: string;
     name: string;
+    region: string;
     subdivisions: Subdivision[];
     locality: LocalityEnum;
 };

@@ -13,8 +13,15 @@ describe('CountrySelect', () => {
                 { name: 'Auckland', code: 'AUK' },
             ],
             locality: LocalityEnum.LOCATION,
+            region: 'Australia and New Zealand',
         },
-        { code: 'AU', name: 'Australia', subdivisions: [], locality: LocalityEnum.LOCATION },
+        {
+            code: 'AU',
+            name: 'Australia',
+            subdivisions: [],
+            locality: LocalityEnum.LOCATION,
+            region: 'Australia and New Zealand',
+        },
     ];
 
     it('should contain placeholder', () => {
@@ -30,6 +37,7 @@ describe('CountrySelect', () => {
                 code: 'AU',
                 name: 'Australia',
                 subdivisions: [],
+                region: 'Australia and New Zealand',
                 locality: LocalityEnum.LOCATION,
             });
         };

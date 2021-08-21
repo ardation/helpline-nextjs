@@ -8,8 +8,9 @@ export default {
 export const Default = (): ReactElement => (
     <About
         countries={[
-            { code: 'AU', name: 'Australia' },
-            { code: 'NZ', name: 'New Zealand' },
+            { code: 'AU', name: 'Australia', region: 'Australia and New Zealand' },
+            { code: 'NZ', name: 'New Zealand', region: 'Australia and New Zealand' },
+            { code: 'US', name: 'United States', region: 'Northern America' },
         ]}
     />
 );

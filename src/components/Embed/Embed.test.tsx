@@ -7,7 +7,13 @@ jest.mock('copy-to-clipboard', () => jest.fn());
 
 describe('Embed', () => {
     const countries = [
-        { code: 'AU', name: 'Australia', subdivisions: [], locality: LocalityEnum.LOCATION },
+        {
+            code: 'AU',
+            name: 'Australia',
+            subdivisions: [],
+            locality: LocalityEnum.LOCATION,
+            region: 'Australia and New Zealand',
+        },
         {
             code: 'NZ',
             name: 'New Zealand',
@@ -16,6 +22,7 @@ describe('Embed', () => {
                 { name: 'Auckland', code: 'AUK' },
             ],
             locality: LocalityEnum.LOCATION,
+            region: 'Australia and New Zealand',
         },
     ];
 
