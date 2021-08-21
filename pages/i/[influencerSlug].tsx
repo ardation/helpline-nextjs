@@ -59,6 +59,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
             topics,
             key: context.params.influencerSlug, // https://github.com/zeit/next.js/issues/9992
         },
+        revalidate: 60,
     };
 };
 
@@ -73,14 +74,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const { influencers } = await request<GetInfluencerSlugs>('https://api.findahelpline.com', query);
 
     return {
-        paths: influencers.map((influencer) => {
+        paths: influencers.slice(0, 20).map((influencer) => {
             return {
                 params: {
                     influencerSlug: influencer.slug.toLowerCase(),
                 },
             };
         }),
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 

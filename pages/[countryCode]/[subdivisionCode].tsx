@@ -172,7 +172,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: flatten(
             countries.slice(0, 20).map((country) => {
-                return country.subdivisions.map((subdivision) => {
+                return country.subdivisions.slice(0, 20).map((subdivision) => {
                     return {
                         params: {
                             countryCode: country.code.toLowerCase(),

@@ -96,15 +96,15 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
         props: {
             organization,
             key: context.params.slug, // https://github.com/zeit/next.js/issues/9992
-            revalidate: 60,
         },
+        revalidate: 60,
     };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const query = gql`
         query GetOrganizationsSlugPaths {
-            organizations(first: 100) {
+            organizations(first: 20) {
                 nodes {
                     slug
                 }
