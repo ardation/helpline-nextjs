@@ -92,7 +92,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const { influencers } = await request<GetInfluencerSlugs>('https://api.findahelpline.com', query);
 
     return {
-        paths: influencers.slice(0, 20).map((influencer) => {
+        paths: influencers.slice(0, 19).map((influencer) => {
             return {
                 params: {
                     influencerSlug: influencer.slug.toLowerCase(),

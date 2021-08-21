@@ -152,7 +152,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const { countries } = await request<GetCountryCodePaths>('https://api.findahelpline.com', query);
 
     return {
-        paths: countries.slice(0, 20).map((country) => {
+        paths: countries.slice(0, 19).map((country) => {
             return {
                 params: {
                     countryCode: country.code.toLowerCase(),
