@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { request, gql } from 'graphql-request';
+import { GetStaticProps } from 'next';
 import Search from '../src/components/Search';
 import Chrome from '../src/components/Chrome';
 import { GetSearchProps } from '../types/GetSearchProps';
@@ -12,7 +13,7 @@ const IndexPage = ({ topics, countries }: GetSearchProps): ReactElement => {
     );
 };
 
-export const getStaticProps = async (): Promise<{ props: GetSearchProps }> => {
+export const getStaticProps: GetStaticProps<GetSearchProps> = async () => {
     const query = gql`
         query GetSearchProps {
             countries {
@@ -36,6 +37,7 @@ export const getStaticProps = async (): Promise<{ props: GetSearchProps }> => {
             countries,
             topics,
         },
+        revalidate: 60,
     };
 };
 

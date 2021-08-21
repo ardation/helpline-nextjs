@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { NextSeo } from 'next-seo';
 import request, { gql } from 'graphql-request';
+import { GetStaticProps } from 'next';
 import Chrome from '../src/components/Chrome';
 import Sitemap from '../src/components/Sitemap';
 import { GetSitemapProps } from '../types/GetSitemapProps';
@@ -16,7 +17,7 @@ const SitemapPage = ({ countries, organizations, topics }: GetSitemapProps): Rea
     );
 };
 
-export const getStaticProps = async (): Promise<{ props: GetSitemapProps }> => {
+export const getStaticProps: GetStaticProps<GetSitemapProps> = async () => {
     const query = gql`
         query GetSitemapProps {
             countries {
@@ -46,6 +47,7 @@ export const getStaticProps = async (): Promise<{ props: GetSitemapProps }> => {
             organizations,
             topics,
         },
+        revalidate: 60,
     };
 };
 

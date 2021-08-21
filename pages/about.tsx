@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { request, gql } from 'graphql-request';
 import { NextSeo } from 'next-seo';
+import { GetStaticProps } from 'next';
 import Chrome from '../src/components/Chrome';
 import About from '../src/components/About';
 import { GetAboutProps } from '../types/GetAboutProps';
@@ -16,7 +17,7 @@ const AboutPage = ({ countries }: GetAboutProps): ReactElement => {
     );
 };
 
-export const getStaticProps = async (): Promise<{ props: GetAboutProps }> => {
+export const getStaticProps: GetStaticProps<GetAboutProps> = async () => {
     const query = gql`
         query GetAboutProps {
             countries {
@@ -31,6 +32,7 @@ export const getStaticProps = async (): Promise<{ props: GetAboutProps }> => {
         props: {
             countries,
         },
+        revalidate: 60,
     };
 };
 export default AboutPage;

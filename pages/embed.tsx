@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { request, gql } from 'graphql-request';
+import { GetStaticProps } from 'next';
 import Embed from '../src/components/Embed';
 import Chrome from '../src/components/Chrome';
 import { GetEmbedProps } from '../types/GetEmbedProps';
@@ -12,7 +13,7 @@ const EmbedPage = ({ countries, topics }: GetEmbedProps): ReactElement => {
     );
 };
 
-export const getStaticProps = async (): Promise<{ props: GetEmbedProps }> => {
+export const getStaticProps: GetStaticProps<GetEmbedProps> = async () => {
     const query = gql`
         query GetEmbedProps {
             countries {
@@ -36,6 +37,7 @@ export const getStaticProps = async (): Promise<{ props: GetEmbedProps }> => {
             countries,
             topics,
         },
+        revalidate: 60,
     };
 };
 
