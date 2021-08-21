@@ -125,16 +125,10 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
             }
         }
     `;
-    const {
-        country,
-        organizations,
-        organizationsWhenEmpty,
-        categories,
-        humanSupportTypes,
-        topics,
-    } = await request<GetCountryCodeProps>('https://api.findahelpline.com', print(query), {
-        countryCode: context.params.countryCode,
-    });
+    const { country, organizations, organizationsWhenEmpty, categories, humanSupportTypes, topics } =
+        await request<GetCountryCodeProps>('https://api.findahelpline.com', print(query), {
+            countryCode: context.params.countryCode,
+        });
     return {
         props: {
             country,

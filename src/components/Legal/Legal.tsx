@@ -31,10 +31,10 @@ const Legal = ({ tab }: Props): ReactElement => {
                     </TabList>
                 </Container>
                 <TabPanel value="privacy">
-                    <Markdown source={privacy} />
+                    <Markdown>{privacy}</Markdown>
                 </TabPanel>
                 <TabPanel value="terms">
-                    <Markdown source={terms} />
+                    <Markdown>{terms}</Markdown>
                 </TabPanel>
             </Box>
         </TabContext>

@@ -155,18 +155,11 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
             }
         }
     `;
-    const {
-        country,
-        organizations,
-        organizationsWhenEmpty,
-        categories,
-        humanSupportTypes,
-        topics,
-        countries,
-    } = await request<GetWidgetSubdivisionCodeProps>('https://api.findahelpline.com', print(query), {
-        countryCode: context.params.countryCode,
-        subdivisionCode: context.params.subdivisionCode,
-    });
+    const { country, organizations, organizationsWhenEmpty, categories, humanSupportTypes, topics, countries } =
+        await request<GetWidgetSubdivisionCodeProps>('https://api.findahelpline.com', print(query), {
+            countryCode: context.params.countryCode,
+            subdivisionCode: context.params.subdivisionCode,
+        });
     const subdivision = find({ code: context.params.subdivisionCode.toString().toUpperCase() }, country.subdivisions);
     return {
         props: {

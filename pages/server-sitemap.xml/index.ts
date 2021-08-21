@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                             return {
                                 loc: `${baseUrl}/${countryCode}/${subdivisionCode}?topics=${param}`,
                                 changefreq: 'daily',
-                                priority: '0.7',
+                                priority: 0.7,
                                 lastmod: new Date().toISOString(),
                             };
                         }),
@@ -46,7 +46,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                     return {
                         loc: `${baseUrl}/${countryCode}?topics=${param}`,
                         changefreq: 'daily',
-                        priority: '0.7',
+                        priority: 0.7,
                         lastmod: new Date().toISOString(),
                     };
                 }),

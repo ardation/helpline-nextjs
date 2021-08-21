@@ -8,7 +8,7 @@ import Markdown from '../Markdown';
 const Gratitude = (): ReactElement => {
     return (
         <>
-            <Markdown source={gratitude} />
+            <Markdown>{gratitude}</Markdown>
             <Container maxWidth="sm">
                 <Divider />
             </Container>

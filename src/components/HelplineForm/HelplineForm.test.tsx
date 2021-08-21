@@ -16,7 +16,7 @@ jest.mock('../../util/formium', () => {
 
 describe('HelplineForm', () => {
     it('should submit form correctly', async () => {
-        const { getByRole, getByText } = render(<HelplineForm form={(formData as unknown) as Form} />);
+        const { getByRole, getByText } = render(<HelplineForm form={formData as unknown as Form} />);
         fireEvent.click(getByRole('button', { name: 'Submit' }));
         await waitFor(() =>
             expect(submitForm).toHaveBeenCalledWith('website-visit-feedback', {
@@ -31,14 +31,14 @@ describe('HelplineForm', () => {
 
     it('should call onSuccess', async () => {
         const handleSuccess = jest.fn();
-        const { getByRole } = render(<HelplineForm form={(formData as unknown) as Form} onSuccess={handleSuccess} />);
+        const { getByRole } = render(<HelplineForm form={formData as unknown as Form} onSuccess={handleSuccess} />);
         fireEvent.click(getByRole('button', { name: 'Submit' }));
         await waitFor(() => expect(handleSuccess).toHaveBeenCalled());
     });
 
     it('should set components', () => {
         const Header = (): ReactElement => <div data-testid="header" />;
-        const { getByTestId } = render(<HelplineForm form={(formData as unknown) as Form} components={{ Header }} />);
+        const { getByTestId } = render(<HelplineForm form={formData as unknown as Form} components={{ Header }} />);
         expect(getByTestId('header')).toBeInTheDocument();
     });
 });

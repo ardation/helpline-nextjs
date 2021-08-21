@@ -3,7 +3,7 @@ import fetchMock from 'fetch-mock';
 
 const stubContactCreate = (storyFn): ReactElement => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ((window as unknown) as any).grecaptcha = {
+    (window as unknown as any).grecaptcha = {
         execute: (): string => 'abc',
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         reset: (): void => {},
