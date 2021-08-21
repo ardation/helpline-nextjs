@@ -14,3 +14,14 @@ export const Default = (): ReactElement => (
         ]}
     />
 );
+
+export const WithTopic = (): ReactElement => (
+    <CountryAccordian
+        countries={[
+            { code: 'AU', name: 'Australia', region: 'Australia and New Zealand' },
+            { code: 'NZ', name: 'New Zealand', region: 'Australia and New Zealand' },
+            { code: 'US', name: 'United States', region: 'Northern America' },
+        ]}
+        topic={{ slug: 'anxiety' }}
+    />
+);

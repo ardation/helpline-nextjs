@@ -19,8 +19,13 @@ type Country = {
     region: string;
 };
 
+type Topic = {
+    slug: string;
+};
+
 type Props = {
-    countries?: Country[];
+    countries: Country[];
+    topic?: Topic;
 };
 
 const Accordion = withStyles({
@@ -64,7 +69,7 @@ const useStyles = makeStyles((theme) =>
     }),
 );
 
-const CountryAccordian = ({ countries }: Props): ReactElement => {
+const CountryAccordian = ({ countries, topic }: Props): ReactElement => {
     const classes = useStyles();
     const [expanded, setExpanded] = useState<string | false>(false);
 
@@ -98,7 +103,13 @@ const CountryAccordian = ({ countries }: Props): ReactElement => {
                             <Grid container spacing={2}>
                                 {region.countries.map((country) => (
                                     <Grid item xs={6} key={country.code}>
-                                        <NextLink href={`/${country.code.toLowerCase()}`} prefetch={false} passHref>
+                                        <NextLink
+                                            href={`/${country.code.toLowerCase()}${
+                                                topic ? `/topics/${topic.slug}` : ''
+                                            }`}
+                                            prefetch={false}
+                                            passHref
+                                        >
                                             <Button variant="contained">{country.name}</Button>
                                         </NextLink>
                                     </Grid>
