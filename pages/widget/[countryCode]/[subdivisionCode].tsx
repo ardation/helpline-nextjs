@@ -1,12 +1,11 @@
 import React, { ReactElement, useEffect } from 'react';
-import { request } from 'graphql-request';
+import { request, gql } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
 import { find, flatten } from 'lodash/fp';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
+import Script from 'next/script';
 import {
     GetWidgetSubdivisionCodeProps,
     GetWidgetSubdivisionCodeProps_country_subdivisions as Subdivision,
@@ -50,7 +49,7 @@ const WidgetSubdivisionCodePage = ({
                 }
             }
         `;
-        request<WidgetSubdivisionCodePageView>('https://api.findahelpline.com', print(mutation), {
+        request<WidgetSubdivisionCodePageView>('https://api.findahelpline.com', mutation, {
             input: {
                 countryCode: country.code,
                 code: subdivision.code,
@@ -67,7 +66,7 @@ const WidgetSubdivisionCodePage = ({
             `}</style>
             <NextSeo title={`${subdivision.name}, ${country.name}`} />
             <Head>
-                <script src="/widget.min.js"></script>
+                <Script src="/widget.min.js"></Script>
             </Head>
             <Widget
                 countries={countries}
@@ -155,18 +154,11 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
             }
         }
     `;
-    const {
-        country,
-        organizations,
-        organizationsWhenEmpty,
-        categories,
-        humanSupportTypes,
-        topics,
-        countries,
-    } = await request<GetWidgetSubdivisionCodeProps>('https://api.findahelpline.com', print(query), {
-        countryCode: context.params.countryCode,
-        subdivisionCode: context.params.subdivisionCode,
-    });
+    const { country, organizations, organizationsWhenEmpty, categories, humanSupportTypes, topics, countries } =
+        await request<GetWidgetSubdivisionCodeProps>('https://api.findahelpline.com', query, {
+            countryCode: context.params.countryCode,
+            subdivisionCode: context.params.subdivisionCode,
+        });
     const subdivision = find({ code: context.params.subdivisionCode.toString().toUpperCase() }, country.subdivisions);
     return {
         props: {
@@ -197,7 +189,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     `;
     const { countries } = await request<GetWidgetCountryCodeSubdivisionCodePaths>(
         'https://api.findahelpline.com',
-        print(query),
+        query,
     );
 
     return {

@@ -12,20 +12,16 @@ describe('ItemSelect', () => {
     });
 
     it('should allow chip to be toggled', () => {
-        let counter = 0;
-        const onChange = (items): void => {
-            if (counter === 0) {
-                expect(items).toEqual([{ name: 'happy' }]);
-            } else {
-                expect(items).toEqual([]);
-            }
-            counter += 1;
+        let changedItems = [];
+        const onChange = (newlychangedItems): void => {
+            changedItems = newlychangedItems;
         };
-
         const { getAllByTestId } = render(<ItemSelect items={items} onChange={onChange} />);
         const elements = getAllByTestId('itemChip');
         fireEvent.click(elements[0]);
+        expect(changedItems).toEqual([{ name: 'happy' }]);
         fireEvent.click(elements[0]);
+        expect(changedItems).toEqual([]);
     });
 
     it('should allow chip to be preselected', () => {
@@ -45,20 +41,16 @@ describe('ItemSelect', () => {
 
     describe('single', () => {
         it('should only allow single chip to be selected', () => {
-            let counter = 0;
-            const onChange = (items): void => {
-                if (counter === 0) {
-                    expect(items).toEqual([{ name: 'happy' }]);
-                } else {
-                    expect(items).toEqual([{ name: 'sad' }]);
-                }
-                counter += 1;
+            let changedItems = [];
+            const onChange = (newlychangedItems): void => {
+                changedItems = newlychangedItems;
             };
-
             const { getAllByTestId } = render(<ItemSelect items={items} onChange={onChange} single />);
             const elements = getAllByTestId('itemChip');
             fireEvent.click(elements[0]);
+            expect(changedItems).toEqual([{ name: 'happy' }]);
             fireEvent.click(elements[1]);
+            expect(changedItems).toEqual([{ name: 'sad' }]);
         });
     });
 

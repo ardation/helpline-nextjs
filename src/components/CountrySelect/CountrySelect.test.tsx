@@ -34,37 +34,27 @@ describe('CountrySelect', () => {
             });
         };
 
-        const { getAllByRole } = render(
+        const { getByRole } = render(
             <CountrySelect countries={countries} onCountryChange={onCountryChange} onSubdivisionChange={jest.fn()} />,
         );
-        const countryElement = getAllByRole('textbox')[0];
-        fireEvent.click(countryElement);
-        fireEvent.click(getAllByRole('listbox')[0].children[0]);
+        fireEvent.click(getByRole('button', { name: 'Open' }));
+        fireEvent.click(getByRole('option', { name: 'Australia' }));
     });
 
     it('should call onSubdivisionChange', () => {
-        let counter = 0;
         const onSubdivisionChange = (subdivision): void => {
-            if (counter === 0) {
-                expect(subdivision).toEqual(null);
-            } else {
-                expect(subdivision).toEqual({ name: 'Bay of Plenty', code: 'BOP' });
-            }
-            counter += 1;
+            expect(subdivision).toEqual({ name: 'Bay of Plenty', code: 'BOP' });
         };
-
-        const { getAllByRole } = render(
+        const { getByRole, getAllByRole } = render(
             <CountrySelect
                 countries={countries}
                 onCountryChange={jest.fn()}
                 onSubdivisionChange={onSubdivisionChange}
             />,
         );
-        const countryElement = getAllByRole('textbox')[0];
-        fireEvent.click(countryElement);
-        fireEvent.click(getAllByRole('listbox')[0].children[1]);
-        const subdivisionElement = getAllByRole('textbox')[1];
-        fireEvent.click(subdivisionElement);
-        fireEvent.click(getAllByRole('listbox')[0].children[1]);
+        fireEvent.click(getByRole('button', { name: 'Open' }));
+        fireEvent.click(getByRole('option', { name: 'New Zealand' }));
+        fireEvent.click(getAllByRole('button', { name: 'Open' })[1]);
+        fireEvent.click(getByRole('option', { name: 'Bay of Plenty' }));
     });
 });

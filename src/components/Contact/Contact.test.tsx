@@ -1,9 +1,7 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
-import { request } from 'graphql-request';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
+import { request, gql } from 'graphql-request';
 import Contact from '.';
 
 jest.mock('graphql-request');
@@ -41,7 +39,7 @@ describe('Contact', () => {
         const submitButton = getByText('Send Message');
         fireEvent.click(submitButton);
         await waitFor(() =>
-            expect(mock).toHaveBeenCalledWith('https://api.findahelpline.com', print(query), {
+            expect(mock).toHaveBeenCalledWith('https://api.findahelpline.com', query, {
                 email: 'test@example.com',
                 message: 'message',
                 subject: 'subject',

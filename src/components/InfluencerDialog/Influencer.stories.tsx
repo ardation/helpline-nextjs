@@ -1,10 +1,11 @@
 import React, { ReactElement } from 'react';
 import { Box } from '@material-ui/core';
 import fetchMock from 'fetch-mock';
+import { StoryFn } from '@storybook/addons';
 import formData from '../HelplineForm/formData.json';
 import InfluencerDialog from '.';
 
-const stubFormDataDecorator = (storyFn): ReactElement => {
+const stubFormDataDecorator = (storyFn: StoryFn): ReactElement => {
     fetchMock.get('/api/forms/find-a-helpline-landing-page', formData);
     return <>{storyFn()}</>;
 };

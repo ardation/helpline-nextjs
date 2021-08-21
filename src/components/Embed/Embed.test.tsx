@@ -24,13 +24,13 @@ describe('Embed', () => {
     });
 
     it('should render correct code snippet', async () => {
-        const { getByRole, getByText, getByTestId } = render(
+        const { getByRole, getAllByRole, getByText, getByTestId } = render(
             <Embed countries={countries} topics={[{ name: 'Anxiety' }]} />,
         );
-        fireEvent.click(getByRole('combobox', { name: 'country' }));
-        fireEvent.click(getByText('New Zealand'));
-        fireEvent.click(getByRole('combobox', { name: 'subdivision' }));
-        fireEvent.click(getByText('Auckland'));
+        fireEvent.click(getByRole('button', { name: 'Open' }));
+        fireEvent.click(getByRole('option', { name: 'New Zealand' }));
+        fireEvent.click(getAllByRole('button', { name: 'Open' })[1]);
+        fireEvent.click(getByRole('option', { name: 'Auckland' }));
         fireEvent.click(getByText('Anxiety'));
         expect(getByTestId('EmbedSyntaxHighlighter').textContent).toEqual(
             `<div id="fah-widget"></div>

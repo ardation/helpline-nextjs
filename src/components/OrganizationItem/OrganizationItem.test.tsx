@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import moment from 'moment-timezone';
+import fetchMock from 'jest-fetch-mock';
 import formData from '../HelplineForm/formData.json';
 import OrganizationItem from '.';
 

@@ -6,7 +6,7 @@ import { AppProps } from 'next/app';
 import { hotjar } from 'react-hotjar';
 import { DefaultSeo } from 'next-seo';
 import TagManager from 'react-gtm-module';
-import ReactGA from 'react-ga';
+import { initialize } from 'react-ga';
 import theme from '../src/theme';
 import '@fontsource/source-sans-pro/400.css';
 import '@fontsource/source-sans-pro/600.css';
@@ -21,7 +21,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         }
 
         TagManager.initialize({ gtmId: 'GTM-TWF6HD4' });
-        ReactGA.initialize(process.env.GA_ID, { standardImplementation: true });
+        initialize(process.env.GA_ID, { standardImplementation: true });
 
         if (process.env.NODE_ENV === 'production') {
             hotjar.initialize(parseInt(process.env.HOTJAR_ID), 6);

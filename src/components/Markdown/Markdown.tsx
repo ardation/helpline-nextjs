@@ -1,6 +1,7 @@
 import { createStyles, makeStyles, Box, Container, Typography } from '@material-ui/core';
 import React, { ReactElement } from 'react';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { ReactMarkdownOptions } from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -27,13 +28,13 @@ const useStyles = makeStyles((theme) =>
     }),
 );
 
-const Markdown = (props: ReactMarkdown.ReactMarkdownProps): ReactElement => {
+const Markdown = (props: ReactMarkdownOptions): ReactElement => {
     const classes = useStyles();
     return (
         <Box className={classes.box}>
             <Container maxWidth="sm">
                 <Typography component="div">
-                    <ReactMarkdown escapeHtml={false} {...props} />
+                    <ReactMarkdown {...props} remarkPlugins={[remarkGfm]} />
                 </Typography>
             </Container>
         </Box>

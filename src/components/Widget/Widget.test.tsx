@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import ReactGA from 'react-ga';
+import { event } from 'react-ga';
 import { mocked } from 'ts-jest/utils';
+import { noop } from 'lodash/fp';
 import { LocalityEnum } from '../../../types/globalTypes';
 import Widget from '.';
 
@@ -104,13 +105,13 @@ describe('Widget', () => {
     });
 
     it('should allow organizations to be filtered', () => {
-        mocked(ReactGA.event).mockReturnValue();
+        mocked(event).mockReturnValue();
         const createElement = document.createElement.bind(document);
         // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         document.createElement = (tagName: string) => {
             const element = createElement(tagName);
             if (tagName === 'canvas') {
-                element.getContext = (): {} => ({});
+                element.getContext = noop;
             }
             return element;
         };
@@ -188,8 +189,8 @@ describe('Widget', () => {
             />,
         );
         expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
-            'Open 24/7',
-            'For youthAll issuesOpen 24/7Volunteers, Staff2340800 376 633website.co.nzTextCallWeb Chat',
+            'KidsCanOpen 24/7',
+            'YouthlineFor youthAll issuesOpen 24/7Volunteers, Staff2340800 376 633website.co.nzTextCallWeb Chat',
         ]);
         rerender(
             <Widget
@@ -203,6 +204,6 @@ describe('Widget', () => {
                 preselectedTopics={[{ name: 'Anxiety' }]}
             />,
         );
-        expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual(['Open 24/7']);
+        expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual(['KidsCanOpen 24/7']);
     });
 });

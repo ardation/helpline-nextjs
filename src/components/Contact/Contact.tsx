@@ -12,17 +12,15 @@ import {
     Box,
 } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import ReCAPTCHA from 'react-google-recaptcha';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
-import { request } from 'graphql-request';
+import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import { gql, request } from 'graphql-request';
 import { Formik } from 'formik';
 import NextLink from 'next/link';
 import * as Yup from 'yup';
 import { ContactCreate } from '../../../types/ContactCreate';
 
 type Props = {
-    grecaptcha?: object;
+    grecaptcha?: Record<string, unknown>;
 };
 
 const useStyles = makeStyles((theme) =>
@@ -62,7 +60,7 @@ const ContactSchema = Yup.object().shape({
 const Contact = ({ grecaptcha }: Props): ReactElement => {
     const classes = useStyles();
     const [contactReceived, setContactReceived] = useState(false);
-    const recaptchaRef = useRef<ReCAPTCHA>(null);
+    const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
     const onSubmit = async ({ subject, email, message }): Promise<void> => {
         const recaptchaToken = await recaptchaRef.current.execute();
         const query = gql`
@@ -74,7 +72,7 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
                 }
             }
         `;
-        await request<ContactCreate>('https://api.findahelpline.com', print(query), {
+        await request<ContactCreate>('https://api.findahelpline.com', query, {
             subject,
             email,
             message,
@@ -195,7 +193,7 @@ const Contact = ({ grecaptcha }: Props): ReactElement => {
                                     </Button>
                                 </Grid>
                                 <Grid item>
-                                    <ReCAPTCHA
+                                    <ReactGoogleRecaptcha
                                         ref={recaptchaRef}
                                         size="invisible"
                                         sitekey={process.env.RECAPTCHA_KEY}

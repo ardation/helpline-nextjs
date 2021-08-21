@@ -1,9 +1,7 @@
 import React, { ReactElement, useEffect } from 'react';
-import { request } from 'graphql-request';
+import { request, gql } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
 import { find, flatten } from 'lodash/fp';
 import { NextSeo } from 'next-seo';
 import Chrome from '../../src/components/Chrome';
@@ -49,7 +47,7 @@ const SubdivisionCodePage = ({
                 }
             }
         `;
-        request<SubdivisionCodePageView>('https://api.findahelpline.com', print(mutation), {
+        request<SubdivisionCodePageView>('https://api.findahelpline.com', mutation, {
             input: {
                 countryCode: country.code,
                 code: subdivision.code,
@@ -136,17 +134,11 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
             }
         }
     `;
-    const {
-        country,
-        organizations,
-        organizationsWhenEmpty,
-        categories,
-        humanSupportTypes,
-        topics,
-    } = await request<GetCountryCodeSubdivisonCodeProps>('https://api.findahelpline.com', print(query), {
-        countryCode: context.params.countryCode,
-        subdivisionCode: context.params.subdivisionCode,
-    });
+    const { country, organizations, organizationsWhenEmpty, categories, humanSupportTypes, topics } =
+        await request<GetCountryCodeSubdivisonCodeProps>('https://api.findahelpline.com', query, {
+            countryCode: context.params.countryCode,
+            subdivisionCode: context.params.subdivisionCode,
+        });
     const subdivision = find({ code: context.params.subdivisionCode.toString().toUpperCase() }, country.subdivisions);
     return {
         props: {
@@ -175,10 +167,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
             }
         }
     `;
-    const { countries } = await request<GetCountryCodeSubdivisionCodePaths>(
-        'https://api.findahelpline.com',
-        print(query),
-    );
+    const { countries } = await request<GetCountryCodeSubdivisionCodePaths>('https://api.findahelpline.com', query);
 
     return {
         paths: flatten(

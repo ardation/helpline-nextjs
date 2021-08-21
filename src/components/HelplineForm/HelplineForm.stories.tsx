@@ -7,4 +7,4 @@ export default {
     title: 'HelplineForm',
 };
 
-export const Default = (): ReactElement => <HelplineForm form={(formData as unknown) as Form} />;
+export const Default = (): ReactElement => <HelplineForm form={formData as unknown as Form} />;
