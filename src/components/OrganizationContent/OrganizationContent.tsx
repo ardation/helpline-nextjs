@@ -2,11 +2,9 @@ import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Button, Box, NoSsr, SvgIcon } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LanguageIcon from '@material-ui/icons/Language';
-import ReactGA, { outboundLink } from 'react-ga';
+import { event, outboundLink } from 'react-ga';
 import { noop } from 'lodash/fp';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
-import { request } from 'graphql-request';
+import { gql, request } from 'graphql-request';
 import OrganizationOpen from '../OrganizationOpen';
 import Chips from '../Chips';
 import OrganizationRating from '../OrganizationRating';
@@ -119,7 +117,7 @@ const OrganizationContent = ({ organization, variant, expandable, onLink }: Prop
 
     const onLinkClick = (label: string, gaEventAction: string, count: CountEnum) => (): void => {
         const dimension7 = organization.categories.map(({ name }) => name).join(', ');
-        ReactGA.event({
+        event({
             category: 'Helpline Card Engagement',
             action: gaEventAction,
             label: label,
@@ -135,7 +133,7 @@ const OrganizationContent = ({ organization, variant, expandable, onLink }: Prop
                 }
             }
         `;
-        request<OrganizationContentLinkClick>('https://api.findahelpline.com', print(mutation), {
+        request<OrganizationContentLinkClick>('https://api.findahelpline.com', mutation, {
             input: {
                 slug: organization.slug,
                 count,

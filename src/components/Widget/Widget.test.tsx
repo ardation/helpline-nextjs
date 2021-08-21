@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import ReactGA from 'react-ga';
+import { event } from 'react-ga';
 import { mocked } from 'ts-jest/utils';
 import { noop } from 'lodash/fp';
 import { LocalityEnum } from '../../../types/globalTypes';
@@ -105,7 +105,7 @@ describe('Widget', () => {
     });
 
     it('should allow organizations to be filtered', () => {
-        mocked(ReactGA.event).mockReturnValue();
+        mocked(event).mockReturnValue();
         const createElement = document.createElement.bind(document);
         // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         document.createElement = (tagName: string) => {

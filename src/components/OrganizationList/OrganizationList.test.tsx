@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import ReactGA from 'react-ga';
+import { event } from 'react-ga';
 import { mocked } from 'ts-jest/utils';
 import { noop } from 'lodash/fp';
 import OrganizationList from '.';
@@ -136,7 +136,7 @@ describe('OrganizationList', () => {
 
     describe('filter', () => {
         it('should allow organizations to be filtered', () => {
-            mocked(ReactGA.event).mockReturnValue();
+            mocked(event).mockReturnValue();
             const { getByText, getByTestId } = render(
                 <OrganizationList
                     country={country}

@@ -18,10 +18,8 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Alert, AlertTitle, Rating } from '@material-ui/lab';
-import ReCAPTCHA from 'react-google-recaptcha';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
-import { request } from 'graphql-request';
+import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import { gql, request } from 'graphql-request';
 import { Formik } from 'formik';
 import TimeIcon from '../../assets/time-icon.svg';
 import { OrganizationReviewCreate } from '../../../types/OrganizationReviewCreate';
@@ -130,7 +128,7 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
     const classes = useStyles();
     const [dialogOpen, setDialogOpen] = useState(open || false);
     const [reviewReceived, setReviewReceived] = useState(false);
-    const recaptchaRef = useRef<ReCAPTCHA>(null);
+    const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
     const handleOpen = (): void => {
         setDialogOpen(true);
     };
@@ -162,7 +160,7 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
             }
         `;
 
-        await request<OrganizationReviewCreate>('https://api.findahelpline.com', print(query), {
+        await request<OrganizationReviewCreate>('https://api.findahelpline.com', query, {
             organizationId: organization.id,
             rating: parseInt(rating),
             responseTime: parseInt(responseTime),
@@ -232,7 +230,7 @@ const ReviewDialog = ({ organization, open, grecaptcha, onClose, button }: Props
                             isSubmitting,
                         }): ReactElement => (
                             <form onSubmit={handleSubmit}>
-                                <ReCAPTCHA
+                                <ReactGoogleRecaptcha
                                     ref={recaptchaRef}
                                     size="invisible"
                                     sitekey={process.env.RECAPTCHA_KEY}

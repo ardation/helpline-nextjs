@@ -1,9 +1,7 @@
 import React, { ReactElement, useEffect } from 'react';
-import { request } from 'graphql-request';
+import { request, gql } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
 import { NextSeo } from 'next-seo';
 import Chrome from '../src/components/Chrome';
 import { GetCountryCodeProps } from '../types/GetCountryCodeProps';
@@ -43,7 +41,7 @@ const CountryCodePage = ({
                 }
             }
         `;
-        request<CountryCodePageView>('https://api.findahelpline.com', print(mutation), {
+        request<CountryCodePageView>('https://api.findahelpline.com', mutation, {
             input: {
                 code: country.code,
             },
@@ -126,7 +124,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
         }
     `;
     const { country, organizations, organizationsWhenEmpty, categories, humanSupportTypes, topics } =
-        await request<GetCountryCodeProps>('https://api.findahelpline.com', print(query), {
+        await request<GetCountryCodeProps>('https://api.findahelpline.com', query, {
             countryCode: context.params.countryCode,
         });
     return {
@@ -151,7 +149,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
             }
         }
     `;
-    const { countries } = await request<GetCountryCodePaths>('https://api.findahelpline.com', print(query));
+    const { countries } = await request<GetCountryCodePaths>('https://api.findahelpline.com', query);
 
     return {
         paths: countries.slice(0, 20).map((country) => {

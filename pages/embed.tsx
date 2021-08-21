@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react';
-import { request } from 'graphql-request';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
+import { request, gql } from 'graphql-request';
 import Embed from '../src/components/Embed';
 import Chrome from '../src/components/Chrome';
 import { GetEmbedProps } from '../types/GetEmbedProps';
@@ -31,7 +29,7 @@ export const getStaticProps = async (): Promise<{ props: GetEmbedProps }> => {
             }
         }
     `;
-    const { countries, topics } = await request<GetEmbedProps>('https://api.findahelpline.com', print(query));
+    const { countries, topics } = await request<GetEmbedProps>('https://api.findahelpline.com', query);
     return {
         props: {
             countries,

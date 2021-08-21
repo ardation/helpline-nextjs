@@ -1,8 +1,6 @@
 import React, { ReactElement, useEffect } from 'react';
-import { request } from 'graphql-request';
+import { request, gql } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
 import { NextSeo } from 'next-seo';
 import Chrome from '../../src/components/Chrome';
 import { GetOrganizationsSlugProps } from '../../types/GetOrganizationsSlugProps';
@@ -26,7 +24,7 @@ const OrganizationPage = ({ organization }: Props): ReactElement => {
                 }
             }
         `;
-        request<OrganizationPageView>('https://api.findahelpline.com', print(mutation), {
+        request<OrganizationPageView>('https://api.findahelpline.com', mutation, {
             input: {
                 slug: organization.slug,
                 count: CountEnum.VIEW,
@@ -91,7 +89,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
             }
         }
     `;
-    const { organization } = await request<GetOrganizationsSlugProps>('https://api.findahelpline.com', print(query), {
+    const { organization } = await request<GetOrganizationsSlugProps>('https://api.findahelpline.com', query, {
         slug: context.params.slug,
     });
     return {
@@ -113,7 +111,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
             }
         }
     `;
-    const { organizations } = await request<GetOrganizationsSlugPaths>('https://api.findahelpline.com', print(query));
+    const { organizations } = await request<GetOrganizationsSlugPaths>('https://api.findahelpline.com', query);
 
     return {
         paths: organizations.nodes.map((organization) => {

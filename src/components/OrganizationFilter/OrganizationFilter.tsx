@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useEffect, ChangeEvent } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { Box, Typography, Button, Tab, Tabs, Container, createStyles, makeStyles } from '@material-ui/core';
-import ReactGA from 'react-ga';
+import { event } from 'react-ga';
 import ItemSelect from '../ItemSelect/ItemSelect';
 
 type ContactMethod = {
@@ -120,7 +120,7 @@ const OrganizationFilter = ({
             .map(({ name }) => name)
             .sort()
             .join(', ');
-        ReactGA.event({
+        event({
             category: 'User',
             action: 'Changed Filters',
             dimension1: dimension1,

@@ -1,4 +1,4 @@
-const formatArrayIntoSentence = (arr): string => {
+const formatArrayIntoSentence = (arr: string[]): string => {
     let outStr = '';
     if (arr.length === 1) {
         outStr = arr[0];

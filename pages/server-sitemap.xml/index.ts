@@ -1,9 +1,7 @@
 import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
 import { GetServerSideProps } from 'next';
 import { noop } from 'lodash';
-import request from 'graphql-request';
-import { print } from 'graphql';
-import gql from 'graphql-tag';
+import request, { gql } from 'graphql-request';
 import { GetServerSitemap } from '../../types/GetServerSitemap';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -20,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             }
         }
     `;
-    const { countries, topics } = await request<GetServerSitemap>('https://api.findahelpline.com', print(query));
+    const { countries, topics } = await request<GetServerSitemap>('https://api.findahelpline.com', query);
     const baseUrl = process.env.SITE_URL || 'https://findahelpline.com';
 
     const fields: ISitemapField[] = [

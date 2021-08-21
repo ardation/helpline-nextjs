@@ -1,8 +1,6 @@
 import React, { ReactElement } from 'react';
-import { request } from 'graphql-request';
+import { request, gql } from 'graphql-request';
 import { GetStaticProps } from 'next';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
 import { NextSeo } from 'next-seo';
 import WidgetPartners from '../src/components/WidgetPartners';
 import { WidgetProps } from '../src/components/Widget/Widget';
@@ -92,7 +90,7 @@ export const getStaticProps: GetStaticProps<WidgetProps> = async () => {
         }
     `;
     const { country, organizations, organizationsWhenEmpty, categories, humanSupportTypes, topics, countries } =
-        await request<GetTheWidgetProps>('https://api.findahelpline.com', print(query), {
+        await request<GetTheWidgetProps>('https://api.findahelpline.com', query, {
             countryCode: 'us',
         });
 

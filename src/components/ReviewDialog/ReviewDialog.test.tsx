@@ -1,9 +1,7 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
-import { request } from 'graphql-request';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
+import { request, gql } from 'graphql-request';
 import ReviewDialog from '.';
 
 jest.mock('graphql-request');
@@ -100,7 +98,7 @@ describe('ReviewDialog', () => {
         const submitButton = getByText('Submit Review');
         fireEvent.click(submitButton);
         await waitFor(() =>
-            expect(mock).toHaveBeenCalledWith('https://api.findahelpline.com', print(query), {
+            expect(mock).toHaveBeenCalledWith('https://api.findahelpline.com', query, {
                 content: 'content',
                 organizationId: 'c1d74c09-ecb0-46f3-902e-1feb22aad7ad',
                 rating: 3,

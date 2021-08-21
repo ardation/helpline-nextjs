@@ -7,8 +7,8 @@
         "build": "npx webpack --config webpack.config.js && next build",
         "postbuild": "next-sitemap",
         "start": "next start",
-        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-        "lint:ci": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
+        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --fix",
+        "lint:ci": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --max-warnings 0",
         "storybook": "start-storybook -p 6006 -c .storybook -s ./public",
         "storybook-debug-webpack": "storybook --debug-webpack",
         "build-storybook": "build-storybook -c .storybook -s ./public",
@@ -59,6 +59,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.15.0",
+        "@next/eslint-plugin-next": "^11.1.0",
         "@storybook/addon-actions": "^6.3.7",
         "@storybook/addon-viewport": "^6.3.7",
         "@storybook/react": "^6.3.7",

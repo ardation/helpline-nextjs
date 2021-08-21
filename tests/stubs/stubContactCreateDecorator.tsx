@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react';
 import fetchMock from 'fetch-mock';
+import { StoryFn } from '@storybook/addons';
 
-const stubContactCreate = (storyFn): ReactElement => {
+const stubContactCreate = (storyFn: StoryFn): ReactElement => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as unknown as any).grecaptcha = {
         execute: (): string => 'abc',

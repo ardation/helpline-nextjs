@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react';
-import { request } from 'graphql-request';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
+import { request, gql } from 'graphql-request';
 import Search from '../src/components/Search';
 import Chrome from '../src/components/Chrome';
 import { GetSearchProps } from '../types/GetSearchProps';
@@ -31,7 +29,7 @@ export const getStaticProps = async (): Promise<{ props: GetSearchProps }> => {
             }
         }
     `;
-    const { countries, topics } = await request<GetSearchProps>('https://api.findahelpline.com', print(query));
+    const { countries, topics } = await request<GetSearchProps>('https://api.findahelpline.com', query);
     return {
         props: {
             countries,
