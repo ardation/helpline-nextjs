@@ -8,7 +8,7 @@ describe('About', () => {
         expect(getByRole('link', { name: 'Learn about the widget' })).toHaveAttribute('href', '/get-the-widget');
         expect(getByRole('link', { name: 'Find a helpline' })).toHaveAttribute('href', '#top');
         rerender(
-            <About countries={[{ code: 'NZ', name: 'New Zealand', subregion: 'Australia and New Zealand' }]} isPage />,
+            <About countries={[{ code: 'NZ', name: 'New Zealand', region: 'Australia and New Zealand' }]} isPage />,
         );
         expect(getByRole('link', { name: 'Find a helpline' })).toHaveAttribute('href', '/');
         expect(getByText('New Zealand').parentElement.getAttribute('href')).toEqual('/nz');

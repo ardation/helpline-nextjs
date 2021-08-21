@@ -15,7 +15,7 @@ export const Default = (): ReactElement => (
                 subdivisions: [],
                 locality: LocalityEnum.LOCATION,
 
-                subregion: 'Australia and New Zealand',
+                region: 'Australia and New Zealand',
             },
             {
                 code: 'NZ',
@@ -25,7 +25,7 @@ export const Default = (): ReactElement => (
                     { name: 'Auckland', code: 'AUK' },
                 ],
                 locality: LocalityEnum.LOCATION,
-                subregion: 'Australia and New Zealand',
+                region: 'Australia and New Zealand',
             },
         ]}
         topics={[{ name: 'Anxiety' }]}

@@ -10,7 +10,7 @@ describe('Search', () => {
             name: 'Australia',
             subdivisions: [],
             locality: LocalityEnum.LOCATION,
-            subregion: 'Australia and New Zealand',
+            region: 'Australia and New Zealand',
         },
         {
             code: 'NZ',
@@ -19,7 +19,7 @@ describe('Search', () => {
                 { name: 'Bay of Plenty', code: 'BOP' },
                 { name: 'Auckland', code: 'AUK' },
             ],
-            subregion: 'Australia and New Zealand',
+            region: 'Australia and New Zealand',
             locality: LocalityEnum.LOCATION,
         },
     ];
@@ -69,7 +69,7 @@ describe('Search', () => {
                     { name: 'Auckland', code: 'AUK' },
                 ],
                 locality: LocalityEnum.LOCATION,
-                subregion: 'Australia and New Zealand',
+                region: 'Australia and New Zealand',
             },
             { name: 'Auckland', code: 'AUK' },
         );

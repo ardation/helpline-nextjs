@@ -16,7 +16,7 @@ type Subdivision = {
 type Country = {
     code: string;
     name: string;
-    subregion: string;
+    region: string;
     subdivisions: Subdivision[];
     emergencyNumber?: string;
     locality: LocalityEnum;

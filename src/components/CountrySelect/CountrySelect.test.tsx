@@ -13,14 +13,14 @@ describe('CountrySelect', () => {
                 { name: 'Auckland', code: 'AUK' },
             ],
             locality: LocalityEnum.LOCATION,
-            subregion: 'Australia and New Zealand',
+            region: 'Australia and New Zealand',
         },
         {
             code: 'AU',
             name: 'Australia',
             subdivisions: [],
             locality: LocalityEnum.LOCATION,
-            subregion: 'Australia and New Zealand',
+            region: 'Australia and New Zealand',
         },
     ];
 
@@ -37,7 +37,7 @@ describe('CountrySelect', () => {
                 code: 'AU',
                 name: 'Australia',
                 subdivisions: [],
-                subregion: 'Australia and New Zealand',
+                region: 'Australia and New Zealand',
                 locality: LocalityEnum.LOCATION,
             });
         };

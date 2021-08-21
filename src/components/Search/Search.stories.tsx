@@ -13,7 +13,7 @@ const countries = [
         name: 'Australia',
         subdivisions: [],
         locality: LocalityEnum.LOCATION,
-        subregion: 'Australia and New Zealand',
+        region: 'Australia and New Zealand',
     },
     {
         code: 'NZ',
@@ -23,7 +23,7 @@ const countries = [
             { name: 'Auckland', code: 'AUK' },
         ],
         locality: LocalityEnum.LOCATION,
-        subregion: 'Australia and New Zealand',
+        region: 'Australia and New Zealand',
     },
 ];
 

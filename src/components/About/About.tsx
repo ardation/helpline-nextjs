@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) =>
 type Country = {
     code: string;
     name: string;
-    subregion: string;
+    region: string;
 };
 
 interface Props {

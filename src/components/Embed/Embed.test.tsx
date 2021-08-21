@@ -12,7 +12,7 @@ describe('Embed', () => {
             name: 'Australia',
             subdivisions: [],
             locality: LocalityEnum.LOCATION,
-            subregion: 'Australia and New Zealand',
+            region: 'Australia and New Zealand',
         },
         {
             code: 'NZ',
@@ -22,7 +22,7 @@ describe('Embed', () => {
                 { name: 'Auckland', code: 'AUK' },
             ],
             locality: LocalityEnum.LOCATION,
-            subregion: 'Australia and New Zealand',
+            region: 'Australia and New Zealand',
         },
     ];
 

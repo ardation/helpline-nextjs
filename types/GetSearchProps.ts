@@ -18,7 +18,7 @@ export interface GetSearchProps_countries {
   code: string;
   name: string;
   locality: LocalityEnum;
-  subregion: string;
+  region: string;
   subdivisions: GetSearchProps_countries_subdivisions[];
 }
 

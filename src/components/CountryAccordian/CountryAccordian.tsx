@@ -16,7 +16,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMoreRounded';
 type Country = {
     code: string;
     name: string;
-    subregion: string;
+    region: string;
 };
 
 type Props = {
@@ -74,29 +74,29 @@ const CountryAccordian = ({ countries }: Props): ReactElement => {
             setExpanded(isExpanded ? panel : false);
         };
 
-    const subregions: { name: string; countries: Country[] }[] = countries.reduce((result, country) => {
-        const subregion = result.find((subregion) => subregion.name === country.subregion);
-        if (subregion) {
-            subregion.countries.push(country);
+    const regions: { name: string; countries: Country[] }[] = countries.reduce((result, country) => {
+        const region = result.find((region) => region.name === country.region);
+        if (region) {
+            region.countries.push(country);
         } else {
-            result.push({ name: country.subregion, countries: [country] });
+            result.push({ name: country.region, countries: [country] });
         }
         return result;
     }, []);
 
     return (
         <>
-            {subregions.map((subregion) => (
-                <Fragment key={subregion.name}>
-                    <Accordion expanded={expanded === subregion.name} onChange={handleChange(subregion.name)}>
+            {regions.map((region) => (
+                <Fragment key={region.name}>
+                    <Accordion expanded={expanded === region.name} onChange={handleChange(region.name)}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon color="secondary" />}>
                             <Typography variant="h6" className={classes.heading}>
-                                {subregion.name}
+                                {region.name}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Grid container spacing={2}>
-                                {subregion.countries.map((country) => (
+                                {region.countries.map((country) => (
                                     <Grid item xs={6} key={country.code}>
                                         <NextLink href={`/${country.code.toLowerCase()}`} prefetch={false} passHref>
                                             <Button variant="contained">{country.name}</Button>

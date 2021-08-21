@@ -3,13 +3,13 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import CountryAccordian from '.';
 
 describe('CountryAccordian', () => {
-    it('should break countries into subregions', async () => {
+    it('should break countries into regions', async () => {
         const { getByRole, queryByRole } = render(
             <CountryAccordian
                 countries={[
-                    { code: 'AU', name: 'Australia', subregion: 'Australia and New Zealand' },
-                    { code: 'NZ', name: 'New Zealand', subregion: 'Australia and New Zealand' },
-                    { code: 'US', name: 'United States', subregion: 'Northern America' },
+                    { code: 'AU', name: 'Australia', region: 'Australia and New Zealand' },
+                    { code: 'NZ', name: 'New Zealand', region: 'Australia and New Zealand' },
+                    { code: 'US', name: 'United States', region: 'Northern America' },
                 ]}
             />,
         );

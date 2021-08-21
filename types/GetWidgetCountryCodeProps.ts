@@ -19,7 +19,7 @@ export interface GetWidgetCountryCodeProps_country {
   name: string;
   emergencyNumber: string | null;
   locality: LocalityEnum;
-  subregion: string;
+  region: string;
   subdivisions: GetWidgetCountryCodeProps_country_subdivisions[];
 }
 
@@ -135,7 +135,7 @@ export interface GetWidgetCountryCodeProps_countries {
   name: string;
   emergencyNumber: string | null;
   locality: LocalityEnum;
-  subregion: string;
+  region: string;
   subdivisions: GetWidgetCountryCodeProps_countries_subdivisions[];
 }
 

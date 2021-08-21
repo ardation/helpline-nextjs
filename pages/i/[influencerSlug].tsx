@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
             countries {
                 code
                 name
-                subregion
+                region
                 locality
                 subdivisions {
                     code
