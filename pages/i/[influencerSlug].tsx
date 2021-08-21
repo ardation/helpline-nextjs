@@ -34,7 +34,7 @@ const InfluencerSlugPage = ({ influencer, topics, countries }: Props): ReactElem
         <>
             <NextSeo description={`A message from ${influencer.name}: ${influencer.message}`} />
             <Chrome footer={true}>
-                <Search countries={countries} topics={topics} />
+                <Search countries={countries} topics={topics} showAbout />
                 <InfluencerDialog influencer={influencer} />
             </Chrome>
         </>

@@ -19,5 +19,6 @@ describe('Sitemap', () => {
             '/nz/auk/topics/depression',
         );
         expect(getByText('Youthline')).toHaveAttribute('href', '/organizations/youthline');
+        expect(getByText('Depression Helplines')).toHaveAttribute('href', '/topics/depression');
     });
 });

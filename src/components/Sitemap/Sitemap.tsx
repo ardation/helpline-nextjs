@@ -109,6 +109,13 @@ const Sitemap = ({ countries, topics, organizations }: Props): ReactElement => {
                             </NextLink>
                         </Grid>
                     ))}
+                    {topics.map((topic) => (
+                        <Grid item key={topic.slug}>
+                            <NextLink href={`/topics/${topic.slug}`} passHref prefetch={false}>
+                                <Link className={classes.link}>{topic.name} Helplines</Link>
+                            </NextLink>
+                        </Grid>
+                    ))}
                 </Grid>
             </Container>
         </Box>
