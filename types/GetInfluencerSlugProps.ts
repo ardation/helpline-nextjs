@@ -11,6 +11,7 @@ import { LocalityEnum } from "./globalTypes";
 
 export interface GetInfluencerSlugProps_influencer {
   name: string;
+  slug: string;
   message: string;
 }
 

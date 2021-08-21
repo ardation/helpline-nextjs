@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { request, gql } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
@@ -7,12 +7,29 @@ import Search from '../../src/components/Search';
 import { GetInfluencerSlugProps } from '../../types/GetInfluencerSlugProps';
 import { GetInfluencerSlugs } from '../../types/GetInfluencerSlugs';
 import InfluencerDialog from '../../src/components/InfluencerDialog';
+import { InfluencerPageView } from '../../types/InfluencerPageView';
 
 interface Props extends GetInfluencerSlugProps {
     key: string | string[];
 }
 
 const InfluencerSlugPage = ({ influencer, topics, countries }: Props): ReactElement => {
+    useEffect(() => {
+        const mutation = gql`
+            mutation InfluencerPageView($input: InfluencerIncrementCountMutationInput!) {
+                influencerIncrementCount(input: $input) {
+                    influencer {
+                        id
+                    }
+                }
+            }
+        `;
+        request<InfluencerPageView>('https://api.findahelpline.com', mutation, {
+            input: {
+                slug: influencer.slug,
+            },
+        });
+    }, []);
     return (
         <>
             <NextSeo description={`A message from ${influencer.name}: ${influencer.message}`} />
@@ -29,6 +46,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
         query GetInfluencerSlugProps($influencerSlug: String!) {
             influencer(slug: $influencerSlug) {
                 name
+                slug
                 message
             }
             countries {
