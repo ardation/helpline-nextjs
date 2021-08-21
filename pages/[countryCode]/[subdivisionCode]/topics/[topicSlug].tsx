@@ -29,7 +29,7 @@ const SubdivisionCodeTopicSlugPage = ({
     return (
         <>
             <NextSeo
-                title={`${topic.name} in ${subdivision.name}, ${country.name}`}
+                title={`${topic.name} helplines in ${subdivision.name}, ${country.name}`}
                 description={`Need to talk? Get free, confidential support with ${topic.name} from a real human. Web chat, text and phone helplines. No sign up or personal info required.`}
             />
             <Chrome country={country} footer>
