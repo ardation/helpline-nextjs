@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactElement } from 'react';
-import { useEmblaCarousel } from 'embla-carousel-react';
+import { useEmblaCarousel } from 'embla-carousel/react';
 import { createStyles, makeStyles, Box, Fab } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeftRounded';
 import ChevronRightIcon from '@material-ui/icons/ChevronRightRounded';
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) =>
 
 const WidgetOrganizationList = ({ organizations, organizationsWhenEmpty }: Props): ReactElement => {
     const classes = useStyles();
-    const [EmblaCarouselReact, embla] = useEmblaCarousel({
+    const [emblaRef, embla] = useEmblaCarousel({
         align: 'start',
     });
 
@@ -91,7 +91,7 @@ const WidgetOrganizationList = ({ organizations, organizationsWhenEmpty }: Props
     useEffect(() => {
         if (embla) {
             embla.scrollTo(0);
-            embla.changeOptions({
+            embla.reInit({
                 align: 'start',
             });
         }
@@ -104,7 +104,7 @@ const WidgetOrganizationList = ({ organizations, organizationsWhenEmpty }: Props
             )}
             {(organizations.length > 0 || organizationsWhenEmpty.length > 0) && (
                 <>
-                    <EmblaCarouselReact>
+                    <div ref={emblaRef}>
                         <Box className={classes.container}>
                             {organizations.length === 0 && (
                                 <Box className={classes.slide}>
@@ -123,7 +123,7 @@ const WidgetOrganizationList = ({ organizations, organizationsWhenEmpty }: Props
                                 ),
                             )}
                         </Box>
-                    </EmblaCarouselReact>
+                    </div>
                     <Fab
                         className={[classes.button, classes.buttonLeft].join(' ')}
                         disabled={!showPreviousButton}
