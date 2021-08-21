@@ -20,8 +20,11 @@ const useStyles = makeStyles((theme) =>
             paddingBottom: theme.spacing(2),
         },
         container: {
-            marginLeft: '-1rem',
+            marginLeft: '4.5rem',
             display: 'flex',
+            [theme.breakpoints.down('xs')]: {
+                marginLeft: '2.5rem',
+            },
         },
         slide: {
             flex: '0 0 auto',
