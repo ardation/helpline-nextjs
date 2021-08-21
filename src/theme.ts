@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import { AlertClassKey } from '@material-ui/lab/Alert';
 import { RatingClassKey } from '@material-ui/lab/Rating';
 
@@ -10,7 +10,7 @@ declare module '@material-ui/core/styles/overrides' {
 }
 
 // Create a theme instance.
-const theme = createMuiTheme({
+const theme = createTheme({
     typography: {
         fontFamily: ['"Source Sans Pro"', 'sans-serif'].join(','),
         h1: {

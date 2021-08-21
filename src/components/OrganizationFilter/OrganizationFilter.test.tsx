@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import ReactGA from 'react-ga';
+import { event } from 'react-ga';
 import { mocked } from 'ts-jest/utils';
 import OrganizationFilter from '.';
 
@@ -23,7 +23,7 @@ describe('OrganizationFilter', () => {
     let mock;
 
     beforeEach(() => {
-        mock = mocked(ReactGA.event).mockReturnValue();
+        mock = mocked(event).mockReturnValue();
     });
 
     it('should contain correct text', () => {

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import Document, { Head, Main, NextScript, DocumentInitialProps, Html } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import { RenderPageResult } from 'next/dist/next-server/lib/utils';
+import { RenderPageResult } from 'next/dist/shared/lib/utils';
 import theme from '../src/theme';
 
 class MyDocument extends Document {
@@ -50,7 +50,10 @@ MyDocument.getInitialProps = async (ctx): Promise<DocumentInitialProps> => {
 
     ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
         originalRenderPage({
-            enhanceApp: (App) => (props): ReactElement => sheets.collect(<App {...props} />),
+            enhanceApp:
+                (App) =>
+                (props): ReactElement =>
+                    sheets.collect(<App {...props} />),
         });
 
     const initialProps = await Document.getInitialProps(ctx);

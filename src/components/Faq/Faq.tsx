@@ -79,9 +79,11 @@ const Faq = (): ReactElement => {
     const classes = useStyles();
     const [expanded, setExpanded] = useState<string | false>(false);
 
-    const handleChange = (panel: string) => (_event: ChangeEvent<{}>, isExpanded: boolean): void => {
-        setExpanded(isExpanded ? panel : false);
-    };
+    const handleChange =
+        (panel: string) =>
+        (_event: ChangeEvent, isExpanded: boolean): void => {
+            setExpanded(isExpanded ? panel : false);
+        };
 
     return (
         <Box bgcolor="background.paper" py={2}>

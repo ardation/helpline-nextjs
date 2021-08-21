@@ -41,28 +41,29 @@ const useStyles = makeStyles((theme) =>
 const WidgetSearch = ({ preselectedCountry, preselectedSubdivision, countries }: Props): ReactElement => {
     const router = useRouter();
     const [selectedCountry, setSelectedCountry] = useState<Country>(preselectedCountry);
-    const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(preselectedSubdivision);
     const classes = useStyles();
 
-    const changeUrl = (country: Country, subdivision: Subdivision): void => {
+    const changeUrl = (country: Country, subdivision?: Subdivision): void => {
         if (country && router) {
-            const url = `/widget/[countryCode]${subdivision ? `/[subdivisionCode]` : ''}`;
-            const as = `/widget/${country.code.toLowerCase()}${
-                subdivision ? `/${subdivision.code.toLowerCase()}` : ''
-            }`;
-            if (router.asPath !== as) {
-                router.push(url, as);
-            }
+            const pathname = `/widget/[countryCode]${subdivision ? `/[subdivisionCode]` : ''}`;
+            const query = subdivision
+                ? {
+                      countryCode: country.code.toLowerCase(),
+                      subdivisionCode: subdivision?.code?.toLowerCase(),
+                  }
+                : {
+                      countryCode: country.code.toLowerCase(),
+                  };
+            router.push({ pathname, query });
         }
     };
 
     const onCountryChange = (country: Country): void => {
         setSelectedCountry(country);
-        changeUrl(country, selectedSubdivision);
+        changeUrl(country);
     };
 
     const onSubdivisionChange = (subdivision: Subdivision): void => {
-        setSelectedSubdivision(subdivision);
         changeUrl(selectedCountry, subdivision);
     };
 

@@ -27,17 +27,15 @@ describe('Search', () => {
             'href',
             '/faq',
         );
-        const element = getByRole('textbox');
-        fireEvent.click(element);
-        fireEvent.click(getByRole('listbox').children[0]);
+        fireEvent.click(getByRole('button', { name: 'Open' }));
+        fireEvent.click(getByRole('option', { name: 'Australia' }));
         expect(getByText('What would you like help with?')).toBeInTheDocument();
     });
 
     it('should change search url after country select', () => {
         const { getByTestId, getByRole, queryByRole } = render(<Search countries={countries} topics={topics} />);
-        const element = getByRole('textbox');
-        fireEvent.click(element);
-        fireEvent.click(getByRole('listbox').children[0]);
+        fireEvent.click(getByRole('button', { name: 'Open' }));
+        fireEvent.click(getByRole('option', { name: 'Australia' }));
         expect(getByTestId('searchButton')).toHaveAttribute('href', '/au');
         expect(queryByRole('button', { name: 'A note from our founder' })).not.toBeInTheDocument();
         expect(queryByRole('button', { name: 'Hear when we launch in your country' })).not.toBeInTheDocument();
@@ -45,13 +43,13 @@ describe('Search', () => {
 
     it('should change search url after country and subdivision select', () => {
         const handleChange = jest.fn();
-        const { getByTestId, getByRole, getByText, getAllByText } = render(
+        const { getByTestId, getByRole, getAllByRole, getByText } = render(
             <Search countries={countries} topics={topics} onChange={handleChange} />,
         );
-        fireEvent.click(getByRole('combobox', { name: 'country' }));
-        fireEvent.click(getAllByText('New Zealand')[1]);
-        fireEvent.click(getByRole('combobox', { name: 'subdivision' }));
-        fireEvent.click(getByText('Auckland'));
+        fireEvent.click(getByRole('button', { name: 'Open' }));
+        fireEvent.click(getByRole('option', { name: 'New Zealand' }));
+        fireEvent.click(getAllByRole('button', { name: 'Open' })[1]);
+        fireEvent.click(getByRole('option', { name: 'Auckland' }));
         fireEvent.click(getByText('happy'));
         expect(getByTestId('searchButton')).toHaveAttribute('href', '/nz/auk?topics=happy');
         expect(handleChange).toHaveBeenCalledWith(
@@ -71,9 +69,8 @@ describe('Search', () => {
 
     it('should change search url after topic select', () => {
         const { getByTestId, getByRole, getAllByTestId } = render(<Search countries={countries} topics={topics} />);
-        const element = getByRole('textbox');
-        fireEvent.click(element);
-        fireEvent.click(getByRole('listbox').children[0]);
+        fireEvent.click(getByRole('button', { name: 'Open' }));
+        fireEvent.click(getByRole('option', { name: 'Australia' }));
         const elements = getAllByTestId('itemChip');
         fireEvent.click(elements[0]);
         expect(getByTestId('searchButton')).toHaveAttribute('href', '/au?topics=happy');

@@ -1,5 +1,6 @@
 import React from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react';
+import fetchMock from 'jest-fetch-mock';
 import formData from '../HelplineForm/formData.json';
 import HelplineFormDialog from '.';
 

@@ -64,7 +64,7 @@ const countries = [
     },
 ];
 
-export const widgetPropsMock = {
+const widgetPropsMock = {
     preselectedCountry: country,
     countries: countries,
     categories: [],

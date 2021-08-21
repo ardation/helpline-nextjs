@@ -6,4 +6,4 @@ export default {
     title: 'Markdown',
 };
 
-export const Default = (): ReactElement => <Markdown source={gratitude} />;
+export const Default = (): ReactElement => <Markdown>{gratitude}</Markdown>;

@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react';
-import { request } from 'graphql-request';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
+import { request, gql } from 'graphql-request';
 import { NextSeo } from 'next-seo';
 import Chrome from '../src/components/Chrome';
 import About from '../src/components/About';
@@ -27,7 +25,7 @@ export const getStaticProps = async (): Promise<{ props: GetAboutProps }> => {
             }
         }
     `;
-    const { countries } = await request<GetAboutProps>('https://api.findahelpline.com', print(query));
+    const { countries } = await request<GetAboutProps>('https://api.findahelpline.com', query);
     return {
         props: {
             countries,

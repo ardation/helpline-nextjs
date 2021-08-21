@@ -1,10 +1,11 @@
 import { noop } from 'lodash/fp';
 import React, { ReactElement } from 'react';
 import fetchMock from 'fetch-mock';
+import { StoryFn } from '@storybook/addons';
 import formData from '../HelplineForm/formData.json';
 import HelplineFormDialog from '.';
 
-const stubFormDataDecorator = (storyFn): ReactElement => {
+const stubFormDataDecorator = (storyFn: StoryFn): ReactElement => {
     fetchMock.get('/api/forms/website-visit-feedback', formData);
     return <>{storyFn()}</>;
 };

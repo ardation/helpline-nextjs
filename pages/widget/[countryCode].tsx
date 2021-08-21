@@ -1,11 +1,10 @@
 import React, { ReactElement, useEffect } from 'react';
-import { request } from 'graphql-request';
+import { request, gql } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
+import Script from 'next/script';
 import { GetWidgetCountryCodeProps } from '../../types/GetWidgetCountryCodeProps';
 import Widget from '../../src/components/Widget';
 import { GetWidgetCountryCodePaths } from '../../types/GetWidgetCountryCodePaths';
@@ -44,7 +43,7 @@ const WidgetCountryCodePage = ({
                 }
             }
         `;
-        request<WidgetCountryCodePageView>('https://api.findahelpline.com', print(mutation), {
+        request<WidgetCountryCodePageView>('https://api.findahelpline.com', mutation, {
             input: {
                 code: country.code,
             },
@@ -60,7 +59,7 @@ const WidgetCountryCodePage = ({
             `}</style>
             <NextSeo title={country.name} />
             <Head>
-                <script src="/widget.min.js"></script>
+                <Script src="/widget.min.js"></Script>
             </Head>
             <Widget
                 countries={countries}
@@ -147,17 +146,10 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
             }
         }
     `;
-    const {
-        country,
-        organizations,
-        organizationsWhenEmpty,
-        categories,
-        humanSupportTypes,
-        topics,
-        countries,
-    } = await request<GetWidgetCountryCodeProps>('https://api.findahelpline.com', print(query), {
-        countryCode: context.params.countryCode,
-    });
+    const { country, organizations, organizationsWhenEmpty, categories, humanSupportTypes, topics, countries } =
+        await request<GetWidgetCountryCodeProps>('https://api.findahelpline.com', query, {
+            countryCode: context.params.countryCode,
+        });
 
     return {
         props: {
@@ -182,7 +174,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
             }
         }
     `;
-    const { countries } = await request<GetWidgetCountryCodePaths>('https://api.findahelpline.com', print(query));
+    const { countries } = await request<GetWidgetCountryCodePaths>('https://api.findahelpline.com', query);
 
     return {
         paths: countries.slice(0, 20).map((country) => {

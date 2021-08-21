@@ -1,5 +1,7 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import { noop } from 'lodash/fp';
+import fetchMock from 'jest-fetch-mock';
 import formData from '../HelplineForm/formData.json';
 import OrganizationCard from '.';
 
@@ -31,7 +33,7 @@ describe('OrganizationCard', () => {
         document.createElement = (tagName: string) => {
             const element = createElement(tagName);
             if (tagName === 'canvas') {
-                element.getContext = (): {} => ({});
+                element.getContext = noop;
             }
             return element;
         };

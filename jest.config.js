@@ -1,6 +1,7 @@
 process.env.TZ = 'GMT';
 
 module.exports = {
+    testEnvironment: 'jsdom',
     automock: false,
     roots: ['<rootDir>/src'],
     preset: 'ts-jest',
@@ -14,7 +15,7 @@ module.exports = {
     testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
     globals: {
         'ts-jest': {
-            tsConfig: '<rootDir>/tsconfig.jest.json',
+            tsconfig: '<rootDir>/tsconfig.jest.json',
         },
     },
     moduleNameMapper: {

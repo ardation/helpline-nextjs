@@ -1,8 +1,6 @@
 import React, { ReactElement } from 'react';
-import { request } from 'graphql-request';
+import { request, gql } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
 import { NextSeo } from 'next-seo';
 import Chrome from '../../src/components/Chrome';
 import Search from '../../src/components/Search';
@@ -49,7 +47,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     `;
     const { influencer, countries, topics } = await request<GetInfluencerSlugProps>(
         'https://api.findahelpline.com',
-        print(query),
+        query,
         {
             influencerSlug: context.params.influencerSlug,
         },
@@ -72,7 +70,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
             }
         }
     `;
-    const { influencers } = await request<GetInfluencerSlugs>('https://api.findahelpline.com', print(query));
+    const { influencers } = await request<GetInfluencerSlugs>('https://api.findahelpline.com', query);
 
     return {
         paths: influencers.map((influencer) => {

@@ -16,7 +16,7 @@ const Legal = ({ tab }: Props): ReactElement => {
     const [value, setValue] = useState(tab);
     const { replace } = useRouter();
 
-    const handleChange = (_event: ChangeEvent<{}>, newValue: TabType): void => {
+    const handleChange = (_event: ChangeEvent, newValue: TabType): void => {
         setValue(newValue);
         replace(`/${newValue}`);
     };
@@ -31,10 +31,10 @@ const Legal = ({ tab }: Props): ReactElement => {
                     </TabList>
                 </Container>
                 <TabPanel value="privacy">
-                    <Markdown source={privacy} />
+                    <Markdown>{privacy}</Markdown>
                 </TabPanel>
                 <TabPanel value="terms">
-                    <Markdown source={terms} />
+                    <Markdown>{terms}</Markdown>
                 </TabPanel>
             </Box>
         </TabContext>
