@@ -23,6 +23,7 @@ export interface GetInfluencerSlugProps_countries_subdivisions {
 export interface GetInfluencerSlugProps_countries {
   code: string;
   name: string;
+  subregion: string;
   locality: LocalityEnum;
   subdivisions: GetInfluencerSlugProps_countries_subdivisions[];
 }

@@ -15,9 +15,16 @@ describe('WidgetSearch', () => {
             { name: 'Auckland', code: 'AUK' },
         ],
         locality: LocalityEnum.LOCATION,
+        subregion: 'Australia and New Zealand',
     };
     const countries = [
-        { code: 'AU', name: 'Australia', subdivisions: [], locality: LocalityEnum.LOCATION },
+        {
+            code: 'AU',
+            name: 'Australia',
+            subdivisions: [],
+            locality: LocalityEnum.LOCATION,
+            subregion: 'Australia and New Zealand',
+        },
         {
             code: 'NZ',
             name: 'New Zealand',
@@ -26,6 +33,7 @@ describe('WidgetSearch', () => {
                 { name: 'Auckland', code: 'AUK' },
             ],
             locality: LocalityEnum.LOCATION,
+            subregion: 'Australia and New Zealand',
         },
     ];
 

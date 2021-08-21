@@ -10,6 +10,7 @@
 export interface GetAboutProps_countries {
   code: string;
   name: string;
+  subregion: string;
 }
 
 export interface GetAboutProps {

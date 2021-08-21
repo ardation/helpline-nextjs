@@ -5,7 +5,13 @@ import Search from '.';
 
 describe('Search', () => {
     const countries = [
-        { code: 'AU', name: 'Australia', subdivisions: [], locality: LocalityEnum.LOCATION },
+        {
+            code: 'AU',
+            name: 'Australia',
+            subdivisions: [],
+            locality: LocalityEnum.LOCATION,
+            subregion: 'Australia and New Zealand',
+        },
         {
             code: 'NZ',
             name: 'New Zealand',
@@ -13,6 +19,7 @@ describe('Search', () => {
                 { name: 'Bay of Plenty', code: 'BOP' },
                 { name: 'Auckland', code: 'AUK' },
             ],
+            subregion: 'Australia and New Zealand',
             locality: LocalityEnum.LOCATION,
         },
     ];
@@ -62,6 +69,7 @@ describe('Search', () => {
                     { name: 'Auckland', code: 'AUK' },
                 ],
                 locality: LocalityEnum.LOCATION,
+                subregion: 'Australia and New Zealand',
             },
             { name: 'Auckland', code: 'AUK' },
         );

@@ -74,6 +74,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
                 name
                 emergencyNumber
                 locality
+                subregion
             }
             organizations(countryCode: $countryCode, subdivisionCodes: []) {
                 ...organizationConnectionFields

@@ -12,7 +12,13 @@ export const Default = (): ReactElement => (
     <Box m={2}>
         <CountrySelect
             countries={[
-                { code: 'AU', name: 'Australia', subdivisions: [], locality: LocalityEnum.LOCATION },
+                {
+                    code: 'AU',
+                    name: 'Australia',
+                    subdivisions: [],
+                    locality: LocalityEnum.LOCATION,
+                    subregion: 'Australia and New Zealand',
+                },
                 {
                     code: 'NZ',
                     name: 'New Zealand',
@@ -21,6 +27,7 @@ export const Default = (): ReactElement => (
                         { name: 'Auckland', code: 'AUK' },
                     ],
                     locality: LocalityEnum.LOCATION,
+                    subregion: 'Australia and New Zealand',
                 },
             ]}
             onCountryChange={action('onCountryChange')}
@@ -33,7 +40,13 @@ export const WithPreselectedCountry = (): ReactElement => (
     <Box m={2}>
         <CountrySelect
             countries={[
-                { code: 'AU', name: 'Australia', subdivisions: [], locality: LocalityEnum.LOCATION },
+                {
+                    code: 'AU',
+                    name: 'Australia',
+                    subdivisions: [],
+                    locality: LocalityEnum.LOCATION,
+                    subregion: 'Australia and New Zealand',
+                },
                 {
                     code: 'NZ',
                     name: 'New Zealand',
@@ -42,9 +55,16 @@ export const WithPreselectedCountry = (): ReactElement => (
                         { name: 'Auckland', code: 'AUK' },
                     ],
                     locality: LocalityEnum.LOCATION,
+                    subregion: 'Australia and New Zealand',
                 },
             ]}
-            preselectedCountry={{ code: 'AU', name: 'Australia', subdivisions: [], locality: LocalityEnum.LOCATION }}
+            preselectedCountry={{
+                code: 'AU',
+                name: 'Australia',
+                subdivisions: [],
+                locality: LocalityEnum.LOCATION,
+                subregion: 'Australia and New Zealand',
+            }}
             onCountryChange={action('onCountryChange')}
             onSubdivisionChange={action('onSubdivisionChange')}
         />
@@ -55,7 +75,13 @@ export const WithInline = (): ReactElement => (
     <Box m={2}>
         <CountrySelect
             countries={[
-                { code: 'AU', name: 'Australia', subdivisions: [], locality: LocalityEnum.LOCATION },
+                {
+                    code: 'AU',
+                    name: 'Australia',
+                    subdivisions: [],
+                    locality: LocalityEnum.LOCATION,
+                    subregion: 'Australia and New Zealand',
+                },
                 {
                     code: 'NZ',
                     name: 'New Zealand',
@@ -64,6 +90,7 @@ export const WithInline = (): ReactElement => (
                         { name: 'Auckland', code: 'AUK' },
                     ],
                     locality: LocalityEnum.LOCATION,
+                    subregion: 'Australia and New Zealand',
                 },
             ]}
             preselectedCountry={{
@@ -74,6 +101,7 @@ export const WithInline = (): ReactElement => (
                     { name: 'Auckland', code: 'AUK' },
                 ],
                 locality: LocalityEnum.LOCATION,
+                subregion: 'Australia and New Zealand',
             }}
             onCountryChange={action('onCountryChange')}
             onSubdivisionChange={action('onSubdivisionChange')}

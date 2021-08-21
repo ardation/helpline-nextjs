@@ -83,6 +83,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
                 name
                 emergencyNumber
                 locality
+                subregion
                 subdivisions {
                     code
                     name
@@ -108,6 +109,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
                 name
                 emergencyNumber
                 locality
+                subregion
                 subdivisions {
                     code
                     name

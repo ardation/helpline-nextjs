@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
-import About from '.';
+import CountryAccordian from '.';
 
 export default {
-    title: 'About',
+    title: 'CountryAccordian',
 };
 
 export const Default = (): ReactElement => (
-    <About
+    <CountryAccordian
         countries={[
             { code: 'AU', name: 'Australia', subregion: 'Australia and New Zealand' },
             { code: 'NZ', name: 'New Zealand', subregion: 'Australia and New Zealand' },

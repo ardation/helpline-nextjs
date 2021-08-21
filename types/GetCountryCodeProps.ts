@@ -14,6 +14,7 @@ export interface GetCountryCodeProps_country {
   name: string;
   emergencyNumber: string | null;
   locality: LocalityEnum;
+  subregion: string;
 }
 
 export interface GetCountryCodeProps_organizations_nodes_humanSupportTypes {

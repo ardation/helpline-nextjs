@@ -22,6 +22,7 @@ export const getStaticProps = async (): Promise<{ props: GetAboutProps }> => {
             countries {
                 code
                 name
+                subregion
             }
         }
     `;

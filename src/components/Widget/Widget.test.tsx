@@ -55,8 +55,16 @@ describe('Widget', () => {
                 { name: 'Auckland', code: 'AUK' },
             ],
             locality: LocalityEnum.LOCATION,
+            subregion: 'Australia and New Zealand',
         },
-        { code: 'AU', name: 'Australia', emergencyNumber: '111', subdivisions: [], locality: LocalityEnum.LOCATION },
+        {
+            code: 'AU',
+            name: 'Australia',
+            emergencyNumber: '111',
+            subdivisions: [],
+            locality: LocalityEnum.LOCATION,
+            subregion: 'Australia and New Zealand',
+        },
     ];
     const country = {
         code: 'NZ',
@@ -67,6 +75,7 @@ describe('Widget', () => {
             { name: 'Auckland', code: 'AUK' },
         ],
         locality: LocalityEnum.LOCATION,
+        subregion: 'Australia and New Zealand',
     };
     const subdivision = { name: 'Bay of Plenty', code: 'BOP' };
     const topics = [{ name: 'Anxiety' }];

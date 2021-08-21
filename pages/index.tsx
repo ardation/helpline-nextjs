@@ -19,6 +19,7 @@ export const getStaticProps = async (): Promise<{ props: GetSearchProps }> => {
                 code
                 name
                 locality
+                subregion
                 subdivisions {
                     code
                     name

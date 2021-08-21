@@ -19,6 +19,7 @@ export const getStaticProps = async (): Promise<{ props: GetEmbedProps }> => {
                 code
                 name
                 locality
+                subregion
                 subdivisions {
                     code
                     name
