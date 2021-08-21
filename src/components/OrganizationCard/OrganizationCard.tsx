@@ -1,7 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { createStyles, makeStyles, Typography, Box, Tooltip, SvgIcon } from '@material-ui/core';
 import Link from 'next/link';
-import TextTruncate from 'react-text-truncate';
 import ReviewDialog from '../ReviewDialog';
 import VerifyIcon from '../../assets/verify-icon.svg';
 import OrganizationFab from '../OrganizationFab';
@@ -119,11 +118,7 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                 <Box className={classes.grid}>
                     <Box className={classes.header}>
                         <Typography variant="h6" className={classes.heading}>
-                            {variant === 'widget' && (
-                                <a data-testid="headingLink">
-                                    <TextTruncate line={2} text={organization.name} />
-                                </a>
-                            )}
+                            {variant === 'widget' && <a data-testid="headingLink">{organization.name}</a>}
                             {!variant && (
                                 <Link
                                     href="/organizations/[slug]"
@@ -131,9 +126,7 @@ const OrganizationCard = ({ organization, variant }: Props): ReactElement => {
                                     passHref
                                     prefetch={process.env.NODE_ENV === 'production'}
                                 >
-                                    <a data-testid="headingLink">
-                                        <TextTruncate line={2} text={organization.name} />
-                                    </a>
+                                    <a data-testid="headingLink">{organization.name}</a>
                                 </Link>
                             )}
                         </Typography>

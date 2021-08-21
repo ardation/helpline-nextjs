@@ -265,8 +265,8 @@ describe('OrganizationList', () => {
             );
             expect(getByText('Helplines in New Zealand.')).toBeInTheDocument();
             expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
-                'For youthAll issues6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzTextCallWeb Chat',
-                '5.0(10)',
+                'YouthlineFor youthAll issues6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzTextCallWeb Chat',
+                'KidsCan5.0(10)',
             ]);
             rerender(
                 <OrganizationList
@@ -281,8 +281,8 @@ describe('OrganizationList', () => {
             );
             expect(getByText('Helplines in New Zealand for anxiety, bullying, and depression.')).toBeInTheDocument();
             expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
-                '5.0(10)',
-                'For youthAll issues6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzTextCallWeb Chat',
+                'KidsCan5.0(10)',
+                'YouthlineFor youthAll issues6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzTextCallWeb Chat',
             ]);
         });
     });
@@ -303,8 +303,8 @@ describe('OrganizationList', () => {
             expect(getByText('Helplines in New Zealand for racism.')).toBeInTheDocument();
             expect(getByTestId('OrganizationEmptyDefault')).toBeInTheDocument();
             expect(getAllByTestId('OrganizationCard').map((o) => o.textContent)).toEqual([
-                '5.0(10)',
-                'For youthAll issues6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzTextCallWeb Chat',
+                'KidsCan5.0(10)',
+                'YouthlineFor youthAll issues6.0(10)Open 24/7Volunteers, Staff2340800 376 633youthline.co.nzTextCallWeb Chat',
             ]);
         });
     });
