@@ -7,7 +7,7 @@ import { GetSearchProps } from '../types/GetSearchProps';
 const IndexPage = ({ topics, countries }: GetSearchProps): ReactElement => {
     return (
         <Chrome footer>
-            <Search countries={countries} topics={topics} />
+            <Search countries={countries} topics={topics} showAbout />
         </Chrome>
     );
 };

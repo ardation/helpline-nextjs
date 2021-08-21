@@ -29,11 +29,16 @@ const countries = [
 
 const topics = [{ name: 'Anxiety' }, { name: 'Bullying' }];
 
-export const Default = (): ReactElement => <Search countries={countries} topics={topics} />;
+export const Default = (): ReactElement => <Search countries={countries} topics={topics} showAbout />;
 
 export const WhenEmbed = (): ReactElement => (
     <Box m={2}>
         <Search countries={countries} topics={topics} variant="embed" />
+    </Box>
+);
+export const withTopic = (): ReactElement => (
+    <Box m={2}>
+        <Search countries={countries} topics={topics} topic={{ name: 'Anxiety' }} />
     </Box>
 );
 

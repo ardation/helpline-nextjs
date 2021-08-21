@@ -32,8 +32,10 @@ type Topic = {
 type Props = {
     countries: Country[];
     topics: Topic[];
+    topic?: Topic;
     variant?: 'embed';
     onChange?: (topics: Topic[], country?: Country, subdivision?: Subdivision) => void;
+    showAbout?: boolean;
 };
 
 const useStyles = makeStyles((theme) =>
@@ -97,7 +99,7 @@ const useStyles = makeStyles((theme) =>
     }),
 );
 
-const Search = ({ topics, countries, variant, onChange }: Props): ReactElement => {
+const Search = ({ topic, topics, countries, variant, onChange, showAbout }: Props): ReactElement => {
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
     const [selectedSubdivision, setSelectedSubdivision] = useState<Subdivision | undefined>(undefined);
     const [selectedTopics, setSelectedTopics] = useState<Topic[]>([]);
@@ -133,8 +135,8 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                                 />
                             </Box>
                             <Typography className={classes.typography} color="secondary" component="h1">
-                                Struggling? Get free, confidential support from a real human over phone, text or
-                                webchat.
+                                Struggling{topic ? ` with ${topic.name}` : ''}? Get free, confidential support from a
+                                real human over phone, text or webchat.
                             </Typography>
                         </>
                     )}
@@ -239,7 +241,7 @@ const Search = ({ topics, countries, variant, onChange }: Props): ReactElement =
                     )}
                 </Box>
             </Container>
-            {!selectedCountry && variant !== 'embed' && <About countries={countries} />}
+            {!selectedCountry && variant !== 'embed' && showAbout && <About countries={countries} />}
         </>
     );
 };

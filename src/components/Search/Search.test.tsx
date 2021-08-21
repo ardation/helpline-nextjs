@@ -29,7 +29,7 @@ describe('Search', () => {
         const { getByText, getByRole } = render(<Search countries={countries} topics={topics} />);
         expect(
             getByText('Struggling? Get free, confidential support from a real human over phone, text or webchat.'),
-        ).toBeTruthy();
+        ).toBeInTheDocument();
         expect(getByRole('link', { name: 'What can I expect when contacting a helpline?' })).toHaveAttribute(
             'href',
             '/faq',
@@ -37,6 +37,15 @@ describe('Search', () => {
         fireEvent.click(getByRole('button', { name: 'Open' }));
         fireEvent.click(getByRole('option', { name: 'Australia' }));
         expect(getByText('What would you like help with?')).toBeInTheDocument();
+    });
+
+    it('should show correct text when topic', () => {
+        const { getByText } = render(<Search countries={countries} topics={topics} topic={{ name: 'happy' }} />);
+        expect(
+            getByText(
+                'Struggling with happy? Get free, confidential support from a real human over phone, text or webchat.',
+            ),
+        ).toBeInTheDocument();
     });
 
     it('should change search url after country select', () => {
@@ -76,7 +85,9 @@ describe('Search', () => {
     });
 
     it('should change search url after topic select', () => {
-        const { getByTestId, getByRole, getAllByTestId } = render(<Search countries={countries} topics={topics} />);
+        const { getByTestId, getByRole, getAllByTestId } = render(
+            <Search countries={countries} topics={topics} showAbout />,
+        );
         fireEvent.click(getByRole('button', { name: 'Open' }));
         fireEvent.click(getByRole('option', { name: 'Australia' }));
         const elements = getAllByTestId('itemChip');
@@ -96,6 +107,13 @@ describe('Search', () => {
             ).not.toBeInTheDocument();
             expect(queryByRole('button', { name: 'A note from our founder' })).not.toBeInTheDocument();
             expect(queryByRole('button', { name: 'Hear when we launch in your country' })).not.toBeInTheDocument();
+        });
+    });
+
+    describe('showAbout is not set', () => {
+        it('should hide about content', () => {
+            const { queryByText } = render(<Search countries={countries} topics={topics} />);
+            expect(queryByText('Free emotional support, wherever you are')).not.toBeInTheDocument();
         });
     });
 });
