@@ -15,4 +15,7 @@ module.exports = {
       checkOptions: {},
       reactDocgen: 'none',
     },
+    features: {
+      postcss: false,
+    },
 };
