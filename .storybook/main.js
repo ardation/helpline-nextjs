@@ -10,4 +10,9 @@ module.exports = {
         });
         return config;
     },
+    typescript: {
+      check: false,
+      checkOptions: {},
+      reactDocgen: 'none',
+    },
 };

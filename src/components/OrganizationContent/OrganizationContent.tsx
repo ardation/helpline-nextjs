@@ -30,10 +30,6 @@ type Category = {
     name: string;
 };
 
-type Topic = {
-    name: string;
-};
-
 export type Organization = {
     id: string;
     slug: string;

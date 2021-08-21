@@ -34,7 +34,7 @@ type Organization = {
 type Props = {
     organization: Organization;
     open?: boolean;
-    grecaptcha?: object;
+    grecaptcha?: Record<string, unknown>;
     onClose?: () => void;
     button?: boolean;
 };

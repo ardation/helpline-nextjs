@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import { noop } from 'lodash/fp';
 import WidgetOrganizationList from '.';
 
 const organizations = [
@@ -53,7 +54,7 @@ describe('WidgetOrganizationList', () => {
             document.createElement = (tagName: string) => {
                 const element = createElement(tagName);
                 if (tagName === 'canvas') {
-                    element.getContext = (): {} => ({});
+                    element.getContext = noop;
                 }
                 return element;
             };

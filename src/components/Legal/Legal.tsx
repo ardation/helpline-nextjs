@@ -16,7 +16,7 @@ const Legal = ({ tab }: Props): ReactElement => {
     const [value, setValue] = useState(tab);
     const { replace } = useRouter();
 
-    const handleChange = (_event: ChangeEvent<{}>, newValue: TabType): void => {
+    const handleChange = (_event: ChangeEvent, newValue: TabType): void => {
         setValue(newValue);
         replace(`/${newValue}`);
     };

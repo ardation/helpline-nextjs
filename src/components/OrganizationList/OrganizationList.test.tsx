@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import ReactGA from 'react-ga';
 import { mocked } from 'ts-jest/utils';
+import { noop } from 'lodash/fp';
 import OrganizationList from '.';
 
 jest.mock('react-ga');
@@ -15,7 +16,7 @@ describe('OrganizationList', () => {
         document.createElement = (tagName: string) => {
             const element = createElement(tagName);
             if (tagName === 'canvas') {
-                element.getContext = (): {} => ({});
+                element.getContext = noop;
             }
             return element;
         };

@@ -22,7 +22,7 @@ import * as Yup from 'yup';
 import { ContactCreate } from '../../../types/ContactCreate';
 
 type Props = {
-    grecaptcha?: object;
+    grecaptcha?: Record<string, unknown>;
 };
 
 const useStyles = makeStyles((theme) =>
