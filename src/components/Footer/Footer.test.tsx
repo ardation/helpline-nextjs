@@ -11,5 +11,6 @@ describe('Footer', () => {
         expect(getByTestId('gratitude')).toHaveAttribute('href', '/gratitude');
         expect(getByTestId('privacy')).toHaveAttribute('href', '/privacy');
         expect(getByTestId('terms')).toHaveAttribute('href', '/terms');
+        expect(getByTestId('sitemap')).toHaveAttribute('href', '/sitemap');
     });
 });

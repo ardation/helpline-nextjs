@@ -98,6 +98,13 @@ const Footer = (): ReactElement => {
                         </Link>
                     </NextLink>
                 </Grid>
+                <Grid item xs={6}>
+                    <NextLink href="/sitemap" passHref prefetch={process.env.NODE_ENV === 'production'}>
+                        <Link className={classes.link} data-testid="sitemap">
+                            Sitemap
+                        </Link>
+                    </NextLink>
+                </Grid>
             </Grid>
             <Box className={classes.box}>
                 <Typography className={classes.typography}>
