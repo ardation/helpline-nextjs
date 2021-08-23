@@ -79,7 +79,7 @@
         "@types/react-google-recaptcha": "^2.1.2",
         "@types/react-swipeable-views": "^0.13.1",
         "@types/react-text-truncate": "^0.14.1",
-        "@typescript-eslint/eslint-plugin": "^4.29.2",
+        "@typescript-eslint/eslint-plugin": "^4.29.3",
         "@typescript-eslint/parser": "^4.29.2",
         "babel-loader": "^8.2.2",
         "babel-preset-react-app": "^10.0.0",
