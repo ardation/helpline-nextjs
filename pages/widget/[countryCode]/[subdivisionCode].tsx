@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { find, flatten } from 'lodash/fp';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import Script from 'next/script';
 import {
     GetWidgetSubdivisionCodeProps,
     GetWidgetSubdivisionCodeProps_country_subdivisions as Subdivision,
@@ -66,7 +65,8 @@ const WidgetSubdivisionCodePage = ({
             `}</style>
             <NextSeo title={`${subdivision.name}, ${country.name}`} />
             <Head>
-                <Script src="/widget.min.js"></Script>
+                {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+                <script src="/widget.min.js"></script>
             </Head>
             <Widget
                 countries={countries}

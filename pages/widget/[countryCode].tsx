@@ -4,7 +4,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import Script from 'next/script';
 import { GetWidgetCountryCodeProps } from '../../types/GetWidgetCountryCodeProps';
 import Widget from '../../src/components/Widget';
 import { GetWidgetCountryCodePaths } from '../../types/GetWidgetCountryCodePaths';
@@ -59,7 +58,8 @@ const WidgetCountryCodePage = ({
             `}</style>
             <NextSeo title={country.name} />
             <Head>
-                <Script src="/widget.min.js"></Script>
+                {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+                <script src="/widget.min.js"></script>
             </Head>
             <Widget
                 countries={countries}

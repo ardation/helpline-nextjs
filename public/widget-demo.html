@@ -11,15 +11,13 @@
     </head>
     <body>
         <script src="/widget.min.js"></script>
-        <div id="country-widget"></div>
-        <div id="subdivision-widget"></div>
-        <div id="topics-widget"></div>
+        <div id="widget"></div>
         <script>
             Widget.default({ 
                 countryCode: 'us',
                 subdivisionCode: 'ny',
                 topics: ['Anxiety', 'Work']
-            }).render('#topics-widget');
+            }).render('#widget');
         </script>
     </body>
 </html>
