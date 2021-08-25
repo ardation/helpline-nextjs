@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) =>
             position: 'relative',
             paddingTop: theme.spacing(2),
             paddingBottom: theme.spacing(2),
+            overflow: 'hidden',
         },
         container: {
             marginLeft: '4.5rem',
