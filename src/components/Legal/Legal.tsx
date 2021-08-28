@@ -24,7 +24,7 @@ const Legal = ({ tab }: Props): ReactElement => {
     return (
         <TabContext value={value}>
             <Box bgcolor="background.paper" py={2}>
-                <Container maxWidth="sm">
+                <Container maxWidth="xs">
                     <TabList onChange={handleChange} variant="fullWidth">
                         <Tab label="Privacy Policy" value="privacy" />
                         <Tab label="Terms of Service" value="terms" />

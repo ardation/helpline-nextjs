@@ -29,4 +29,14 @@ describe('Topic', () => {
         expect(getByRole('heading', { name: 'Suicide hotlines' })).toBeInTheDocument();
         expect(getByRole('heading', { name: 'Finding a suicide hotline' })).toBeInTheDocument();
     });
+
+    it('should render markdown', () => {
+        const { getByRole } = render(
+            <Topic
+                countries={[]}
+                topic={{ name: 'Suicidal Thoughts', slug: 'suicidal-thoughts', markdown: '# hello world' }}
+            />,
+        );
+        expect(getByRole('heading', { name: 'hello world' })).toBeInTheDocument();
+    });
 });

@@ -6,8 +6,6 @@ import remarkGfm from 'remark-gfm';
 const useStyles = makeStyles((theme) =>
     createStyles({
         box: {
-            padding: theme.spacing(2, 0),
-            backgroundColor: theme.palette.background.paper,
             '& a:link, & a:visited': {
                 color: theme.palette.text.primary,
             },
@@ -32,7 +30,7 @@ const Markdown = (props: ReactMarkdownOptions): ReactElement => {
     const classes = useStyles();
     return (
         <Box className={classes.box}>
-            <Container maxWidth="sm">
+            <Container maxWidth="xs">
                 <Typography component="div">
                     <ReactMarkdown {...props} remarkPlugins={[remarkGfm]} />
                 </Typography>

@@ -30,6 +30,7 @@ export interface GetTopicSlugProps_topics {
 export interface GetTopicSlugProps_topic {
   name: string;
   slug: string;
+  markdown: string | null;
 }
 
 export interface GetTopicSlugProps {

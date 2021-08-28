@@ -9,7 +9,6 @@
 
 export interface GetTopicSlugPaths_topics {
   slug: string;
-  name: string;
 }
 
 export interface GetTopicSlugPaths {
