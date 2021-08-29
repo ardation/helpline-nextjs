@@ -8,8 +8,10 @@ import Markdown from '../Markdown';
 const Gratitude = (): ReactElement => {
     return (
         <>
-            <Markdown>{gratitude}</Markdown>
-            <Container maxWidth="sm">
+            <Box py={5} bgcolor="background.paper">
+                <Markdown>{gratitude}</Markdown>
+            </Box>
+            <Container maxWidth="xs">
                 <Divider />
             </Container>
             <Box py={5} bgcolor="background.paper">

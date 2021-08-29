@@ -47,6 +47,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
             topic(slug: $topicSlug) {
                 name
                 slug
+                markdown
             }
         }
     `;
@@ -70,7 +71,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
         query GetTopicSlugPaths {
             topics {
                 slug
-                name
             }
         }
     `;

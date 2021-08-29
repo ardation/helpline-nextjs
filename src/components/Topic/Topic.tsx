@@ -44,15 +44,15 @@ type Country = {
 type Topic = {
     name: string;
     slug: string;
+    markdown?: string;
 };
 
 interface Props {
     countries: Country[];
     topic: Topic;
-    markdown?: string;
 }
 
-const About = ({ countries, topic, markdown }: Props): ReactElement => {
+const About = ({ countries, topic }: Props): ReactElement => {
     const classes = useStyles();
 
     return (
@@ -68,11 +68,9 @@ const About = ({ countries, topic, markdown }: Props): ReactElement => {
                     <CountryAccordian countries={countries} topic={topic} />
                 </Container>
             </Box>
-            {markdown && (
+            {topic.markdown && (
                 <Box className={classes.content}>
-                    <Container maxWidth="xs">
-                        <Markdown>{markdown}</Markdown>
-                    </Container>
+                    <Markdown>{topic.markdown}</Markdown>
                 </Box>
             )}
             <Box className={[classes.content, classes.contentAlt].join(' ')}>
